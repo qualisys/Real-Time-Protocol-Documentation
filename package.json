@@ -1,0 +1,27 @@
+{
+  "name": "qualisys-rt-docs",
+  "version": "1.12.0",
+  "description": "Html documentation for Qualisys real-time protocol.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "keywords": [
+    "docs",
+    "qualisys",
+    "real-time",
+    "motion",
+    "capture",
+    "mocap",
+    "markdown",
+    "html"
+  ],
+  "author": "Reimund Trost",
+  "license": "BSD",
+  "dependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-less": "~0.9.0"
+  }
+}

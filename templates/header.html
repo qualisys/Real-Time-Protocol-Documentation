@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{{ title }}</title>
+		<link href="static/css/lib/bootstrap.min.css" type="text/css" rel="stylesheet" />
+		<link href="static/css/master.css" type="text/css" rel="stylesheet" />
+		<script src="static/js/lib/jquery.min.js"></script>
+		<script src="static/js/lib/bootstrap.min.js"></script>
+		{{{ livereload }}}
+	</head>
+
+	<body data-spy="scroll" data-target="nav.toq">
+
+		<header class="affix-wrapper clearfix">
+			<div class="affix" data-spy="affix">
+
+				<div class="container">
+					<div class="row">
+						<div class="col-md-3 col-sm-3 col-xs-12">
+							<a class="logo" href="http://qualisys.com"><img src="static/img/qualisys-logo.png" title="Qualisys Motion capture systems"></a>
+						</div>
+						<div class="h1 col-md-9 col-sm-9 col-xs-12">
+							<strong>QTM Real-time Server Protocol Documentation</strong>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</header>
+
+
+		<div class="container">
+
+			<div class="row">
+				<div class="col-xs-3">&nbsp;</div>
+				<div class="col-sm-9 col-sm-offset-3 col-xs-9 meta">
+					<table>
+						<thead>
+							<tr>
+								<th>Written by</th>
+								<th>Document number</th>
+								<th>Revision</th>
+								<th>Date </th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Lars Nilsson</td>
+								<td class="document-number">QDEV-QTM-EXTERN-SDK_RTQTM_RT_SERVER_V_1_12</td>
+								<td>{{ revision }}</td>
+								<td>{{ date }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+
+			<div class="row title">
+				<div class="col-sm-12">
+					<h1 id="qtm-real-time-server-protocol-documentation">QTM Real-time Server Protocol Documentation</h1>
+					<h3 id="version">Version {{ version }}</h3>
+				</div>
+			</div>
+			<div class="row content">
+				<div class="col-sm-9 col-xs-7">
+
