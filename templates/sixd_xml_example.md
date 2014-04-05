@@ -1,0 +1,26 @@
+```xml
+<QTM_Parameters_Ver_1.12>
+    <The_6D>
+        <Bodies>1</Bodies>
+        <Body>
+            <Name>Body1</Name>
+            <RGBColor>ffffff</RGBColor>
+            <Point>
+                <X>10.5</X>
+                <Y>9.5</Y>
+                <Z>10.5</Z>
+            </Point>
+            <Point>
+                <X>10.5</X>
+                <Y>9.5</Y>
+                <Z>10.5</Z>
+            </Point>
+            <Point>
+                <X>10.5</X>
+                <Y>9.5</Y>
+                <Z>10.5</Z>
+            </Point>
+        </Body>
+    </The_3D>
+</QTM_Parameters_Ver_1.12>
+```

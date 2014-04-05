@@ -1,30 +1,34 @@
-var	  version   = require('./package.json').version
-	, rtVersion = version.substr(0, version.lastIndexOf('.'))
-	, revision  = version.substr(version.lastIndexOf('.') + 1)
+var fs = require('fs')
+  , version   = require('./package.json').version
+  , rtVersion = version.substr(0, version.lastIndexOf('.'))
+  , revision  = version.substr(version.lastIndexOf('.') + 1)
+  , livereloadPort = 9005
 ;
 
 var doqRunner = function()
 {
-	var   doq = require('doq')
+	var   doq        = require('doq')
 		, livereload = ''
 	;
 
 	if ('debug' == this.args[0])
-		livereload = '<script src="http://localhost:35729/livereload.js"></script>';
+		livereload = '<script src="http://localhost:' + livereloadPort + '/livereload.js"></script>';
 
 	doq({
 		  templates: [
+			//, { name: 'templates/majs.md', data: {} }
 			  { name: 'templates/header.html', data: {
 					  livereload: livereload
 					, version: rtVersion
 					, revision: revision
 				}
-			}
-			, { name: 'index.md' }
+			  }
+			, { name: 'index.md', data: {} }
 			, { name: 'templates/footer.html' }
 		]
 		, output: 'index.html'
 		, debug: 'debug' == this.args[0]
+		, templateRoot: 'templates/'
 	});
 
 }
@@ -54,7 +58,7 @@ module.exports = function(grunt) {
 			  doq: {
 				options: {
 					  spawn: false
-					, livereload: true
+					, livereload: { port: livereloadPort }
 					, atBegin: true
 				}
 				, files: ['**/*.md', 'templates/**/*.html', 'less/**/*.less', 'static/**/*', './Gruntfile.js']

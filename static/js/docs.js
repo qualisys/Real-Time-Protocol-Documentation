@@ -5,7 +5,7 @@ jQuery(document).ready(function($)
 				.addClass('nav');
 
 	nav.find('ol').first().replaceWith(ol);
-	nav.wrap('<div class="col-sm-3 col-xs-4 aside-container"><div class="aside affix" data-spy="affix">');
+	nav.wrap('<div class="col-lg-3 col-md-4 col-sm-5 col-xs-1 aside-container"><div class="aside affix" data-spy="affix">');
 
 	// Remove title and version headings from table of contents.
 	nav.find('li').first().remove();
@@ -16,6 +16,13 @@ jQuery(document).ready(function($)
 		$('header.affix-wrapper').height($('header div.affix').height());
 	};
 	prepareAffix();
+
+	var setNavHeight = function()
+	{
+		var topOffset = $('div.affix').height() + 2 * parseInt($('nav').css('padding-top'));
+		$('nav.toq').height($(window).height() - topOffset);
+	}
+	setNavHeight();
 	
 	$('div.aside.affix').affix({
 		offset: {
@@ -28,21 +35,41 @@ jQuery(document).ready(function($)
 	$('header div.affix').affix({
 		offset: {
 			top: function() {
-				return $('h1').offset().top; //+ $('h1').height() / 5;
+				return $('h1').offset().top;
 			 }
 		}
 	});
 
-	var debouncedUpdates = debounce(prepareAffix, 85);
+	var debouncedUpdates = [
+		debounce(prepareAffix, 85),
+		debounce(setNavHeight, 30),
+	];
+
 	var scrollSpyOffset = 90;
 
 	$('body').scrollspy({ offset: scrollSpyOffset });
 
 	window.onresize = function() {
-		debouncedUpdates();
+		debouncedUpdates.forEach(function(debounced) {
+			debounced();
+		});
 	};
 
 	tocFix();
+	stripOSC();
+
+	var startExpanded = [
+		'introduction',
+		'protocol-versions',
+		'overview',
+		'commands',
+		'qtm-rt-packets',
+	];
+
+	startExpanded.forEach(function(heading) {
+		expandHeading(heading);
+			
+	});
 
 	$('nav.toq a').on('click', function(e) {
 		tocFix();
@@ -54,6 +81,14 @@ jQuery(document).ready(function($)
 	$('nav.toq').on('activate.bs.scrollspy', function () {
 		tocFix();
 	})
+
+	$('pre code').each(function(i, e) {
+		var lang = $(this).attr('class').replace('lang-', '');
+
+		$(this).addClass(lang);
+		hljs.highlightBlock(e)
+	});
+
 });
 
 /**
@@ -70,28 +105,40 @@ debounce = function(fn, timeout)
 	}
 };
 
+function expandHeading(heading) {
+	var ol = $('nav.toq li.toq-level-2 > span + a[href=#' + heading + ']')
+		.parent().next().find('ol').first();
+
+	ol.addClass('expanded nocollapse');
+}
+
+function expand(el)
+{
+	if (0 < el.length) {
+		// Step up through the parent child.
+		while (!el.hasClass('nav')) {
+			// Show sub items.
+			var siblingChild = el.next().children().first();
+			if ('OL' == siblingChild.prop('tagName'))
+				siblingChild.addClass('expanded');
+			el.parent().addClass('expanded');
+			// Select next parent up in the chain.
+			el = el.parent();
+		}
+	}
+}
+
+
 var autocollapse = true;
 
 function tocFix()
 {
 	if (autocollapse) {
-		$('nav ol.expanded').removeClass('expanded');
+		$('nav ol.expanded').not('.nocollapse').removeClass('expanded');
 
 		// Select deepest active list item.
-		var el = $('nav li.active.deepest').first();
+		expand($('nav li.active.deepest').first());
 		
-		if (0 < el.length) {
-			// Step up through the parent child.
-			while (!el.hasClass('nav')) {
-				// Show sub items.
-				var siblingChild = el.next().children().first();
-				if ('OL' == siblingChild.prop('tagName'))
-					siblingChild.addClass('expanded');
-				el.parent().addClass('expanded');
-				// Select next parent up in the chain.
-				el = el.parent();
-			}
-		}
 	}
 
 	$('nav li.active').each(function(el) {
@@ -99,5 +146,12 @@ function tocFix()
 
 		if (!$(this).find('li.active').length)
 			$(this).addClass('deepest');
+	});
+}
+
+function stripOSC()
+{
+	$('nav a, h1, h2, h3, h4, h5').each(function() {
+		$(this).text($(this).text().replace('(OSC)', ''));
 	});
 }
