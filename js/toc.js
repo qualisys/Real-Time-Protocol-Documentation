@@ -1,8 +1,21 @@
+var autocollapse = true;
+
 jQuery(document).ready(function($)
 {
-	var nav = $('nav');
-	var ol = $('nav ol ol').first()
-				.addClass('nav');
+	var nav             = $('nav')
+	  , ol              = $('nav ol ol').first().addClass('nav')
+	  , scrollSpyOffset = 90
+	  , startExpanded   = ['introduction', 'protocol-versions', 'overview', 'commands', 'qtm-rt-packets']
+	;
+
+	var setNavHeight = function() {
+		var topOffset = Math.max(
+				$('div.aside-container').next().get(0).getBoundingClientRect().top,
+				$('div.affix').height()
+			) + 2 * parseInt($('nav').css('padding-top'));
+
+		$('nav.toq').height($(window).height() - topOffset);
+	};
 
 	nav.find('ol').first().replaceWith(ol);
 	nav.wrap('<div class="col-lg-3 col-md-4 col-sm-5 col-xs-1 aside-container"><div class="aside affix" data-spy="affix">');
@@ -11,19 +24,8 @@ jQuery(document).ready(function($)
 	nav.find('li').first().remove();
 	nav.find('li').first().remove();
 
-	var prepareAffix = function() {
-		$('div.row.content').prepend(nav.parent().parent().detach());
-		$('header.affix-wrapper').height($('header div.affix').height());
-	};
-	prepareAffix();
+	$('div.row.content').prepend(nav.parent().parent().detach());
 
-	var setNavHeight = function()
-	{
-		var topOffset = $('div.affix').height() + 2 * parseInt($('nav').css('padding-top'));
-		$('nav.toq').height($(window).height() - topOffset);
-	}
-	setNavHeight();
-	
 	$('div.aside.affix').affix({
 		offset: {
 			top: function() {
@@ -40,42 +42,22 @@ jQuery(document).ready(function($)
 		}
 	});
 
-	var debouncedUpdates = [
-		debounce(prepareAffix, 85),
-		debounce(setNavHeight, 30),
-	];
+	debouncedOnResize.push(debounce(setNavHeight, 30));
 
-	var scrollSpyOffset = 90;
+	$(window).on('scroll', function() {
+		setNavHeight();
+	});
 
-	window.onresize = function() {
-		debouncedUpdates.forEach(function(debounced) {
-			debounced();
-		});
-	};
-
+	setNavHeight();
 	expandToc();
 	stripOSC();
 
-	[
-		'introduction',
-		'protocol-versions',
-		'overview',
-		'commands',
-		'qtm-rt-packets',
-	].forEach(function(heading) {
+	startExpanded.forEach(function(heading) {
 		expandHeading(heading);
-	});
-
-	$('pre code').each(function(i, e) {
-		var lang = $(this).attr('class').replace('lang-', '');
-
-		$(this).addClass(lang);
-		hljs.highlightBlock(e)
 	});
 
 	$('nav.toq a').on('click', function(e) {
 		expandToc();
-
 		expand($(this).closest('li'));
 
 		var anchor = '#' + $(this).prop('href').split('#')[1];
@@ -89,20 +71,6 @@ jQuery(document).ready(function($)
 
 	$('body').scrollspy({ offset: scrollSpyOffset });
 });
-
-/**
- * Debounce.
- */
-debounce = function(fn, timeout) 
-{
-	var timeoutID = -1;
-	return function() {
-		if (timeoutID > -1) {
-			window.clearTimeout(timeoutID);
-		}
-		timeoutID = window.setTimeout(fn, timeout);
-	}
-};
 
 function expandHeading(heading) {
 	var ol = $('nav.toq li.toq-level-2 > span + a[href=#' + heading + ']')
@@ -127,8 +95,6 @@ function expand(el)
 	}
 }
 
-
-var autocollapse = true;
 
 function expandToc()
 {
