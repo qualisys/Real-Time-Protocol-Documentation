@@ -139,12 +139,31 @@ nav {
 			span { display: none; }
 			a, span { padding: 4px; } 
 
+			//a.expand, a.collapse {
+				//opacity: 0.7;
+				//font-size: 12px;
+			//}
+
+
+			//a.expand {
+				//padding: 0 !important;
+				////margin-left: 0px !important;
+				//margin-left: 10px !important;
+				//margin-right: -30px;
+				//border: none !important;
+				//font-size: 11px;
+			//}
+
 			a {
 				max-width: 12em;
 				color: @gray-light;
 				transition: color 0.15s ease-in-out;
 				border-left: 1px solid transparent;
 				text-decoration: none;
+
+				i.expand {
+					margin-left: -18px;
+				}
 			}
 		
 			a:hover {
@@ -161,14 +180,20 @@ nav {
 			a {
 				color: darken(@gray, 5%);
 				border-left: 3px solid @brand-primary;
+
+				i.expand { display: none; }
 			}
 
 		}
 
+		li.expanded > span + a {
+			i.expand {
+				display: none;
+			}
+		}
+
 		li.toq-level-2 {
-			a:before {
-				content: '\e802';
-				content: '\e800';
+			span + a:before {
 				content: '\e806';
 				font-family: fontello;
 				color: @gray;
@@ -191,9 +216,15 @@ nav {
 			a { border-left: none; }
 		} 
 
+		li.toq-level-3.active.deepest,
+		li.toq-level-4.active.deepest,
+		li.toq-level-5.active.deepest {
+			a:hover { border-left: 3px solid @brand-primary; }
+		}
+
 
 		li.toq-level-3 {
-			a:before {
+			span + a:before {
 				content: '';
 				margin-right: 0;
 			};
@@ -214,12 +245,28 @@ nav {
 
 			a:hover {
 				margin-left: 0;
-				border-left: 3px solid @brand-primary;
 			}
 		}
 
 
-		li.toq-level-4,
+		li.toq-level-4 {
+			font-size: 12px;
+			line-height: 1.8em;
+
+			a {
+				max-width: 18em;
+				display: inline-block;
+				line-height: 1.2em;
+				padding-left: 38px;
+			}
+
+			a:hover { padding-left: 35px; }
+		}
+
+		li.toq-level-4.active.deepest {
+			a { padding-left: 35px; }
+		}
+
 		li.toq-level-5 {
 			font-size: 12px;
 			line-height: 1.8em;
@@ -228,16 +275,14 @@ nav {
 				max-width: 18em;
 				display: inline-block;
 				line-height: 1.2em;
-				padding-left: 33px;
+				padding-left: 46px;
 			}
 
-			a:hover { padding-left: 30px; }
+			a:hover { padding-left: 43px; }
 		}
 
-		li.toq-level-4.active.deepest,
 		li.toq-level-5.active.deepest {
-			a { padding-left: 30px; }
-			a:hover { border-left: 3px solid @brand-primary; }
+			a { padding-left: 43px; }
 		}
 
 		ol.expanded {

@@ -1,5 +1,7 @@
 'use strict';
 
+var debouncedOnResize = [];
+
 var debounce = function(fn, timeout) 
 {
 	var timeoutID = -1;
@@ -11,3 +13,11 @@ var debounce = function(fn, timeout)
 	};
 };
 
+jQuery(document).ready(function($)
+{
+	window.onresize = function() {
+		debouncedOnResize.forEach(function(fun) {
+			fun();
+		});
+	};
+});

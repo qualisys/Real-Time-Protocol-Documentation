@@ -186,16 +186,17 @@ shall start on external trigger. The value can be true or false.
 
 * **Signal\_Source** - Signal source used for external time base. Selectable values:
 
- | * Control port
-	* IR receiver
-	* SMPTE
-	* Video sync
+ * Control port
+ * IR receiver
+ * SMPTE
+ * Video sync
 
 
 * **Signal\_Mode** - Selectable values:
 
-	* Periodic
-	* Non-periodic
+  * Periodic
+  * Non-periodic
+
 
 * **Frequency\_Multiplier** - Multiply incoming frequency by this integer to
   get the camera frequency. Can be combined with frequency divisor. Value is an
@@ -214,8 +215,9 @@ shall start on external trigger. The value can be true or false.
 
 * **Signal\_Edge** - Control port TTL signal edge.
 
-	* Negative
-	* Positive
+  * Negative
+  * Positive
+
 
 * **Signal\_Shutter\_Delay** - Delay from signal to shutter opening in micro
   seconds. Value is an integer.
@@ -273,9 +275,9 @@ following content.
 * **Mode** - Changes camera mode for selected camera. Available camera modes
   are:
 
-	* Marker 
-	* Marker Intensity
-	* Video
+  * Marker 
+  * Marker Intensity
+  * Video
 
 * **Video\_Exposure** - Set video exposure time for the camera selected by
   Camera ID, see above. The value is either in micro seconds ( \>&nbsp;5&nbsp;&micro;s) or in
@@ -300,27 +302,30 @@ following content.
 * **Sync\_Out** - Camera settings consist of none or one *Sync\_Out * block,
   with following content:
 
-	* **Mode** - Synchronization mode for the selected camera. Available modes:
-		* Shutter out 
-		* Multiplier
-		* Divisor
-		* Camera independent
-		* Measurement time
-		* Continuous 100Hz
-		* SRAM wired
+  * **Mode** - Synchronization mode for the selected camera. Available modes:
+    * Shutter out 
+    * Multiplier
+    * Divisor
+    * Camera independent
+    * Measurement time
+    * Continuous 100Hz
+    * SRAM wired
 
-	* **Value** - This integer value is only used for three of the sync out
-	  modes. The content is different depending on the *Mode* setting.
-		* **Multiplier** - Multiplier applied to the camera frequency
-		* **Divisor** -  Divisor applied to the camera frequency
-		* **Camera** - independent Camera independent frequency
 
-	* **Duty\_Cycle** - Output duty cycle in per cent (float). Only used in
-	  multiplier, divisor and camera independent mode.
+  * **Value** - This integer value is only used for three of the sync out
+    modes. The content is different depending on the *Mode* setting.
+    * **Multiplier** - Multiplier applied to the camera frequency
+    * **Divisor** -  Divisor applied to the camera frequency
+    * **Camera** - independent Camera independent frequency
 
-	* **Signal\_Polarity** - TTL signal polarity. Possible values:
-		* Positive
-		* Negative
+
+  * **Duty\_Cycle** - Output duty cycle in per cent (float). Only used in
+    multiplier, divisor and camera independent mode.
+
+
+  * **Signal\_Polarity** - TTL signal polarity. Possible values:
+    * Positive
+    * Negative
 
 #### Image settings
 
@@ -344,10 +349,10 @@ present in the *Camera*element. Otherwise current image settings will be used.
 
 * **Format** - Available image formats.
 
-	* RAWGrayscale 
-	* RAWBGR
-	* JPG (Default)
-	* PNG
+  * RAWGrayscale 
+  * RAWBGR
+  * JPG (Default)
+  * PNG
 
 * **Width** - Width of the requested image. This does not take into account the
   cropping. The width is the dimensions had the image not been cropped at all.
@@ -360,26 +365,26 @@ present in the *Camera*element. Otherwise current image settings will be used.
 * **Left\_Crop** - Position of the requested image left edge relative the
   original image. 32-bit float.
 
-	* 0.0 = Original image left edge (Default).
-	* 1.0 = Original image right edge.
+  * 0.0 = Original image left edge (Default).
+  * 1.0 = Original image right edge.
 
 * **Top\_Crop** - Position of requested image top edge relative the original
   image. 32-bit float.
 
-	* 0.0 = Original image top edge (Default).  
-	* 1.0 = Original image bottom edge.
+  * 0.0 = Original image top edge (Default).  
+  * 1.0 = Original image bottom edge.
 
 * **Right\_Crop** - Position of requested image right edge relative the
   original image. 32-bit float.
 
-	* 0.0 = Original image left edge.
-	* 1.0 = Original image right edge (Default).
+  * 0.0 = Original image left edge.
+  * 1.0 = Original image right edge (Default).
 
 * **Bottom\_Crop** Position of requested image bottom edge relative the
   original image. 32-bit float.
 
-	* 0.0 = Original image top edge.
-	* 1.0 = Original image bottom edge (Default).
+  * 0.0 = Original image top edge.
+  * 1.0 = Original image bottom edge (Default).
 
 #### Force settings
 
