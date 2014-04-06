@@ -21,6 +21,7 @@
 	"smarttabs":    true,
 	"multistr":     true,
 	"node":         true,
+	"jquery":       true,
 	"globals": {
 		"require":      false,
 		"throw":        false,

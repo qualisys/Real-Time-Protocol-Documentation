@@ -1,3 +1,5 @@
+'use strict';
+
 var debounce = function(fn, timeout) 
 {
 	var timeoutID = -1;
@@ -6,6 +8,6 @@ var debounce = function(fn, timeout)
 			window.clearTimeout(timeoutID);
 		}
 		timeoutID = window.setTimeout(fn, timeout);
-	}
+	};
 };
 

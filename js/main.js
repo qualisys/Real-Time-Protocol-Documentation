@@ -24,7 +24,7 @@ jQuery(document).ready(function($)
 		var lang = $(this).attr('class').replace('lang-', '');
 
 		$(this).addClass(lang);
-		hljs.highlightBlock(e)
+		hljs.highlightBlock(e);
 	});
 
 	window.onresize = function() {

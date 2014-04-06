@@ -1,5 +1,54 @@
 var autocollapse = true;
 
+var expandHeading = function(heading) {
+	var ol = $('nav.toq li.toq-level-2 > span + a[href=#' + heading + ']')
+		.parent().next().find('ol').first();
+
+	ol.addClass('expanded nocollapse');
+};
+
+var expand = function(el)
+{
+	if (0 < el.length) {
+		// Step up through the parent child.
+		while (!el.hasClass('nav')) {
+			// Show sub items.
+			var siblingChild = el.next().children().first();
+			if ('OL' === siblingChild.prop('tagName'))
+				siblingChild.addClass('expanded');
+			el.parent().addClass('expanded');
+			// Select next parent up in the chain.
+			el = el.parent();
+		}
+	}
+};
+
+
+var expandToc = function()
+{
+	if (autocollapse) {
+		$('nav ol.expanded').not('.nocollapse').each(function() {
+			if (!$(this).parent().prev().hasClass('active'))
+				$(this).removeClass('expanded');
+		});
+
+		// Select deepest active list item.
+		expand($('nav li.active.deepest').first());
+	}
+
+	$('nav li.active').each(function() {
+		if (!$(this).find('li.active').length)
+			$(this).addClass('deepest');
+	});
+};
+
+var stripOSC = function()
+{
+	$('nav a, h1, h2, h3, h4, h5').each(function() {
+		$(this).text($(this).text().replace('(OSC)', ''));
+	});
+};
+
 jQuery(document).ready(function($)
 {
 	var nav             = $('nav')
@@ -24,6 +73,7 @@ jQuery(document).ready(function($)
 	nav.find('li').first().remove();
 	nav.find('li').first().remove();
 
+	// Insert the nav inside the content div, but before the actual content.
 	$('div.row.content').prepend(nav.parent().parent().detach());
 
 	$('div.aside.affix').affix({
@@ -44,10 +94,6 @@ jQuery(document).ready(function($)
 
 	debouncedOnResize.push(debounce(setNavHeight, 30));
 
-	$(window).on('scroll', function() {
-		setNavHeight();
-	});
-
 	setNavHeight();
 	expandToc();
 	stripOSC();
@@ -67,56 +113,12 @@ jQuery(document).ready(function($)
 
 	$('nav.toq').on('activate.bs.scrollspy', function () {
 		expandToc();
-	})
+	});
+
+	$(window).on('scroll', function() {
+		setNavHeight();
+	});
 
 	$('body').scrollspy({ offset: scrollSpyOffset });
 });
 
-function expandHeading(heading) {
-	var ol = $('nav.toq li.toq-level-2 > span + a[href=#' + heading + ']')
-		.parent().next().find('ol').first();
-
-	ol.addClass('expanded nocollapse');
-}
-
-function expand(el)
-{
-	if (0 < el.length) {
-		// Step up through the parent child.
-		while (!el.hasClass('nav')) {
-			// Show sub items.
-			var siblingChild = el.next().children().first();
-			if ('OL' == siblingChild.prop('tagName'))
-				siblingChild.addClass('expanded');
-			el.parent().addClass('expanded');
-			// Select next parent up in the chain.
-			el = el.parent();
-		}
-	}
-}
-
-
-function expandToc()
-{
-	if (autocollapse) {
-		$('nav ol.expanded').not('.nocollapse').each(function() {
-			if (!$(this).parent().prev().hasClass('active'))
-				$(this).removeClass('expanded');
-		});
-
-		// Select deepest active list item.
-		expand($('nav li.active.deepest').first());
-	}
-
-	$('nav li.active').each(function(el) {
-		if (!$(this).find('li.active').length)
-			$(this).addClass('deepest');
-	});
-}
-
-function stripOSC()
-{
-	$('nav a, h1, h2, h3, h4, h5').each(function() {
-		$(this).text($(this).text().replace('(OSC)', ''));
-	});
-}
