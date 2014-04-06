@@ -29,7 +29,7 @@ At the end of this document (in section 6.10.1 on page 77), there is a list of t
 that have been made to the protocol between different versions.
 
 
-### Open sound control (v1.6+)
+### Open sound control
 
 Version 1.6 and later of the QTM RT server protocol supports the *OSC (Open Sound
 Control)* protocol over UDP. Connecting to the RT server when using OSC, differs from
@@ -1979,7 +1979,7 @@ Example of a server info string: `MyComputer, QTM 2.5 (build 568), 5 cameras`.
 **Note**: The base port number is only used for version 1.0 of the RT server,
 see 3.2.2 to get the desired port number.
  
-## Open Sound Control
+## Open Sound Control (OSC)
 
 The OSC version of the QTM RT server uses the [Open Sound Control 1.0 specification](http://opensoundcontrol.org).
 
