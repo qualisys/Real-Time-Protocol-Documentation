@@ -11,7 +11,7 @@ connection in real-time. This document describes the protocol used in such a
 connection.
 
 
-## Protocol versions
+### Protocol versions
 
 This document describes the 1.12 version of the QTM RT server protocol.
 
@@ -71,12 +71,16 @@ TCP/IP port on the computer where QTM is running.
 The first thing that happens when you have connected to the QTM RT server is
 that the server sends a welcome message string:
 
-> QTM RT Interface connected.
+```
+QTM RT Interface connected.
+```
 
 Number of simultaneous connections is limited to 10. If the limit is reached
 while connecting, QTM will respond with an error message:
 
-> Connection refused. Max number of clients reached.
+```
+Connection refused. Max number of clients reached.
+```
 
 The first command that the client should send to the server is the `Version`
 command, to make sure that QTM is using the RT protocol version expected by the
@@ -84,7 +88,7 @@ client. If the client doesn&rsquo;t send the `Version` command, QTM will use ver
 1.1.
 
 If the client will request streaming data over TCP/IP (default) or polled data,
-make sure to disable Nagle&rsquo;s algorithm for the TCP/IP port. See 3.2.1.
+make sure to disable **Nagle&rsquo;s algorithm** for the TCP/IP port. See 3.2.1.
 
 
 #### Disabling Nagle&rsquo;s algorithm
@@ -97,9 +101,9 @@ fill a full TCP packet, or until the previous packet has been acknowledged by
 the receiver, before sending it to the client (or the server).
 
 On the Windows platform, Nagle&rsquo;s algorithm can be turned off by enabling the
-TCP_NODELAY option for the TCP/IP port.
+**TCP_NODELAY** option for the TCP/IP port.
 
-If you use UDP/IP streaming only (via the StreamFrames command), it is not
+If you use UDP/IP streaming only (via the `StreamFrames` command), it is *not*
 necessary to turn off Nagle&rsquo;s algorithm for the TCP/IP port, since a little
 higher latency can be accepted in the parts of the protocol that do not stream
 data in real-time. The UDP streaming protocol has no such bandwidth
@@ -107,11 +111,12 @@ optimization and is designed for low latency-applications.
 
 #### IP port numbers
 
-In the &ldquo;RT output&rdquo; tab of the Workspace Options dialog in QTM, you can
-configure the QTM RT server ports. You can only edit the base port (**22222** by
-default). It is the legacy server port, for version 1.0 of the protocol. All
-other ports except for the auto discover port are set from the base port. See
-table below.
+In the **RT output** tab of the Workspace Options dialog in QTM, you can
+configure the QTM RT server ports.
+
+You can only edit the base port (**22222** by default). This is is the legacy
+server port, for version 1.0 of the protocol. All other ports except for the
+auto discover port are set from the base port. See table below.
 
 | Port           | Default | Description                                                                                                             |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -133,7 +138,7 @@ In most cases, the QTM RT server does not send any data to the client unless
 requested. The client sends a command and the QTM RT server sends a response in
 form of a string or XML data or frame data. The client should however be able
 to handle cases when packets arrive which is not a response to a command. For
-example, an event (see 5.10 and 6.10) or an error (see 5.3 and 6.4) message
+example, an [event](#event-packet) or an [error](#error-packet) message
 could arrive when a completely different response is expected. 
 
 ### Retrieving settings
@@ -141,25 +146,29 @@ could arrive when a completely different response is expected.
 Before requesting streamed data, it may be necessary to ask QTM about different
 settings, for example what frequency the system is capturing in and what labels
 the labeled markers have. For all such information that does not change with
-each frame, the command *GetParameters* is used. QTM replies with an XML data
-string package, that the client should parse and extract the required data
-from. See 5.5.
+each frame, the command `GetParameters` is used. QTM replies with an XML data
+string packat, that the client should parse and extract the required data from.
+See [XML packet](#xml-packet).
 
 ### Change settings
 
 It is possible to change some of the QTM settings via the RT server. This is
 done by sending an XML data packet, see 5.5, containing the settings to be
-changed. Settings that are possible to change are: General, Image and Force,
-See 3.5.1, 3.5.2 and 3.5.3.
+changed. Settings that are possible to change are:
+[General](#general-settings), [Image](#image-settings) and
+[Force](#force-settings),
 
-If the settings were updated ok, the server will send a 
-> Setting parameters succeeded
+If the settings were updated ok, the server will send a command string response:
 
-command string response. Otherwise a 
-> Setting parameters failed
+```
+Setting parameters succeeded
+```
 
-error string will be sent.
+Otherwise a error string will be sent:
 
+```
+Setting parameters failed
+```
 
 *Change settings is not available with the OSC protocol*.
 

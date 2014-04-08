@@ -59,7 +59,7 @@ module.exports = function(grunt) {
 
 		concat: {
 			dist: {
-				src: ['js/debounce.js', 'js/main.js', 'js/toc.js'],
+				src: ['js/debounce.js', 'js/toc.js', 'js/main.js'],
 				dest: 'static/js/app.js',
 			},
 		},

@@ -17,8 +17,14 @@ pre {
 
 blockquote {
 
+	strong {
+		code {
+			color: inherit;
+		}
+	}
+
 	code {
-		color: inherit;
+		color: darken(@gray-light, 10%);
 		background-color: inherit;
 		white-space: inherit;
 	}
@@ -26,21 +32,5 @@ blockquote {
 	p {
 		text-indent: -2em;
 		margin-left: 2em;
-	}
-}
-
-div.table-noheader + table {
-	th {
-		font-weight: normal;
-		border-bottom-width: 1px;
-	}
-
-	td:first-child {
-		font-weight: normal;
-	}
-
-	td {
-		background-color: transparent !important;
-		//font-weight: bold;
 	}
 }

@@ -1,5 +1,53 @@
 table {
 	.table;
-	.table-striped;
+	//.table-striped;
 	.table-bordered;
+}
+
+table.meta {
+	th { background-color: transparent; }
+}
+
+table {
+	thead {
+		th {
+			white-space: nowrap;
+			//background: @brand-primary;
+			//color: #fff;
+			text-transform: uppercase;
+			font-weight: 700;
+			font-size: 0.9em;
+
+			background-color: lighten(@gray-lighter, 3%);
+		}
+	}
+
+	tbody {
+		tr:nth-child(odd) {
+			td {
+				//background-color: lighten(@gray-lighter, 3%);
+			}
+		}
+	}
+}
+
+table > thead > tr > th {
+	border-bottom-width: 1px;
+}
+
+div.table-noheader + table {
+	th {
+		font-weight: normal;
+		border-bottom-width: 1px;
+		text-transform: none;
+	}
+
+	td:first-child {
+		font-weight: normal;
+	}
+
+	td {
+		background-color: transparent !important;
+		//font-weight: bold;
+	}
 }
