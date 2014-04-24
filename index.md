@@ -25,15 +25,15 @@ adapts the data to be sent to each client according to their selected protocol v
 To ensure that a particular client will work with all future releases of QTM, the client
 only needs to send the `Version` command to the QTM RT server when connecting to it.  
   
-At the end of this document (in section 6.10.1 on page 77), there is a list of the changes
-that have been made to the protocol between different versions.
+At the end of this document there is a [list of the changes](#changelog) that
+have been made to the protocol between different versions.
 
 
 ### Open sound control
 
 Version 1.6 and later of the QTM RT server protocol supports the *OSC (Open Sound
 Control)* protocol over UDP. Connecting to the RT server when using OSC, differs from
-the standard version of the RT protocol. See 6.1.
+the standard version of the RT protocol. See [Connecting](#connecting).
 
 ## Overview
 
@@ -46,8 +46,7 @@ any computer architecture. To avoid problems, check the points below.
 #### Byte order
 The byte order of data pieces larger than one byte can differ between computer
 architectures. Select the byte-order your computer architecture prefers by
-connecting to the corresponding TCP/IP port on the QTM RT server. See section
-3.2.2 on page 6.
+connecting to the corresponding TCP/IP port on the QTM RT server. See [IP port numbers](#ip-port-numbers).
 
 #### Floating point values
 The floating point type used by the QTM RT server is the standard defined by
@@ -57,8 +56,8 @@ IEEE 754. Single precision floats (32-bit) values are used.
 
 It is possible to auto discover any computers running QTM version 2.4 (build 551) or
 later on your local area network. This is done by broadcasting an UDP packet to the
-QTM auto discover port, see 3.2.2. The discover packet shall contain the port number to
-which QTM sends an UDP response string, see 5.11. Except for the IP address,
+QTM auto discover port, see [IP port numbers](#ip-port-numbers). The discover packet shall contain the port number to
+which QTM sends an UDP response string, see [Discover packet](#discover-packet). Except for the IP address,
 the client will also respond with the host name, QTM version and number of
 connected cameras.
 
@@ -88,23 +87,23 @@ client. If the client doesn&rsquo;t send the `Version` command, QTM will use ver
 1.1.
 
 If the client will request streaming data over TCP/IP (default) or polled data,
-make sure to disable **Nagle&rsquo;s algorithm** for the TCP/IP port. See 3.2.1.
+make sure to disable **Nagle's algorithm** for the TCP/IP port. See [Disabling Nagle's algorithm](#disabling-nagle-39-s-algorithm).
 
 
-#### Disabling Nagle&rsquo;s algorithm
+#### Disabling Nagle's algorithm
 
-The TCP protocol by default uses a performance improvement called Nagle&rsquo;s
+The TCP protocol by default uses a performance improvement called Nagle's
 algorithm that reduces the bandwidth used by the TCP connection. In the case of
 a real-time server that sends small amounts of data in each frame, this
 algorithm should be turned off. Otherwise the server (and client) will wait to
 fill a full TCP packet, or until the previous packet has been acknowledged by
 the receiver, before sending it to the client (or the server).
 
-On the Windows platform, Nagle&rsquo;s algorithm can be turned off by enabling the
+On the Windows platform, Nagle's algorithm can be turned off by enabling the
 **TCP_NODELAY** option for the TCP/IP port.
 
 If you use UDP/IP streaming only (via the `StreamFrames` command), it is *not*
-necessary to turn off Nagle&rsquo;s algorithm for the TCP/IP port, since a little
+necessary to turn off Nagle's algorithm for the TCP/IP port, since a little
 higher latency can be accepted in the parts of the protocol that do not stream
 data in real-time. The UDP streaming protocol has no such bandwidth
 optimization and is designed for low latency-applications.
@@ -153,7 +152,7 @@ See [XML packet](#xml-packet).
 ### Change settings
 
 It is possible to change some of the QTM settings via the RT server. This is
-done by sending an XML data packet, see 5.5, containing the settings to be
+done by sending an [XML data packet](#xml-packet), containing the settings to be
 changed. Settings that are possible to change are:
 [General](#general-settings), [Image](#image-settings) and
 [Force](#force-settings),
@@ -345,10 +344,11 @@ images from one or several cameras.
 ##### Camera
 
 The settings within a *Camera* element must come in a predefined order, see
-below and example 3.5.4. All settings can be set individually, except for ID,
-which always has to be present.  If the selected camera is not enabled since
-before, the default values will be used for all image settings that are not
-present in the *Camera*element. Otherwise current image settings will be used.
+below and [Settings example](#settings-example). All settings can be set
+individually, except for ID, which always has to be present.  If the selected
+camera is not enabled since before, the default values will be used for all
+image settings that are not present in the *Camera*element. Otherwise current
+image settings will be used.
 
 * **ID** - Select camera to fetch images from. This value must always be
   present in the image settings.
@@ -404,7 +404,7 @@ The Force section in the XML data packet consists of none or several
 
 Each *Plate* element consists of a *Force\_Plate\_Index* and a *Location*
 element. The settings within a plate element must come in a predefined order,
-see example 3.5.4.
+see [Settings example](#settings-example).
 
 * **Force\_ID** - ID of camera to fetch images from. This value must always be
   present in the image settings.
@@ -420,11 +420,15 @@ Send the following XML data packet to the RT server:
 {{> settings_example }}
 
 Response: 
-> Setting parameters succeeded
+```
+Setting parameters succeeded
+```
 
 or
 
-> Setting parameters failed
+```
+Setting parameters failed
+```
 
 ### Streaming data
 
@@ -510,7 +514,7 @@ If you don't set the protocol version yourself, QTM will set it to **version
 Example:
 ```coffeescript
 Command:    Version 1.12
-Response:   Version set to 1.12	or  
+Response:   Version set to 1.12    or  
 			Version NOT supported
 
 Command:    Version
@@ -536,7 +540,7 @@ Returns the current byte order.
 Example:
 ```coffeescript
 Command:    ByteOrder
-Response:   Byte order is little endian	or
+Response:   Byte order is little endian or
             Byte order is big endian
 ``` 
 
@@ -555,14 +559,14 @@ Command:    GetState
 Response:   Event data packet with last QTM event.
 
 (Telnet)
-Response:   Connected	or
-            Connection Closed	or
-            Capture Started	or
-            Capture Stopped	or
-            Calibration Started	or
-            Calibration Stopped 	or
-            RT From File Started	or
-            RT From File Stopped	or
+Response:   Connected               or
+            Connection Closed       or
+            Capture Started         or
+            Capture Stopped         or
+            Calibration Started     or
+            Calibration Stopped     or
+            RT From File Started    or
+            RT From File Stopped    or
             Waiting For Trigger
 ```
 
@@ -570,13 +574,13 @@ Response:   Connected	or
 > **`GetParameters`** `All | ([General] [3D] [6D] [Analog] [Force] [Image])`
 
 This command retrieves the settings for the requested component(s) of QTM in
-XML format. The XML parameters are described <a href="#5.5 on page 28">here</a>.
+XML format. The XML parameters are described [here](#xml-packet).
 
 
 Example:
 ```coffeescript
 Command:    GetParameters 3D Force
-Response:   Parameters not available	or
+Response:   Parameters not available                    or
             XML string containing requested parameters
 ```
 
@@ -591,7 +595,7 @@ This command returns the current frame of real-time data from the server.
 Points worth noting are:  
 * The frame is composed of the parts specified in the parameters to the
   command. The exact layout of the data frame in different situations is
-  described in section 5.6 on page 44. 
+  described in [Data packet](#data-packet). 
 
 * The composition of the data frame may vary between frames. This is due to the
   fact that some data (Analog and Force data) is not collected or buffered at
@@ -603,8 +607,8 @@ Points worth noting are:
   data is available
 
 * If there is no ongoing measurement (either it has not started or it has
-  already finished), an empty data frame is sent to the client (see section 5.7
-  on page 57).
+  already finished), an [empty data frame](#no-more-data-packet) is sent to the
+  client .
 
 * If a measurement is ongoing but there is no new frame of data available, the
   server waits until the next frame of data is available before sending it to
@@ -614,7 +618,7 @@ Example:
 ```coffeescript
 Command:    GetCurrentFrame 3D Analog
 Response:   One data frame is sent to the client according to the 
-            data frame protocol described in section 5.6 on page 44.
+            data frame protocol described in the Data packet section.
 ```
 
 ### StreamFrames
@@ -628,7 +632,7 @@ This command makes the QTM RT server start streaming data frames in real-time.
 Points worth noting are:
 * Each frame is composed of the parts specified in the parameters to the
   command. The exact layout of the data frame in different situations is
-  described in section 5.6 on page 44.
+  described in [Data packet](#data-packet).
 
   The composition of the data frame may vary between frames. This is due to the
   fact that some data (Analog and Force data) is not collected or buffered at
@@ -640,8 +644,8 @@ Points worth noting are:
   data is available
 
 * If there is no ongoing measurement (either it has not started or it has
-  already finished), an empty data frame is sent to the client (see section 5.7
-  on page 57).
+  already finished), an [empty data frame](#no-more-data-packet) is sent to the
+  client.
 
 * The actual rate at which the frames are sent depends on several factors
   &ndash; not just the frequency specified in the command parameters:
@@ -712,9 +716,9 @@ Points worth noting are:
     server will try to fit as many components into one UDP datagram as
     possible. 
 
-* When the measurement is finished, or has not yet started, a special empty
-  data frame packet signaling that no data is available is sent to the client
-  (see section 5.7 on page 57).
+* When the measurement is finished, or has not yet started, a special
+  [empty data frame](#no-more-data-packet) packet signaling that no data is
+  available is sent to the client.
 
 * To stop the data stream before it has reached the end of the measurement or
   to prevent data from being sent if a new measurement is started after the
@@ -726,8 +730,7 @@ Example:
 Command:    StreamFrames Frequency:30 UDP:2234 3D Analog
 Response:   30 frames per second containing 3D data and Analog data 
             are streamed over UDP/IP to port 2234 of the client computer. The
-            data frame protocol is described in section 5.6 
-            on page 44.
+            data frame protocol is described in the Data packet section.
 ```
 
 ### TakeControl
@@ -765,7 +768,7 @@ Response:   You are now a regular client      or
 
 This command will create a new measurement in QTM, connect to the cameras and
 enter RT (preview) mode. It is only possible to issue this command if you have
-the control over the QTM RT interface. See 4.8.
+the control over the QTM RT interface. See [TakeControl](#takecontrol).
 
 Example:
 ```coffeescript
@@ -783,14 +786,14 @@ it will disconnect from the cameras end exit RT (preview) mode. Otherwise it
 will close any open QTM measurement file. If the measurement isn’t saved, all
 data will be lost. If QTM is running RT from file, the playback will stop and
 the file will be closed. It is only possible to issue this command if you have
-the control over the QTM RT interface. See 4.8.
+the control over the QTM RT interface. See [TakeControl](#takecontrol).
 
 Example:
 ```coffeescript
 Command:    Close
-Response:   Closing connection	or
-            Closing file	or
-            No connection to close 	or
+Response:   Closing connection                          or
+            Closing file                                or
+            No connection to close                      or
             You must be master to issue this command
 ```
 
@@ -800,7 +803,7 @@ Response:   Closing connection	or
 This command will start a new capture. If the argument RTFromFile is used, QTM
 will start streaming real-time data from current QTM file. If there is any file
 open. It is only possible to issue this command if you have the control over
-the QTM RT interface. See 4.8.
+the QTM RT interface. See [TakeControl](#takecontrol).
 
 Example:
 ```coffeescript
@@ -818,7 +821,7 @@ Response:   Starting measurement                         or
 
 This command will stop an ongoing capture or playback of RT from file. It is
 only possible to issue this command if you have the control over the QTM RT
-interface. See 4.8.
+interface. See [TakeControl](#takecontrol).
 
 Example:
 ```coffeescript
@@ -843,7 +846,7 @@ project folder. If the file doesn’t exist, current measurement isn’t saved o
 an active camera connection exists, the measurement will not load.
 
 It is only possible to issue this command if you have the control over the QTM
-RT interface. See 4.8.
+RT interface. See [TakeControl](#takecontrol).
 
 Example:
 ```coffeescript
@@ -877,7 +880,7 @@ Overwrite parameter is present. Otherwise a counter will be added to the end of
 the file name (_##).
 
 It is only possible to issue this command if you have the control over the QTM
-RT interface. See 4.8.
+RT interface. See [TakeControl](#takecontrol).
 
 Example:
 ```coffeescript
@@ -901,7 +904,7 @@ exist, current measurement isn’t saved or an active camera connection exists,
 the project will not load. C:\Users\lnn\QTM files\Imagination
 
 It is only possible to issue this command if you have the control over the QTM
-RT interface. See 4.8.
+RT interface. See [TakeControl](#takecontrol).
 
 Example:
 ```coffeescript
@@ -942,8 +945,8 @@ Response:   Sending capture followed by a QTM data packet containing current cap
 
 This command will trig a measurement, if the camera system is set to start on
 external trigger. The RT server will send a WaitingForTrigger event when it is
-waiting for a trigger. See 5.10.1. It is only possible to issue this command if
-you have the control over the QTM RT interface. See 4.8.
+waiting for a trigger. See [Events](#events). It is only possible to issue this command if
+you have the control over the QTM RT interface. See [TakeControl](#takecontrol).
 
 Example:
 ```coffeescript
@@ -1105,7 +1108,7 @@ Size in bytes  | Name          | Value
 -------------- | ---------------------
 4              | Size          | 8 bytes header + XML string length
 4              | Type          | 2
-               | Data          | XML string data, NULL terminated.<br><br>The XML data can consist of one or several of following parameters:<br>General, 3D, 6D, Analog, Force and Image. See 5.5.1 to 5.5.5.
+               | Data          | XML string data, NULL terminated.<br><br>The XML data can consist of one or several of following parameters:<br>[General](#general-xml-parameters), [3D](#3d-xml-parameters), [6D](#6d-xml-parameters), [Analog](#analog-xml-parameters), [Force](#force-xml-parameters) and [Image](#image-xml-parameters).
 
 ### XML Parameters
 
@@ -1552,7 +1555,7 @@ Size in bytes |  Name           |  Value/Description
 --------------|-----------------|--------------------
 4             |  Component Size |  Size of Component Data + 8 bytes component header. 32-bit integer.
 4             |  Component Type |  The type of the component. Defined in the following section. 32-bit integer.
-Size - 8      |  Component Data |  Component-specific data. Defined in the following sections, 5.6.1 to 5.6.2.
+Size - 8      |  Component Data |  Component-specific data. Defined in [Data component types](#data-component-types) and [2D and 2D linearized component](#2d-and-2d-linearized-component) sections.
 
 #### Data component types
 
@@ -1575,7 +1578,7 @@ Type     | Name                   | Description
 11       | 6D Residuals           | 6D data - position and rotation matrix with residuals
 12       | 6D Euler Residuals     | 6D data - position and Euler angles with residuals
 13       | Analog Single          | Analog data from available analog devices. Only one sample per channel and camera frame. The latest sample is used if more than one sample is available.
-14       | Image                  | Image frame from a specific camera. Image size and format is set with the XML settings, see 3.5.2.
+14       | Image                  | Image frame from a specific camera. Image size and format is set with the XML settings, see [Image settings](#image-settings).
 15       | Force Single           | Force data from available force plates. Only one sample per plate and camera frame. The latest sample is used if more than one sample is available.
 
 #### 2D and 2D linearized component
@@ -1586,7 +1589,7 @@ that the coordinates are linearized in 2D linearized.
 Size in bytes | Name                | Description
 --------------|---------------------|------------
 4             | Component Size      | The size of the component including the header (Component Size, Component Type and Camera Count). 32-bit integer.
-4             | Component Type      | Value 7 or 8. See section 5.6.1. 32-bit integer.
+4             | Component Type      | Value 7 or 8. See [Data component types](#data-component-types). 32-bit integer.
 4             | Camera Count        | Number of cameras. 32-bit integer.
 2             | 2D Drop Rate        | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably. 16-bit integer.
 2             | 2D Out Of Sync Rate | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time. 16-bit integer.
@@ -1623,7 +1626,7 @@ Not-A-Number according to the IEEE 754 floating point standard.
 Size in bytes | Name                | Description
 --------------|---------------------|------------
 4             | Component Size      | The size of the component including the header (Component Size, Component Type and Marker Count). 32-bit integer
-4             | Component Type      | Value = 1. See section 5.6.1. 32-bit integer
+4             | Component Type      | Value = 1. See [Data component types](#data-component-types). 32-bit integer
 4             | Marker Count        | The number of markers in this frame. 32-bit integer
 2             | 2D Drop Rate        | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably. 16-bit integer
 2             | 2D Out Of Sync Rate | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time. 16-bit integer.
@@ -1652,7 +1655,7 @@ point.
 Size in bytes | Name                | Description
 --------------|---------------------|------------
 4             | Component Size      | The size of the component including the header (Component Size, Component Type and Marker Count). 32-bit integer.
-4             | Component Type      | Value = 9. See section 5.6.1. 32-bit integer.
+4             | Component Type      | Value = 9. See [Data component types](#data-component-types). 32-bit integer.
 4             | Marker Count        | The number of markers in this frame. 32-bit integer.
 2             | 2D Drop Rate        | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably. 16-bit integer.
 2             | 2D Out Of Sync Rate | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time. 16-bit integer.
@@ -1672,7 +1675,7 @@ Repeated Marker Count times:
 Size in bytes | Name                | Description
 --------------|---------------------|------------
 4             | Component Size      | The size of the component including the header (Component Size, Component Type and Marker Count). 32-bit integer.
-4             | Component Type      | Value = 2. See section 5.6.1. 32-bit integer.
+4             | Component Type      | Value = 2. See [Data component types](#data-component-types). 32-bit integer.
 4             | Marker Count        | The number of markers in this frame. 32-bit integer.
 2             | 2D Drop Rate        | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably. 16-bit integer.
 2             | 2D Out Of Sync Rate | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time. 16-bit integer.
@@ -1693,7 +1696,7 @@ Repeated Marker Count times:
 Size in bytes | Name                | Description
 --------------|---------------------|------------
 4             | Component Size      | The size of the component including the header (Component Size, Component Type and Marker Count). 32-bit integer.
-4             | Component Type      | Value = 10. See section 5.6.1. 32-bit integer.
+4             | Component Type      | Value = 10. See [Data component types](#data-component-types). 32-bit integer.
 4             | Marker Count        | The number of markers in this frame. 32-bit integer.
 2             | 2D Drop Rate        | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably. 16-bit integer.
 2             | 2D Out Of Sync Rate | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time. 16-bit integer.
@@ -1715,7 +1718,7 @@ Repeated Marker Count times:
 Size in bytes | Name                | Description
 --------------|---------------------|-------------
 4             | Component Size      | The size of the component including the header (Component Size, Component Type and Body Count). 32-bit integer.
-4             | Component Type      | Value = 5. See section 5.6.1. 32-bit integer.
+4             | Component Type      | Value = 5. See [Data component types](#data-component-types). 32-bit integer.
 4             | Body Count          | The number of 6DOF bodies in this frame. 32-bit integer.
 2             | 2D Drop Rate        | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably. 16-bit integer.
 2             | 2D Out Of Sync Rate | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time. 16-bit integer.
@@ -1736,7 +1739,7 @@ Repeated Body Count times:
 Size in bytes | Name                          | Description
 --------------|-------------------------------|------------
 4             | Component Size                | The size of the component including the header (Component Size, Component Type and Body Count). 32-bit integer.
-4             | Component Type                | Value = 11. See section 5.6.1. 32-bit integer.
+4             | Component Type                | Value = 11. See [Data component types](#data-component-types). 32-bit integer.
 4             | Body Count                    | The number of 6DOF bodies in this frame. 32-bit integer.
 2             | 2D Drop Rate                  | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably. 16-bit integer.
 2             | 2D Out Of Sync Rate           | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time. 16-bit integer.
@@ -1758,7 +1761,7 @@ Repeated Body Count times:
 Size in bytes | Name                 | Description
 --------------|----------------------|------------
 4             | Component Size       | The size of the component including the header (Component Size, Component Type and Body Count). 32-bit integer.
-4             | Component Type       | Value = 6. See section 5.6.1. 32-bit integer.
+4             | Component Type       | Value = 6. See [Data component types](#data-component-types). 32-bit integer.
 4             | Body Count           | The number of 6DOF bodies in this frame. 32-bit integer.
 2             | 2D Drop Rate         | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably. 16-bit integer.
 2             | 2D Out Of Sync Rate  | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time. 16-bit integer.
@@ -1782,7 +1785,7 @@ Repeated Body Count times:
 Size in bytes | Name                                | Description
 --------------|-------------------------------------|------------
 4             | Component Size                      | The size of the component including the header (Component Size, Component Type and Body Count).<br><br>32-bit integer.
-4             | Component Type                      | Value = 12. See section 5.6.1.<br><br>32-bit integer.
+4             | Component Type                      | Value = 12. See [Data component types](#data-component-types).<br><br>32-bit integer.
 4             | Body Count                          | The number of 6DOF bodies in this frame.<br><br>32-bit integer.
 2             | 2D Drop Rate                        | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably. 16-bit integer.
 2             | 2D Out Of Sync Rate                 | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time. 16-bit integer.
@@ -1806,7 +1809,7 @@ Repeated Body Count times:
 Size in bytes | Name                | Description
 --------------|---------------------|------------
 4             | Component Size      | The size of the component including the header (Component Size, Component Type and Analog Device Count). 32-bit integer.
-4             | Component Type      | Value = 3. See section 5.6.1. 32-bit integer.
+4             | Component Type      | Value = 3. See [Data component types](#data-component-types). 32-bit integer.
 4             | Analog Device Count | Number of analog devices in this component. 32-bit integer.
 
 Repeated Analog Device Count times:
@@ -1825,7 +1828,7 @@ Repeated Analog Device Count times:
 Size in bytes | Name                | Description
 --------------|---------------------|------------
 4             | Component Size      | The size of the component including the header (Component Size, Component Type and Analog Device Count). 32-bit integer.
-4             | Component Type      | Value = 13. See section 5.6.1. 32-bit integer.
+4             | Component Type      | Value = 13. See [Data component types](#data-component-types). 32-bit integer.
 4             | Analog Device Count | Number of analog devices in this component. 32-bit integer.
 
 Repeated Analog Device Count times:
@@ -1844,7 +1847,7 @@ If no analog data is available, Analog Data will contain IEEE NaN (Not a number)
 Size in bytes | Name           | Description
 --------------|----------------|------------
 4             | Component Size | The size of the component including the header (Component Size, Component Type and Plate Count). 32-bit integer.
-4             | Component Type | Value = 4. See section 5.6.1. 32-bit integer.
+4             | Component Type | Value = 4. See [Data component types](#data-component-types). 32-bit integer.
 4             | Plate Count    | The number of force plates in this frame. 32-bit integer.
 
 
@@ -1863,7 +1866,7 @@ Force single component
 Size in bytes | Name           | Description
 --------------|----------------|------------
 4             | Component Size | The size of the component including the header (Component Size, Component Type and Plate Count). 32-bit integer.
-4             | Component Type | Value = 15. See section 5.6.1. 32-bit integer.
+4             | Component Type | Value = 15. See [Data component types](#data-component-types). 32-bit integer.
 4             | Plate Count    | The number of force plates in this frame. 32-bit integer.
 
 
@@ -1882,7 +1885,7 @@ If no force data is available, Force Data will contain IEEE NaN (Not a number) f
 Size in bytes | Name           | Description
 --------------|----------------|------------
 4             | Component Size | The size of the component including the header (Component Size, Component Type and Camera Count). 32-bit integer.
-4             | Component Type | Value = 14. See section 5.6.1. 32-bit integer.
+4             | Component Type | Value = 14. See [Data component types](#data-component-types). 32-bit integer.
 4             | Camera Count   | Number of cameras. 32-bit integer.
 
 Repeated Camera Count times:
@@ -1936,7 +1939,7 @@ Size in bytes | Name  | Value
 --------------|-------|------
 4             | Size  | 9 bytes. 32-bit integer.
 4             | Type  | Value = 6. 32-bit integer.
-1             | Event | Event number: 1-13, see 5.10.1.
+1             | Event | Event number: 1-13, see [Events](#events).
 
 #### Events
 The RT server sends an event data packet to all its clients when the RT server
@@ -1960,8 +1963,8 @@ Event ID     | Name                    | Comment
 
 
 ### Discover packet
-When this type of packet is broadcasted to QTM's auto discovery port, see 3.2.2,
-QTM responds with a discover response packet, see 5.11.1.
+When this type of packet is broadcasted to QTM's auto discovery port, see [IP port numbers](#ip-port-numbers),
+QTM responds with a discover response packet, see [Discover response packet](#discover-response-packet).
 
 Size in bytes | Name          | Value
 --------------|---------------|------
@@ -1991,7 +1994,7 @@ n+1           | Server info string   | Null terminated string containing, server
 Example of a server info string: `MyComputer, QTM 2.5 (build 568), 5 cameras`.
 
 **Note**: The base port number is only used for version 1.0 of the RT server,
-see 3.2.2 to get the desired port number.
+see [IP port numbers](#ip-port-numbers) to get the desired port number.
  
 ## Open Sound Control (OSC)
 
@@ -2000,8 +2003,8 @@ The OSC version of the QTM RT server uses the [Open Sound Control 1.0 specificat
 ### Connecting (OSC)
 When using the OSC protocol, which uses UDP, the client must first establish a
 connection with the server. This is because UDP is not connection-based like
-TCP. This is done with the `Connect` command, see 6.2.1. A connection is closed
-with the disconnect command, see 6.2.2.
+TCP. This is done with the `Connect` command, see [Connect](#connect-osc-). A connection is closed
+with the disconnect command, see [Disconnect](#disconnect-osc-).
 
 The first thing that happens when you have connected to the QTM RT server with
 OSC is that the server sends a welcome message string: `QTM RT Interface
@@ -2014,7 +2017,7 @@ version will always be used.
 There is only one server port available for OSC, base port + 4. OSC is sent via
 UDP packets. The clients listens to a UDP port for incoming OSC packets from
 the server. The client UDP server port is set to the RT server with the Connect
-command. See .
+command. See [Connecting](#connecting).
 
 ### Commands (OSC)
 In the description of the commands, number parameters are designated by an n,
@@ -2110,7 +2113,7 @@ Response:   License pass                         or
 > **`GetParameters`** `All | ([General] [3D] [Analog] [Force])`
 
 This command retrieves the settings for the requested component(s) of QTM in
-XML format. The XML parameters are described in section 5.5 on page 28.
+XML format. The XML parameters are described [here](#xml-paramters).
 
 Example:
 ```coffeescript
@@ -2130,7 +2133,7 @@ Points worth noting are:
 
 * The frame is composed of the parts specified in the parameters to the
   command. The exact layout of the data frame in different situations is
-  described in section 5.6 on page 44. 
+  described in [Data packet](#data-packet). 
 
 * The composition of the data frame may vary between frames. This is due to the
   fact that some data (Analog and Force data) is not collected or buffered at
@@ -2143,8 +2146,8 @@ Points worth noting are:
   often as camera data is available
 
 * If there is no ongoing measurement (either it has not started or it has
-  already finished), an empty data frame is sent to the client (see section 5.7
-  on page 57).
+  already finished), an [empty data frame](#no-more-data-packet) is sent to the
+  client.
 
 * If a measurement is ongoing but there is no new frame of data available, the
   server waits until the next frame of data is available before sending it to
@@ -2154,7 +2157,7 @@ Example:
 ```coffeescript
 Command:    GetCurrentFrame 3D Analog
 Response:   One data frame is sent to the client according to the 
-            data frame protocol described in section 5.6 on page 44.
+			data frame protocol described in section the Data packet section.
 ```
 
 #### StreamFrames (OSC)
@@ -2170,7 +2173,7 @@ Points worth noting are:
 
 * Each frame is composed of the parts specified in the parameters to the
   command. The exact layout of the data frame in different situations is
-  described in section 5.6 on page 44.
+  described in section [Data packet](#data-packet).
 
 * The composition of the data frame may vary between frames. This is due to the
   fact that some data (Analog and Force data) is not collected or buffered at
@@ -2181,8 +2184,8 @@ Points worth noting are:
   available in fairly large chunks and not as often as camera data is available
 
 * If there is no ongoing measurement (either it has not started or it has
-  already finished), an empty data frame is sent to the client (see section 5.7
-  on page 57).
+  already finished), an [empty data frame](#no-more-data-packet) is sent to the
+  client.
 
 * The actual rate at which the frames are sent depends on several factors – not
   just the frequency specified in the command parameters:
@@ -2224,9 +2227,9 @@ Points worth noting are:
 	  When a client specifies AllFrames in the StreamFrames command, every
 	  real-time frame processed by QTM is transmitted to the client.
 
- * When the measurement is finished, or has not yet started, a special empty
-   data frame packet signaling that no data is available is sent to the client
-   (see section 5.7 on page 57).
+ * When the measurement is finished, or has not yet started, a special
+  [empty data frame](#no-more-data-packet) packet signaling that no data is
+  available is sent to the client.
 
  * To stop the data stream before it has reached the end of the measurement or
    to prevent data from being sent if a new measurement is started after the
@@ -2238,15 +2241,14 @@ Example:
 Command:    StreamFrames Frequency:30 UDP:2234 3D Analog
 Response:   30 frames per second containing 3D data and Analog data 
             are streamed over UDP/IP to the client computer’s port 
-            2234. The data frame protocol is described in section 5.6 
-            on page 44.
+            2234. The data frame protocol is described in the Data packet section.
 ```
 
 ### QTM RT Packets (OSC)
 
 #### Structure (OSC)
 All OSC packets sent to or from the server have the same general layout. They
-don't have a header with size and type like the standard packet, see 5.2.
+don't have a header with size and type like the standard packet, see [QTM RT Packets](#qtm-rt-packets).
 
 The content of the OSC packet differs slightly from the standard packet and
 uses the OSC data types for int32, int64, float32 and strings. All OSC packets
@@ -2300,12 +2302,12 @@ OSC-string | Data | "Connected"
 
 
 #### XML packet (OSC)
-The XML string contains the same data as for the standard XML packet. See 5.5.
+The XML string contains the same data as for the standard [XML Packet](#xml-packet).
 OSC XML packets are sent in an OSC message with address pattern `/qtm/xml`.
 
 OSC type   | Name | Value
 -----------|------|------
-OSC-string | Data | XML string data. The XML data is described in 5.5.
+OSC-string | Data | XML string data. The XML data is described in [XML Packet](#xml-packet).
 
 
 #### Data packet (OSC)
@@ -2317,7 +2319,7 @@ with a component header – identical (in layout) to the packet header.
 OSC data packets consist of one or several OSC messages enclosed in an OSC
 bundle. The first message contains the data frame header and has the OSC
 address pattern `/qtm/data`. It is followed by an OSC message for each data
-component. See 6.8.2.
+component. See [OSC Data frame component types](#data-frame-component-types-osc-).
 
 ##### Data frame header (OSC)
 The frame header and the data components are sent in an OSC bundle as separate
@@ -2341,18 +2343,18 @@ Name                   | OSC address           | Description
 -----------------------|-----------------------|-------------
 2D                     | /qtm/2d               | 2D marker data
 2D Linearized          | /qtm/2d_lin           | Linearized 2D marker data
-3D                     | /qtm/3d               | 3D marker data. Each marker has its own OSC address. See 6.8.4.
-3D Residuals           | /qtm/3d_res           | 3D marker data with residuals. Each marker has its own OSC address. See 6.8.5.6.8.4
+3D                     | /qtm/3d               | 3D marker data. Each marker has its own OSC address. See [OSC 3D component](#3d-component-osc-).
+3D Residuals           | /qtm/3d_res           | 3D marker data with residuals. Each marker has its own OSC address. See [3D with residuals component](#3d-with-residuals-component-osc-).
 3D No Labels           | /qtm/3d_no_labels     | Unidentified 3D marker data.
 3D No Labels Residuals | /qtm/3d_no_labels_res | Unidentified 3D marker data with residuals
 Analog                 | /qtm/analog           | Analog data from available devices.
 Analog Single          | /qtm/analog_single    | Analog data from available analog devices. Only one sample per channel and camera frame. The latest sample is used if more than one sample is available.
 Force                  | /qtm/force            | Data from available force plates.
 Force Single           | /qtm/force_single     | Force data from available force plates. Only one sample per plate and camera frame. The latest sample is used if more than one sample is available.
-6D                     | /qtm/6d               | 6D data - position and rotation matrix. Each body has its own OSC address. See 6.8.12.
-6D Residuals           | /qtm/6d_res           | 6D data - position and rotation matrix with residuals. Each body has its own OSC address. See 6.8.13.
-6D Euler               | /qtm/6d_euler         | 6D data - position and Euler angles. Each body has its own OSC address. See 6.8.14.
-6D Euler Residuals     | /qtm/6d_euler_res     | 6D data - position and Euler angles with residuals. Each body has its own OSC address. See 6.8.15.
+6D                     | /qtm/6d               | 6D data - position and rotation matrix. Each body has its own OSC address.  See [OSC 6DOF component](#6dof-component-osc-).
+6D Residuals           | /qtm/6d_res           | 6D data - position and rotation matrix with residuals. Each body has its own OSC address. See [6DOF with residuals component](#6dof-with-residuals-component-osc-).
+6D Euler               | /qtm/6d_euler         | 6D data - position and Euler angles. Each body has its own OSC address. See [6DOF Euler component](#6dof-euler-component-osc-).
+6D Euler Residuals     | /qtm/6d_euler_res     | 6D data - position and Euler angles with residuals. Each body has its own OSC address. See [6DOF Euler with residuals component](#6dof-euler-with-residuals-component-osc-).
 
 
 
@@ -2573,7 +2575,7 @@ OSC event packets are sent in an OSC message with address pattern `/qtm/event`.
 
 OSC type   | Name  | Value
 -----------|-------|------
-OSC-string | Event | Event string. See 6.10.1.
+OSC-string | Event | Event string. See [OSC Events](#events-osc-).
 
 #### Events (OSC)
 The RT server sends an event data packet to all its clients when the RT server
