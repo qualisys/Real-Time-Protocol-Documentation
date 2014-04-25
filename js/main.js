@@ -3,7 +3,7 @@ var scrollSpyOffset = 90;
 var stripOSC = function()
 {
 	$('nav a, h1, h2, h3, h4, h5').each(function() {
-		$(this).text($(this).text().replace('(OSC)', ''));
+		$(this).text($(this).text().replace(' (OSC)', ''));
 	});
 };
 
@@ -32,6 +32,11 @@ jQuery(document).ready(function($)
 	});
 
 	setupToc();
+
+	$('code.coffeescript span.hljs-keyword:contains(or)').each(function() {
+		if ('or' == $(this).text())
+			$(this).addClass('highlight-or');
+	});
 
 	$('div.body a').on('click', function(e) {
 		var href = $(this).prop('href').split('#');
