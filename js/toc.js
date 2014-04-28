@@ -223,10 +223,16 @@ var setupToc = function()
 
 	$('nav.toq').on('activate.bs.scrollspy', function () {
 		expandToc();
-	});
-
-	$(window).on('scroll', function() {
 		setNavHeight();
+
+		var nav           = $('nav.toq');
+		var currentScroll = nav.offset().top - nav.children().first().offset().top + parseInt(nav.css('padding-top'));
+
+		nav.scrollTop(0);
+		var outsideDelta = Math.max(0, (nav.find('li.active.deepest').offset().top - nav.offset().top) - nav.height());
+
+		if (0 < outsideDelta)
+			nav.scrollTop(currentScroll + outsideDelta);
 	});
 
 	$('body').scrollspy({ offset: scrollSpyOffset });
