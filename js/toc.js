@@ -3,7 +3,7 @@ var autocollapse = true;
 var setNavHeight = function() {
 	var topOffset = Math.max(
 			$('div.aside-container').next().get(0).getBoundingClientRect().top,
-			$('div.affix').height()
+			$('header div.affix').height()
 		) + 2 * parseInt($('nav').css('padding-top'));
 
 	$('nav.toq').height($(window).height() - topOffset);

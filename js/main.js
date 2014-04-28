@@ -19,6 +19,7 @@ jQuery(document).ready(function($)
 
 	stripOSC();
 
+	// Apply syntax highlighting.
 	$('pre code').each(function(i, e) {
 		var lang  = 'no-highlight'
 		  , theClass = $(this).attr('class');
@@ -31,16 +32,16 @@ jQuery(document).ready(function($)
 		hljs.highlightBlock(e);
 	});
 
-	setupToc();
-
+	// Highlight the word 'or' in coffeescript-highlighted code.
 	$('code.coffeescript span.hljs-keyword:contains(or)').each(function() {
 		if ('or' == $(this).text())
 			$(this).addClass('highlight-or');
 	});
 
+	
+	// Handle scroll and history of internal #-links.
 	$('div.body a').on('click', function(e) {
 		var href = $(this).prop('href').split('#');
-			console.log($(this));
 
 		if (1 < href.length) {
 			var anchor = '#' + href[1];
@@ -56,6 +57,8 @@ jQuery(document).ready(function($)
 			e.preventDefault();
 		}
 	});
+
+	setupToc();
 
 });
 
