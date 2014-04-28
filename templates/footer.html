@@ -8,7 +8,8 @@
 		<script src="static/js/app.js"></script>
 		<script type="text/javascript">
 			WebFontConfig = {
-				google: { families: [ 'Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700,800:latin' ] }
+				google: { families: [ 'Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700,800:latin' ] },
+				active: function() { $('body').scrollspy('refresh'); }
 			};
 			(function() {
 				var wf = document.createElement('script');
