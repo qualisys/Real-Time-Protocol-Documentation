@@ -21,6 +21,7 @@ var doqRunner = function()
 					livereload: livereload,
 					version: rtVersion,
 					revision: revision,
+					title: 'QTM Real-time Server Protocol documentation',
 				}
 			},
 			{ name: 'index.md', data: {} },
