@@ -1,5 +1,6 @@
 var fs             = require('fs')
   , matchdep       = require('matchdep')
+  , moment         = require('moment')
   , version        = require('./package.json').version
   , rtVersion      = version.substr(0, version.lastIndexOf('.'))
   , revision       = version.substr(version.lastIndexOf('.') + 1)
@@ -22,6 +23,7 @@ var doqRunner = function()
 					version: rtVersion,
 					revision: revision,
 					title: 'QTM Real-time Server Protocol documentation',
+					date: moment().format("MMM Do YYYY"),
 				}
 			},
 			{ name: 'index.md', data: {} },
