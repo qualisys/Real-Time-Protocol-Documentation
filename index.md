@@ -1544,7 +1544,7 @@ Size in bytes | Name            | Value/Description
 --------------|-----------------|------------------
 4             | Size            | 8 bytes packet header + 12 bytes data frame header + the size of all the components and their headers. 32-bit integer
 4             | Type            | Value = 3. 32-bit integer
-8             | Time Stamp      | Number of microseconds from start, 64-bit integer. The time stamp value is not valid for the Analog and Force data frame components, they have their own timestamps in their component data.
+8             | Timestamp      | Number of microseconds from start, 64-bit integer. The timestamp value is not valid for the Analog and Force data frame components, they have their own timestamps in their component data.
 4             | Frame Number    | The number of this frame. The frame number is not valid for the Analog and Force data frame components. They have their own frame numbers within the component. 32-bit integer.
 4             | Component Count | The number of data components in the data packet. 32-bit integer.
 
@@ -1816,12 +1816,12 @@ Repeated Analog Device Count times:
 
 <div class="table-noheader"></div>
 
-4                                | Analog Device ID | Id of this analog device. Id starts at 1. 32-bit integer.
----------------------------------|------------------|----------------------------------------------------------
-4                                | Channel Count    | The number of channels of this analog device in this frame. 32-bit integer.
-4                                | Sample Count     | The number of analog samples per channel in this frame. 32-bit integer.
-4                                | Sample Number    | Order number of first sample in this frame. Sample Number is increased with the analog frequency. There are Channel Count values per sample number. 32-bit integer.<br><br>Sample Number is omitted if Sample Count is 0.
-4 * Channel Count * Sample Count | Analog Data      | Voltage values for all samples of all channels as 32-bit floats. The samples are ordered like this:<br><br>Channel 1, Sample Sample Number<br>Channel 1, Sample Sample Number + 1<br>Channel 1, Sample Sample Number + 2<br>&hellip;<br>Channel 1, Sample Sample Number + Sample Count - 1<br>Channel 2, Sample Sample Number Channel 2, Sample Sample Number + 1<br>&hellip;<br><br>Analog Data is omitted if Sample Count is 0.
+4                                  | Analog Device ID | Id of this analog device. Id starts at 1. 32-bit integer.
+-----------------------------------|------------------|----------------------------------------------------------
+4                                  | Channel Count    | The number of channels of this analog device in this frame. 32-bit integer.
+4                                  | Sample Count     | The number of analog samples per channel in this frame. 32-bit integer.
+4                                  | Sample Number    | Order number of first sample in this frame. Sample Number is increased with the analog frequency. There are Channel Count values per sample number. 32-bit integer.<br><br>Sample Number is omitted if Sample Count is 0.
+4 \* Channel Count \* Sample Count | Analog Data      | Voltage values for all samples of all channels as 32-bit floats. The samples are ordered like this:<br><br>Channel 1, Sample *Sample Number*<br>Channel 1, Sample *Sample Number* + 1<br>Channel 1, Sample *Sample Number* + 2<br>&hellip;<br>Channel 1, Sample *Sample Number* + Sample Count - 1<br>Channel 2, Sample *Sample Number* Channel 2, Sample *Sample Number + 1*<br>&hellip;<br><br>Analog Data is omitted if Sample Count is 0.
 
 #### Analog single component
 
@@ -1861,7 +1861,7 @@ Repeated Plate Count times:
 4                | Force Number   | Order number of first force in this frame. Force Number is increased with the force frequency. 32-bit integer.
 36 * Force Count | Force Data     | Each force sample consists of 9 32-bit float values: <br><br>X coordinate of the force <br>Y coordinate of the force <br>Z coordinate of the force <br>X coordinate of the moment <br>Y coordinate of the moment <br>Z coordinate of the moment <br>X coordinate of the force application point <br>Y coordinate of the force application point <br>Z coordinate of the force application point
 
-Force single component
+#### Force single component
 
 Size in bytes | Name           | Description
 --------------|----------------|------------
@@ -2327,7 +2327,7 @@ OSC messages.
 
 OSC type | Name            | Value
 ---------|-----------------|------
-Int32    | TimeStamp Hi    | Hi 32 bits of 64 bit timestamp value.<br><br>Number of microseconds from start. The time stamp value is not valid for the Analog and Force data frame components, they have their own timestamps in their component data.
+Int32    | TimeStamp Hi    | Hi 32 bits of 64 bit timestamp value.<br><br>Number of microseconds from start. The timestamp value is not valid for the Analog and Force data frame components, they have their own timestamps in their component data.
 Int32    | TimeStamp Lo    | Lo 32 bits of 64 bit timestamp value. See above.
 Int32    | SMPTETimeCode   | SMPTE time code little endian format:<br> <br>Bit 0-4: Hours <br>Bit 5-10: Minutes <br>Bit 11-16: Seconds <br>Bit 17-21: Frame <br>Bit 22-30: Sub frame <br>Bit 31: Valid bit
 Int32    | FrameNumber     | The number of this frame. The frame number is not valid for the Analog and Force data frame components. They have their own sample numbers in their component data.
@@ -2452,7 +2452,7 @@ Int32    | Analog Device ID | Id of this analog device.
 Int32    | Channel Count    | The number of channels of this analog device in this frame.
 Int32    | Sample Count     | The number of analog samples per channel in this frame.
 Int32    | Sample Number    | Order number of first sample in this frame. Sample Number is increased with the analog frequency. There are Channel Count values per sample number.
-Float32  | Analog Data      | There are (Channel Count * Sample Count) voltage values. The samples are ordered like this:<br><br>Channel 1, Sample Sample Number <br>Channel 1, Sample Sample Number + 1 <br>Channel 1, Sample Sample Number + 2 <br>&hellip;.  <br>Channel 1, Sample Sample Number + <br> Sample Count – 1 <br>Channel 2, Sample Sample Number <br>Channel 2, Sample Sample Number + 1 <br>&hellip;
+Float32  | Analog Data      | There are (Channel Count * Sample Count) voltage values. The samples are ordered like this:<br><br>Channel 1, Sample *Sample Number* <br>Channel 1, Sample *Sample Number + 1* <br>Channel 1, *Sample Sample Number + 2* <br>&hellip;.  <br>Channel 1, Sample *Sample Number + Sample Count – 1* <br>Channel 2, Sample *Sample Number* <br>Channel 2, Sample *Sample Number + 1* <br>&hellip;
 
 ##### Analog single component (OSC)
 
