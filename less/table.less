@@ -12,8 +12,6 @@ table {
 	thead {
 		th {
 			white-space: nowrap;
-			//background: @brand-primary;
-			//color: #fff;
 			text-transform: uppercase;
 			font-weight: 700;
 			font-size: 0.9em;
@@ -42,12 +40,6 @@ div.table-noheader + table {
 		text-transform: none;
 	}
 
-	td:first-child {
-		font-weight: normal;
-	}
-
-	td {
-		background-color: transparent !important;
-		//font-weight: bold;
-	}
+	td:first-child { font-weight: normal; }
+td, th { background-color: transparent !important; }
 }

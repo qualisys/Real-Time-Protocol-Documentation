@@ -993,16 +993,16 @@ All packets sent to or from the server have the same general layout.
 
 The first part consists of a packet header of 8 bytes:
 
-Size in bytes   | Name   | Description
-----------------|--------|------------
-4               | Size   | The total size of the QTM RT packet including these four bytes denoting the size.
-4               | Type   | The type of data in the packet
+Bytes | Name     | Type           | Description
+----- | -------- | -------------- | -----------
+4     | Size     | 32-bit integer | The total size of the QTM RT packet including these four bytes denoting the size.
+4     | Type     | 32-bit integer |  The type of data in the packet
 
 After the header follows the actual data of the packet:
 
-Size in bytes   | Name   | Description
-----------------|--------|------------
-Size - 8        | Data   | Whatever data that the Type field says it is.
+Bytes    | Name     | Type  | Description
+-------- | -------- | ----- | -----------
+Size - 8 | Data     | Mixed | Whatever data that the Type field says it is.
 
 
 **Please note**:  
@@ -1041,11 +1041,11 @@ you expect.
 
 Example of an error packet:  
 
-Size in bytes  | Name   | Value
----------------|--------|-------
-4              | Size   | 31 (8 bytes header + 23 bytes data)
-4              | Type   | 0
-23             | Data   | "Command not supported."
+Bytes | Name     | Value
+----- | -------- | -------
+4     | Size     | 31 (8 bytes header + 23 bytes data)
+4     | Type     | 0
+23    | Data     | "Command not supported."
 
 The error string is laid out like this (always with a `NULL` char to terminate it):
 
@@ -1064,11 +1064,11 @@ NULL-termination is optional for command strings sent from the clients.
 
 Here is an example of a command sent to the server:
 
-Size in bytes  | Name   | Value
--------------- | ------ | -----
-4              | Size   | 20 (8 bytes header + 12 bytes data)
-4              | Type   | 1
-12             | Data   | "Version 1.2"
+Bytes | Name   | Value
+----- | ------ | -----
+4     | Size   | 20 (8 bytes header + 12 bytes data)
+4     | Type   | 1
+12    | Data   | "Version 1.2"
 
 The resulting string is laid out like this (with a `NULL` char to terminate it,
 which is not required of clients).
@@ -1104,11 +1104,11 @@ When requesting more than one type of parameters at the same time, all of them
 are placed in the same `<QTM_Parameters_Ver_1.12>` block. The individual blocks
 may appear in any order inside this block.
 
-Size in bytes  | Name          | Value
--------------- | ---------------------
-4              | Size          | 8 bytes header + XML string length
-4              | Type          | 2
-               | Data          | XML string data, NULL terminated.<br><br>The XML data can consist of one or several of following parameters:<br>[General](#general-xml-parameters), [3D](#3d-xml-parameters), [6D](#6d-xml-parameters), [Analog](#analog-xml-parameters), [Force](#force-xml-parameters) and [Image](#image-xml-parameters).
+Bytes | Name                  | Value
+----- | --------------------- | -----
+4     | Size                  | 8 bytes header + XML string length
+4     | Type                  | 2
+      | Data                  | XML string data, NULL terminated.<br><br>The XML data can consist of one or several of following parameters:<br>[General](#general-xml-parameters), [3D](#3d-xml-parameters), [6D](#6d-xml-parameters), [Analog](#analog-xml-parameters), [Force](#force-xml-parameters) and [Image](#image-xml-parameters).
 
 ### XML Parameters
 
@@ -1540,22 +1540,22 @@ with a component header – identical (in layout) to the packet header.
 
 **Data packet header**
 
-Size in bytes | Name            | Value/Description
---------------|-----------------|------------------
-4             | Size            | 8 bytes packet header + 12 bytes data frame header + the size of all the components and their headers. 32-bit integer
-4             | Type            | Value = 3. 32-bit integer
-8             | Timestamp      | Number of microseconds from start, 64-bit integer. The timestamp value is not valid for the Analog and Force data frame components, they have their own timestamps in their component data.
-4             | Frame Number    | The number of this frame. The frame number is not valid for the Analog and Force data frame components. They have their own frame numbers within the component. 32-bit integer.
-4             | Component Count | The number of data components in the data packet. 32-bit integer.
+Bytes | Name            | Type           | Value/Description
+----- | --------------- | -------------- | -----------------
+4     | Size            | 32-bit integer | 8 bytes packet header + 12 bytes data frame header + the size of all the components and their headers.
+4     | Type            | 32-bit integer | Value = 3.
+8     | Timestamp       | 64-bit integer | Number of microseconds from start. The timestamp value is not valid for the Analog and Force data frame components, they have their own timestamps in their component data.
+4     | Frame Number    | 32-bit integer | The number of this frame. The frame number is not valid for the Analog and Force data frame components. They have their own frame numbers within the component.
+4     | Component Count | 32-bit integer | The number of data components in the data packet.
 
 
-**Component data** (Repeated ComponentCount times)
+**Component data** (Repeated Component Count times)
 
-Size in bytes |  Name           |  Value/Description
---------------|-----------------|--------------------
-4             |  Component Size |  Size of Component Data + 8 bytes component header. 32-bit integer.
-4             |  Component Type |  The type of the component. Defined in the following section. 32-bit integer.
-Size - 8      |  Component Data |  Component-specific data. Defined in [Data component types](#data-component-types) and [2D and 2D linearized component](#2d-and-2d-linearized-component) sections.
+Bytes    |  Name           | Type           | Value/Description
+-------- | --------------- | -------------- | ------------------
+4        |  Component Size | 32-bit integer |  Size of Component Data + 8 bytes component header.
+4        |  Component Type | 32-bit integer | The type of the component. Defined in the following section.
+Size - 8 |  Component Data | Mixed          | Component-specific data. Defined in [Data component types](#data-component-types) and [2D and 2D linearized component](#2d-and-2d-linearized-component) sections.
 
 #### Data component types
 
@@ -1586,33 +1586,31 @@ Type     | Name                   | Description
 The 2D and 2D linearized data frame format are the same. The only difference is
 that the coordinates are linearized in 2D linearized.
 
-Size in bytes | Name                | Description
---------------|---------------------|------------
-4             | Component Size      | The size of the component including the header (Component Size, Component Type and Camera Count). 32-bit integer.
-4             | Component Type      | Value 7 or 8. See [Data component types](#data-component-types). 32-bit integer.
-4             | Camera Count        | Number of cameras. 32-bit integer.
-2             | 2D Drop Rate        | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably. 16-bit integer.
-2             | 2D Out Of Sync Rate | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time. 16-bit integer.
+Bytes | Name                | Type           | Description
+----- | ------------------- | -------------- | -----------
+4     | Component Size      | 32-bit integer | The size of the component including the header (Component Size, Component Type and Camera Count).
+4     | Component Type      | 32-bit integer | Value 7 or 8. See [Data component types](#data-component-types).
+4     | Camera Count        | 32-bit integer | Number of cameras.
+2     | 2D Drop Rate        | 16-bit integer | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.
+2     | 2D Out Of Sync Rate | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
 
 
-Repeated CameraCount times:
+Repeated Camera Count times:
 
-<div class="table-noheader"></div>
+Bytes             | Name         | Type           | Description
+----------------- | ------------ | -------------- | -----------
+4                 | Marker Count | 32-bit integer | The number of markers for this camera in this frame.
+1                 | Status Flags | 8-bit integer  | Bit 1: Too much light enters the camera. Please increase the threshold level or <br>lower the exposure time. If measuring at high frequencies, try to reduce the image size.<br><br>Bit 2-8: Not used.
+12 * Marker Count | 2D data      | Mixed          | 2D marker data from the camera, described below:
 
-4                 | Marker Count | The number of markers for this camera in this frame. 32-bit integer
-------------------|--------------|----------------------------------------------------------------------
-1                 | Status Flags | Bit 1: Too much light enters the camera. Please increase the threshold level or lower the exposure time. If measuring at high frequencies, try to reduce the image size.<br><br>Bit 2-8: Not used.
-12 * Marker Count | 2D data      | 2D marker data from the camera, described below:
+2D Data, repeated Marker Count times:
 
-2D Data, repeated MarkerCount times:
-
-<div class="table-noheader"></div>
-
-4 | X          | X coordinate of the marker, 32-bit integer.
---|------------|---------------------------------------------
-4 | Y          | Y coordinate of the marker, 32-bit integer.
-2 | Diameter X | Marker X size, 16-bit integer.
-2 | Diameter Y | Marker Y size, 16-bit integer.
+Bytes | Name       | Type           | Description
+----- | ---------- | -------------- | -----------
+4     | X          | 32-bit integer | X coordinate of the marker.
+4     | Y          | 32-bit integer | Y coordinate of the marker.
+2     | Diameter X | 16-bit integer | Marker X size.
+2     | Diameter Y | 16-bit integer | Marker Y size.
 
 #### 3D component
 
@@ -1623,22 +1621,21 @@ coordinates will have all their 32 bits set - this signifies a negative quiet
 Not-A-Number according to the IEEE 754 floating point standard. 
 
 
-Size in bytes | Name                | Description
---------------|---------------------|------------
-4             | Component Size      | The size of the component including the header (Component Size, Component Type and Marker Count). 32-bit integer
-4             | Component Type      | Value = 1. See [Data component types](#data-component-types). 32-bit integer
-4             | Marker Count        | The number of markers in this frame. 32-bit integer
-2             | 2D Drop Rate        | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably. 16-bit integer
-2             | 2D Out Of Sync Rate | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time. 16-bit integer.
+Bytes | Name                  | Type           | Description
+----- | --------------------- | -------------- | -----------
+4     | Component Size        | 32-bit integer | The size of the component including the header (Component Size, Component Type and Marker Count).
+4     | Component Type        | 32-bit integer | Value = 1. See [Data component types](#data-component-types).
+4     | Marker Count          | 32-bit integer | The number of markers in this frame.
+2     | 2D Drop Rate          | 16-bit integer | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.
+2     | 2D Out Of Sync Rate   | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
 
-Repeated MarkerCount times:
+Repeated Marker Count times:
 
-<div class="table-noheader"></div>
-
-4 | X | X coordinate of the marker, 32-bit float.
---|---|------------------------------------------
-4 | Y | Y coordinate of the marker, 32-bit float.
-4 | Z | Z coordinate of the marker, 32-bit float.
+Bytes | Name | Type         | Description
+----- | ---- | ------------ | -----------
+4     | X    | 32-bit float | X coordinate of the marker.
+4     | Y    | 32-bit float | Y coordinate of the marker.
+4     | Z    | 32-bit float | Z coordinate of the marker.
 
 #### 3D with residuals component
 
@@ -1652,294 +1649,282 @@ Not-A-Number according to the IEEE 754 floating point standard. This frame
 component is the same as the 3D data frame, except for the residual for each 3D
 point.
 
-Size in bytes | Name                | Description
---------------|---------------------|------------
-4             | Component Size      | The size of the component including the header (Component Size, Component Type and Marker Count). 32-bit integer.
-4             | Component Type      | Value = 9. See [Data component types](#data-component-types). 32-bit integer.
-4             | Marker Count        | The number of markers in this frame. 32-bit integer.
-2             | 2D Drop Rate        | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably. 16-bit integer.
-2             | 2D Out Of Sync Rate | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time. 16-bit integer.
+Bytes | Name                  | Type           | Description
+----- | --------------------- | -------------- | -----------
+4     | Component Size        | 32-bit integer | The size of the component including the header (Component Size, Component Type and Marker Count).
+4     | Component Type        | 32-bit integer | Value = 9. See [Data component types](#data-component-types).
+4     | Marker Count          | 32-bit integer | The number of markers in this frame.
+2     | 2D Drop Rate          | 16-bit integer | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.
+2     | 2D Out Of Sync Rate   | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
 
 Repeated Marker Count times:
 
-<div class="table-noheader"></div>
-
-4  | X        | X coordinate of the marker, 32-bit float.
----|----------|------------------------------------------
-4  | Y        | Y coordinate of the marker, 32-bit float.
-4  | Z        | Z coordinate of the marker, 32-bit float.
-4  | Residual | Residual for the 3D point. 32-bit float.
+Bytes | Name     | Type         | Description
+----- | -------- | ------------ | -----------
+4     | X        | 32-bit float | X coordinate of the marker.
+4     | Y        | 32-bit float | Y coordinate of the marker.
+4     | Z        | 32-bit float | Z coordinate of the marker.
+4     | Residual | 32-bit float | Residual for the 3D point.
 
 #### 3D no labels component
 
-Size in bytes | Name                | Description
---------------|---------------------|------------
-4             | Component Size      | The size of the component including the header (Component Size, Component Type and Marker Count). 32-bit integer.
-4             | Component Type      | Value = 2. See [Data component types](#data-component-types). 32-bit integer.
-4             | Marker Count        | The number of markers in this frame. 32-bit integer.
-2             | 2D Drop Rate        | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably. 16-bit integer.
-2             | 2D Out Of Sync Rate | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time. 16-bit integer.
+Bytes | Name                  | Type           | Description
+----- | --------------------- | -------------- | -----------
+4     | Component Size        | 32-bit integer | The size of the component including the header (Component Size, Component Type and Marker Count).
+4     | Component Type        | 32-bit integer | Value = 2. See [Data component types](#data-component-types).
+4     | Marker Count          | 32-bit integer | The number of markers in this frame.
+2     | 2D Drop Rate          | 16-bit integer | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.
+2     | 2D Out Of Sync Rate   | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
 
 
 Repeated Marker Count times:
 
-<div class="table-noheader"></div>
-
-4 | X  | X coordinate of the marker, 32-bit float.
---|----|------------------------------------------
-4 | Y  | Y coordinate of the marker, 32-bit float.
-4 | Z  | Z coordinate of the marker, 32-bit float.
-4 | ID | An unsigned integer ID that serves to identify markers between frames. 32-bit integer.
+Bytes | Name | Type           | Description
+----- | ---- | -------------- | -----------
+4     | X    | 32-bit float   | X coordinate of the marker.
+4     | Y    | 32-bit float   | Y coordinate of the marker.
+4     | Z    | 32-bit float   | Z coordinate of the marker.
+4     | ID   | 32-bit integer | An unsigned integer ID that serves to identify markers between frames.
 
 #### 3D no labels with residuals component
 
-Size in bytes | Name                | Description
---------------|---------------------|------------
-4             | Component Size      | The size of the component including the header (Component Size, Component Type and Marker Count). 32-bit integer.
-4             | Component Type      | Value = 10. See [Data component types](#data-component-types). 32-bit integer.
-4             | Marker Count        | The number of markers in this frame. 32-bit integer.
-2             | 2D Drop Rate        | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably. 16-bit integer.
-2             | 2D Out Of Sync Rate | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time. 16-bit integer.
+Bytes | Name                  | Type           | Description
+----- | --------------------- | -------------- | -----------
+4     | Component Size        | 32-bit integer | The size of the component including the header (Component Size, Component Type and Marker Count).
+4     | Component Type        | 32-bit integer | Value = 10. See [Data component types](#data-component-types).
+4     | Marker Count          | 32-bit integer | The number of markers in this frame.
+2     | 2D Drop Rate          | 16-bit integer | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.
+2     | 2D Out Of Sync Rate   | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
 
 
 Repeated Marker Count times:
 
-<div class="table-noheader"></div>
-
-4 | X        | X coordinate of the marker, 32-bit float.
---|----------|------------------------------------------
-4 | Y        | Y coordinate of the marker, 32-bit float.
-4 | Z        | Z coordinate of the marker, 32-bit float.
-4 | ID       | An unsigned integer ID that serves to identify markers between frames. 32-bit integer.
-4 | Residual | Residual for the 3D point. 32-bit float.
+Bytes | Name     | Type           | Description
+----- | -------- | -------------- | -----------
+4     | X        | 32-bit float   | X coordinate of the marker.
+4     | Y        | 32-bit float   | Y coordinate of the marker.
+4     | Z        | 32-bit float   | Z coordinate of the marker.
+4     | ID       | 32-bit integer | An unsigned integer ID that serves to identify markers between frames.
+4     | Residual | 32-bit float   | Residual for the 3D point.
 
 #### 6DOF component
 
-Size in bytes | Name                | Description
---------------|---------------------|-------------
-4             | Component Size      | The size of the component including the header (Component Size, Component Type and Body Count). 32-bit integer.
-4             | Component Type      | Value = 5. See [Data component types](#data-component-types). 32-bit integer.
-4             | Body Count          | The number of 6DOF bodies in this frame. 32-bit integer.
-2             | 2D Drop Rate        | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably. 16-bit integer.
-2             | 2D Out Of Sync Rate | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time. 16-bit integer.
+Bytes | Name                | Type           | Description
+----- | ------------------- | -------------- | -----------
+4     | Component Size      | 32-bit integer | The size of the component including the header (Component Size, Component Type and Body Count).
+4     | Component Type      | 32-bit integer | Value = 5. See [Data component types](#data-component-types).
+4     | Body Count          | 32-bit integer | The number of 6DOF bodies in this frame.
+2     | 2D Drop Rate        | 16-bit integer | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.
+2     | 2D Out Of Sync Rate | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
 
 
 Repeated Body Count times:
 
-<div class="table-noheader"></div>
-
-4     | X        | X coordinate of the body, 32-bit float.
-------|----------|-----------------------------------------
-4     | Y        | Y coordinate of the body, 32-bit float.
-4     | Z        | Z coordinate of the body, 32-bit float.
-9 * 4 | Rotation | Rotation matrix of the body, 9 32-bit floats.
+Bytes | Name     | Type                  | Description
+----- | -------- | --------------------- | -----------
+4     | X        | 32-bit float          | X coordinate of the body.
+4     | Y        | 32-bit float          | Y coordinate of the body.
+4     | Z        | 32-bit float          | Z coordinate of the body.
+9 * 4 | Rotation | 32-bt float&#91;&#93; | Rotation matrix of the body, 9 floats.
 
 #### 6DOF with residuals component
 
-Size in bytes | Name                          | Description
---------------|-------------------------------|------------
-4             | Component Size                | The size of the component including the header (Component Size, Component Type and Body Count). 32-bit integer.
-4             | Component Type                | Value = 11. See [Data component types](#data-component-types). 32-bit integer.
-4             | Body Count                    | The number of 6DOF bodies in this frame. 32-bit integer.
-2             | 2D Drop Rate                  | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably. 16-bit integer.
-2             | 2D Out Of Sync Rate           | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time. 16-bit integer.
+Bytes | Name                | Type           | Description
+----- | ------------------- | -------------- | -----------
+4     | Component Size      | 32-bit integer | The size of the component including the header (Component Size, Component Type and Body Count).
+4     | Component Type      | 32-bit integer | Value = 11. See [Data component types](#data-component-types).
+4     | Body Count          | 32-bit integer | The number of 6DOF bodies in this frame.
+2     | 2D Drop Rate        | 16-bit integer | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.
+2     | 2D Out Of Sync Rate | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
 
 
 Repeated Body Count times:
 
-<div class="table-noheader"></div>
-
-4     | X        | X coordinate of the body, 32-bit float.
-------|----------|----------------------------------------
-4     | Y        | Y coordinate of the body, 32-bit float.
-4     | Z        | Z coordinate of the body, 32-bit float.
-9 * 4 | Rotation | Rotation matrix of the body, 9 32-bit floats.
-4     | Residual | Residual for the 6D body. 32-bit float.
+Bytes | Name     | Type                   | Description
+----- | -------- | ---------------------- | -----------
+4     | X        | 32-bit float           | X coordinate of the body.
+4     | Y        | 32-bit float           | Y coordinate of the body.
+4     | Z        | 32-bit float           | Z coordinate of the body.
+9 * 4 | Rotation | 32-bit float&#91;&#93; | Rotation matrix of the body, 9 floats.
+4     | Residual | 32-bit float           | Residual for the 6D body.
 
 #### 6DOF Euler component
 
-Size in bytes | Name                 | Description
---------------|----------------------|------------
-4             | Component Size       | The size of the component including the header (Component Size, Component Type and Body Count). 32-bit integer.
-4             | Component Type       | Value = 6. See [Data component types](#data-component-types). 32-bit integer.
-4             | Body Count           | The number of 6DOF bodies in this frame. 32-bit integer.
-2             | 2D Drop Rate         | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably. 16-bit integer.
-2             | 2D Out Of Sync Rate  | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time. 16-bit integer.
+Bytes | Name                   | Type           | Description
+----- | ---------------------- | -------------- | -----------
+4     | Component Size         | 32-bit integer | The size of the component including the header (Component Size, Component Type and Body Count).
+4     | Component Type         | 32-bit integer | Value = 6. See [Data component types](#data-component-types).
+4     | Body Count             | 32-bit integer | The number of 6DOF bodies in this frame.
+2     | 2D Drop Rate           | 16-bit integer | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.
+2     | 2D Out Of Sync Rate    | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
 
 
 Repeated Body Count times:
 
-<div class="table-noheader"></div>
-
-4             | X                                   | X coordinate of the body, 32-bit float.
---------------|-------------------------------------|----------------------------------------
-4             | Y                                   | Y coordinate of the body, 32-bit float.
-4             | Z                                   | Z coordinate of the body, 32-bit float.
-4             | Angle 1                             | First Euler angle, in degrees, as defined on the Euler tab in QTM's workspace options. 32-bit float.
-4             | Angle 2                             | Second Euler angle, 32-bit float.
-4             | Angle 3                             | Third Euler angle, 32-bit float.
+Bytes | Name    | Type         | Description
+----- | ------- | ------------ | -----------
+4     | X       | 32-bit float | X coordinate of the body.
+4     | Y       | 32-bit float | Y coordinate of the body.
+4     | Z       | 32-bit float | Z coordinate of the body.
+4     | Angle 1 | 32-bit float | First Euler angle, in degrees, as defined on the Euler tab in QTM's workspace options.
+4     | Angle 2 | 32-bit float | Second Euler angle.
+4     | Angle 3 | 32-bit float | Third Euler angle.
 
 
 #### 6DOF Euler with residuals component
 
-Size in bytes | Name                                | Description
---------------|-------------------------------------|------------
-4             | Component Size                      | The size of the component including the header (Component Size, Component Type and Body Count).<br><br>32-bit integer.
-4             | Component Type                      | Value = 12. See [Data component types](#data-component-types).<br><br>32-bit integer.
-4             | Body Count                          | The number of 6DOF bodies in this frame.<br><br>32-bit integer.
-2             | 2D Drop Rate                        | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably. 16-bit integer.
-2             | 2D Out Of Sync Rate                 | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time. 16-bit integer.
+Bytes | Name                                  | Type           | Description
+----- | ------------------------------------- | -------------- | -----------
+4     | Component Size                        | 32-bit integer | The size of the component including the header (Component Size, Component Type and Body Count).
+4     | Component Type                        | 32-bit integer | Value = 12. See [Data component types](#data-component-types).
+4     | Body Count                            | 32-bit integer | The number of 6DOF bodies in this frame.
+2     | 2D Drop Rate                          | 16-bit integer | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.
+2     | 2D Out Of Sync Rate                   | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
 
 
 Repeated Body Count times:
 
-<div class="table-noheader"></div>
-
-4 | X        | X coordinate of the body, 32-bit float.
---|----------|----------------------------------------
-4 | Y        | Y coordinate of the body, 32-bit float.
-4 | Z        | Z coordinate of the body, 32-bit float.
-4 | Angle 1  | First Euler angle, in degrees, as defined on the Euler tab in QTM's workspace options. 32-bit float.
-4 | Angle 2  | Second Euler angle, 32-bit float.
-4 | Angle 3  | Third Euler angle, 32-bit float.
-4 | Residual | Residual for the 6D body. 32-bit float.
+Bytes | Name     | Type           | Description
+----- | -------- | -------------- | -----------
+4     | X        | 32-bit float   | X coordinate of the body.
+4     | Y        | 32-bit float   | Y coordinate of the body.
+4     | Z        | 32-bit float   | Z coordinate of the body.
+4     | Angle 1  | 32-bit float   | First Euler angle, in degrees, as defined on the Euler tab in QTM's workspace options.
+4     | Angle 2  | 32-bit float   | Second Euler angle.
+4     | Angle 3  | 32-bit float   | Third Euler angle.
+4     | Residual | 32-bit float   | Residual for the 6D body.
 
 #### Analog component
 
-Size in bytes | Name                | Description
---------------|---------------------|------------
-4             | Component Size      | The size of the component including the header (Component Size, Component Type and Analog Device Count). 32-bit integer.
-4             | Component Type      | Value = 3. See [Data component types](#data-component-types). 32-bit integer.
-4             | Analog Device Count | Number of analog devices in this component. 32-bit integer.
+Bytes | Name                  | Type           | Description
+----- | --------------------- | -------------- | -----------
+4     | Component Size        | 32-bit integer | The size of the component including the header (Component Size, Component Type and Analog Device Count).
+4     | Component Type        | 32-bit integer | Value = 3. See [Data component types](#data-component-types).
+4     | Analog Device Count   | 32-bit integer | Number of analog devices in this component.
 
 Repeated Analog Device Count times:
 
-<div class="table-noheader"></div>
-
-4                                  | Analog Device ID | Id of this analog device. Id starts at 1. 32-bit integer.
------------------------------------|------------------|----------------------------------------------------------
-4                                  | Channel Count    | The number of channels of this analog device in this frame. 32-bit integer.
-4                                  | Sample Count     | The number of analog samples per channel in this frame. 32-bit integer.
-4                                  | Sample Number    | Order number of first sample in this frame. Sample Number is increased with the analog frequency. There are Channel Count values per sample number. 32-bit integer.<br><br>Sample Number is omitted if Sample Count is 0.
-4 \* Channel Count \* Sample Count | Analog Data      | Voltage values for all samples of all channels as 32-bit floats. The samples are ordered like this:<br><br>Channel 1, Sample *Sample Number*<br>Channel 1, Sample *Sample Number* + 1<br>Channel 1, Sample *Sample Number* + 2<br>&hellip;<br>Channel 1, Sample *Sample Number* + Sample Count - 1<br>Channel 2, Sample *Sample Number* Channel 2, Sample *Sample Number + 1*<br>&hellip;<br><br>Analog Data is omitted if Sample Count is 0.
+Bytes                              | Name             | Type                   | Description
+---------------------------------- | ---------------- | ---------------------- | -----------
+4                                  | Analog Device ID | 32-bit integer         | Id of this analog device. Id starts at 1.
+4                                  | Channel Count    | 32-bit integer         | The number of channels of this analog device in this frame.
+4                                  | Sample Count     | 32-bit integer         | The number of analog samples per channel in this frame.
+4                                  | Sample Number    | 32-bit integer         | Order number of first sample in this frame. Sample Number is increased with the analog frequency. There are Channel Count values per sample number.<br><br>Sample Number is omitted if Sample Count is 0.
+4 \* Channel Count \* Sample Count | Analog Data      | 32-bit float&#91;&#93; | Voltage values for all samples of all channels. The samples are ordered like this:<br><br>Channel 1, Sample *Sample Number*<br>Channel 1, Sample *Sample Number* + 1<br>Channel 1, Sample *Sample Number* + 2<br>&hellip;<br>Channel 1, Sample *Sample Number* + Sample Count - 1<br>Channel 2, Sample *Sample Number* Channel 2, Sample *Sample Number + 1*<br>&hellip;<br><br>Analog Data is omitted if Sample Count is 0.
 
 #### Analog single component
 
-Size in bytes | Name                | Description
---------------|---------------------|------------
-4             | Component Size      | The size of the component including the header (Component Size, Component Type and Analog Device Count). 32-bit integer.
-4             | Component Type      | Value = 13. See [Data component types](#data-component-types). 32-bit integer.
-4             | Analog Device Count | Number of analog devices in this component. 32-bit integer.
+Bytes | Name                  | Type           | Description
+----- | --------------------- | -------------- | -----------
+4     | Component Size        | 32-bit integer | The size of the component including the header (Component Size, Component Type and Analog Device Count).
+4     | Component Type        | 32-bit integer | Value = 13. See [Data component types](#data-component-types).
+4     | Analog Device Count   | 32-bit integer | Number of analog devices in this component.
 
 Repeated Analog Device Count times:
 
-<div class="table-noheader"></div>
-
-4                 | Analog Device ID | Id of this analog device. Id starts at 1. 32-bit integer.
-------------------|------------------|-----------------------------------------------------------
-4                 | Channel Count    | The number of channels of this analog device in this frame. 32-bit integer.
-4 * Channel Count | Analog Data      | Voltage values as 32-bit floats, starting with channel 1.
+Bytes             | Name                  | Type                   | Description
+----------------- | --------------------- | ---------------------- | -----------
+4                 | Analog Device ID      | 32-bit integer         | Id of this analog device. Id starts at 1.
+4                 | Channel Count         | 32-bit integer         | The number of channels of this analog device in this frame.
+4 * Channel Count | Analog Data           | 32-bit float&#91;&#93; | Voltage values starting with channel 1.
 
 If no analog data is available, Analog Data will contain IEEE NaN (Not a number) float values.
 
 #### Force component
 
-Size in bytes | Name           | Description
---------------|----------------|------------
-4             | Component Size | The size of the component including the header (Component Size, Component Type and Plate Count). 32-bit integer.
-4             | Component Type | Value = 4. See [Data component types](#data-component-types). 32-bit integer.
-4             | Plate Count    | The number of force plates in this frame. 32-bit integer.
+Bytes | Name             | Type           | Description
+----- | ---------------- | -------------- | -----------
+4     | Component Size   | 32-bit integer | The size of the component including the header (Component Size, Component Type and Plate Count).
+4     | Component Type   | 32-bit integer | Value = 4. See [Data component types](#data-component-types).
+4     | Plate Count      | 32-bit integer | The number of force plates in this frame.
 
 
 Repeated Plate Count times:
 
-<div class="table-noheader"></div>
-
-4                | Force Plate ID | Id of the analog device in this frame. Id starts at 1. 32-bit integer.
------------------|----------------|------------------------------------------------------------------------
-4                | Force Count    | The number of forces in this frame. 32-bit integer.
-4                | Force Number   | Order number of first force in this frame. Force Number is increased with the force frequency. 32-bit integer.
-36 * Force Count | Force Data     | Each force sample consists of 9 32-bit float values: <br><br>X coordinate of the force <br>Y coordinate of the force <br>Z coordinate of the force <br>X coordinate of the moment <br>Y coordinate of the moment <br>Z coordinate of the moment <br>X coordinate of the force application point <br>Y coordinate of the force application point <br>Z coordinate of the force application point
+Bytes            | Name             | Type                   | Description
+---------------- | ---------------- | ---------------------- | -----------
+4                | Force Plate ID   | 32-bit integer         | Id of the analog device in this frame. Id starts at 1.
+4                | Force Count      | 32-bit integer         | The number of forces in this frame.
+4                | Force Number     | 32-bit integer         | Order number of first force in this frame. Force Number is increased with the force frequency.
+36 * Force Count | Force Data       | 32-bit float&#91;&#93; | Each force sample consists of 9 float values: <br><br>X coordinate of the force <br>Y coordinate of the force <br>Z coordinate of the force <br>X coordinate of the moment <br>Y coordinate of the moment <br>Z coordinate of the moment <br>X coordinate of the force application point <br>Y coordinate of the force application point <br>Z coordinate of the force application point
 
 #### Force single component
 
-Size in bytes | Name           | Description
---------------|----------------|------------
-4             | Component Size | The size of the component including the header (Component Size, Component Type and Plate Count). 32-bit integer.
-4             | Component Type | Value = 15. See [Data component types](#data-component-types). 32-bit integer.
-4             | Plate Count    | The number of force plates in this frame. 32-bit integer.
+Bytes | Name             | Type           | Description
+----- | ---------------- | -------------- | -----------
+4     | Component Size   | 32-bit integer | The size of the component including the header (Component Size, Component Type and Plate Count).
+4     | Component Type   | 32-bit integer | Value = 15. See [Data component types](#data-component-types).
+4     | Plate Count      | 32-bit integer | The number of force plates in this frame.
 
 
 Repeated Plate Count times:
 
-<div class="table-noheader"></div>
-
-4                           | Force Plate ID | Id of the analog device in this frame. Id starts at 1. 32-bit integer.
-----------------------------|----------------|-----------------------------------------------------------------------
-36 * Force Count            | Force Data     | Each force sample consists of 9 32-bit float values: <br><br>X coordinate of the force <br>Y coordinate of the force <br>Z coordinate of the force <br>X coordinate of the moment <br>Y coordinate of the moment <br>Z coordinate of the moment <br>X coordinate of the force application point <br>Y coordinate of the force application point <br>Z coordinate of the force application point
+Bytes            | Name             | Type                   | Description
+---------------- | ---------------- | ---------------------- | -----------
+4                | Force Plate ID   | 32-bit integer         | Id of the analog device in this frame. Id starts at 1.
+36 * Force Count | Force Data       | 32-bit float&#91;&#93; | Each force sample consists of 9 float values: <br><br>X coordinate of the force <br>Y coordinate of the force <br>Z coordinate of the force <br>X coordinate of the moment <br>Y coordinate of the moment <br>Z coordinate of the moment <br>X coordinate of the force application point <br>Y coordinate of the force application point <br>Z coordinate of the force application point
 
 If no force data is available, Force Data will contain IEEE NaN (Not a number) float values.
 
 #### Image component
 
-Size in bytes | Name           | Description
---------------|----------------|------------
-4             | Component Size | The size of the component including the header (Component Size, Component Type and Camera Count). 32-bit integer.
-4             | Component Type | Value = 14. See [Data component types](#data-component-types). 32-bit integer.
-4             | Camera Count   | Number of cameras. 32-bit integer.
+Bytes | Name             | Type           | Description
+----- | ---------------- | -------------- | -----------
+4     | Component Size   | 32-bit integer | The size of the component including the header (Component Size, Component Type and Camera Count).
+4     | Component Type   | 32-bit integer | Value = 14. See [Data component types](#data-component-types).
+4     | Camera Count     | 32-bit integer | Number of cameras.
 
 Repeated Camera Count times:
 
-Size in bytes | Name         | Description
---------------|--------------|------------
-4             | Camera ID    | Camera ID of the camera which the image comes from. Id starts at 1. 32-bit integer.
-4             | Image Format | Image format of the requested image. 32-bit integer.  <br>0 = Raw Grayscale <br>1 = Raw BGR<br>2 = JPG <br>3 = PNG
-4             | Width        | Width of the requested image. 32-bit integer.
-4             | Height       | Height of the requested image. 32-bit integer.
-4             | Left Crop    | Position of the requested image left edge relative the original image. 32-bit float.  <br>0: Original image left edge.  <br>1: Original image right edge.
-4             | Top Crop     | Position of the requested image top edge relative the original image. 32-bit float.  <br>0: Original image top edge.  <br>1: Original image bottom edge.
-4             | Right Crop   | Position of the requested image right edge relative the original image. 32-bit float.  <br>0: Original image left edge.  <br>1: Original image right edge.
-4             | Bottom Crop  | Position of the requested image bottom edge relative the original image. 32-bit float.  <br>0: Original image top edge.  <br>1: Original image bottom edge.
-4             | Image Size   | Size of Image Data in number of bytes. 32-bit integer.
-Image Size    | Image Data   | Binary image data formatted according to the Image Format parameter.
+Bytes      | Name           | Type           | Description
+---------- | -------------- | -------------- | -----------
+4          | Camera ID      | 32-bit integer | Camera ID of the camera which the image comes from. Id starts at 1.
+4          | Image Format   | 32-bit integer | Image format of the requested image. <br>0 = Raw Grayscale <br>1 = Raw BGR<br>2 = JPG <br>3 = PNG
+4          | Width          | 32-bit integer | Width of the requested image.
+4          | Height         | 32-bit integer | Height of the requested image.
+4          | Left Crop      | 32-bit float   | Position of the requested image left edge relative the original image. <br>0: Original image left edge.  <br>1: Original image right edge.
+4          | Top Crop       | 32-bit float   | Position of the requested image top edge relative the original image.  <br>0: Original image top edge.  <br>1: Original image bottom edge.
+4          | Right Crop     | 32-bit float   | Position of the requested image right edge relative the original image.  <br>0: Original image left edge.  <br>1: Original image right edge.
+4          | Bottom Crop    | 32-bit float   | Position of the requested image bottom edge relative the original image.  <br>0: Original image top edge.  <br>1: Original image bottom edge.
+4          | Image Size     | 32-bit integer | Size of Image Data in number of bytes.
+Image Size | Image Data     | Binary data    | Image data formatted according to the Image Format parameter.
 
 ### No More Data packet
 This type of packet is sent when QTM is out of data to send because a measurement has stopped or has not even started.
 
-Size in bytes | Name | Value
---------------|------|-------
-4             | Size | 8 (only the header is sent) 32-bit integer.
-4             | Type | Value = 4. 32-bit integer.
+Bytes | Name   | Type           | Value
+----- | ------ | -------------- | -----
+4     | Size   | 32-bit integer | 8 (only the header is sent).
+4     | Type   | 32-bit integer | 4
 
 ### C3D packet
 This type of packet is sent as a response to the GetCaptureC3D command. It
 contains a C3D file, with the latest captured QTM measurement.
 
-Size in bytes | Name     | Value
---------------|----------|------
-4             | Size     | 8 header bytes + C3D file size. 32-bit integer.
-4             | Type     | Value = 5. 32-bit integer.
-n             | C3D file | C3D file
+Bytes | Name     | Type           | Value
+----- | -------- | -------------- | -----
+4     | Size     | 32-bit integer | 8 + n (header bytes + C3D file size)
+4     | Type     | 32-bit integer | 5
+n     | C3D file | Binary data    | C3D file
 
 ### QTM packet
 This type of packet is sent as a response to the GetCaptureQTM command. It
 contains a C3D file, with the latest captured QTM measurement.
 
-Size in bytes | Name     | Value
---------------|----------|------
-4             | Size     | 8 header bytes + C3D file size. 32-bit integer.
-4             | Type     | Value = 8. 32-bit integer.
-n             | C3D file | C3D file
-
+Bytes | Name     | Type           | Value
+----- | -------- | -------------- | -----
+4     | Size     | 32-bit integer | 8 + n (header bytes + C3D file size)
+4     | Type     | 32-bit integer | 8
+n     | QTM file | Binary data    | QTM file
 
 ### Event packet
 This type of packet is sent when QTM has an event to signal to the RT clients.
 
-Size in bytes | Name  | Value
---------------|-------|------
-4             | Size  | 9 bytes. 32-bit integer.
-4             | Type  | Value = 6. 32-bit integer.
-1             | Event | Event number: 1-13, see [Events](#events).
+Bytes | Name  | Type           | Value
+----- | ----- | -------------- | -----
+4     | Size  | 32-bit integer | 9 (header bytes + event number)
+4     | Type  | 32-bit integer | 6
+1     | Event | 8-bit integer  | Event number: 1-13, see [Events](#events).
 
 #### Events
 The RT server sends an event data packet to all its clients when the RT server
@@ -1966,11 +1951,11 @@ Event ID     | Name                    | Comment
 When this type of packet is broadcasted to QTM's auto discovery port, see [IP port numbers](#ip-port-numbers),
 QTM responds with a discover response packet, see [Discover response packet](#discover-response-packet).
 
-Size in bytes | Name          | Value
---------------|---------------|------
-4             | Size          | 10 bytes. 32-bit integer. Little endian
-4             | Type          | Value = 7. 32-bit integer. Little endian
-2             | Response Port | Response port number: 0 – 65535, unsigned 16-bit integer. Network byte order (Big endian).
+Bytes | Name            | Type           | Value
+----- | --------------- | -------------- | -----
+4     | Size            | 32-bit integer | 10 (little endian)
+4     | Type            | 32-bit integer | 7 (little endian)
+2     | Response Port   | 16-bit integer | Response port number: 0 - 65535. Network byte order (big endian).
 
 Size and type is always sent as little endian 32 bit integers.
 
@@ -1982,12 +1967,12 @@ The discover response packet is a special command message of type 1. The
 message contains a null terminated string, followed by the server's base port
 number. 
 
-Size in bytes | Name                 | Value
---------------|----------------------|------
-4             | Size                 | 10 bytes. 32-bit integer. Little endian
-4             | Type                 | Value = 1. 32-bit integer. Little endian
-n+1           | Server info string   | Null terminated string containing, server host name, QTM version and number of connected cameras.  <br>n = string size.
-2             | RT server base port. | Base port number: 0 – 65535, 16-bit unsigned integer. Network byte order (Big endian).
+Bytes | Name                   | Type           |  Value
+----- | ---------------------- | -------------- | -----
+4     | Size                   | 32-bit integer | 10 bytes. Little endian
+4     | Type                   | 32-bit integer | 1. Little endian
+n+1   | Server info string     | Char&#91;&#93; | Null terminated string containing, server host name, QTM version and number of connected cameras. n = string size.
+2     | RT server base port.   | 16-bit integer | Base port number: 0 - 65535. Network byte order (Big endian).
 
 **Note**: Size and Type is always sent as little endian 32 bit integers.
 
@@ -2472,12 +2457,12 @@ If there is no analog data available, Channel Count is set to 0 and Analog Data 
 
 ##### Force component (OSC)
 
-OSC type  | Name       | Description
-----------|------------|------------
-Int32     | PlateCount | The number of force plates in this frame.
+OSC type  | Name        | Description
+----------|-------------|------------
+Int32     | Plate Count | The number of force plates in this frame.
 
 
-Repeated PlateCount times:
+Repeated Plate Count times:
 
 OSC type | Name           | Description
 ---------|----------------|------------
@@ -2490,12 +2475,12 @@ If Force Count = 0 (force not visible in QTM), Force Number and Force Data is om
 
 ##### Force single component (OSC)
 
-OSC type | Name       | Description
----------|------------|------------
-Int32    | PlateCount | The number of force plates in this frame.
+OSC type | Name        | Description
+---------|-------------|------------
+Int32    | Plate Count | The number of force plates in this frame.
 
 
-Repeated PlateCount times:
+Repeated Plate Count times:
 
 OSC type | Name           | Description
 ---------|----------------|------------
@@ -2536,7 +2521,7 @@ Each body is sent in a separate OSC message. The OSC address of this message is
 Example: `/qtm/3d/body1`.
 
 OSC type | Name    | Description
----------|----------|------------
+---------|---------|------------
 Float32  | X       | X coordinate of the body.
 Float32  | Y       | Y coordinate of the body.
 Float32  | Z       | Z coordinate of the body.
