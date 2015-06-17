@@ -1,0 +1,5002 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>QTM Real-time Server Protocol documentation</title>
+		<link href="styles/master.css" type="text/css" rel="stylesheet" />
+		
+	</head>
+
+	<body data-spy="scroll" data-target="nav.toq">
+
+		<header class="affix-wrapper clearfix">
+			<div class="affix" data-spy="affix">
+
+				<div class="container">
+					<div class="row">
+						<div class="col-md-3 col-sm-3 col-xs-12">
+							<a class="logo" href="http://www.qualisys.com"><img src="images/qualisys-logo.png" title="Qualisys Motion capture systems"></a>
+						</div>
+						<div class="h1 col-md-9 col-sm-9 col-xs-12">
+							<strong>QTM Real-time Server Protocol Documentation</strong>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</header>
+
+
+		<div class="container">
+
+			<div class="row">
+				<div class="col-xs-3">&nbsp;</div>
+				<div class="col-md-9 col-sm-8 col-sm-offset-3 col-xs-9 meta">
+					<table class="meta">
+						<thead>
+							<tr>
+								<th>Written by</th>
+								<th>Document number</th>
+								<th>Revision</th>
+								<th>Date </th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Lars Nilsson</td>
+								<td class="document-number">QDEV-QTM-EXTERN-SDK_RTQTM_RT_SERVER_V_1_12</td>
+								<td>0</td>
+								<td>Jun 17th 2015</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+
+			<div class="row title">
+				<div class="col-sm-12">
+					<h1 id="qtm-real-time-server-protocol-documentation">QTM Real-time Server Protocol Documentation</h1>
+					<h3 id="title-version">Version 1.12</h3>
+				</div>
+			</div>
+			<div class="row content">
+				<div class="col-lg-9 col-md-8 col-sm-7 col-xs-11 body">
+
+<nav class="toq"><ol class="nav"><li class="toq-level-1"><ol><li class="toq-level-2"><span>1</span> <a href="#qtm-real-time-server-protocol-documentation">QTM Real-time Server Protocol Documentation</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>1.1</span> <a href="#title-version">Version 1.12</a></li></ol></li><li class="toq-level-2"><span>2</span> <a href="#introduction">Introduction</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>2.1</span> <a href="#protocol-versions">Protocol versions</a></li><li class="toq-level-3"><span>2.2</span> <a href="#standard">Standard</a></li><li class="toq-level-3"><span>2.3</span> <a href="#open-sound-control">Open sound control</a></li></ol></li><li class="toq-level-2"><span>3</span> <a href="#overview">Overview</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>3.1</span> <a href="#protocol-details">Protocol details</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>3.1.1</span> <a href="#standards-used">Standards used</a></li><li class="toq-level-4"><span>3.1.2</span> <a href="#byte-order">Byte order</a></li><li class="toq-level-4"><span>3.1.3</span> <a href="#floating-point-values">Floating point values</a></li></ol></li><li class="toq-level-3"><span>3.2</span> <a href="#auto-discover">Auto discover</a></li><li class="toq-level-3"><span>3.3</span> <a href="#connecting">Connecting</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>3.3.1</span> <a href="#disabling-nagle-39-s-algorithm">Disabling Nagle&#39;s algorithm</a></li><li class="toq-level-4"><span>3.3.2</span> <a href="#ip-port-numbers">IP port numbers</a></li></ol></li><li class="toq-level-3"><span>3.4</span> <a href="#protocol-structure">Protocol structure</a></li><li class="toq-level-3"><span>3.5</span> <a href="#retrieving-settings">Retrieving settings</a></li><li class="toq-level-3"><span>3.6</span> <a href="#change-settings">Change settings</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>3.6.1</span> <a href="#general-settings">General settings</a></li><li class="toq-level-4"><ol><li class="toq-level-5"><span>3.6.1.1</span> <a href="#frequency">Frequency</a></li><li class="toq-level-5"><span>3.6.1.2</span> <a href="#capture_time">Capture_Time</a></li><li class="toq-level-5"><span>3.6.1.3</span> <a href="#start_on_external_trigger">Start_On_External_Trigger</a></li><li class="toq-level-5"><span>3.6.1.4</span> <a href="#external_time_base">External_Time_Base</a></li><li class="toq-level-5"><span>3.6.1.5</span> <a href="#processing_actions">Processing_Actions</a></li><li class="toq-level-5"><span>3.6.1.6</span> <a href="#camera">Camera</a></li></ol></li><li class="toq-level-4"><span>3.6.2</span> <a href="#image-settings">Image settings</a></li><li class="toq-level-4"><ol><li class="toq-level-5"><span>3.6.2.1</span> <a href="#camera-2">Camera</a></li></ol></li><li class="toq-level-4"><span>3.6.3</span> <a href="#force-settings">Force settings</a></li><li class="toq-level-4"><span>3.6.4</span> <a href="#settings-example">Settings example</a></li></ol></li><li class="toq-level-3"><span>3.7</span> <a href="#streaming-data">Streaming data</a></li><li class="toq-level-3"><span>3.8</span> <a href="#command-summary">Command summary</a></li></ol></li><li class="toq-level-2"><span>4</span> <a href="#commands">Commands</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>4.1</span> <a href="#version">Version</a></li><li class="toq-level-3"><span>4.2</span> <a href="#qtmversion">QTMVersion</a></li><li class="toq-level-3"><span>4.3</span> <a href="#byteorder">ByteOrder</a></li><li class="toq-level-3"><span>4.4</span> <a href="#getstate">GetState</a></li><li class="toq-level-3"><span>4.5</span> <a href="#getparameters">GetParameters</a></li><li class="toq-level-3"><span>4.6</span> <a href="#getcurrentframe">GetCurrentFrame</a></li><li class="toq-level-3"><span>4.7</span> <a href="#streamframes">StreamFrames</a></li><li class="toq-level-3"><span>4.8</span> <a href="#takecontrol">TakeControl</a></li><li class="toq-level-3"><span>4.9</span> <a href="#releasecontrol">ReleaseControl</a></li><li class="toq-level-3"><span>4.10</span> <a href="#new">New</a></li><li class="toq-level-3"><span>4.11</span> <a href="#close">Close</a></li><li class="toq-level-3"><span>4.12</span> <a href="#start">Start</a></li><li class="toq-level-3"><span>4.13</span> <a href="#stop">Stop</a></li><li class="toq-level-3"><span>4.14</span> <a href="#load">Load</a></li><li class="toq-level-3"><span>4.15</span> <a href="#save">Save</a></li><li class="toq-level-3"><span>4.16</span> <a href="#loadproject">LoadProject</a></li><li class="toq-level-3"><span>4.17</span> <a href="#getcapturec3d">GetCaptureC3D</a></li><li class="toq-level-3"><span>4.18</span> <a href="#getcaptureqtm">GetCaptureQTM</a></li><li class="toq-level-3"><span>4.19</span> <a href="#trig">Trig</a></li><li class="toq-level-3"><span>4.20</span> <a href="#setqtmevent">SetQTMEvent</a></li><li class="toq-level-3"><span>4.21</span> <a href="#quit">Quit</a></li></ol></li><li class="toq-level-2"><span>5</span> <a href="#qtm-rt-packets">QTM RT Packets</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>5.1</span> <a href="#structure">Structure</a></li><li class="toq-level-3"><span>5.2</span> <a href="#packet-types">Packet types</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>5.2.1</span> <a href="#error-packet">Error packet</a></li><li class="toq-level-4"><span>5.2.2</span> <a href="#command-command-response-packet">Command / Command Response packet</a></li><li class="toq-level-4"><span>5.2.3</span> <a href="#xml-packet">XML packet</a></li></ol></li><li class="toq-level-3"><span>5.3</span> <a href="#xml-parameters">XML Parameters</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>5.3.1</span> <a href="#general-xml-parameters">General XML parameters</a></li><li class="toq-level-4"><span>5.3.2</span> <a href="#3d-xml-parameters">3D XML parameters</a></li><li class="toq-level-4"><span>5.3.3</span> <a href="#6d-xml-parameters">6D XML parameters</a></li><li class="toq-level-4"><span>5.3.4</span> <a href="#analog-xml-parameters">Analog XML parameters</a></li><li class="toq-level-4"><span>5.3.5</span> <a href="#force-xml-parameters">Force XML parameters</a></li><li class="toq-level-4"><span>5.3.6</span> <a href="#image-xml-parameters">Image XML parameters</a></li></ol></li><li class="toq-level-3"><span>5.4</span> <a href="#data-packet">Data packet</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>5.4.1</span> <a href="#data-component-types">Data component types</a></li><li class="toq-level-4"><span>5.4.2</span> <a href="#2d-and-2d-linearized-component">2D and 2D linearized component</a></li><li class="toq-level-4"><span>5.4.3</span> <a href="#3d-component">3D component</a></li><li class="toq-level-4"><span>5.4.4</span> <a href="#3d-with-residuals-component">3D with residuals component</a></li><li class="toq-level-4"><span>5.4.5</span> <a href="#3d-no-labels-component">3D no labels component</a></li><li class="toq-level-4"><span>5.4.6</span> <a href="#3d-no-labels-with-residuals-component">3D no labels with residuals component</a></li><li class="toq-level-4"><span>5.4.7</span> <a href="#6dof-component">6DOF component</a></li><li class="toq-level-4"><span>5.4.8</span> <a href="#6dof-with-residuals-component">6DOF with residuals component</a></li><li class="toq-level-4"><span>5.4.9</span> <a href="#6dof-euler-component">6DOF Euler component</a></li><li class="toq-level-4"><span>5.4.10</span> <a href="#6dof-euler-with-residuals-component">6DOF Euler with residuals component</a></li><li class="toq-level-4"><span>5.4.11</span> <a href="#analog-component">Analog component</a></li><li class="toq-level-4"><span>5.4.12</span> <a href="#analog-single-component">Analog single component</a></li><li class="toq-level-4"><span>5.4.13</span> <a href="#force-component">Force component</a></li><li class="toq-level-4"><span>5.4.14</span> <a href="#force-single-component">Force single component</a></li><li class="toq-level-4"><span>5.4.15</span> <a href="#image-component">Image component</a></li></ol></li><li class="toq-level-3"><span>5.5</span> <a href="#no-more-data-packet">No More Data packet</a></li><li class="toq-level-3"><span>5.6</span> <a href="#c3d-packet">C3D packet</a></li><li class="toq-level-3"><span>5.7</span> <a href="#qtm-packet">QTM packet</a></li><li class="toq-level-3"><span>5.8</span> <a href="#event-packet">Event packet</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>5.8.1</span> <a href="#events">Events</a></li></ol></li><li class="toq-level-3"><span>5.9</span> <a href="#discover-packet">Discover packet</a></li><li class="toq-level-3"><span>5.10</span> <a href="#discover-response-packet">Discover response packet</a></li></ol></li><li class="toq-level-2"><span>6</span> <a href="#open-sound-control-osc-">Open Sound Control (OSC)</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>6.1</span> <a href="#connecting-osc-">Connecting (OSC)</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>6.1.1</span> <a href="#port-number-osc-">Port number (OSC)</a></li></ol></li><li class="toq-level-3"><span>6.2</span> <a href="#commands-osc-">Commands (OSC)</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>6.2.1</span> <a href="#connect-osc-">Connect (OSC)</a></li><li class="toq-level-4"><span>6.2.2</span> <a href="#disconnect-osc-">Disconnect (OSC)</a></li><li class="toq-level-4"><span>6.2.3</span> <a href="#version-osc-">Version (OSC)</a></li><li class="toq-level-4"><span>6.2.4</span> <a href="#qtmversion-osc-">QTMVersion (OSC)</a></li><li class="toq-level-4"><span>6.2.5</span> <a href="#getstate-osc-">GetState (OSC)</a></li><li class="toq-level-4"><span>6.2.6</span> <a href="#checklicense-osc-">CheckLicense (OSC)</a></li><li class="toq-level-4"><span>6.2.7</span> <a href="#getparameters-osc-">GetParameters (OSC)</a></li><li class="toq-level-4"><span>6.2.8</span> <a href="#getcurrentframe-osc-">GetCurrentFrame (OSC)</a></li><li class="toq-level-4"><span>6.2.9</span> <a href="#streamframes-osc-">StreamFrames (OSC)</a></li></ol></li><li class="toq-level-3"><span>6.3</span> <a href="#qtm-rt-packets-osc-">QTM RT Packets (OSC)</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>6.3.1</span> <a href="#structure-osc-">Structure (OSC)</a></li><li class="toq-level-4"><span>6.3.2</span> <a href="#packet-types-osc-">Packet types (OSC)</a></li><li class="toq-level-4"><span>6.3.3</span> <a href="#error-packet-osc-">Error packet (OSC)</a></li><li class="toq-level-4"><span>6.3.4</span> <a href="#command-packet-osc-">Command packet (OSC)</a></li><li class="toq-level-4"><span>6.3.5</span> <a href="#command-response-packet-osc-">Command response packet (OSC)</a></li><li class="toq-level-4"><span>6.3.6</span> <a href="#xml-packet-osc-">XML packet (OSC)</a></li><li class="toq-level-4"><span>6.3.7</span> <a href="#data-packet-osc-">Data packet (OSC)</a></li><li class="toq-level-4"><ol><li class="toq-level-5"><span>6.3.7.1</span> <a href="#data-frame-header-osc-">Data frame header (OSC)</a></li><li class="toq-level-5"><span>6.3.7.2</span> <a href="#data-frame-component-types-osc-">Data frame component types (OSC)</a></li><li class="toq-level-5"><span>6.3.7.3</span> <a href="#2d-and-2d-linearized-component-osc-">2D and 2D linearized component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.4</span> <a href="#3d-component-osc-">3D component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.5</span> <a href="#3d-with-residuals-component-osc-">3D with residuals component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.6</span> <a href="#3d-no-labels-component-osc-">3D no labels component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.7</span> <a href="#3d-no-labels-with-residuals-component-osc-">3D no labels with residuals component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.8</span> <a href="#analog-component-osc-">Analog component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.9</span> <a href="#analog-single-component-osc-">Analog single component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.10</span> <a href="#force-component-osc-">Force component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.11</span> <a href="#force-single-component-osc-">Force single component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.12</span> <a href="#6dof-component-osc-">6DOF component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.13</span> <a href="#6dof-with-residuals-component-osc-">6DOF with residuals component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.14</span> <a href="#6dof-euler-component-osc-">6DOF Euler component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.15</span> <a href="#6dof-euler-with-residuals-component-osc-">6DOF Euler with residuals component (OSC)</a></li></ol></li></ol></li><li class="toq-level-3"><span>6.4</span> <a href="#no-more-data-packet-osc-">No More Data packet (OSC)</a></li><li class="toq-level-3"><span>6.5</span> <a href="#event-data-packet-osc-">Event Data packet (OSC)</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>6.5.1</span> <a href="#events-osc-">Events (OSC)</a></li></ol></li></ol></li><li class="toq-level-2"><span>7</span> <a href="#changelog">Changelog</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>7.1</span> <a href="#changes-in-1-12">Changes in 1.12</a></li><li class="toq-level-3"><span>7.2</span> <a href="#changes-in-1-11">Changes in 1.11</a></li><li class="toq-level-3"><span>7.3</span> <a href="#changes-in-1-10">Changes in 1.10</a></li><li class="toq-level-3"><span>7.4</span> <a href="#changes-in-1-9">Changes in 1.9</a></li><li class="toq-level-3"><span>7.5</span> <a href="#changes-in-1-8">Changes in 1.8</a></li><li class="toq-level-3"><span>7.6</span> <a href="#changes-in-1-7">Changes in 1.7</a></li><li class="toq-level-3"><span>7.7</span> <a href="#changes-in-1-6">Changes in 1.6</a></li><li class="toq-level-3"><span>7.8</span> <a href="#changes-in-1-5">Changes in 1.5</a></li><li class="toq-level-3"><span>7.9</span> <a href="#changes-in-1-4">Changes in 1.4</a></li><li class="toq-level-3"><span>7.10</span> <a href="#changes-in-1-3">Changes in 1.3</a></li><li class="toq-level-3"><span>7.11</span> <a href="#changes-in-1-2">Changes in 1.2</a></li><li class="toq-level-3"><span>7.12</span> <a href="#changes-in-1-1">Changes in 1.1</a></li></ol></li></ol></li></ol></nav>
+<h2 id="introduction">Introduction</h2><p>The Qualisys Track Manager software is used to collect and process motion capture
+data from Qualisys motion capture cameras. The software is running under Windows
+and offers both post-processing and real-time processing functionality.
+The processed real-time data can be retrieved from QTM over a TCP/IP (or UDP/IP)
+connection in real-time. This document describes the protocol used in such a
+connection.</p>
+<h3 id="protocol-versions">Protocol versions</h3><p>This document describes the 1.12 version of the QTM RT server protocol.</p>
+<h3 id="standard">Standard</h3><p>QTM is backwards compatible with all previous versions of the protocol. The QTM RT
+server keeps track of the protocol version used by each RT client connected to it, and
+adapts the data to be sent to each client according to their selected protocol version.  </p>
+<p>To ensure that a particular client will work with all future releases of QTM, the client
+only needs to send the <code>Version</code> command to the QTM RT server when connecting to it.  </p>
+<p>At the end of this document there is a <a href="#changelog">list of the changes</a> that
+have been made to the protocol between different versions.</p>
+<h3 id="open-sound-control">Open sound control</h3><p>Version 1.6 and later of the QTM RT server protocol supports the <em>OSC (Open Sound
+Control)</em> protocol over UDP. Connecting to the RT server when using OSC, differs from
+the standard version of the RT protocol. See <a href="#connecting">Connecting</a>.</p>
+<h2 id="overview">Overview</h2><h3 id="protocol-details">Protocol details</h3><h4 id="standards-used">Standards used</h4><p>The QTM RT server should be able to communicate successfully with clients from
+any computer architecture. To avoid problems, check the points below.</p>
+<h4 id="byte-order">Byte order</h4><p>The byte order of data pieces larger than one byte can differ between computer
+architectures. Select the byte-order your computer architecture prefers by
+connecting to the corresponding TCP/IP port on the QTM RT server. See <a href="#ip-port-numbers">IP port numbers</a>.</p>
+<h4 id="floating-point-values">Floating point values</h4><p>The floating point type used by the QTM RT server is the standard defined by
+IEEE 754. Single precision floats (32-bit) values are used.</p>
+<h3 id="auto-discover">Auto discover</h3><p>It is possible to auto discover any computers running QTM version 2.4 (build 551) or
+later on your local area network. This is done by broadcasting an UDP packet to the
+QTM auto discover port, see <a href="#ip-port-numbers">IP port numbers</a>. The discover packet shall contain the port number to
+which QTM sends an UDP response string, see <a href="#discover-packet">Discover packet</a>. Except for the IP address,
+the client will also respond with the host name, QTM version and number of
+connected cameras.</p>
+<h3 id="connecting">Connecting</h3><p>Connecting to the QTM RT server is simply a matter of connecting to a specific
+TCP/IP port on the computer where QTM is running.</p>
+<p>The first thing that happens when you have connected to the QTM RT server is
+that the server sends a welcome message string:</p>
+<pre><code>QTM RT Interface connected.
+</code></pre><p>Number of simultaneous connections is limited to 10. If the limit is reached
+while connecting, QTM will respond with an error message:</p>
+<pre><code>Connection refused. Max number of clients reached.
+</code></pre><p>The first command that the client should send to the server is the <code>Version</code>
+command, to make sure that QTM is using the RT protocol version expected by the
+client. If the client doesn&rsquo;t send the <code>Version</code> command, QTM will use version
+1.1.</p>
+<p>If the client will request streaming data over TCP/IP (default) or polled data,
+make sure to disable <strong>Nagle&#39;s algorithm</strong> for the TCP/IP port. See <a href="#disabling-nagle-39-s-algorithm">Disabling Nagle&#39;s algorithm</a>.</p>
+<h4 id="disabling-nagle-39-s-algorithm">Disabling Nagle&#39;s algorithm</h4><p>The TCP protocol by default uses a performance improvement called Nagle&#39;s
+algorithm that reduces the bandwidth used by the TCP connection. In the case of
+a real-time server that sends small amounts of data in each frame, this
+algorithm should be turned off. Otherwise the server (and client) will wait to
+fill a full TCP packet, or until the previous packet has been acknowledged by
+the receiver, before sending it to the client (or the server).</p>
+<p>On the Windows platform, Nagle&#39;s algorithm can be turned off by enabling the
+<strong>TCP_NODELAY</strong> option for the TCP/IP port.</p>
+<p>If you use UDP/IP streaming only (via the <code>StreamFrames</code> command), it is <em>not</em>
+necessary to turn off Nagle&#39;s algorithm for the TCP/IP port, since a little
+higher latency can be accepted in the parts of the protocol that do not stream
+data in real-time. The UDP streaming protocol has no such bandwidth
+optimization and is designed for low latency-applications.</p>
+<h4 id="ip-port-numbers">IP port numbers</h4><p>In the <strong>RT output</strong> tab of the Workspace Options dialog in QTM, you can
+configure the QTM RT server ports.</p>
+<p>You can only edit the base port (<strong>22222</strong> by default). This is is the legacy
+server port, for version 1.0 of the protocol. All other ports except for the
+auto discover port are set from the base port. See table below.</p>
+<table>
+<thead>
+<tr>
+<th>Port</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Base port - 1</td>
+<td>22221</td>
+<td>Telnet port. Used mainly for testing. Connects to the latest version of the RT protocol.</td>
+</tr>
+<tr>
+<td>Base port</td>
+<td>22222</td>
+<td>Supports only the 1.0 version of the protocol. <strong>Don&rsquo;t use this port for any new clients.</strong></td>
+</tr>
+<tr>
+<td>Base port + 1</td>
+<td>22223</td>
+<td>Little-endian version of the protocol. Used from protocol version 1.1 and onwards.</td>
+</tr>
+<tr>
+<td>Base port + 2</td>
+<td>22224</td>
+<td>Big-endian version of the protocol.  Used from protocol version 1.1 and onwards.</td>
+</tr>
+<tr>
+<td>Base port + 3</td>
+<td>22225</td>
+<td>QTM RT-protocol over OSC (Open Sound Control) protocol. OSC protocol is sent over UDP.</td>
+</tr>
+<tr>
+<td>22226</td>
+<td>22226</td>
+<td>QTM auto discover. QTM listens for UDP discover broadcasts on this port and responds with an UDP message to the sender.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="protocol-structure">Protocol structure</h3><p>All data sent between the server and the client is packaged in packets with an
+<strong>8-byte</strong> header consisting of a <strong>4&#8209;byte&nbsp;Size</strong> field and a
+<strong>4&#8209;byte&nbsp;Type</strong> field. </p>
+<p>In most cases, the QTM RT server does not send any data to the client unless
+requested. The client sends a command and the QTM RT server sends a response in
+form of a string or XML data or frame data. The client should however be able
+to handle cases when packets arrive which is not a response to a command. For
+example, an <a href="#event-packet">event</a> or an <a href="#error-packet">error</a> message
+could arrive when a completely different response is expected. </p>
+<h3 id="retrieving-settings">Retrieving settings</h3><p>Before requesting streamed data, it may be necessary to ask QTM about different
+settings, for example what frequency the system is capturing in and what labels
+the labeled markers have. For all such information that does not change with
+each frame, the command <code>GetParameters</code> is used. QTM replies with an XML data
+string packat, that the client should parse and extract the required data from.
+See <a href="#xml-packet">XML packet</a>.</p>
+<h3 id="change-settings">Change settings</h3><p>It is possible to change some of the QTM settings via the RT server. This is
+done by sending an <a href="#xml-packet">XML data packet</a>, containing the settings to be
+changed. Settings that are possible to change are:
+<a href="#general-settings">General</a>, <a href="#image-settings">Image</a> and
+<a href="#force-settings">Force</a>,</p>
+<p>If the settings were updated ok, the server will send a command string response:</p>
+<pre><code>Setting parameters succeeded
+</code></pre><p>Otherwise a error string will be sent:</p>
+<pre><code>Setting parameters failed
+</code></pre><p><em>Change settings is not available with the OSC protocol</em>.</p>
+<h4 id="general-settings">General settings</h4><h5 id="frequency">Frequency</h5><p>The Frequency setting tells QTM how long a capture started with the
+<em>start</em> command shall be. The time is expressed in seconds.</p>
+<h5 id="capture_time">Capture_Time</h5><p>The Capture_Time setting tells QTM how long a capture started with the
+<em>start</em> command shall be. The time is expressed in seconds.</p>
+<h5 id="start_on_external_trigger">Start_On_External_Trigger</h5><p>The Start_On_External_Trigger setting tells QTM if the measurement
+shall start on external trigger. The value can be true or false.</p>
+<h5 id="external_time_base">External_Time_Base</h5><ul>
+<li><p><strong>Enabled</strong> - Enable or disable external time base. Value can be True or False.</p>
+</li>
+<li><p><strong>Signal_Source</strong> - Signal source used for external time base. Selectable values:</p>
+<ul>
+<li>Control port</li>
+<li>IR receiver</li>
+<li>SMPTE</li>
+<li>Video sync</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>Signal_Mode</strong> - Selectable values:</p>
+<ul>
+<li>Periodic</li>
+<li>Non-periodic</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>Frequency_Multiplier</strong> - Multiply incoming frequency by this integer to
+get the camera frequency. Can be combined with frequency divisor. Value is an
+integer.</p>
+</li>
+<li><p><strong>Frequency_Divisor</strong> - Divide incoming frequency by this integer to get the
+camera frequency. Can be combined with frequency multiplier. Value is an
+integer.</p>
+</li>
+<li><p><strong>Frequency_Tolerance</strong> - Frequency tolerance in ppm of period time. Value
+is an integer. </p>
+</li>
+<li><p><strong>Nominal_Frequency</strong> - Nominal frequency used by QTM. To disable nominal
+frequency set the value to <em>None.</em> To enable nominal frequency set a float
+value.</p>
+</li>
+<li><p><strong>Signal_Edge</strong> - Control port TTL signal edge.</p>
+<ul>
+<li>Negative</li>
+<li>Positive</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>Signal_Shutter_Delay</strong> - Delay from signal to shutter opening in micro
+seconds. Value is an integer.</p>
+</li>
+<li><p><strong>Non_Periodic_Timeout</strong> - Max number of seconds expected between two
+frames in non-periodic mode. Value is a float.</p>
+</li>
+</ul>
+<h5 id="processing_actions">Processing_Actions</h5><ul>
+<li><p><strong>Tracking</strong> - Enable or disable 3D or 2D tracking processing action. Value
+can be 3D, 2D or False.</p>
+</li>
+<li><p><strong>TwinSystemMerge</strong> - Enable or disable twin system merge processing action.
+Value can be True or False.</p>
+</li>
+<li><p><strong>SplineFill</strong> - Enable or disable spline fill processing action. Value can
+be True or False.</p>
+</li>
+<li><p><strong>AIM</strong> - Enable or disable AIM processing action. Value can be True or
+False.</p>
+</li>
+<li><p><strong>Track6DOF</strong> - Enable or disable 6DOF tracking processing action. Value can
+be True or False.</p>
+</li>
+<li><p><strong>ForceData</strong> - Enable or disable force data processing action. Value can be
+True or False.</p>
+</li>
+<li><p><strong>GazeVectorData</strong> - Enable or disable gaze vector data processing action.
+Value can be True or False.</p>
+</li>
+<li><p><strong>ExportTSV</strong> - Enable or disable export to TSV processing action. Value can
+be True or False.</p>
+</li>
+<li><p><strong>ExportC3D</strong> - Enable or disable export to C3D processing action. Value can
+be True or False.</p>
+</li>
+<li><p><strong>ExportDiff</strong> - Enable or disable export to Diff format processing action.
+Value can be True or False.</p>
+</li>
+<li><p><strong>ExportMatlabDirect</strong> - Enable or disable export to Matlab directly
+processing action. Value can be True or False.  </p>
+</li>
+<li><p><strong>ExportMatlabFile</strong>  - Enable or disable export to MATLAB file processing
+action. Value can be True or False.</p>
+</li>
+</ul>
+<h5 id="camera">Camera</h5><p>General settings consist of none or several <em>Camera</em> elements, with
+following content.</p>
+<ul>
+<li><p><strong>ID</strong> - Select camera to which the settings shall apply. If the camera id is
+set to a negative value, settings will apply to all cameras. This value must
+always be present.  </p>
+</li>
+<li><p><strong>Mode</strong> - Changes camera mode for selected camera. Available camera modes
+are:</p>
+<ul>
+<li>Marker </li>
+<li>Marker Intensity</li>
+<li>Video</li>
+</ul>
+</li>
+<li><p><strong>Video_Exposure</strong> - Set video exposure time for the camera selected by
+Camera ID, see above. The value is either in micro seconds ( >&nbsp;5&nbsp;&micro;s) or in
+percent of max value (0.0 to 1.0), 32-bit float.</p>
+</li>
+<li><p><strong>Video_Flash_Time</strong> - Set video flash time for the camera selected by
+Camera ID, see above. The value is either in micro seconds ( >&nbsp;5&nbsp;&micro;s) or in
+percent of max value (0.0 to 1.0), 32-bit float.</p>
+</li>
+<li><p><strong>Marker_Exposure</strong> - Set marker exposure time for the camera selected by
+Camera ID, see above. The value is either in micro seconds ( >&nbsp;5&nbsp;&micro;s) or in
+percent of max value (0.0 to 1.0), 32-bit float.</p>
+</li>
+<li><p><strong>Marker_Threshold</strong> - Set marker threshold for the camera selected by
+Camera ID, see above. The value is either an absolute value (50&nbsp;-&nbsp;900) or in
+percent of max value (0.0 to 1.0), 32-bit float.</p>
+</li>
+<li><p><strong>Orientation</strong> - Set camera orientation for the camera selected by Camera
+ID, see above. The setting affects the 2D camera view in QTM. The value is in
+degrees (0, 90, 180 or 270), 32-bit integer.</p>
+</li>
+<li><p><strong>Sync_Out</strong> - Camera settings consist of none or one <em>Sync_Out </em> block,
+with following content:</p>
+<ul>
+<li><strong>Mode</strong> - Synchronization mode for the selected camera. Available modes:<ul>
+<li>Shutter out </li>
+<li>Multiplier</li>
+<li>Divisor</li>
+<li>Camera independent</li>
+<li>Measurement time</li>
+<li>Continuous 100Hz</li>
+<li>SRAM wired</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Value</strong> - This integer value is only used for three of the sync out
+modes. The content is different depending on the <em>Mode</em> setting.<ul>
+<li><strong>Multiplier</strong> - Multiplier applied to the camera frequency</li>
+<li><strong>Divisor</strong> -  Divisor applied to the camera frequency</li>
+<li><strong>Camera</strong> - independent Camera independent frequency</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Duty_Cycle</strong> - Output duty cycle in per cent (float). Only used in
+multiplier, divisor and camera independent mode.</li>
+</ul>
+<ul>
+<li><strong>Signal_Polarity</strong> - TTL signal polarity. Possible values:<ul>
+<li>Positive</li>
+<li>Negative</li>
+</ul>
+</li>
+</ul>
+<h4 id="image-settings">Image settings</h4><p>The <em>Image</em> element in the XML data packet consists of none or several
+<em>Camera</em> elements. The image settings are used to request streaming
+images from one or several cameras.</p>
+<h5 id="camera-2">Camera</h5><p>The settings within a <em>Camera</em> element must come in a predefined order, see
+below and <a href="#settings-example">Settings example</a>. All settings can be set
+individually, except for ID, which always has to be present.  If the selected
+camera is not enabled since before, the default values will be used for all
+image settings that are not present in the <em>Camera</em>element. Otherwise current
+image settings will be used.</p>
+<ul>
+<li><p><strong>ID</strong> - Select camera to fetch images from. This value must always be
+present in the image settings.</p>
+</li>
+<li><p><strong>Enabled</strong> - Enable or disable transmission of image data from camera
+selected by Camera ID, see above. True or False</p>
+</li>
+<li><p><strong>Format</strong> - Available image formats.</p>
+<ul>
+<li>RAWGrayscale </li>
+<li>RAWBGR</li>
+<li>JPG (Default)</li>
+<li>PNG</li>
+</ul>
+</li>
+<li><p><strong>Width</strong> - Width of the requested image. This does not take into account the
+cropping. The width is the dimensions had the image not been cropped at all.
+32-bit integer.</p>
+</li>
+<li><p><strong>Height</strong> - Height of the requested image. This does not take into account
+the cropping. The height is the dimensions had the image not been cropped at
+all. 32-bit integer.</p>
+</li>
+<li><p><strong>Left_Crop</strong> - Position of the requested image left edge relative the
+original image. 32-bit float.</p>
+<ul>
+<li>0.0 = Original image left edge (Default).</li>
+<li>1.0 = Original image right edge.</li>
+</ul>
+</li>
+<li><p><strong>Top_Crop</strong> - Position of requested image top edge relative the original
+image. 32-bit float.</p>
+<ul>
+<li>0.0 = Original image top edge (Default).  </li>
+<li>1.0 = Original image bottom edge.</li>
+</ul>
+</li>
+<li><p><strong>Right_Crop</strong> - Position of requested image right edge relative the
+original image. 32-bit float.</p>
+<ul>
+<li>0.0 = Original image left edge.</li>
+<li>1.0 = Original image right edge (Default).</li>
+</ul>
+</li>
+<li><p><strong>Bottom_Crop</strong> Position of requested image bottom edge relative the
+original image. 32-bit float.</p>
+<ul>
+<li>0.0 = Original image top edge.</li>
+<li>1.0 = Original image bottom edge (Default).</li>
+</ul>
+</li>
+</ul>
+<h4 id="force-settings">Force settings</h4><p>The Force section in the XML data packet consists of none or several
+<em>Plate</em> elements. </p>
+<p><strong>Plate</strong></p>
+<p>Each <em>Plate</em> element consists of a <em>Force_Plate_Index</em> and a <em>Location</em>
+element. The settings within a plate element must come in a predefined order,
+see <a href="#settings-example">Settings example</a>.</p>
+<ul>
+<li><p><strong>Force_ID</strong> - ID of camera to fetch images from. This value must always be
+present in the image settings.</p>
+</li>
+<li><p><strong>Location</strong> - The <em>Location</em> element consists of four corner elements:
+<em>Corner1, Corner2, Corner3</em> and <em>Corner4</em>. Each corner element consists of X,
+Y and Z elements with the coordinates for the force plate (32 bit floats).</p>
+</li>
+</ul>
+<h4 id="settings-example">Settings example</h4><p>Send the following XML data packet to the RT server:</p>
+<pre><code class="lang-xml">&lt;QTM_Settings&gt;
+    &lt;General&gt;
+        &lt;Capture_Time&gt;2.5&lt;/Capture_Time&gt;
+        &lt;Capture_Frequency&gt;25&lt;/Capture_Frequency&gt;
+        &lt;Start_On_External_Trigger&gt;True&lt;/Start_On_External_Trigger&gt;
+        &lt;External_Time_Base&gt;
+            &lt;Enabled&gt;True&lt;/Enabled&gt;
+            &lt;Signal_Source&gt;Control port&lt;/Signal_Source&gt;
+            &lt;Signal_Mode&gt;Periodic&lt;/Signal_Mode&gt;
+            &lt;Frequency_Multiplier&gt;1&lt;/Frequency_Multiplier&gt;
+            &lt;Frequency_Divisor&gt;1&lt;/Frequency_Divisor&gt;
+            &lt;Frequency_Tolerance&gt;1000&lt;/Frequency_Tolerance&gt;
+            &lt;Nominal_Frequency&gt;None&lt;/Nominal_Frequency&gt;
+            &lt;Signal_Edge&gt;Negative&lt;/Signal_Edge&gt;
+            &lt;Signal_Shutter_Delay&gt;10000&lt;/Signal_Shutter_Delay&gt;
+            &lt;Non_Periodic_Timeout&gt;10&lt;/Non_Periodic_Timeout&gt;
+        &lt;/External_Time_Base&gt;
+        &lt;Processing_Actions&gt;
+            &lt;Tracking&gt;3D&lt;/Tracking&gt;
+            &lt;TwinSystemMerge&gt;False&lt;/TwinSystemMerge&gt;
+            &lt;SplineFill&gt;True&lt;/SplineFill&gt;
+            &lt;AIM&gt;True&lt;/AIM&gt;
+            &lt;Track6DOF&gt;False&lt;/Track6DOF&gt;
+            &lt;ForceData&gt;False&lt;/ForceData&gt;
+            &lt;GazeVectorData&gt;False&lt;/GazeVectorData&gt;
+            &lt;ExportTSV&gt;False&lt;/ExportTSV&gt;
+            &lt;ExportC3D&gt;False&lt;/ExportC3D&gt;
+            &lt;ExportDiff&gt;False&lt;/ExportDiff&gt;
+            &lt;ExportMatlabDirect&gt;False&lt;/ExportMatlabDirect&gt;
+            &lt;ExportMatlabFile&gt;False&lt;/ExportMatlabFile&gt;
+        &lt;/Processing_Actions&gt;
+        &lt;Camera&gt;
+            &lt;ID&gt;1&lt;/ID&gt;
+            &lt;Mode&gt;Marker&lt;/Mode&gt;
+            &lt;Video_Exposure&gt;0.5&lt;/Video_Exposure&gt;
+            &lt;Video_Flash_Time&gt;0.3&lt;/Video_Flash_Time&gt;
+            &lt;Marker_Exposure&gt;0.5&lt;/Marker_Exposure&gt;        
+            &lt;Marker_Threshold&gt;0.4&lt;/Marker_Threshold&gt;
+            &lt;Orientation&gt;0&lt;/Orientation&gt;
+            &lt;Sync_Out&gt;
+                &lt;Mode&gt;Camera independent&lt;/Mode&gt;
+                &lt;Value&gt;120&lt;/Value&gt;
+                &lt;Duty cycle&gt;50.000&lt;/Duty cycle&gt;
+                &lt;Signal_Polarity&gt;Negative&lt;/Signal_Polarity&gt;
+            &lt;/Sync_Out&gt;
+        &lt;/Camera&gt;
+    &lt;/General&gt;
+    &lt;The_3D&gt;
+        &lt;TwinCalibrated&gt;False&lt;/TwinCalibrated&gt;
+    &lt;/The_3D&gt;
+    &lt;Image&gt;
+        &lt;Camera&gt;
+            &lt;ID&gt;1&lt;/ID&gt;
+            &lt;Enabled&gt;True&lt;/Enabled&gt;
+            &lt;Format&gt;JPG&lt;/Format&gt;
+            &lt;Width&gt;640&lt;/Width&gt;
+            &lt;Height&gt;400&lt;/Height&gt;
+            &lt;Left_Crop&gt;0.0&lt;/Left_Crop&gt;
+            &lt;Top_Crop&gt;0.0&lt;/Top_Crop&gt;
+            &lt;Right_Crop&gt;1.0&lt;/Right_Crop&gt;
+            &lt;Bottom_Crop&gt;1.0&lt;/Bottom_Crop&gt;
+        &lt;/Camera&gt;
+    &lt;/Image&gt;
+    &lt;Force&gt;
+        &lt;Plate&gt;
+            &lt;Force_ID&gt;1&lt;/Force_ID&gt;
+            &lt;Location&gt;
+                &lt;Corner1&gt;
+                    &lt;X&gt;1000.00&lt;/X&gt;
+                    &lt;Y&gt;0.00&lt;/Y&gt;
+                    &lt;Z&gt;0.00&lt;/Z&gt;
+                &lt;Corner1&gt;
+                &lt;Corner2&gt;
+                    &lt;X&gt;1600.00&lt;/X&gt;
+                    &lt;Y&gt;0.00&lt;/Y&gt;
+                    &lt;Z&gt;0.00&lt;/Z&gt;
+                &lt;Corner2&gt;
+                &lt;Corner3&gt;
+                    &lt;X&gt;1600.00&lt;/X&gt;
+                    &lt;Y&gt;400.00&lt;/Y&gt;
+                    &lt;Z&gt;0.00&lt;/Z&gt;
+                &lt;Corner3&gt;
+                &lt;Corner4&gt;
+                    &lt;X&gt;1000.00&lt;/X&gt;
+                    &lt;Y&gt;400.00&lt;/Y&gt;
+                    &lt;Z&gt;0.00&lt;/Z&gt;
+                &lt;Corner4&gt;
+            &lt;/Location&gt;
+        &lt;/Plate&gt;
+    &lt;/Force&gt;
+&lt;/QTM_Settings&gt;
+</code></pre>
+<p>Response: </p>
+<pre><code>Setting parameters succeeded
+</code></pre><p>or</p>
+<pre><code>Setting parameters failed
+</code></pre><h3 id="streaming-data">Streaming data</h3><p>The client has two options when requesting data frames from the QTM RT
+server: polling mode or streaming mode. </p>
+<p>In polling mode, the client requests each frame in the pace it needs
+them, using the command <em>GetCurrentFrame</em>. </p>
+<p>In streaming mode, the client tells QTM to stream data at a fixed rate
+to the client by using the <em>StreamFrames</em> command. QTM keeps streaming
+data until the measurement is stopped in QTM or the client tells QTM to
+stop. </p>
+<p>In either mode, the client decides what type of data it needs (2D, 3D,
+6D, Analog, Force or a combination of these). </p>
+<p>In streaming mode, the client may request streaming over UDP/IP instead
+of TCP/IP, to minimize the protocol latency (at the cost of possibly
+losing some data frames). When using the OSC protocol, all data is sent
+via UDP. </p>
+<h3 id="command-summary">Command summary</h3><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Parameters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Version</td>
+<td>[n.n]</td>
+</tr>
+<tr>
+<td>QTMVersion</td>
+<td>-</td>
+</tr>
+<tr>
+<td>ByteOrder</td>
+<td>-</td>
+</tr>
+<tr>
+<td>GetState</td>
+<td>-</td>
+</tr>
+<tr>
+<td>GetParameters</td>
+<td><code>All</code> &#124; <code>([General] [3D] [6D] [Analog] [Force] [Image])</code></td>
+</tr>
+<tr>
+<td>GetCurrentFrame</td>
+<td><code>All</code> &#124; <code>([2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes]</code><br><code>[Analog] [AnalogSingle] [Force] [6D] [6DRes] [6DEuler] [6DEulerRes] [Image])</code></td>
+</tr>
+<tr>
+<td>StreamFrames</td>
+<td><code>Stop</code> &#124; <code>((FrequencyDivisor:n</code> &#124; <code>Frequency:n</code> &#124; <code>AllFrames)</code><br><code>[UDP[:address]:port] (All</code> &#124; <code>([2D] [2DLin] [3D] [3DRes]</code><br><code>[3DNoLabels] [3DNoLabelsRes] [Analog] [AnalogSingle]</code><br><code>[Force] [6D] [6DRes] [6DEuler] [6DEulerRes] [Image])))</code> </td>
+</tr>
+<tr>
+<td>TakeControl</td>
+<td><code>[Password]</code></td>
+</tr>
+<tr>
+<td>ReleaseControl</td>
+<td>-</td>
+</tr>
+<tr>
+<td>New</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Close</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Start</td>
+<td><code>[RTFromFile]</code> </td>
+</tr>
+<tr>
+<td>Stop</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Load</td>
+<td><code>Filename</code></td>
+</tr>
+<tr>
+<td>Save</td>
+<td><code>Filename [Overwrite]</code></td>
+</tr>
+<tr>
+<td>LoadProject</td>
+<td><code>ProjectPath</code></td>
+</tr>
+<tr>
+<td>GetCaptureC3D</td>
+<td>-</td>
+</tr>
+<tr>
+<td>GetCaptureQTM</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Trig</td>
+<td>-</td>
+</tr>
+<tr>
+<td>SetQTMEvent</td>
+<td><code>Label</code></td>
+</tr>
+<tr>
+<td>Quit</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h2 id="commands">Commands</h2><p>In the description of the commands, number parameters are designated by an <code>n</code>,
+optional parameters are designated by enclosing brackets <code>[ ]</code> and choices between
+possible values are designated by a <code>|</code>. Parentheses are used to group
+parameters together. None of these characters, ie brackets <code>[ ]</code>, the pipe
+character <code>|</code> or parentheses <code>()</code> should be included in the command sent to the
+server. </p>
+<p>Command strings and their parameters never contain spaces, so a space character
+(ASCII 32) is used as separator between command names and parameters.</p>
+<p>Command strings and parameter strings are case insensitive.</p>
+<p>The response to a command is a command packet, error packet, XML packet, C3D
+data packet or QTM data packet. Each command below has an example. The
+examples list all available responses for each command. Command strings and
+error strings are shown in italic. If the command is not recognized by the
+server, it will send an error response with the string <strong>Parse Error</strong>.</p>
+<h3 id="version">Version</h3><blockquote>
+<p><strong><code>Version</code></strong> <code>[n.n]</code></p>
+</blockquote>
+<p>The first thing that a client should do after connecting to the QTM RT server
+is to send the Version command to the server with the desired protocol version.
+This will ensure that the protocol described in this document is followed by
+the server. The server will respond with Version set to n.n, where n.n is the
+version selected. If no argument is used, the server will respond with the
+current version.</p>
+<p>If you don&#39;t set the protocol version yourself, QTM will set it to <strong>version
+1.1</strong> by default.</p>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    Version 1.12
+Response:   Version set to 1.12    or  
+            Version NOT supported
+
+Command:    Version
+Response:   Version is 1.12
+</code></pre>
+<h3 id="qtmversion">QTMVersion</h3><blockquote>
+<p><strong><code>QTMVersion</code></strong></p>
+</blockquote>
+<p>Returns the QTM version on which the RT server is running.</p>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    QTMVersion
+Response:   QTM Version is 2.3 (build 464)
+</code></pre>
+<h3 id="byteorder">ByteOrder</h3><blockquote>
+<p><strong><code>ByteOrder</code></strong></p>
+</blockquote>
+<p>Returns the current byte order.</p>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    ByteOrder
+Response:   Byte order is little endian or
+            Byte order is big endian
+</code></pre>
+<h3 id="getstate">GetState</h3><blockquote>
+<p><strong><code>GetState</code></strong></p>
+</blockquote>
+<p>This command makes the RT server send current QTM state as an event data
+packet. The event packet will only be sent to the client that sent the GetState
+command. If the client is connected via Telnet, then the response will be sent
+as an ASCII string. <code>GetState</code> will not show the <strong>Camera Settings Changed</strong>,
+<strong>QTM Shutting Down</strong> and <strong>Capture Saved events</strong>.</p>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    GetState
+Response:   Event data packet with last QTM event.
+
+(Telnet)
+Response:   Connected               or
+            Connection Closed       or
+            Capture Started         or
+            Capture Stopped         or
+            Calibration Started     or
+            Calibration Stopped     or
+            RT From File Started    or
+            RT From File Stopped    or
+            Waiting For Trigger
+</code></pre>
+<h3 id="getparameters">GetParameters</h3><blockquote>
+<p><strong><code>GetParameters</code></strong> <code>All | ([General] [3D] [6D] [Analog] [Force] [Image])</code></p>
+</blockquote>
+<p>This command retrieves the settings for the requested component(s) of QTM in
+XML format. The XML parameters are described <a href="#xml-packet">here</a>.</p>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    GetParameters 3D Force
+Response:   Parameters not available                    or
+            XML string containing requested parameters
+</code></pre>
+<h3 id="getcurrentframe">GetCurrentFrame</h3><blockquote>
+<p><strong><code>GetCurrentFrame</code></strong> <code>All | ([2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes]
+                  [Analog] [AnalogSingle] [Force] [6D] [6DRes] [6DEuler]
+                  [6DEulerRes] [Image])</code></p>
+</blockquote>
+<p>This command returns the current frame of real-time data from the server.  </p>
+<p>Points worth noting are:  </p>
+<ul>
+<li><p>The frame is composed of the parts specified in the parameters to the
+command. The exact layout of the data frame in different situations is
+described in <a href="#data-packet">Data packet</a>. </p>
+</li>
+<li><p>The composition of the data frame may vary between frames. This is due to the
+fact that some data (Analog and Force data) is not collected or buffered at
+the same rate as the camera data (<strong>2D</strong>, <strong>3D</strong>, <strong>6D</strong>). If you specify
+Analog or Force data to be streamed together with some form(s) of camera
+data, some data frames may include analog while others don&#39;t include it. This
+is because QTM sends the Analog and Force data as soon as it is available,
+and it is usually available in fairly large chunks and not as often as camera
+data is available</p>
+</li>
+<li><p>If there is no ongoing measurement (either it has not started or it has
+already finished), an <a href="#no-more-data-packet">empty data frame</a> is sent to the
+client .</p>
+</li>
+<li><p>If a measurement is ongoing but there is no new frame of data available, the
+server waits until the next frame of data is available before sending it to
+the client.</p>
+</li>
+</ul>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    GetCurrentFrame 3D Analog
+Response:   One data frame is sent to the client according to the 
+            data frame protocol described in the Data packet section.
+</code></pre>
+<h3 id="streamframes">StreamFrames</h3><blockquote>
+<p><strong><code>StreamFrames</code></strong> <code>Stop | ((FrequencyDivisor:n | Frequency:n | AllFrames)
+                      [UDP[:address]:port] (All |  ([2D] [2DLin] [3D] [3DRes] [3DNoLabels]
+                      [3DNoLabelsRes] [Analog] [AnalogSingle] [Force] [6D] [6DRes] [6DEuler]
+                      [6DEulerRes] [Image])))</code></p>
+</blockquote>
+<p>This command makes the QTM RT server start streaming data frames in real-time.  </p>
+<p>Points worth noting are:</p>
+<ul>
+<li><p>Each frame is composed of the parts specified in the parameters to the
+command. The exact layout of the data frame in different situations is
+described in <a href="#data-packet">Data packet</a>.</p>
+<p>The composition of the data frame may vary between frames. This is due to the
+fact that some data (Analog and Force data) is not collected or buffered at
+the same rate as the camera data (2D, 3D, 6D). If you specify Analog or Force
+data to be streamed together with some form(s) of camera data, some data
+frames may include analog while others don&#39;t include it. This is
+because QTM sends the Analog and Force data as soon as it is available, and
+it is usually available in fairly large chunks and not as often as camera
+data is available</p>
+</li>
+<li><p>If there is no ongoing measurement (either it has not started or it has
+already finished), an <a href="#no-more-data-packet">empty data frame</a> is sent to the
+client.</p>
+</li>
+<li><p>The actual rate at which the frames are sent depends on several factors
+&ndash; not just the frequency specified in the command parameters:</p>
+<ul>
+<li><p><strong>The measurement frequency</strong> used when acquiring the camera data (2D, 3D,
+6D).  The transmission rate cannot be greater than this frequency.</p>
+</li>
+<li><p><strong>The real-time processing frequency set</strong> in QTM. This may differ greatly
+from the measurement frequency. For example QTM may be measuring at 1000 Hz
+but trying to calculate real-time frames only at 50Hz. The transmission
+rate cannot be greater than this frequency either.</p>
+</li>
+<li><p><strong>The processing time</strong> needed for each frame of data in QTM. 
+This may also be a limiting factor – QTM may not have time to process and
+transmit frames at the rate specified as the real-time processing
+frequency.</p>
+</li>
+<li><p><strong>The frequency specified by the client in the command parameters</strong>.<br>The client has three ways of specifying the preferred data rate of the
+server. If the client specifies a higher rate than it can receive and
+handle in real-time, buffering will occur in the TCP/IP or UDP/IP stack at
+the client side and the client will experience lagging. </p>
+<ul>
+<li><p><strong>FrequencyDivisor:n</strong><br>With this setting, QTM transmits every n:th processed real-time frame to
+the client. Please note that this may not be the same as every n:th frame
+of the measurement (see real-time processing frequency above).  </p>
+<p><em>Example</em>: QTM is measuring in 200 Hz and real-time tracking in 100 Hz.
+If a client specifies FrequencyDivisor:4 QTM will send data at a rate of
+25Hz. </p>
+</li>
+<li><p><strong>Frequency:n</strong><br>With a specific frequency setting, the QTM RT server will transmit frames
+at a rate of approximately n Hz.  </p>
+</li>
+</ul>
+<p><em>Example</em>: QTM is measuring in 200 Hz and real-time tracking in 100 Hz.
+If a client specifies Frequency:60 QTM will send data at an approximate
+rate of 60Hz. This means that usually every other processed frame is
+transmitted, but once in a while two frames in a row are transmitted (to
+reach 60Hz instead of 50). </p>
+<ul>
+<li><strong>AllFrames</strong><br>When a client specifies AllFrames in the StreamFrames command, every
+real-time frame processed by QTM is transmitted to the client.  </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>UDP notes:</p>
+<ul>
+<li><p>If the UDP argument is present, the server will send the data frames over
+UDP/IP instead of TCP/IP. With high network load the risk of losing packets
+increases. When using TCP/IP, these packets will be retransmitted and no
+packets will be lost, but on the other hand, when packets are lost the
+client will not receive any data until they have been retransmitted, which
+can take up to a second in some cases.  </p>
+<p>When using UDP/IP, lost packets are lost, but the next transmitted packet
+will not be delayed by waiting for retransmissions, so the latency can be a
+lot better using UDP/IP. </p>
+</li>
+<li><p>The address parameter is optional. If omitted, the UDP frames will be sent
+to the IP address that the command is sent from (the IP address of the
+client). </p>
+</li>
+<li><p>The port parameter is not optional. Valid port numbers are 1023 – 65535.</p>
+</li>
+<li><p>When using UDP one cannot be sure that all components are sent in a single
+data frame packet. It can be divided into several data frame packets. The
+server will try to fit as many components into one UDP datagram as
+possible. </p>
+</li>
+</ul>
+</li>
+<li><p>When the measurement is finished, or has not yet started, a special
+<a href="#no-more-data-packet">empty data frame</a> packet signaling that no data is
+available is sent to the client.</p>
+</li>
+<li><p>To stop the data stream before it has reached the end of the measurement or
+to prevent data from being sent if a new measurement is started after the
+first was finished: send the StreamFrames Stop command.</p>
+</li>
+</ul>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    StreamFrames Frequency:30 UDP:2234 3D Analog
+Response:   30 frames per second containing 3D data and Analog data 
+            are streamed over UDP/IP to port 2234 of the client computer. The
+            data frame protocol is described in the Data packet section.
+</code></pre>
+<h3 id="takecontrol">TakeControl</h3><blockquote>
+<p><strong><code>TakeControl</code></strong> <code>[Password]</code></p>
+</blockquote>
+<p>This command is used to take control over the QTM RT interface. Only one client
+can have the control at a time. Once a user has the control, it is possible to
+change settings, create a new measurement, close measurement, start capture,
+stop capture and get a capture. The password argument is optional and is only
+needed if it is required by QTM. QTM can be configured to deny all clients
+control, only allow clients with correct password or allow all clients control.</p>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    TakeControl x364k6Gt
+Response:   You are now master                    or
+            You are already master                or
+            127.0.0.1 (1832) is already master    or
+            Client control disabled in QTM        or
+            Wrong or missing password
+</code></pre>
+<h3 id="releasecontrol">ReleaseControl</h3><p>Release the control over the QTM RT interface, so that another client can take
+over the control.</p>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    ReleaseControl
+Response:   You are now a regular client      or
+            You are already a regular client
+</code></pre>
+<h3 id="new">New</h3><p>This command will create a new measurement in QTM, connect to the cameras and
+enter RT (preview) mode. It is only possible to issue this command if you have
+the control over the QTM RT interface. See <a href="#takecontrol">TakeControl</a>.</p>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    New
+Response:   Creating new connection                                  or
+            Already connected                                        or
+            The previous measurement has not been saved or closed    or
+            You must be master to issue this command
+</code></pre>
+<h3 id="close">Close</h3><p>This command will close the current QTM measurement. If in RT (preview) mode,
+it will disconnect from the cameras end exit RT (preview) mode. Otherwise it
+will close any open QTM measurement file. If the measurement isn’t saved, all
+data will be lost. If QTM is running RT from file, the playback will stop and
+the file will be closed. It is only possible to issue this command if you have
+the control over the QTM RT interface. See <a href="#takecontrol">TakeControl</a>.</p>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    Close
+Response:   Closing connection                          or
+            Closing file                                or
+            No connection to close                      or
+            You must be master to issue this command
+</code></pre>
+<h3 id="start">Start</h3><blockquote>
+<p><strong><code>Start</code></strong> <code>[RTFromFile]</code></p>
+</blockquote>
+<p>This command will start a new capture. If the argument RTFromFile is used, QTM
+will start streaming real-time data from current QTM file. If there is any file
+open. It is only possible to issue this command if you have the control over
+the QTM RT interface. See <a href="#takecontrol">TakeControl</a>.</p>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    Start
+Response:   Starting measurement                         or
+            Measurement is already running               or
+            Not connected. Create connection with new    or
+            Starting RT from file                        or
+            RT from file already running                 or
+            No file open                                 or
+            You must be master to issue this command
+</code></pre>
+<h3 id="stop">Stop</h3><p>This command will stop an ongoing capture or playback of RT from file. It is
+only possible to issue this command if you have the control over the QTM RT
+interface. See <a href="#takecontrol">TakeControl</a>.</p>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    Stop
+Response:   Stopping measurement                         or
+            No measurement is running                    or
+            Parse error                                  or
+            You must be master to issue this command
+</code></pre>
+<h3 id="load">Load</h3><blockquote>
+<p><strong><code>Load</code></strong> <code>Filename</code></p>
+</blockquote>
+<p><strong>Filename</strong>: A string containing the name of the QTM file to load. If the
+filename doesn’t end with “.qtm”, it will be added to the end of the filename.
+The file name can be a relative or absolute path. See below.</p>
+<p>This command will load a measurement from file. The name of the file is given
+in the argument. The file name can be relative or absolute. If the file name is
+relative, QTM will try to find the file in the data folder located in the
+project folder. If the file doesn’t exist, current measurement isn’t saved or
+an active camera connection exists, the measurement will not load.</p>
+<p>It is only possible to issue this command if you have the control over the QTM
+RT interface. See <a href="#takecontrol">TakeControl</a>.</p>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    Load
+Response:   Measurement loaded                          or
+            Missing file name                           or
+            Failed to load measurement                  or
+            Active camera connection exists             or
+            Current measurement not saved               or
+            Parse error                                 or
+            You must be master to issue this command
+</code></pre>
+<h3 id="save">Save</h3><blockquote>
+<p><strong><code>Save</code></strong> <code>Filename [Overwrite]</code></p>
+</blockquote>
+<p><strong>Filename</strong>: A string containing the name of the file to save the current
+measurement to. If the filename doesn’t end with “.qtm”, it will be added to
+the end of the filename. The file name can be a relative or absolute path. See
+below.</p>
+<p><strong>Overwrite</strong>: If this parameter is present, an existing measurement with the same
+name will be overwritten. Otherwise a file exists error response will be sent.
+This parameter is optional. </p>
+<p>This command will save the current measurement to file. The name of the file is
+given in the argument. The file name can be relative or absolute. If the file
+name is relative, QTM will save the file in the data folder located in the
+project folder. If the file already exists, it will be overwritten if the
+Overwrite parameter is present. Otherwise a counter will be added to the end of
+the file name (_##).</p>
+<p>It is only possible to issue this command if you have the control over the QTM
+RT interface. See <a href="#takecontrol">TakeControl</a>.</p>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    Save
+Response:   Measurement saved                                   or
+            Measurement saved as &#39;new filename with counter&#39;    or
+            Failed to save measurement                          or
+            No write access.                                    or
+            Failed to create directory                          or
+            No measurement to save                              or
+            You must be master to issue this command
+</code></pre>
+<h3 id="loadproject">LoadProject</h3><blockquote>
+<p><strong><code>LoadProject</code></strong> <code>ProjectPath</code></p>
+</blockquote>
+<p><strong>ProjectPath</strong>: A string containing the path of the project to load.</p>
+<p>This command will load a project, given a project path. If the path doesn’t
+exist, current measurement isn’t saved or an active camera connection exists,
+the project will not load. C:\Users\lnn\QTM files\Imagination</p>
+<p>It is only possible to issue this command if you have the control over the QTM
+RT interface. See <a href="#takecontrol">TakeControl</a>.</p>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    Load
+Response:   Project loaded                             or
+            Missing project name                       or
+            Failed to load project                     or
+            Active camera connection exists            or
+            Current measurement not saved              or
+            Parse error                                or
+            You must be master to issue this command
+</code></pre>
+<h3 id="getcapturec3d">GetCaptureC3D</h3><p>This command will download the latest capture as a C3D file.</p>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    GetCapture
+Response:   Sending capture followed by a C3D data packet containing current capture.    or
+            No capture to get                                                            or
+            Error sending C3D file
+</code></pre>
+<h3 id="getcaptureqtm">GetCaptureQTM</h3><p>This command will download the latest capture as a QTM file.</p>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    GetCapture
+Response:   Sending capture followed by a QTM data packet containing current capture.    or
+            No capture to get                                                            or
+            Error sending QTM file
+</code></pre>
+<h3 id="trig">Trig</h3><blockquote>
+<p><strong><code>Trig</code></strong></p>
+</blockquote>
+<p>This command will trig a measurement, if the camera system is set to start on
+external trigger. The RT server will send a WaitingForTrigger event when it is
+waiting for a trigger. See <a href="#events">Events</a>. It is only possible to issue this command if
+you have the control over the QTM RT interface. See <a href="#takecontrol">TakeControl</a>.</p>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    Trig
+Response:   Trig ok                                     or
+            QTM not waiting for trig                    or
+            You must be master to issue this command
+</code></pre>
+<h3 id="setqtmevent">SetQTMEvent</h3><blockquote>
+<p><strong><code>SetQTMEvent</code></strong> <code>Label</code></p>
+</blockquote>
+<p><strong>Label</strong>: A string containing the label name of the event. If no name is
+given, the label will be set to “Manual event”.</p>
+<p>This command will set an event in QTM. </p>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    Event test_event
+Response:   Event set                                    or
+            Event label too long                         or
+            QTM is not capturing                         or
+            You must be master to issue this command
+</code></pre>
+<h3 id="quit">Quit</h3><blockquote>
+<p><strong><code>Quit</code></strong></p>
+</blockquote>
+<p>This command ends the current telnet session. The Quit command only works if
+you have connected to the RT server on the telnet port. Default telnet port is
+22221.</p>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    Quit
+Response:   Bye bye
+</code></pre>
+<h2 id="qtm-rt-packets">QTM RT Packets</h2><h3 id="structure">Structure</h3><p>All packets sent to or from the server have the same general layout.</p>
+<p>The first part consists of a packet header of 8 bytes:</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Size</td>
+<td>32-bit integer</td>
+<td>The total size of the QTM RT packet including these four bytes denoting the size.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Type</td>
+<td>32-bit integer</td>
+<td>The type of data in the packet</td>
+</tr>
+</tbody>
+</table>
+<p>After the header follows the actual data of the packet:</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Size - 8</td>
+<td>Data</td>
+<td>Mixed</td>
+<td>Whatever data that the Type field says it is.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Please note</strong>:<br>A packet sent to or from a QTM RT server is not a type of TCP data packet. TCP
+is defined as a data stream. QTM RT server data packets are part of the QTM RT
+server protocol defined on top of a TCP stream. When a client reads data from
+the TCP/IP stream, it is usually divided into chunks (each probably being sent
+in a single TCP/IP packet), but these chunks are not necessarily the same as a
+QTM RT server protocol packet. To handle TCP/IP reading properly, first read
+four bytes from the stream to see how big the packet is, then read (Size – 4)
+bytes from the TCP/IP stream to make sure you have received a whole packet.
+Then handle the packet according to its Type member.</p>
+<h3 id="packet-types">Packet types</h3><p>The Type field of a QTM RT server packet header is a number that should be
+interpreted according to the table below. These are the data types that are
+defined in the protocol so far. Detailed descriptions of the data packets for
+each type can be found in the sections following this one.</p>
+<table>
+<thead>
+<tr>
+<th>Type no</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Error</td>
+<td>The last command generated an error. The error message is included in the packet.</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Command / Command Response</td>
+<td>A command sent to the server or a response from the server to a command indicating that the command was successful.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>XML</td>
+<td>Data sent by the server in the form of XML, or data sent to the server in the form of XML.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Data</td>
+<td>One sample of real-time data sent from the server. The contents of the frame may vary depending on the commands/settings sent to the server. The contents may also vary between frames due to different sampling frequencies and buffering properties of different data types.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>No More Data</td>
+<td>This packet type contains no data. It is a marker used to indicate that a measurement has finished or is not yet started.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>C3D file</td>
+<td>Data sent from the server in form of a C3D file.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Event</td>
+<td>This packet type contains event data from QTM.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Discover</td>
+<td>Auto discover packet.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>QTM file</td>
+<td>Data sent from the server in form of a QTM file.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="error-packet">Error packet</h4><p>Error messages from the server are sent in an error packet. Whenever you read a
+response from the server, it may be an error packet instead of the packet type
+you expect. </p>
+<p>Example of an error packet:  </p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Size</td>
+<td>31 (8 bytes header + 23 bytes data)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Type</td>
+<td>0</td>
+</tr>
+<tr>
+<td>23</td>
+<td>Data</td>
+<td>&quot;Command not supported.&quot;</td>
+</tr>
+</tbody>
+</table>
+<p>The error string is laid out like this (always with a <code>NULL</code> char to terminate it):</p>
+<div class="table-noheader"></div>
+
+<table>
+<thead>
+<tr>
+<th>Byte</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+<th>11</th>
+<th>12</th>
+<th>13</th>
+<th>14</th>
+<th>15</th>
+<th>16</th>
+<th>17</th>
+<th>18</th>
+<th>19</th>
+<th>20</th>
+<th>21</th>
+<th>22</th>
+<th>23</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Value</td>
+<td>C</td>
+<td>o</td>
+<td>m</td>
+<td>m</td>
+<td>a</td>
+<td>n</td>
+<td>d</td>
+<td>\32</td>
+<td>n</td>
+<td>o</td>
+<td>t</td>
+<td>\32</td>
+<td>s</td>
+<td>u</td>
+<td>p</td>
+<td>p</td>
+<td>o</td>
+<td>r</td>
+<td>t</td>
+<td>e</td>
+<td>d</td>
+<td>.</td>
+<td>\0</td>
+</tr>
+</tbody>
+</table>
+<h4 id="command-command-response-packet">Command / Command Response packet</h4><p>Commands and responses to commands are sent in packets of type 1 (see table
+above). Command response strings sent from the server are always
+NULL-terminated but
+NULL-termination is optional for command strings sent from the clients. </p>
+<p>Here is an example of a command sent to the server:</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Size</td>
+<td>20 (8 bytes header + 12 bytes data)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Type</td>
+<td>1</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Data</td>
+<td>&quot;Version 1.2&quot;</td>
+</tr>
+</tbody>
+</table>
+<p>The resulting string is laid out like this (with a <code>NULL</code> char to terminate it,
+which is not required of clients).</p>
+<div class="table-noheader"></div>
+
+<table>
+<thead>
+<tr>
+<th>Byte</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+<th>11</th>
+<th>12</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Value</td>
+<td>V</td>
+<td>e</td>
+<td>r</td>
+<td>s</td>
+<td>i</td>
+<td>o</td>
+<td>n</td>
+<td>\32</td>
+<td>1</td>
+<td>.</td>
+<td>2</td>
+<td>\0</td>
+</tr>
+</tbody>
+</table>
+<h4 id="xml-packet">XML packet</h4><p>XML is used to exchange parameters between the server and the client. This has
+several benefits, including extendibility. Clients should not assume that the
+XML sent by the server looks exactly like the examples below - there may be any
+number of other items included as well, and there may be differences in
+whitespace etc, but if you use a standard XML parser to look for the items you
+are interested in this will not be a problem.</p>
+<p>The QTM RT client SDK source code includes source code for a free XML parser
+(it is actually the same source code used inside QTM to create the XML, so they
+should work well together).</p>
+<p>XML packets follow the same layout as Command/Response packets and Error
+packets.</p>
+<p>The packet header is followed by a <code>NULL</code>-terminated ASCII string.  Interpret
+the string as XML according to the following paragraphs. All XML data strings
+sent from the QTM RT server are enclosed by a block named from the version of
+the protocol used (<code>QTM_Parameters_Ver_1.12</code> in this version of the
+protocol).</p>
+<p>When requesting more than one type of parameters at the same time, all of them
+are placed in the same <code>&lt;QTM_Parameters_Ver_1.12&gt;</code> block. The individual blocks
+may appear in any order inside this block.</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Size</td>
+<td>8 bytes header + XML string length</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Type</td>
+<td>2</td>
+</tr>
+<tr>
+<td></td>
+<td>Data</td>
+<td>XML string data, NULL terminated.<br><br>The XML data can consist of one or several of following parameters:<br><a href="#general-xml-parameters">General</a>, <a href="#3d-xml-parameters">3D</a>, <a href="#6d-xml-parameters">6D</a>, <a href="#analog-xml-parameters">Analog</a>, <a href="#force-xml-parameters">Force</a> and <a href="#image-xml-parameters">Image</a>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="xml-parameters">XML Parameters</h3><h4 id="general-xml-parameters">General XML parameters</h4><p>In response to the command GetParameters General the QTM RT server will reply
+with an XML data packet, containing a block called General. See below for the
+format of this block.</p>
+<p><strong>Frequency</strong><br>The QTM capture frequency.</p>
+<p><strong>Capture_Time</strong><br>The length of the QTM capture, started with the start command. The time is expressed in seconds.</p>
+<p><strong>Start_On_External_Trigger</strong><br>Measurement starts on external trigger. The value can be true or false.</p>
+<p><strong>External_Time_Base</strong>  </p>
+<ul>
+<li><p><strong>Enabled</strong><br>Enable or disable external time base. Value can be True or False.</p>
+</li>
+<li><p><strong>Signal_Source</strong><br>Signal source used for external time base. Possible values:</p>
+<ul>
+<li>Control port</li>
+<li>IR receiver</li>
+<li>SMPTE</li>
+<li>Video sync  </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Signal_Mode</strong><br>Possible values:<ul>
+<li>Periodic</li>
+<li>Non-periodic</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>Frequency_Multiplier</strong><br>Incoming frequency is multiplied by this integer to get the camera frequency.
+Can be combined with frequency divisor. Value is an integer.</p>
+</li>
+<li><p><strong>Frequency_Divisor</strong><br>Incoming frequency is divided by this integer to get the camera frequency. Can
+be combined with frequency multiplier. Value is an integer.</p>
+</li>
+<li><p><strong>Frequency_Tolerance</strong><br>Frequency tolerance in ppm of period time. Value is an integer. </p>
+</li>
+<li><p><strong>Nominal_Frequency</strong><br>Nominal frequency used by QTM. If the value is None, nominal frequency is
+disabled. Otherwise the value is a float.</p>
+</li>
+<li><p><strong>Signal_Edge</strong><br>Control port TTL signal edge.  </p>
+<ul>
+<li>Negative</li>
+<li>Positive</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>Signal_Shutter_Delay</strong><br>Delay from signal to shutter opening in micro seconds. Value is an integer.</p>
+</li>
+<li><p><strong>Non_Periodic_Timeout</strong><br>Max number of seconds expected between two frames in non-periodic mode. Value
+is a float.</p>
+</li>
+</ul>
+<p><strong>Processing_Actions</strong></p>
+<ul>
+<li><p><strong>Tracking</strong><br>2D or 3D tracking processing action. Value can be 2D, 3D or False.</p>
+</li>
+<li><p><strong>TwinSystemMerge</strong><br>Twin system merge processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>SplineFill</strong><br>Spline fill processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>AIM</strong><br>AIM processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>Track6DOF</strong><br>6 DOF tracking processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ForceData</strong><br>Force data processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ExportTSV</strong><br>Export to TSV processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ExportC3D</strong><br>Export to C3D processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ExportDiff</strong><br>Export to Diff format processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ExportMatlabDirect</strong><br>Export to Matlab directly processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ExportMatlabFile</strong><br>Export to MATLAB file processing action. Value can be True or False.</p>
+</li>
+</ul>
+<p><strong>Camera</strong><br>General settings consist of none or several Camera blocks, with following
+content:</p>
+<ul>
+<li><p><strong>ID</strong>
+Identity of the camera to which the settings apply.</p>
+</li>
+<li><p><strong>Model</strong><br>Model of selected camera. Available models are:</p>
+<ul>
+<li>MacReflex</li>
+<li>ProReflex 120</li>
+<li>ProReflex 240</li>
+<li>ProReflex 500</li>
+<li>ProReflex 1000</li>
+<li>Oqus 100</li>
+<li>Oqus 200 C</li>
+<li>Oqus 300</li>
+<li>Oqus 300 Plus</li>
+<li>Oqus 400</li>
+<li>Oqus 500</li>
+<li>Oqus 500 Plus</li>
+<li>Oqus 700</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>Underwater</strong><br>True if the camera is an underwater camera.</p>
+</li>
+<li><p><strong>Serial</strong><br>Serial number of the selected camera.</p>
+</li>
+<li><p><strong>Mode</strong><br>Camera mode for selected camera. Available camera modes are:</p>
+<ul>
+<li>Marker</li>
+<li>Marker Intensity</li>
+<li>Video</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>Video_Exposure</strong><br>There are three video exposure times for the selected camera. Current value,
+min and max value, which sets the boundaries for the exposure time. The values
+are in micro seconds.</p>
+</li>
+<li><p><strong>Video_Flash_Time</strong><br>There are three video flash times for the selected camera. Current value, min
+and max value, which sets the boundaries for the flash time. The values are in
+micro seconds.</p>
+</li>
+<li><p><strong>Marker_Exposure</strong><br>There are three marker exposure times for the selected camera. Current value,
+min and max value, which sets the boundaries for the exposure time. The values
+are in micro seconds.</p>
+</li>
+<li><p><strong>Marker_Threshold</strong><br>There are three marker threshold values for the selected camera. Current value,
+min and max value, which sets the boundaries for the threshold. The values have
+no unit.</p>
+</li>
+<li><p><strong>Position</strong><br>Position and rotation for selected camera. The position is expressed in X, Y Z
+coordinates. The rotation is presented by a 3x3 rotational matrix, Rot_1_1 ...
+Rot_3_3.</p>
+</li>
+<li><p><strong>Orientation</strong><br>QTM 2D camera view orientation for selected camera. Possible values are: 0,
+90, 180 or 270 degrees.</p>
+</li>
+<li><p><strong>Marker_Res</strong><br>Marker resolution for selected camera. Width and height values are in sub pixels.</p>
+</li>
+<li><p><strong>Video_Res</strong><br>Video resolution for selected camera. Width and height values are in sub pixels.</p>
+</li>
+<li><p><strong>Marker_FOV</strong><br>Marker field of view for selected camera. Left, top, right and bottom
+coordinates are in pixels.</p>
+</li>
+<li><p><strong>Video_FOV</strong><br>Video field of view for selected camera. Left, top, right and bottom
+coordinates are in pixels.</p>
+</li>
+<li><p><strong>Sync_Out</strong><br>Camera settings consist of none or one Sync_Out  block, with following content:</p>
+</li>
+<li><p><strong>Mode</strong><br>Synchronization mode for the selected camera. Available modes:</p>
+<ul>
+<li>Shutter out</li>
+<li>Multiplier</li>
+<li>Divisor</li>
+<li>Camera independent</li>
+<li>Measurement time</li>
+<li>SRAM wired</li>
+<li>Continuous 100Hz</li>
+</ul>
+</li>
+<li><p><strong>Value</strong><br>Integer value with different content depending on the Mode setting.</p>
+<ul>
+<li>Shutter out.    - Not used</li>
+<li>Multiplier    - Multiplier applied to the camera frequency</li>
+<li>Divisor        - Divisor applied to the camera frequency</li>
+<li>Camera independent    - Camera independent frequency</li>
+<li>Measurement time    - Not used</li>
+<li>Continuous 100Hz    - Not used</li>
+</ul>
+</li>
+<li><p><strong>Duty_Cycle</strong><br>Output duty cycle in percent (float). Only used in multiplier, divisor and
+camera independent mode.</p>
+</li>
+<li><p><strong>Signal_Polarity</strong><br>TTL signal polarity. Not used in SRAM wired and Continuous 100Hz mode. Possible values:</p>
+<ul>
+<li>Positive</li>
+<li>Negative</li>
+</ul>
+</li>
+</ul>
+<p>Example:</p>
+<pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.12&gt;
+    &lt;General&gt;
+        &lt;Frequency&gt;240&lt;/Frequency&gt;
+        &lt;Capture_Time&gt;2.5&lt;/Capture_Time&gt;
+        &lt;Start_On_External_Trigger&gt;True&lt;/Start_On_External_Trigger&gt;
+        &lt;External_Time_Base&gt;
+            &lt;Enabled&gt;True&lt;/Enabled&gt;
+            &lt;Signal_Source&gt;Control_Port&lt;/Signal_Source&gt;
+            &lt;Signal_Mode&gt;Periodic&lt;/Signal_Mode&gt;
+            &lt;Frequency_Multiplier&gt;1&lt;/Frequency_Multiplier&gt;
+            &lt;Frequency_Divisor&gt;1&lt;/Frequency_Divisor&gt;
+            &lt;Frequency_Tolerance&gt;1000&lt;/Frequency_Tolerance&gt;
+            &lt;Nominal_Frequency&gt;None&lt;/Nominal_Frequency&gt;
+            &lt;Signal_Edge&gt;Negative&lt;/Signal_Edge&gt;
+            &lt;Signal_Shutter_Delay&gt;10000&lt;/Signal_Shutter_Delay&gt;
+            &lt;Non_Periodic_Timeout&gt;10&lt;/Non_Periodic_Timeout&gt;
+        &lt;/External_Time_Base&gt;
+        &lt;Processing_Actions&gt;
+            &lt;Tracking&gt;3D&lt;/Tracking&gt;
+            &lt;TwinSystemMerge&gt;False&lt;/TwinSystemMerge&gt;
+            &lt;SplineFill&gt;True&lt;/SplineFill&gt;
+            &lt;AIM&gt;True&lt;/AIM&gt;
+            &lt;Track6DOF&gt;False&lt;/Track6DOF&gt;
+            &lt;ForceData&gt;False&lt;/ForceData&gt;
+            &lt;ExportTSV&gt;False&lt;/ExportTSV&gt;
+            &lt;ExportC3D&gt;False&lt;/ExportC3D&gt;
+            &lt;ExportDiff&gt;False&lt;/ExportDiff&gt;
+            &lt;ExportMatlabDirect&gt;False&lt;/ExportMatlabDirect&gt;
+            &lt;ExportMatlabFile&gt;False&lt;/ExportMatlabFile&gt;
+        &lt;/Processing_Actions&gt;
+        &lt;Camera&gt;
+            &lt;ID&gt;1&lt;/ID&gt;
+            &lt;Model&gt;Oqus 300&lt;/Model&gt;
+            &lt;Underwater&gt;False&lt;/Underwater&gt;
+            &lt;Serial&gt;7658787&lt;/Serial&gt;
+            &lt;Mode&gt;Marker&lt;/Mode&gt;
+            &lt;Video_Exposure&gt;
+                &lt;Current&gt;10000&lt;/Current&gt;
+                &lt;Min&gt;5&lt;/Min&gt;
+                &lt;Max&gt;39980&lt;/Max&gt;
+            &lt;/Video_Exposure&gt;
+            &lt;Video_Flash_Time&gt;
+                &lt;Current&gt;1000&lt;/Current&gt;
+                &lt;Min&gt;5&lt;/Min&gt;
+                &lt;Max&gt;2000&lt;/Max&gt;
+            &lt;/Video_Flash_Time&gt;
+            &lt;Marker_Exposure&gt;
+                &lt;Current&gt;1000&lt;/Current&gt;
+                &lt;Min&gt;5&lt;/Min&gt;
+                &lt;Max&gt;2000&lt;/Max&gt;
+            &lt;/Marker_Exposure&gt;
+            &lt;Marker_Threshold&gt;
+                &lt;Current&gt;200&lt;/Current&gt;
+                &lt;Min&gt;50&lt;/Min&gt;
+                &lt;Max&gt;900&lt;/Max&gt;
+            &lt;/Marker_Threshold&gt;
+            &lt;Position&gt;
+                &lt;X&gt;100.0&gt;/X&gt;
+                &lt;Y&gt;200.0&gt;/Y&gt;
+                &lt;Z&gt;100.0&gt;/Z&gt;
+                &lt;Rot_1_1&gt;0.0&lt;/Rot_1_1&gt;
+                &lt;Rot_2_1&gt;0.0&lt;/Rot_2_1&gt;
+                &lt;Rot_3_1&gt;0.0&lt;/Rot_3_1&gt;
+                &lt;Rot_1_2&gt;0.0&lt;/Rot_1_2&gt;
+                &lt;Rot_2_2&gt;0.0&lt;/Rot_2_2&gt;
+                &lt;Rot_3_2&gt;0.0&lt;/Rot_3_2&gt;
+                &lt;Rot_1_3&gt;0.0&lt;/Rot_1_3&gt;
+                &lt;Rot_2_3&gt;0.0&lt;/Rot_2_3&gt;
+                &lt;Rot_3_3&gt;0.0&lt;/Rot_3_3&gt;
+            &lt;/Position&gt;
+            &lt;Orientation&gt;0&lt;/Orientation&gt;
+            &lt;Marker_Res&gt;
+                &lt;Width&gt;81920&lt;/Width&gt;
+                &lt;Height&gt;65536&lt;/Height&gt;
+            &lt;/Marker_Res&gt;
+            &lt;Video_Res&gt;
+                &lt;Width&gt;1280&lt;/Width&gt;
+                &lt;Height&gt;1024&lt;/Height&gt;
+            &lt;/Video_Res&gt;
+            &lt;Marker_FOV&gt;
+                         &lt;Left&gt;0&lt;/Left&gt;
+                         &lt;Top&gt;0&lt;/Top&gt;
+                         &lt;Right&gt;1279&lt;/Right&gt;
+                         &lt;Bottom&gt;1023&lt;/Bottom&gt;
+            &lt;/Marker_FOV&gt;
+            &lt;Video_FOV&gt;
+                         &lt;Left&gt;0&lt;/Left&gt;
+                         &lt;Top&gt;0&lt;/Top&gt;
+                         &lt;Right&gt;1279&lt;/Right&gt;
+                         &lt;Bottom&gt;1023&lt;/Bottom&gt;
+            &lt;/Video_FOV&gt;
+            &lt;Sync_Out&gt;
+                &lt;Mode&gt;Camera independent&lt;/Mode&gt;
+                &lt;Value&gt;120&lt;/Value&gt;
+                &lt;Duty cycle&gt;50.000&lt;/Duty cycle&gt;
+                &lt;Signal_Polarity&gt;Negative&lt;/Signal_Polarity&gt;
+            &lt;/Sync_Out&gt;
+        &lt;/Camera&gt;
+    &lt;/General&gt;
+&lt;/QTM_Parameters_Ver_1.12&gt;
+</code></pre>
+<h4 id="3d-xml-parameters">3D XML parameters</h4><p>In response to the command GetParameters 3D the QTM RT server will reply with
+an XML data packet, containing a block called The_3D. See below for the format
+of this block.</p>
+<p><em>Note</em>: XML element names can’t begin with a number, that’s why the element for
+3D parameters is called The_3D.</p>
+<ul>
+<li><p><strong>AxisUpwards</strong><br>This parameter tells which axis that is pointing upwards in QTM. The value
+can be one of following: +X, +Y, +Z, -X, -Y and –Z.</p>
+</li>
+<li><p><strong>CalibrationTime</strong><br>This parameter tells the date and time of when the system was last
+calibrated. If the system has no valid calibration the value is empty. The
+calibration date and time is formatted like this: yyyy.mm.dd hh:mm:ss.
+Example, &quot;2011.09.23 11:23:11&quot;</p>
+</li>
+<li><p><strong>Labels</strong><br>Number of labelled trajectories (markers).</p>
+</li>
+<li><p><strong>Label</strong><br>Block containing label information.</p>
+<ul>
+<li><p>Name<br>The name of the label (trajectory).</p>
+</li>
+<li><p>RGBColor
+The color of the label (trajectory), represented by a three byte integer
+value. Bit 0-7 represents red, bit 8-15 represents green and bit 16-23
+represents blue.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>Example:</p>
+<pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.12&gt;
+    &lt;The_3D&gt;
+        &lt;AxisUpwards&gt;+Z&lt;/AxisUpwards&gt;
+        &lt;CalibrationTime&gt;2011.09.23 11:23:11&lt;/CalibrationTime&gt;
+        &lt;Labels&gt;2&lt;/Labels&gt;
+        &lt;Label&gt;
+             &lt;Name&gt;th12&lt;/Name&gt;
+             &lt;RGBColor&gt;ff00ff&lt;/RGBColor&gt;
+        &lt;/Label&gt;
+        &lt;Label&gt;
+             &lt;Name&gt;r_asis&lt;/Name&gt;
+             &lt;RGBColor&gt;00ffff&lt;/RGBColor&gt;
+        &lt;/Label&gt;
+    &lt;/The_3D&gt;
+&lt;/QTM_Parameters_Ver_1.12&gt;
+</code></pre>
+<h4 id="6d-xml-parameters">6D XML parameters</h4><p>In response to the command GetParameters 3D the QTM RT server will reply with
+an XML data packet, containing a block called The_3D. See below for the format
+of this block.</p>
+<p><em>Note</em>: XML element names can’t begin with a number, that’s why the element for
+3D parameters is called The_6D.</p>
+<ul>
+<li><p><strong>Bodies</strong><br>Number of 6DOF bodies.</p>
+</li>
+<li><p><strong>Body</strong><br>Block containing 6DOF body information.</p>
+<ul>
+<li><p>Name<br>The name of the 6DOF body.</p>
+</li>
+<li><p>RGBColor<br>The color of the 6DOF body, represented by a three byte integer value. Bit
+0-7 represents red, bit 8-15 represents green and bit 16-23 represents blue.</p>
+</li>
+<li><p>Point<br>The X, Y and Z coordinate of one of the points that defines the 6DOF body.
+The body is defined by 3 or more points.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>Example:</p>
+<pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.12&gt;
+    &lt;The_6D&gt;
+        &lt;Bodies&gt;1&lt;/Bodies&gt;
+        &lt;Body&gt;
+            &lt;Name&gt;Body1&lt;/Name&gt;
+            &lt;RGBColor&gt;ffffff&lt;/RGBColor&gt;
+            &lt;Point&gt;
+                &lt;X&gt;10.5&lt;/X&gt;
+                &lt;Y&gt;9.5&lt;/Y&gt;
+                &lt;Z&gt;10.5&lt;/Z&gt;
+            &lt;/Point&gt;
+            &lt;Point&gt;
+                &lt;X&gt;10.5&lt;/X&gt;
+                &lt;Y&gt;9.5&lt;/Y&gt;
+                &lt;Z&gt;10.5&lt;/Z&gt;
+            &lt;/Point&gt;
+            &lt;Point&gt;
+                &lt;X&gt;10.5&lt;/X&gt;
+                &lt;Y&gt;9.5&lt;/Y&gt;
+                &lt;Z&gt;10.5&lt;/Z&gt;
+            &lt;/Point&gt;
+        &lt;/Body&gt;
+    &lt;/The_3D&gt;
+&lt;/QTM_Parameters_Ver_1.12&gt;
+</code></pre>
+<h4 id="analog-xml-parameters">Analog XML parameters</h4><p>In response to the command GetParameters Analog the QTM RT server will reply
+with XML data packet, containing a block called Analog. See below for the
+format of this block.</p>
+<ul>
+<li><p><strong>Device</strong><br>Block containing analog device information.</p>
+</li>
+<li><p><strong>Device_ID</strong><br>Unique ID of the analog device. An integer value starting with 1.</p>
+</li>
+<li><p><strong>Device_Name</strong><br>Analog device name.</p>
+</li>
+<li><p><strong>Channels</strong><br>Number of analog channels.</p>
+</li>
+<li><p><strong>Frequency</strong><br>Analog measurement frequency.</p>
+</li>
+<li><p><strong>Unit</strong><br>Measurement unit.</p>
+</li>
+<li><p><strong>Range</strong><br>Min and max analog measurement values.</p>
+</li>
+<li><p><strong>Label</strong><br>Channel name. There shall be as many labels as there are channels.</p>
+</li>
+</ul>
+<p>Example</p>
+<pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.12&gt;
+    &lt;Analog&gt;
+        &lt;Device&gt;
+            &lt;Device_ID&gt;1&lt;/Device_ID&gt;
+            &lt;Device_Name&gt;Board 1&lt;/Device_Name&gt;
+            &lt;Channels&gt;4&lt;/Channels&gt;
+            &lt;Frequency&gt;2400&lt;/Frequency&gt;
+            &lt;Range&gt;
+                &lt;Min&gt;-10.0&lt;/Min&gt;
+                &lt;Max&gt;10.0&lt;/Max&gt;
+            &lt;/Range&gt;
+            &lt;Channel&gt;
+                &lt;Label&gt;Channel 1&lt;/Label&gt;
+                &lt;Unit&gt;volts&lt;/Unit&gt;
+            &lt;/Channel&gt;
+            &lt;Channel&gt;
+                &lt;Label&gt;Channel 2&lt;/Label&gt;
+                &lt;Unit&gt;volts&lt;/Unit&gt;
+            &lt;/Channel&gt;
+            &lt;Channel&gt;
+                &lt;Label&gt;Channel 3&lt;/Label&gt;
+                &lt;Unit&gt;volts&lt;/Unit&gt;
+            &lt;/Channel&gt;
+            &lt;Channel&gt;
+                &lt;Label&gt;Channel 4&lt;/Label&gt;
+                &lt;Unit&gt;microvolts&lt;/Unit&gt;
+            &lt;/Channel&gt;
+        &lt;/Device&gt;
+    &lt;/Analog&gt;
+&lt;/QTM_Parameters_Ver_1.12&gt;
+</code></pre>
+<h4 id="force-xml-parameters">Force XML parameters</h4><p>In response to the command <code>GetParameters Force</code> the QTM RT server will reply
+with XML data packet, containing a block called Force. See below for the format
+of this block.</p>
+<ul>
+<li><p><strong>Unit_Length</strong><br>Length unit used in the Force XML block.</p>
+</li>
+<li><p><strong>Unit_Force</strong><br>Force unit used in the Force XML block.</p>
+</li>
+<li><p><strong>Plate</strong><br>Block containing force plate information.</p>
+</li>
+<li><p><strong>Plate_ID</strong><br>Unique ID of the force plate. An integer value starting with 1.</p>
+</li>
+<li><p><strong>Analog_Device_ID</strong><br>ID of the analog device connected to the force plate. If the ID is 0, there
+is no analog device associated with this force plate.</p>
+</li>
+<li><p><strong>Frequency</strong><br>Measurement frequence of the analog device connected to the force plate.</p>
+</li>
+<li><p><strong>Type</strong><br>Force plate type. Supported force plates:
+AMTI, AMTI 8 Channels, Bertec, Kistler and QMH.</p>
+</li>
+<li><p><strong>Name</strong><br>Force plate name.</p>
+</li>
+<li><p><strong>Length</strong><br>Force plate length.</p>
+</li>
+<li><p><strong>Width</strong><br>Force plate width.</p>
+</li>
+<li><p><strong>Location</strong><br>Block containing four blocks with the corners of the force plate. Corner1,
+Corner2, Corner3 and Corner4. Each corner has an X, Y and Z coordinate value.</p>
+</li>
+<li><p><strong>Origin</strong><br>Block containing X, Y and Z coordinates for the force plate origin.</p>
+</li>
+<li><p><strong>Channels</strong><br>Block containing blocks called Channel. One for each analog channel connected
+to the force plate. Each Channel contains Channel_No and ConversionFactor.</p>
+</li>
+<li><p><strong>Calibration_Matrix</strong><br>Block containing a 6x6 calibration matrix for the force plate.</p>
+</li>
+</ul>
+<p>Example</p>
+<pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.12&gt;    
+    &lt;Force&gt;
+        &lt;Unit_Length&gt;mm&lt;/Unit_Length&gt;
+        &lt;Unit_Force &gt;N&lt;/Unit_Force&gt;
+        &lt;Plate&gt;
+            &lt;Plate_ID&gt;1&lt;/Plate_ID&gt;
+            &lt;Analog_Device_ID&gt;1&lt;/Analog_Device_ID&gt;
+            &lt;Frequency&gt;1000&lt;/Frequency&gt;
+            &lt;Type&gt;AMTI&lt;/Type&gt;
+        &lt;Name&gt;First force plate&lt;/Name&gt;
+            &lt;Length&gt;600.0&lt;/Length&gt;
+            &lt;Width&gt;400.0&lt;/Width&gt;
+            &lt;Location&gt;
+                &lt;Corner1&gt;
+                    &lt;X&gt;1000.00&lt;/X&gt;
+                    &lt;Y&gt;0.00&lt;/Y&gt;
+                    &lt;Z&gt;0.00&lt;/Z&gt;
+                &lt;Corner1&gt;
+                &lt;Corner2&gt;
+                    &lt;X&gt;1600.00&lt;/X&gt;
+                    &lt;Y&gt;0.00&lt;/Y&gt;
+                    &lt;Z&gt;0.00&lt;/Z&gt;
+                &lt;Corner2&gt;
+                &lt;Corner3&gt;
+                    &lt;X&gt;1600.00&lt;/X&gt;
+                    &lt;Y&gt;400.00&lt;/Y&gt;
+                    &lt;Z&gt;0.00&lt;/Z&gt;
+                &lt;Corner3&gt;
+                &lt;Corner4&gt;
+                    &lt;X&gt;1000.00&lt;/X&gt;
+                    &lt;Y&gt;400.00&lt;/Y&gt;
+                    &lt;Z&gt;0.00&lt;/Z&gt;
+                &lt;Corner4&gt;
+            &lt;/Location&gt;
+            &lt;Origin&gt;
+                &lt;X&gt;-4.00&lt;/X&gt;
+                &lt;Y&gt;5.00&lt;/Y&gt;
+                &lt;Z&gt;-40.00&lt;/Z&gt;
+            &lt;/Origin&gt;
+            &lt;Channels&gt;
+                &lt;Channel&gt;
+                    &lt;Channel_No&gt;1&lt;/Channel_No&gt;
+                    &lt;ConversionFactor&gt;4623.454&lt;/ConversionFactor&gt;
+                &lt;/Channel&gt;
+                &lt;Channel&gt;
+                    &lt;Channel_No&gt;2&lt;/Channel_No&gt;
+                    &lt;ConversionFactor&gt;4623.454&lt;/ConversionFactor&gt;
+                &lt;/Channel&gt;
+                &lt;Channel&gt;
+                    &lt;Channel_No&gt;3&lt;/Channel_No&gt;
+                    &lt;ConversionFactor&gt;4623.454&lt;/ConversionFactor&gt;
+                &lt;/Channel&gt;
+                &lt;Channel&gt;
+                    &lt;Channel_No&gt;4&lt;/Channel_No&gt;
+                    &lt;ConversionFactor&gt;4623.454&lt;/ConversionFactor&gt;
+                &lt;/Channel&gt;
+                &lt;Channel&gt;
+                    &lt;Channel_No&gt;5&lt;/Channel_No&gt;
+                    &lt;ConversionFactor&gt;4623.454&lt;/ConversionFactor&gt;
+                &lt;/Channel&gt;
+                &lt;Channel&gt;
+                    &lt;Channel_No&gt;6&lt;/Channel_No&gt;
+                    &lt;ConversionFactor&gt;4623.454&lt;/ConversionFactor&gt;
+                &lt;/Channel&gt;
+                &lt;Channel&gt;
+                    &lt;Channel_No&gt;7&lt;/Channel_No&gt;
+                    &lt;ConversionFactor&gt;4623.454&lt;/ConversionFactor&gt;
+                &lt;/Channel&gt;
+                &lt;Channel&gt;
+                    &lt;Channel_No&gt;8&lt;/Channel_No&gt;
+                    &lt;ConversionFactor&gt;4623.454&lt;/ConversionFactor&gt;
+                &lt;/Channel&gt;
+            &lt;/Channels&gt;
+            &lt;Calibration_Matrix&gt;
+                &lt;Row1&gt;
+                    &lt;Col1&gt;1.00&lt;/Col1&gt;
+                    &lt;Col2&gt;0.00&lt;/Col2&gt;
+                    &lt;Col3&gt;0.00&lt;/Col3&gt;
+                    &lt;Col4&gt;0.00&lt;/Col4&gt;
+                    &lt;Col5&gt;0.00&lt;/Col5&gt;
+                    &lt;Col6&gt;0.00&lt;/Col6&gt;
+                &lt;/Row1&gt;
+                &lt;Row2&gt;
+                    &lt;Col1&gt;0.00&lt;/Col1&gt;
+                    &lt;Col2&gt;1.00&lt;/Col2&gt;
+                    &lt;Col3&gt;0.00&lt;/Col3&gt;
+                    &lt;Col4&gt;0.00&lt;/Col4&gt;
+                    &lt;Col5&gt;0.00&lt;/Col5&gt;
+                    &lt;Col6&gt;0.00&lt;/Col6&gt;
+                &lt;/Row2&gt;
+                &lt;Row3&gt;
+                    &lt;Col1&gt;0.00&lt;/Col1&gt;
+                    &lt;Col2&gt;0.00&lt;/Col2&gt;
+                    &lt;Col3&gt;1.00&lt;/Col3&gt;
+                    &lt;Col4&gt;0.00&lt;/Col4&gt;
+                    &lt;Col5&gt;0.00&lt;/Col5&gt;
+                    &lt;Col6&gt;0.00&lt;/Col6&gt;
+                &lt;/Row3&gt;
+                &lt;Row4&gt;
+                    &lt;Col1&gt;0.00&lt;/Col1&gt;
+                    &lt;Col2&gt;0.00&lt;/Col2&gt;
+                    &lt;Col3&gt;0.00&lt;/Col3&gt;
+                    &lt;Col4&gt;1.00&lt;/Col4&gt;
+                    &lt;Col5&gt;0.00&lt;/Col5&gt;
+                    &lt;Col6&gt;0.00&lt;/Col6&gt;
+                &lt;/Row4&gt;
+                &lt;Row5&gt;
+                    &lt;Col1&gt;0.00&lt;/Col1&gt;
+                    &lt;Col2&gt;0.00&lt;/Col2&gt;
+                    &lt;Col3&gt;0.00&lt;/Col3&gt;
+                    &lt;Col4&gt;0.00&lt;/Col4&gt;
+                    &lt;Col5&gt;1.00&lt;/Col5&gt;
+                    &lt;Col6&gt;0.00&lt;/Col6&gt;
+                &lt;/Row5&gt;
+                &lt;Row6&gt;
+                    &lt;Col1&gt;0.00&lt;/Col1&gt;
+                    &lt;Col2&gt;0.00&lt;/Col2&gt;
+                    &lt;Col3&gt;0.00&lt;/Col3&gt;
+                    &lt;Col4&gt;0.00&lt;/Col4&gt;
+                    &lt;Col5&gt;0.00&lt;/Col5&gt;
+                    &lt;Col6&gt;1.00&lt;/Col6&gt;
+                &lt;/Row6&gt;                
+            &lt;/Calibration_Matrix&gt;
+        &lt;/Plate&gt;
+    &lt;/Force&gt;
+&lt;/QTM_Parameters_Ver_1.12&gt;
+</code></pre>
+<p>The parameters for force plates follow roughly the standard of the <a href="http://www.c3d.org">C3D file
+format</a>. </p>
+<h4 id="image-xml-parameters">Image XML parameters</h4><p>In response to the command GetParameters Image the QTM RT server will reply
+with XML data packet, containing a block called Image. See below for the format
+of this block.</p>
+<ul>
+<li><p><strong>Camera</strong><br>The Image block contains one or several Camera blocks. </p>
+</li>
+<li><p><strong>ID</strong><br>Camera ID for the camera to which the settings apply.</p>
+</li>
+<li><p><strong>Enabled</strong><br>Turn on or of Image streaming from the selected camera.</p>
+</li>
+<li><p><strong>Format</strong><br>Picture format of the image stream. Available formats are: <code>RAWGrayscale</code>,
+<code>RAWBGR</code>, <code>JPG</code> and <code>PNG</code>.</p>
+</li>
+<li><p><strong>Width</strong><br>Width of the streaming image. This does not take into account the cropping.
+The width is the dimensions had the image not been cropped at all. Note that
+this does not have to be the same as the requested width, due to scaling in
+QTM. 32-bit integer.</p>
+</li>
+<li><p><strong>Height</strong><br>Height of the streaming image. This does not take into account the cropping.
+The height is the dimensions had the image not been cropped at all. Note that
+this does not have to be the same as the requested width, due to scaling in
+QTM.</p>
+</li>
+<li><p><strong>Left_Crop</strong><br>Position of the requested image left edge relative the original image. 32-bit
+float.  </p>
+<p>0.0 = Original image left edge <strong>(Default)</strong>.<br>1.0 = Original image right edge.</p>
+</li>
+<li><p><strong>Top_Crop</strong><br>Position of the requested image top edge relative the original image. 32-bit
+float.  </p>
+<p>0.0 = Original image top edge <strong>(Default)</strong>.<br>1.0 = Original image bottom edge.</p>
+</li>
+<li><p><strong>Right_Crop</strong><br>Position of the requested image right edge relative the original image.
+32-bit float.  </p>
+<p>0.0 = Original image left edge.<br>1.0 = Original image right edge <strong>(Default)</strong>.  </p>
+</li>
+<li><p><strong>Bottom_Crop</strong><br>Position of the requested image bottom edge relative the original image. 32-bit float.</p>
+<p>0.0 = Original image top edge.<br>1.0 = Original image bottom edge <strong>(Default)</strong>.</p>
+</li>
+</ul>
+<p>Example</p>
+<pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.12&gt;
+    &lt;Image&gt;
+        &lt;Camera&gt;
+            &lt;ID&gt;1&lt;/ID&gt;
+            &lt;Enabled&gt;False&lt;/Enabled&gt;
+            &lt;Format&gt;JPG&lt;/Format&gt;
+            &lt;Width&gt;640&lt;/Width&gt;
+            &lt;Height&gt;400&lt;/Height&gt;
+            &lt;Left_Crop&gt;0.0&lt;/Left_Crop &gt;
+            &lt;Top_Crop&gt;0.0&lt;/Top_Crop&gt;
+            &lt;Right_Crop&gt;1.0&lt;/Right_Crop&gt;
+            &lt;Bottom_Crop&gt;1.0&lt;/Bottom_Crop&gt;
+        &lt;/Camera&gt;
+    &lt;/Image&gt;
+&lt;/QTM_Parameters_Ver_1.12&gt;
+</code></pre>
+<h3 id="data-packet">Data packet</h3><p>Each data frame is made up of one or more components, as specified in the
+commands GetCurrentFrame or StreamFrames. The data frame contains a Count field
+that specifies the number of components in the frame. Every component starts
+with a component header – identical (in layout) to the packet header. </p>
+<p><strong>Data packet header</strong></p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Value/Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Size</td>
+<td>32-bit integer</td>
+<td>8 bytes packet header + 12 bytes data frame header + the size of all the components and their headers.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Type</td>
+<td>32-bit integer</td>
+<td>Value = 3.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Timestamp</td>
+<td>64-bit integer</td>
+<td>Number of microseconds from start. The timestamp value is not valid for the Analog and Force data frame components, they have their own timestamps in their component data.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Frame Number</td>
+<td>32-bit integer</td>
+<td>The number of this frame. The frame number is not valid for the Analog and Force data frame components. They have their own frame numbers within the component.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Component Count</td>
+<td>32-bit integer</td>
+<td>The number of data components in the data packet.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Component data</strong> (Repeated Component Count times)</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Value/Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Component Size</td>
+<td>32-bit integer</td>
+<td>Size of Component Data + 8 bytes component header.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Component Type</td>
+<td>32-bit integer</td>
+<td>The type of the component. Defined in the following section.</td>
+</tr>
+<tr>
+<td>Size - 8</td>
+<td>Component Data</td>
+<td>Mixed</td>
+<td>Component-specific data. Defined in <a href="#data-component-types">Data component types</a> and <a href="#2d-and-2d-linearized-component">2D and 2D linearized component</a> sections.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="data-component-types">Data component types</h4><p>The <code>Component Type</code> field of the data component header is a number that should
+be interpreted according to the table below. These are the data frame component
+types that are defined in the protocol so far.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>3D</td>
+<td>3D marker data</td>
+</tr>
+<tr>
+<td>2</td>
+<td>3D No Labels</td>
+<td>Unidentified 3D marker data</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Analog</td>
+<td>Analog data from available analog devices</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Force</td>
+<td>Force data from available force plates.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>6D</td>
+<td>6D data - position and rotation matrix</td>
+</tr>
+<tr>
+<td>6</td>
+<td>6D Euler</td>
+<td>6D data - position and Euler angles</td>
+</tr>
+<tr>
+<td>7</td>
+<td>2D</td>
+<td>2D marker data</td>
+</tr>
+<tr>
+<td>8</td>
+<td>2D Linearized</td>
+<td>Linearized 2D marker data</td>
+</tr>
+<tr>
+<td>9</td>
+<td>3D Residuals</td>
+<td>3D marker data with residuals</td>
+</tr>
+<tr>
+<td>10</td>
+<td>3D No Labels Residuals</td>
+<td>Unidentified 3D marker data with residuals</td>
+</tr>
+<tr>
+<td>11</td>
+<td>6D Residuals</td>
+<td>6D data - position and rotation matrix with residuals</td>
+</tr>
+<tr>
+<td>12</td>
+<td>6D Euler Residuals</td>
+<td>6D data - position and Euler angles with residuals</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Analog Single</td>
+<td>Analog data from available analog devices. Only one sample per channel and camera frame. The latest sample is used if more than one sample is available.</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Image</td>
+<td>Image frame from a specific camera. Image size and format is set with the XML settings, see <a href="#image-settings">Image settings</a>.</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Force Single</td>
+<td>Force data from available force plates. Only one sample per plate and camera frame. The latest sample is used if more than one sample is available.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2d-and-2d-linearized-component">2D and 2D linearized component</h4><p>The 2D and 2D linearized data frame format are the same. The only difference is
+that the coordinates are linearized in 2D linearized.</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Component Size</td>
+<td>32-bit integer</td>
+<td>The size of the component including the header (Component Size, Component Type and Camera Count).</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Component Type</td>
+<td>32-bit integer</td>
+<td>Value 7 or 8. See <a href="#data-component-types">Data component types</a>.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Camera Count</td>
+<td>32-bit integer</td>
+<td>Number of cameras.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2D Drop Rate</td>
+<td>16-bit integer</td>
+<td>Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2D Out Of Sync Rate</td>
+<td>16-bit integer</td>
+<td>Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.</td>
+</tr>
+</tbody>
+</table>
+<p>Repeated Camera Count times:</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Marker Count</td>
+<td>32-bit integer</td>
+<td>The number of markers for this camera in this frame.</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Status Flags</td>
+<td>8-bit integer</td>
+<td>Bit 1: Too much light enters the camera. Please increase the threshold level or <br>lower the exposure time. If measuring at high frequencies, try to reduce the image size.<br><br>Bit 2-8: Not used.</td>
+</tr>
+<tr>
+<td>12 * Marker Count</td>
+<td>2D data</td>
+<td>Mixed</td>
+<td>2D marker data from the camera, described below:</td>
+</tr>
+</tbody>
+</table>
+<p>2D Data, repeated Marker Count times:</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>X</td>
+<td>32-bit integer</td>
+<td>X coordinate of the marker.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Y</td>
+<td>32-bit integer</td>
+<td>Y coordinate of the marker.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Diameter X</td>
+<td>16-bit integer</td>
+<td>Marker X size.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Diameter Y</td>
+<td>16-bit integer</td>
+<td>Marker Y size.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3d-component">3D component</h4><p>The markers of the 3D data always follow the labels of the 3D parameters. The
+same number of markers are sent each frame, and in the same order as the labels
+of the 3D parameters. If a marker is missing from the frame, its X, Y and Z
+coordinates will have all their 32 bits set - this signifies a negative quiet
+Not-A-Number according to the IEEE 754 floating point standard. </p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Component Size</td>
+<td>32-bit integer</td>
+<td>The size of the component including the header (Component Size, Component Type and Marker Count).</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Component Type</td>
+<td>32-bit integer</td>
+<td>Value = 1. See <a href="#data-component-types">Data component types</a>.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Marker Count</td>
+<td>32-bit integer</td>
+<td>The number of markers in this frame.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2D Drop Rate</td>
+<td>16-bit integer</td>
+<td>Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2D Out Of Sync Rate</td>
+<td>16-bit integer</td>
+<td>Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.</td>
+</tr>
+</tbody>
+</table>
+<p>Repeated Marker Count times:</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>X</td>
+<td>32-bit float</td>
+<td>X coordinate of the marker.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Y</td>
+<td>32-bit float</td>
+<td>Y coordinate of the marker.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Z</td>
+<td>32-bit float</td>
+<td>Z coordinate of the marker.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3d-with-residuals-component">3D with residuals component</h4><p>The markers of the 3D data always follow the labels of the 3D parameters. The
+same number of markers are sent each frame, and in the same order as the labels
+of the 3D parameters.  </p>
+<p>If a marker is missing from the frame, its X, Y and Z
+coordinates will have all their 64 bits set - this signifies a negative quiet
+Not-A-Number according to the IEEE 754 floating point standard. This frame
+component is the same as the 3D data frame, except for the residual for each 3D
+point.</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Component Size</td>
+<td>32-bit integer</td>
+<td>The size of the component including the header (Component Size, Component Type and Marker Count).</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Component Type</td>
+<td>32-bit integer</td>
+<td>Value = 9. See <a href="#data-component-types">Data component types</a>.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Marker Count</td>
+<td>32-bit integer</td>
+<td>The number of markers in this frame.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2D Drop Rate</td>
+<td>16-bit integer</td>
+<td>Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2D Out Of Sync Rate</td>
+<td>16-bit integer</td>
+<td>Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.</td>
+</tr>
+</tbody>
+</table>
+<p>Repeated Marker Count times:</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>X</td>
+<td>32-bit float</td>
+<td>X coordinate of the marker.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Y</td>
+<td>32-bit float</td>
+<td>Y coordinate of the marker.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Z</td>
+<td>32-bit float</td>
+<td>Z coordinate of the marker.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Residual</td>
+<td>32-bit float</td>
+<td>Residual for the 3D point.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3d-no-labels-component">3D no labels component</h4><table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Component Size</td>
+<td>32-bit integer</td>
+<td>The size of the component including the header (Component Size, Component Type and Marker Count).</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Component Type</td>
+<td>32-bit integer</td>
+<td>Value = 2. See <a href="#data-component-types">Data component types</a>.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Marker Count</td>
+<td>32-bit integer</td>
+<td>The number of markers in this frame.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2D Drop Rate</td>
+<td>16-bit integer</td>
+<td>Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2D Out Of Sync Rate</td>
+<td>16-bit integer</td>
+<td>Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.</td>
+</tr>
+</tbody>
+</table>
+<p>Repeated Marker Count times:</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>X</td>
+<td>32-bit float</td>
+<td>X coordinate of the marker.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Y</td>
+<td>32-bit float</td>
+<td>Y coordinate of the marker.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Z</td>
+<td>32-bit float</td>
+<td>Z coordinate of the marker.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>ID</td>
+<td>32-bit integer</td>
+<td>An unsigned integer ID that serves to identify markers between frames.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3d-no-labels-with-residuals-component">3D no labels with residuals component</h4><table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Component Size</td>
+<td>32-bit integer</td>
+<td>The size of the component including the header (Component Size, Component Type and Marker Count).</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Component Type</td>
+<td>32-bit integer</td>
+<td>Value = 10. See <a href="#data-component-types">Data component types</a>.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Marker Count</td>
+<td>32-bit integer</td>
+<td>The number of markers in this frame.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2D Drop Rate</td>
+<td>16-bit integer</td>
+<td>Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2D Out Of Sync Rate</td>
+<td>16-bit integer</td>
+<td>Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.</td>
+</tr>
+</tbody>
+</table>
+<p>Repeated Marker Count times:</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>X</td>
+<td>32-bit float</td>
+<td>X coordinate of the marker.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Y</td>
+<td>32-bit float</td>
+<td>Y coordinate of the marker.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Z</td>
+<td>32-bit float</td>
+<td>Z coordinate of the marker.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>ID</td>
+<td>32-bit integer</td>
+<td>An unsigned integer ID that serves to identify markers between frames.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Residual</td>
+<td>32-bit float</td>
+<td>Residual for the 3D point.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="6dof-component">6DOF component</h4><table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Component Size</td>
+<td>32-bit integer</td>
+<td>The size of the component including the header (Component Size, Component Type and Body Count).</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Component Type</td>
+<td>32-bit integer</td>
+<td>Value = 5. See <a href="#data-component-types">Data component types</a>.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Body Count</td>
+<td>32-bit integer</td>
+<td>The number of 6DOF bodies in this frame.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2D Drop Rate</td>
+<td>16-bit integer</td>
+<td>Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2D Out Of Sync Rate</td>
+<td>16-bit integer</td>
+<td>Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.</td>
+</tr>
+</tbody>
+</table>
+<p>Repeated Body Count times:</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>X</td>
+<td>32-bit float</td>
+<td>X coordinate of the body.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Y</td>
+<td>32-bit float</td>
+<td>Y coordinate of the body.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Z</td>
+<td>32-bit float</td>
+<td>Z coordinate of the body.</td>
+</tr>
+<tr>
+<td>9 * 4</td>
+<td>Rotation</td>
+<td>32-bt float&#91;&#93;</td>
+<td>Rotation matrix of the body, 9 floats.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="6dof-with-residuals-component">6DOF with residuals component</h4><table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Component Size</td>
+<td>32-bit integer</td>
+<td>The size of the component including the header (Component Size, Component Type and Body Count).</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Component Type</td>
+<td>32-bit integer</td>
+<td>Value = 11. See <a href="#data-component-types">Data component types</a>.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Body Count</td>
+<td>32-bit integer</td>
+<td>The number of 6DOF bodies in this frame.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2D Drop Rate</td>
+<td>16-bit integer</td>
+<td>Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2D Out Of Sync Rate</td>
+<td>16-bit integer</td>
+<td>Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.</td>
+</tr>
+</tbody>
+</table>
+<p>Repeated Body Count times:</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>X</td>
+<td>32-bit float</td>
+<td>X coordinate of the body.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Y</td>
+<td>32-bit float</td>
+<td>Y coordinate of the body.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Z</td>
+<td>32-bit float</td>
+<td>Z coordinate of the body.</td>
+</tr>
+<tr>
+<td>9 * 4</td>
+<td>Rotation</td>
+<td>32-bit float&#91;&#93;</td>
+<td>Rotation matrix of the body, 9 floats.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Residual</td>
+<td>32-bit float</td>
+<td>Residual for the 6D body.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="6dof-euler-component">6DOF Euler component</h4><table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Component Size</td>
+<td>32-bit integer</td>
+<td>The size of the component including the header (Component Size, Component Type and Body Count).</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Component Type</td>
+<td>32-bit integer</td>
+<td>Value = 6. See <a href="#data-component-types">Data component types</a>.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Body Count</td>
+<td>32-bit integer</td>
+<td>The number of 6DOF bodies in this frame.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2D Drop Rate</td>
+<td>16-bit integer</td>
+<td>Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2D Out Of Sync Rate</td>
+<td>16-bit integer</td>
+<td>Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.</td>
+</tr>
+</tbody>
+</table>
+<p>Repeated Body Count times:</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>X</td>
+<td>32-bit float</td>
+<td>X coordinate of the body.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Y</td>
+<td>32-bit float</td>
+<td>Y coordinate of the body.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Z</td>
+<td>32-bit float</td>
+<td>Z coordinate of the body.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Angle 1</td>
+<td>32-bit float</td>
+<td>First Euler angle, in degrees, as defined on the Euler tab in QTM&#39;s workspace options.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Angle 2</td>
+<td>32-bit float</td>
+<td>Second Euler angle.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Angle 3</td>
+<td>32-bit float</td>
+<td>Third Euler angle.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="6dof-euler-with-residuals-component">6DOF Euler with residuals component</h4><table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Component Size</td>
+<td>32-bit integer</td>
+<td>The size of the component including the header (Component Size, Component Type and Body Count).</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Component Type</td>
+<td>32-bit integer</td>
+<td>Value = 12. See <a href="#data-component-types">Data component types</a>.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Body Count</td>
+<td>32-bit integer</td>
+<td>The number of 6DOF bodies in this frame.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2D Drop Rate</td>
+<td>16-bit integer</td>
+<td>Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2D Out Of Sync Rate</td>
+<td>16-bit integer</td>
+<td>Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.</td>
+</tr>
+</tbody>
+</table>
+<p>Repeated Body Count times:</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>X</td>
+<td>32-bit float</td>
+<td>X coordinate of the body.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Y</td>
+<td>32-bit float</td>
+<td>Y coordinate of the body.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Z</td>
+<td>32-bit float</td>
+<td>Z coordinate of the body.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Angle 1</td>
+<td>32-bit float</td>
+<td>First Euler angle, in degrees, as defined on the Euler tab in QTM&#39;s workspace options.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Angle 2</td>
+<td>32-bit float</td>
+<td>Second Euler angle.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Angle 3</td>
+<td>32-bit float</td>
+<td>Third Euler angle.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Residual</td>
+<td>32-bit float</td>
+<td>Residual for the 6D body.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="analog-component">Analog component</h4><table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Component Size</td>
+<td>32-bit integer</td>
+<td>The size of the component including the header (Component Size, Component Type and Analog Device Count).</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Component Type</td>
+<td>32-bit integer</td>
+<td>Value = 3. See <a href="#data-component-types">Data component types</a>.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Analog Device Count</td>
+<td>32-bit integer</td>
+<td>Number of analog devices in this component.</td>
+</tr>
+</tbody>
+</table>
+<p>Repeated Analog Device Count times:</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Analog Device ID</td>
+<td>32-bit integer</td>
+<td>Id of this analog device. Id starts at 1.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Channel Count</td>
+<td>32-bit integer</td>
+<td>The number of channels of this analog device in this frame.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Sample Count</td>
+<td>32-bit integer</td>
+<td>The number of analog samples per channel in this frame.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Sample Number</td>
+<td>32-bit integer</td>
+<td>Order number of first sample in this frame. Sample Number is increased with the analog frequency. There are Channel Count values per sample number.<br><br>Sample Number is omitted if Sample Count is 0.</td>
+</tr>
+<tr>
+<td>4 * Channel Count * Sample Count</td>
+<td>Analog Data</td>
+<td>32-bit float&#91;&#93;</td>
+<td>Voltage values for all samples of all channels. The samples are ordered like this:<br><br>Channel 1, Sample <em>Sample Number</em><br>Channel 1, Sample <em>Sample Number</em> + 1<br>Channel 1, Sample <em>Sample Number</em> + 2<br>&hellip;<br>Channel 1, Sample <em>Sample Number</em> + Sample Count - 1<br>Channel 2, Sample <em>Sample Number</em> Channel 2, Sample <em>Sample Number + 1</em><br>&hellip;<br><br>Analog Data is omitted if Sample Count is 0.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="analog-single-component">Analog single component</h4><table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Component Size</td>
+<td>32-bit integer</td>
+<td>The size of the component including the header (Component Size, Component Type and Analog Device Count).</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Component Type</td>
+<td>32-bit integer</td>
+<td>Value = 13. See <a href="#data-component-types">Data component types</a>.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Analog Device Count</td>
+<td>32-bit integer</td>
+<td>Number of analog devices in this component.</td>
+</tr>
+</tbody>
+</table>
+<p>Repeated Analog Device Count times:</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Analog Device ID</td>
+<td>32-bit integer</td>
+<td>Id of this analog device. Id starts at 1.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Channel Count</td>
+<td>32-bit integer</td>
+<td>The number of channels of this analog device in this frame.</td>
+</tr>
+<tr>
+<td>4 * Channel Count</td>
+<td>Analog Data</td>
+<td>32-bit float&#91;&#93;</td>
+<td>Voltage values starting with channel 1.</td>
+</tr>
+</tbody>
+</table>
+<p>If no analog data is available, Analog Data will contain IEEE NaN (Not a number) float values.</p>
+<h4 id="force-component">Force component</h4><table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Component Size</td>
+<td>32-bit integer</td>
+<td>The size of the component including the header (Component Size, Component Type and Plate Count).</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Component Type</td>
+<td>32-bit integer</td>
+<td>Value = 4. See <a href="#data-component-types">Data component types</a>.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Plate Count</td>
+<td>32-bit integer</td>
+<td>The number of force plates in this frame.</td>
+</tr>
+</tbody>
+</table>
+<p>Repeated Plate Count times:</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Force Plate ID</td>
+<td>32-bit integer</td>
+<td>Id of the analog device in this frame. Id starts at 1.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Force Count</td>
+<td>32-bit integer</td>
+<td>The number of forces in this frame.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Force Number</td>
+<td>32-bit integer</td>
+<td>Order number of first force in this frame. Force Number is increased with the force frequency.</td>
+</tr>
+<tr>
+<td>36 * Force Count</td>
+<td>Force Data</td>
+<td>32-bit float&#91;&#93;</td>
+<td>Each force sample consists of 9 float values: <br><br>X coordinate of the force <br>Y coordinate of the force <br>Z coordinate of the force <br>X coordinate of the moment <br>Y coordinate of the moment <br>Z coordinate of the moment <br>X coordinate of the force application point <br>Y coordinate of the force application point <br>Z coordinate of the force application point</td>
+</tr>
+</tbody>
+</table>
+<h4 id="force-single-component">Force single component</h4><table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Component Size</td>
+<td>32-bit integer</td>
+<td>The size of the component including the header (Component Size, Component Type and Plate Count).</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Component Type</td>
+<td>32-bit integer</td>
+<td>Value = 15. See <a href="#data-component-types">Data component types</a>.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Plate Count</td>
+<td>32-bit integer</td>
+<td>The number of force plates in this frame.</td>
+</tr>
+</tbody>
+</table>
+<p>Repeated Plate Count times:</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Force Plate ID</td>
+<td>32-bit integer</td>
+<td>Id of the analog device in this frame. Id starts at 1.</td>
+</tr>
+<tr>
+<td>36 * Force Count</td>
+<td>Force Data</td>
+<td>32-bit float&#91;&#93;</td>
+<td>Each force sample consists of 9 float values: <br><br>X coordinate of the force <br>Y coordinate of the force <br>Z coordinate of the force <br>X coordinate of the moment <br>Y coordinate of the moment <br>Z coordinate of the moment <br>X coordinate of the force application point <br>Y coordinate of the force application point <br>Z coordinate of the force application point</td>
+</tr>
+</tbody>
+</table>
+<p>If no force data is available, Force Data will contain IEEE NaN (Not a number) float values.</p>
+<h4 id="image-component">Image component</h4><table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Component Size</td>
+<td>32-bit integer</td>
+<td>The size of the component including the header (Component Size, Component Type and Camera Count).</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Component Type</td>
+<td>32-bit integer</td>
+<td>Value = 14. See <a href="#data-component-types">Data component types</a>.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Camera Count</td>
+<td>32-bit integer</td>
+<td>Number of cameras.</td>
+</tr>
+</tbody>
+</table>
+<p>Repeated Camera Count times:</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Camera ID</td>
+<td>32-bit integer</td>
+<td>Camera ID of the camera which the image comes from. Id starts at 1.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Image Format</td>
+<td>32-bit integer</td>
+<td>Image format of the requested image. <br>0 = Raw Grayscale <br>1 = Raw BGR<br>2 = JPG <br>3 = PNG</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Width</td>
+<td>32-bit integer</td>
+<td>Width of the requested image.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Height</td>
+<td>32-bit integer</td>
+<td>Height of the requested image.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Left Crop</td>
+<td>32-bit float</td>
+<td>Position of the requested image left edge relative the original image. <br>0: Original image left edge.  <br>1: Original image right edge.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Top Crop</td>
+<td>32-bit float</td>
+<td>Position of the requested image top edge relative the original image.  <br>0: Original image top edge.  <br>1: Original image bottom edge.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Right Crop</td>
+<td>32-bit float</td>
+<td>Position of the requested image right edge relative the original image.  <br>0: Original image left edge.  <br>1: Original image right edge.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Bottom Crop</td>
+<td>32-bit float</td>
+<td>Position of the requested image bottom edge relative the original image.  <br>0: Original image top edge.  <br>1: Original image bottom edge.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Image Size</td>
+<td>32-bit integer</td>
+<td>Size of Image Data in number of bytes.</td>
+</tr>
+<tr>
+<td>Image Size</td>
+<td>Image Data</td>
+<td>Binary data</td>
+<td>Image data formatted according to the Image Format parameter.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="no-more-data-packet">No More Data packet</h3><p>This type of packet is sent when QTM is out of data to send because a measurement has stopped or has not even started.</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Size</td>
+<td>32-bit integer</td>
+<td>8 (only the header is sent).</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Type</td>
+<td>32-bit integer</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<h3 id="c3d-packet">C3D packet</h3><p>This type of packet is sent as a response to the GetCaptureC3D command. It
+contains a C3D file, with the latest captured QTM measurement.</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Size</td>
+<td>32-bit integer</td>
+<td>8 + n (header bytes + C3D file size)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Type</td>
+<td>32-bit integer</td>
+<td>5</td>
+</tr>
+<tr>
+<td>n</td>
+<td>C3D file</td>
+<td>Binary data</td>
+<td>C3D file</td>
+</tr>
+</tbody>
+</table>
+<h3 id="qtm-packet">QTM packet</h3><p>This type of packet is sent as a response to the GetCaptureQTM command. It
+contains a C3D file, with the latest captured QTM measurement.</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Size</td>
+<td>32-bit integer</td>
+<td>8 + n (header bytes + C3D file size)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Type</td>
+<td>32-bit integer</td>
+<td>8</td>
+</tr>
+<tr>
+<td>n</td>
+<td>QTM file</td>
+<td>Binary data</td>
+<td>QTM file</td>
+</tr>
+</tbody>
+</table>
+<h3 id="event-packet">Event packet</h3><p>This type of packet is sent when QTM has an event to signal to the RT clients.</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Size</td>
+<td>32-bit integer</td>
+<td>9 (header bytes + event number)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Type</td>
+<td>32-bit integer</td>
+<td>6</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Event</td>
+<td>8-bit integer</td>
+<td>Event number: 1-13, see <a href="#events">Events</a>.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="events">Events</h4><p>The RT server sends an event data packet to all its clients when the RT server
+changes state.</p>
+<table>
+<thead>
+<tr>
+<th>Event ID</th>
+<th>Name</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Connected</td>
+<td>Sent when QTM has connected to the camera system.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Connection Closed</td>
+<td>Sent when QTM has disconnected from the camera system.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Capture Started</td>
+<td>Sent when QTM has started a capture.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Capture Stopped</td>
+<td>Sent when QTM has stopped a capture.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Not used</td>
+<td>Previously Fetching Finished, deprecated.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Calibration Started</td>
+<td>Sent when QTM has started a calibration.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Calibration Stopped</td>
+<td>Sent when QTM has stopped a calibration.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>RT From File Started</td>
+<td>Sent when QTM has started real time transmissions from a file.</td>
+</tr>
+<tr>
+<td>9</td>
+<td>RT From File Stopped</td>
+<td>Sent when QTM has stopped real time transmissions from a file.</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Waiting For Trigger</td>
+<td>Sent when QTM is waiting for the user to press the trigger button.</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Camera Settings Changed</td>
+<td>Sent when the settings have changed for one or more cameras. Not included in the GetState response.</td>
+</tr>
+<tr>
+<td>12</td>
+<td>QTM Shutting Down</td>
+<td>Sent when QTM is shutting down. Not included in the GetState response.</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Capture Saved</td>
+<td>Sent when QTM has saved the current measurement. Not included in the GetState response.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="discover-packet">Discover packet</h3><p>When this type of packet is broadcasted to QTM&#39;s auto discovery port, see <a href="#ip-port-numbers">IP port numbers</a>,
+QTM responds with a discover response packet, see <a href="#discover-response-packet">Discover response packet</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Size</td>
+<td>32-bit integer</td>
+<td>10 (little endian)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Type</td>
+<td>32-bit integer</td>
+<td>7 (little endian)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Response Port</td>
+<td>16-bit integer</td>
+<td>Response port number: 0 - 65535. Network byte order (big endian).</td>
+</tr>
+</tbody>
+</table>
+<p>Size and type is always sent as little endian 32 bit integers.</p>
+<p>The Response Port is the UDP port number to which QTM sends a discover response
+message. The response port is big endian.</p>
+<h3 id="discover-response-packet">Discover response packet</h3><p>The discover response packet is a special command message of type 1. The
+message contains a null terminated string, followed by the server&#39;s base port
+number. </p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Size</td>
+<td>32-bit integer</td>
+<td>10 bytes. Little endian</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Type</td>
+<td>32-bit integer</td>
+<td>1. Little endian</td>
+</tr>
+<tr>
+<td>n+1</td>
+<td>Server info string</td>
+<td>Char&#91;&#93;</td>
+<td>Null terminated string containing, server host name, QTM version and number of connected cameras. n = string size.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>RT server base port.</td>
+<td>16-bit integer</td>
+<td>Base port number: 0 - 65535. Network byte order (Big endian).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note</strong>: Size and Type is always sent as little endian 32 bit integers.</p>
+<p>Example of a server info string: <code>MyComputer, QTM 2.5 (build 568), 5 cameras</code>.</p>
+<p><strong>Note</strong>: The base port number is only used for version 1.0 of the RT server,
+see <a href="#ip-port-numbers">IP port numbers</a> to get the desired port number.</p>
+<h2 id="open-sound-control-osc-">Open Sound Control (OSC)</h2><p>The OSC version of the QTM RT server uses the <a href="http://opensoundcontrol.org">Open Sound Control 1.0 specification</a>.</p>
+<h3 id="connecting-osc-">Connecting (OSC)</h3><p>When using the OSC protocol, which uses UDP, the client must first establish a
+connection with the server. This is because UDP is not connection-based like
+TCP. This is done with the <code>Connect</code> command, see <a href="#connect-osc-">Connect</a>. A connection is closed
+with the disconnect command, see <a href="#disconnect-osc-">Disconnect</a>.</p>
+<p>The first thing that happens when you have connected to the QTM RT server with
+OSC is that the server sends a welcome message string: <code>QTM RT Interface
+connected</code>.</p>
+<p>When using OSC it is not possible to set the protocol version, the latest
+version will always be used.</p>
+<h4 id="port-number-osc-">Port number (OSC)</h4><p>There is only one server port available for OSC, base port + 4. OSC is sent via
+UDP packets. The clients listens to a UDP port for incoming OSC packets from
+the server. The client UDP server port is set to the RT server with the Connect
+command. See <a href="#connecting">Connecting</a>.</p>
+<h3 id="commands-osc-">Commands (OSC)</h3><p>In the description of the commands, number parameters are designated by an n,
+optional parameters are designated by enclosing brackets <code>[ ]</code> and choices between
+possible values are designated by a <code>|</code>. Parentheses are used to group
+parameters together. None of these characters (brackets, <code>|</code> or parentheses)
+should be included in the command sent to the server. </p>
+<p>Command strings and their parameters never contain spaces, so a space character
+(ASCII 32) is used as separator between command names and parameters.</p>
+<p>Command strings and parameter strings are case insensitive.</p>
+<h4 id="connect-osc-">Connect (OSC)</h4><p>OSC Format:</p>
+<blockquote>
+<p><strong><code>Connect</code></strong> <code>Port</code></p>
+</blockquote>
+<p>Connects the client to the QTM RT server via the OSC protocol over UDP. The
+Port argument is the UDP port on which the client listens for server responses. </p>
+<h4 id="disconnect-osc-">Disconnect (OSC)</h4><p>Disconnects the client from the QTM RT server.</p>
+<h4 id="version-osc-">Version (OSC)</h4><p>The server responds with <code>Version is n.n</code>, where <code>n.n</code> is the version of the RT
+protocol currently used.</p>
+<p>It is not possible to set the version when connected via the OSC protocol. You
+can only retrieve current version.</p>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    Version
+Response:   Version is 1.12
+</code></pre>
+<h4 id="qtmversion-osc-">QTMVersion (OSC)</h4><p>Returns the QTM version on which the RT server is running.</p>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    QTMVersion
+Response:   QTM Version is 2.3 (build 464)
+</code></pre>
+<h4 id="getstate-osc-">GetState (OSC)</h4><p>This command makes the RT server send current QTM state as an event data
+packet. The event packet will only be sent to the client that sent the GetState
+command. If the client is connected via Telnet, then the response will be sent
+as an ASCII string. GetState will not show the Camera Settings Changed, QTM
+Shutting Down and Capture Saved events.</p>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    GetState
+Response:   Event data packet with last QTM event.
+Response    (Telnet): Connected                      or
+            Connection Closed                        or
+            Capture Started                          or
+            Capture Stopped                          or
+            Capture Fetching Finished                or
+            Calibration Started                      or
+            Calibration Stopped                      or
+            RT From File Started                     or
+            RT From File Stopped                     or
+            Waiting For Trigger
+</code></pre>
+<h4 id="checklicense-osc-">CheckLicense (OSC)</h4><p>CheckLicense LicenseCode</p>
+<p>LicenseCode: A string containing the license code string that corresponds to
+the license name.</p>
+<p>QTM can take care of license checking for an RT client. To produce valid
+license keys, the LicenseCode code string must be sent to Qualisys together
+with the QTM user name for the user that will be granted a license. Qualisys
+will generate a key that the user can enter into QTM. QTM then uses the
+LicenseCode code string sent by the RT client with this command to verify that
+the license key for the RT client is valid. </p>
+<p>The QTM RT server will respond with License pass or License fail, depending on
+whether a valid license key has been entered into QTM. </p>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    CheckLicense dh4xx56krnj8KR3o8yk1nfr
+Response:   License pass                         or
+            License fail
+</code></pre>
+<h4 id="getparameters-osc-">GetParameters (OSC)</h4><blockquote>
+<p><strong><code>GetParameters</code></strong> <code>All | ([General] [3D] [Analog] [Force])</code></p>
+</blockquote>
+<p>This command retrieves the settings for the requested component(s) of QTM in
+XML format. The XML parameters are described <a href="#xml-paramters">here</a>.</p>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    GetParameters 3D Force
+Response:   XML string containing requested parameters
+</code></pre>
+<h4 id="getcurrentframe-osc-">GetCurrentFrame (OSC)</h4><blockquote>
+<p><strong><code>GetCurrentFrame</code></strong> <code>All |
+  ([2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes]
+  [Analog] [AnalogSingle] [Force] [ForceSingle] [6D]
+  [6DRes] [6DEuler] [6DEulerRes])</code></p>
+</blockquote>
+<p>This command returns the current frame of real-time data from the server. 
+Points worth noting are:</p>
+<ul>
+<li><p>The frame is composed of the parts specified in the parameters to the
+command. The exact layout of the data frame in different situations is
+described in <a href="#data-packet">Data packet</a>. </p>
+</li>
+<li><p>The composition of the data frame may vary between frames. This is due to the
+fact that some data (Analog and Force data) is not collected or buffered at
+the same rate as the camera data (2D, 3D, 6D).</p>
+<p>If you specify Analog or Force data to be streamed together with some form(s)
+of camera data, some data frames may include analog while others don&#39;t
+include it. This is because QTM sends the Analog and Force data as soon as it
+is available, and it is usually available in fairly large chunks and not as
+often as camera data is available</p>
+</li>
+<li><p>If there is no ongoing measurement (either it has not started or it has
+already finished), an <a href="#no-more-data-packet">empty data frame</a> is sent to the
+client.</p>
+</li>
+<li><p>If a measurement is ongoing but there is no new frame of data available, the
+server waits until the next frame of data is available before sending it to
+the client.</p>
+</li>
+</ul>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    GetCurrentFrame 3D Analog
+Response:   One data frame is sent to the client according to the 
+            data frame protocol described in section the Data packet section.
+</code></pre>
+<h4 id="streamframes-osc-">StreamFrames (OSC)</h4><blockquote>
+<p><strong><code>StreamFrame</code></strong> <code>Stop |
+  ((FrequencyDivisor:n | Frequency:n | AllFrames) All |    
+  ([2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes]
+  [Analog] [AnalogSingle] [Force] [ForceSingle] [6D]
+  [6DRes] [6DEuler] [6DEulerRes]))</code></p>
+</blockquote>
+<p>This command makes the QTM RT server start streaming data frames in real-time. </p>
+<p>Points worth noting are:</p>
+<ul>
+<li><p>Each frame is composed of the parts specified in the parameters to the
+command. The exact layout of the data frame in different situations is
+described in section <a href="#data-packet">Data packet</a>.</p>
+</li>
+<li><p>The composition of the data frame may vary between frames. This is due to the
+fact that some data (Analog and Force data) is not collected or buffered at
+the same rate as the camera data (2D, 3D, 6D). If you specify Analog or Force
+data to be streamed together with some form(s) of camera data, some data
+frames may include analog while others don’t include it. This is because QTM
+sends the Analog and Force data as soon as it is available, and it is usually
+available in fairly large chunks and not as often as camera data is available</p>
+</li>
+<li><p>If there is no ongoing measurement (either it has not started or it has
+already finished), an <a href="#no-more-data-packet">empty data frame</a> is sent to the
+client.</p>
+</li>
+<li><p>The actual rate at which the frames are sent depends on several factors – not
+just the frequency specified in the command parameters:</p>
+<ul>
+<li><p><strong>The measurement frequency</strong> used when acquiring the camera data (2D, 3D, 6D).
+The transmission rate cannot be greater than this frequency.</p>
+</li>
+<li><p><strong>The real-time processing frequency</strong> set in QTM. This may differ greatly from
+the measurement frequency. For example QTM may be measuring at 1000 Hz but
+trying to calculate real-time frames only at 50Hz. The transmission rate
+cannot be greater than this frequency either.</p>
+</li>
+<li><p><strong>The processing time</strong> needed for each frame of data in QTM. 
+This may also be a limiting factor – QTM may not have time to process and
+transmit frames at the rate specified as the real-time processing
+frequency.</p>
+</li>
+<li><p><strong>The frequency specified by the client in the command parameters</strong>.<br>The client has three ways of specifying the preferred data rate of the
+server. If the client specifies a higher rate than it can receive and
+handle in real-time, buffering will occur in the TCP/IP or UDP/IP stack at
+the client side and the client will experience lagging. </p>
+<ul>
+<li><strong>FrequencyDivisor:n</strong>
+With this setting, QTM transmits every n:th processed real-time frame to
+the client. Please note that this may not be the same as every n:th frame
+of the measurement (see real-time processing frequency above).<br>Example: QTM is measuring in 200 Hz and real-time tracking in 100 Hz. If
+a client specifies FrequencyDivisor:4 QTM will send data at a rate of
+25Hz. </li>
+<li><strong>Frequency:n</strong>
+With a specific frequency setting, the QTM RT server will transmit frames
+at a rate of approximately n Hz. 
+Example: QTM is measuring in 200 Hz and real-time tracking in 100 Hz. If
+a client specifies Frequency:60 QTM will send data at an approximate rate
+of 60Hz. This means that usually every other processed frame is
+transmitted, but once in a while two frames in a row are transmitted (to
+reach 60Hz instead of 50). </li>
+<li><strong>AllFrames</strong>
+When a client specifies AllFrames in the StreamFrames command, every
+real-time frame processed by QTM is transmitted to the client.</li>
+</ul>
+</li>
+<li><p>When the measurement is finished, or has not yet started, a special
+<a href="#no-more-data-packet">empty data frame</a> packet signaling that no data is
+available is sent to the client.</p>
+</li>
+<li><p>To stop the data stream before it has reached the end of the measurement or
+to prevent data from being sent if a new measurement is started after the
+first was finished: send the StreamFrames Stop command.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>Example:</p>
+<pre><code class="lang-coffeescript">Command:    StreamFrames Frequency:30 UDP:2234 3D Analog
+Response:   30 frames per second containing 3D data and Analog data 
+            are streamed over UDP/IP to the client computer’s port 
+            2234. The data frame protocol is described in the Data packet section.
+</code></pre>
+<h3 id="qtm-rt-packets-osc-">QTM RT Packets (OSC)</h3><h4 id="structure-osc-">Structure (OSC)</h4><p>All OSC packets sent to or from the server have the same general layout. They
+don&#39;t have a header with size and type like the standard packet, see <a href="#qtm-rt-packets">QTM RT Packets</a>.</p>
+<p>The content of the OSC packet differs slightly from the standard packet and
+uses the OSC data types for int32, int64, float32 and strings. All OSC packets
+sent to the RT server shall be sent in an OSC message with OSC address pattern
+<code>/qtm</code>. The address pattern of packets sent from the server depends on the
+packet type.  </p>
+<h4 id="packet-types-osc-">Packet types (OSC)</h4><p>The Type field of a QTM RT server packet header is a number that should be
+interpreted according to the table below. These are the data types that are
+defined in the protocol so far. Detailed descriptions of the data packets for
+each type can be found in the sections following this one.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>OSC address</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Error</td>
+<td>/qtm/error</td>
+<td>The last command generated an error. The error message is included in the packet.</td>
+</tr>
+<tr>
+<td>Command</td>
+<td>/qtm</td>
+<td>A command sent to the server.</td>
+</tr>
+<tr>
+<td>Command response</td>
+<td>/qtm/cmd_res</td>
+<td>A response from the server to a command indicating that the command was successful.</td>
+</tr>
+<tr>
+<td>XML</td>
+<td>/qtm/xml</td>
+<td>Data sent by the server in the form of XML, or data sent to the server in the form of XML.</td>
+</tr>
+<tr>
+<td>Data frame header</td>
+<td>/qtm/data</td>
+<td>This message contains the data header and is followed by one or several data frame component messages, containing the real-time data sent from the server. The contents of the frame may vary depending on the commands/settings sent to the server. The contents may also vary between frames due to different sampling frequencies and buffering properties of different data types.</td>
+</tr>
+<tr>
+<td>No More Data</td>
+<td>/qtm/no_data</td>
+<td>This packet type contains no data. It is a marker used to indicate that a measurement has finished or is not yet started.</td>
+</tr>
+<tr>
+<td>Event</td>
+<td>/qtm/event</td>
+<td>This packet type contains event data from QTM.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="error-packet-osc-">Error packet (OSC)</h4><p>Error packets are sent from the server only. Whenever you read a response from
+the server, it may be an error packet instead of the packet type you expect.</p>
+<p>OSC error packets are sent in an OSC message with address pattern <code>/qtm/error</code>
+and contains one OSC string.</p>
+<table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OSC-string</td>
+<td>Data</td>
+<td>Example: &quot;Command not supported.&quot;</td>
+</tr>
+</tbody>
+</table>
+<h4 id="command-packet-osc-">Command packet (OSC)</h4><p>OSC command packets sent to the RT server shall be sent in an OSC message with address pattern “/qtm”.</p>
+<table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OSC-string</td>
+<td>Data</td>
+<td>Example: &quot;GetState&quot;</td>
+</tr>
+</tbody>
+</table>
+<h4 id="command-response-packet-osc-">Command response packet (OSC)</h4><p>OSC command packets sent from the RT server as response to client commands is
+sent in a OSC message with address pattern <code>/qtm/cmd_res</code>.</p>
+<table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OSC-string</td>
+<td>Data</td>
+<td>&quot;Connected&quot;</td>
+</tr>
+</tbody>
+</table>
+<h4 id="xml-packet-osc-">XML packet (OSC)</h4><p>The XML string contains the same data as for the standard <a href="#xml-packet">XML Packet</a>.
+OSC XML packets are sent in an OSC message with address pattern <code>/qtm/xml</code>.</p>
+<table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OSC-string</td>
+<td>Data</td>
+<td>XML string data. The XML data is described in <a href="#xml-packet">XML Packet</a>.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="data-packet-osc-">Data packet (OSC)</h4><p>Each data frame is made up of one or more components, as specified in the
+commands GetCurrentFrame or StreamFrames. The data frame contains a Count
+that specifies the number of components in the frame. Every component starts
+with a component header – identical (in layout) to the packet header. </p>
+<p>OSC data packets consist of one or several OSC messages enclosed in an OSC
+bundle. The first message contains the data frame header and has the OSC
+address pattern <code>/qtm/data</code>. It is followed by an OSC message for each data
+component. See <a href="#data-frame-component-types-osc-">OSC Data frame component types</a>.</p>
+<h5 id="data-frame-header-osc-">Data frame header (OSC)</h5><p>The frame header and the data components are sent in an OSC bundle as separate
+OSC messages.</p>
+<table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Int32</td>
+<td>TimeStamp Hi</td>
+<td>Hi 32 bits of 64 bit timestamp value.<br><br>Number of microseconds from start. The timestamp value is not valid for the Analog and Force data frame components, they have their own timestamps in their component data.</td>
+</tr>
+<tr>
+<td>Int32</td>
+<td>TimeStamp Lo</td>
+<td>Lo 32 bits of 64 bit timestamp value. See above.</td>
+</tr>
+<tr>
+<td>Int32</td>
+<td>SMPTETimeCode</td>
+<td>SMPTE time code little endian format:<br> <br>Bit 0-4: Hours <br>Bit 5-10: Minutes <br>Bit 11-16: Seconds <br>Bit 17-21: Frame <br>Bit 22-30: Sub frame <br>Bit 31: Valid bit</td>
+</tr>
+<tr>
+<td>Int32</td>
+<td>FrameNumber</td>
+<td>The number of this frame. The frame number is not valid for the Analog and Force data frame components. They have their own sample numbers in their component data.</td>
+</tr>
+<tr>
+<td>Int32</td>
+<td>2DDropRate</td>
+<td>How many individual camera 2D frames that have been lost, in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000.<br><br>A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.</td>
+</tr>
+<tr>
+<td>Int32</td>
+<td>2DOutOfSyncRate</td>
+<td>How many individual camera 2D frames, in frames per thousand over the last 0.5 to 1.0 seconds, that have not had the same frame number as the other frames. Range 0-1000.<br><br>A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.</td>
+</tr>
+<tr>
+<td>Int32</td>
+<td>ComponentCount</td>
+<td>The number of data components in the data message. Each component is sent as a separate OSC message.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="data-frame-component-types-osc-">Data frame component types (OSC)</h5><p>Each data frame component has a unique OSC address. The table below shows the
+OSC address for all data components.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>OSC address</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2D</td>
+<td>/qtm/2d</td>
+<td>2D marker data</td>
+</tr>
+<tr>
+<td>2D Linearized</td>
+<td>/qtm/2d_lin</td>
+<td>Linearized 2D marker data</td>
+</tr>
+<tr>
+<td>3D</td>
+<td>/qtm/3d</td>
+<td>3D marker data. Each marker has its own OSC address. See <a href="#3d-component-osc-">OSC 3D component</a>.</td>
+</tr>
+<tr>
+<td>3D Residuals</td>
+<td>/qtm/3d_res</td>
+<td>3D marker data with residuals. Each marker has its own OSC address. See <a href="#3d-with-residuals-component-osc-">3D with residuals component</a>.</td>
+</tr>
+<tr>
+<td>3D No Labels</td>
+<td>/qtm/3d_no_labels</td>
+<td>Unidentified 3D marker data.</td>
+</tr>
+<tr>
+<td>3D No Labels Residuals</td>
+<td>/qtm/3d_no_labels_res</td>
+<td>Unidentified 3D marker data with residuals</td>
+</tr>
+<tr>
+<td>Analog</td>
+<td>/qtm/analog</td>
+<td>Analog data from available devices.</td>
+</tr>
+<tr>
+<td>Analog Single</td>
+<td>/qtm/analog_single</td>
+<td>Analog data from available analog devices. Only one sample per channel and camera frame. The latest sample is used if more than one sample is available.</td>
+</tr>
+<tr>
+<td>Force</td>
+<td>/qtm/force</td>
+<td>Data from available force plates.</td>
+</tr>
+<tr>
+<td>Force Single</td>
+<td>/qtm/force_single</td>
+<td>Force data from available force plates. Only one sample per plate and camera frame. The latest sample is used if more than one sample is available.</td>
+</tr>
+<tr>
+<td>6D</td>
+<td>/qtm/6d</td>
+<td>6D data - position and rotation matrix. Each body has its own OSC address.  See <a href="#6dof-component-osc-">OSC 6DOF component</a>.</td>
+</tr>
+<tr>
+<td>6D Residuals</td>
+<td>/qtm/6d_res</td>
+<td>6D data - position and rotation matrix with residuals. Each body has its own OSC address. See <a href="#6dof-with-residuals-component-osc-">6DOF with residuals component</a>.</td>
+</tr>
+<tr>
+<td>6D Euler</td>
+<td>/qtm/6d_euler</td>
+<td>6D data - position and Euler angles. Each body has its own OSC address. See <a href="#6dof-euler-component-osc-">6DOF Euler component</a>.</td>
+</tr>
+<tr>
+<td>6D Euler Residuals</td>
+<td>/qtm/6d_euler_res</td>
+<td>6D data - position and Euler angles with residuals. Each body has its own OSC address. See <a href="#6dof-euler-with-residuals-component-osc-">6DOF Euler with residuals component</a>.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="2d-and-2d-linearized-component-osc-">2D and 2D linearized component (OSC)</h5><p>The 2D and 2D linearized data frame format are the same. The only difference is
+that the coordinates are linearized in 2D linearized.</p>
+<table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Int32</td>
+<td>Camera Count</td>
+<td>Number of cameras. 32-bit integer.</td>
+</tr>
+</tbody>
+</table>
+<p>Repeated Camera Count times:</p>
+<table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Int32</td>
+<td>Marker Count</td>
+<td>The number of markers for this camera in this frame.</td>
+</tr>
+<tr>
+<td></td>
+<td>2D data</td>
+<td>2D marker data from the camera, described below:</td>
+</tr>
+</tbody>
+</table>
+<p>2D data, repeated Marker Count times:</p>
+<table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Int32</td>
+<td>X</td>
+<td>X coordinate of the marker.</td>
+</tr>
+<tr>
+<td>Int32</td>
+<td>Y</td>
+<td>Y coordinate of the marker.</td>
+</tr>
+<tr>
+<td>Int32</td>
+<td>Diameter X</td>
+<td>Marker X size.</td>
+</tr>
+<tr>
+<td>Int32</td>
+<td>Diameter Y</td>
+<td>Marker Y size.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="3d-component-osc-">3D component (OSC)</h5><p>Each marker is sent in a separate OSC message. The OSC address of this message
+is <code>/qtm/3d/</code> with the name of the marker in the end of the address string.
+Example: <code>/qtm/3d/marker1</code>.</p>
+<table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Float32</td>
+<td>X</td>
+<td>X coordinate of the marker.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Y</td>
+<td>Y coordinate of the marker.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Z</td>
+<td>Z coordinate of the marker.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="3d-with-residuals-component-osc-">3D with residuals component (OSC)</h5><p>Each marker is sent in a separate OSC message. The OSC address of this message
+is <code>/qtm/3d/</code> with the name of the marker in the end of the address string.
+Example: <code>/qtm/3d/marker1</code>.</p>
+<table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Float32</td>
+<td>X</td>
+<td>X coordinate of the marker.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Y</td>
+<td>Y coordinate of the marker.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Z</td>
+<td>Z coordinate of the marker.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Residual</td>
+<td>Residual for the 3D point.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="3d-no-labels-component-osc-">3D no labels component (OSC)</h5><table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Int32</td>
+<td>Marker Count</td>
+<td>The number of markers in this frame.</td>
+</tr>
+</tbody>
+</table>
+<p>Repeated Marker Count times:</p>
+<table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Float32</td>
+<td>X</td>
+<td>X coordinate of the marker.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Y</td>
+<td>Y coordinate of the marker.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Z</td>
+<td>Z coordinate of the marker.</td>
+</tr>
+<tr>
+<td>Int32</td>
+<td>ID</td>
+<td>An unsigned integer ID that serves to identify markers between frames.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="3d-no-labels-with-residuals-component-osc-">3D no labels with residuals component (OSC)</h5><table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Int32</td>
+<td>Marker Count</td>
+<td>The number of markers in this frame.</td>
+</tr>
+</tbody>
+</table>
+<p>Repeated Marker Count times:</p>
+<table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Float32</td>
+<td>X</td>
+<td>X coordinate of the marker.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Y</td>
+<td>Y coordinate of the marker.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Z</td>
+<td>Z coordinate of the marker.</td>
+</tr>
+<tr>
+<td>Int32</td>
+<td>ID</td>
+<td>An unsigned integer ID that serves to identify markers between frames.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Residual</td>
+<td>Residual for the 3D point.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="analog-component-osc-">Analog component (OSC)</h5><table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Int32</td>
+<td>Analog Device Count</td>
+<td>Number of analog devices in this component.</td>
+</tr>
+</tbody>
+</table>
+<p>Repeated Analog Device Count times:</p>
+<table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Int32</td>
+<td>Analog Device ID</td>
+<td>Id of this analog device.</td>
+</tr>
+<tr>
+<td>Int32</td>
+<td>Channel Count</td>
+<td>The number of channels of this analog device in this frame.</td>
+</tr>
+<tr>
+<td>Int32</td>
+<td>Sample Count</td>
+<td>The number of analog samples per channel in this frame.</td>
+</tr>
+<tr>
+<td>Int32</td>
+<td>Sample Number</td>
+<td>Order number of first sample in this frame. Sample Number is increased with the analog frequency. There are Channel Count values per sample number.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Analog Data</td>
+<td>There are (Channel Count <em> Sample Count) voltage values. The samples are ordered like this:<br><br>Channel 1, Sample </em>Sample Number<em> <br>Channel 1, Sample </em>Sample Number + 1<em> <br>Channel 1, </em>Sample Sample Number + 2<em> <br>&hellip;.  <br>Channel 1, Sample </em>Sample Number + Sample Count – 1<em> <br>Channel 2, Sample </em>Sample Number<em> <br>Channel 2, Sample </em>Sample Number + 1* <br>&hellip;</td>
+</tr>
+</tbody>
+</table>
+<h5 id="analog-single-component-osc-">Analog single component (OSC)</h5><table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Int32</td>
+<td>Analog Device Count</td>
+<td>Number of analog devices in this component.</td>
+</tr>
+</tbody>
+</table>
+<p>Repeated Analog Device Count times:</p>
+<table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Int32</td>
+<td>Analog Device ID</td>
+<td>Id of this analog device.</td>
+</tr>
+<tr>
+<td>Int32</td>
+<td>Channel Count</td>
+<td>The number of channels of this analog device in this frame.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Analog Data</td>
+<td>There are Channel Count voltage values.</td>
+</tr>
+</tbody>
+</table>
+<p>If there is no analog data available, Channel Count is set to 0 and Analog Data is omitted.</p>
+<h5 id="force-component-osc-">Force component (OSC)</h5><table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Int32</td>
+<td>Plate Count</td>
+<td>The number of force plates in this frame.</td>
+</tr>
+</tbody>
+</table>
+<p>Repeated Plate Count times:</p>
+<table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Int32</td>
+<td>Force Plate ID</td>
+<td>Id of the analog device in this frame. Starts at 1.</td>
+</tr>
+<tr>
+<td>Int32</td>
+<td>Force Count</td>
+<td>The number of forces in this frame.</td>
+</tr>
+<tr>
+<td>Int32</td>
+<td>Force Number</td>
+<td>Order number of first force in this frame. Force Number is increased with the force frequency.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Force Data</td>
+<td>There are (Force Count * 9) float values. Each force sample consists of 9 Float32 values in following order:<br><br>X coordinate of the force <br>Y coordinate of the force <br>Z coordinate of the force <br>X coordinate of the moment <br>Y coordinate of the moment <br>Z coordinate of the moment <br>X coordinate of the force application point <br>Y coordinate of the force application point <br>Z coordinate of the force application point</td>
+</tr>
+</tbody>
+</table>
+<p>If Force Count = 0 (force not visible in QTM), Force Number and Force Data is omitted.</p>
+<h5 id="force-single-component-osc-">Force single component (OSC)</h5><table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Int32</td>
+<td>Plate Count</td>
+<td>The number of force plates in this frame.</td>
+</tr>
+</tbody>
+</table>
+<p>Repeated Plate Count times:</p>
+<table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Int32</td>
+<td>Force Plate ID</td>
+<td>Id of the analog device in this frame. Starts at 1.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Force Data</td>
+<td>There are (Force Count * 9) float values. Each force sample consists of 9 Float32 values in following order:<br><br>X coordinate of the force <br>Y coordinate of the force <br>Z coordinate of the force <br>X coordinate of the moment <br>Y coordinate of the moment <br>Z coordinate of the moment <br>X coordinate of the force application point <br>Y coordinate of the force application point <br>Z coordinate of the force application point</td>
+</tr>
+</tbody>
+</table>
+<p>If force not visible in QTM, Force Data is omitted.</p>
+<h5 id="6dof-component-osc-">6DOF component (OSC)</h5><p>Each body is sent in a separate OSC message. The OSC address of this message is
+<code>/qtm/6d/</code> with the name of the body in the end of the address string. Example:
+<code>/qtm/3d/body1</code>.</p>
+<table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Float32</td>
+<td>X</td>
+<td>X coordinate of the body.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Y</td>
+<td>Y coordinate of the body.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Z</td>
+<td>Z coordinate of the body.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Rotation</td>
+<td>3x3 Rotation matrix of the body. Consists of 9 Float32 values.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="6dof-with-residuals-component-osc-">6DOF with residuals component (OSC)</h5><p>Each body is sent in a separate OSC message. The OSC address of this message is
+<code>/qtm/6d/</code> with the name of the body in the end of the address string. Example:
+<code>/qtm/3d/body1</code>.</p>
+<table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Float32</td>
+<td>X</td>
+<td>X coordinate of the body.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Y</td>
+<td>Y coordinate of the body.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Z</td>
+<td>Z coordinate of the body.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Rotation</td>
+<td>3x3 Rotation matrix of the body. Consists of 9 Float32 values.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Residual</td>
+<td>Residual for the 6D body.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="6dof-euler-component-osc-">6DOF Euler component (OSC)</h5><p>Each body is sent in a separate OSC message. The OSC address of this message is
+<code>/qtm/6d/</code> with the name of the body in the end of the address string.
+Example: <code>/qtm/3d/body1</code>.</p>
+<table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Float32</td>
+<td>X</td>
+<td>X coordinate of the body.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Y</td>
+<td>Y coordinate of the body.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Z</td>
+<td>Z coordinate of the body.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Angle 1</td>
+<td>First Euler angle, in degrees, as defined on the Euler tab in QTM&#39;s workspace options.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Angle 2</td>
+<td>Second Euler angle.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Angle 3</td>
+<td>Third Euler angle.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="6dof-euler-with-residuals-component-osc-">6DOF Euler with residuals component (OSC)</h5><p>Each body is sent in a separate OSC message. The OSC address of this message is
+<code>/qtm/6d/</code> with the name of the body in the end of the address string. Example:
+<code>/qtm/3d/body1</code>.</p>
+<table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Float32</td>
+<td>X</td>
+<td>X coordinate of the body.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Y</td>
+<td>Y coordinate of the body.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Z</td>
+<td>Z coordinate of the body.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Angle 1</td>
+<td>First Euler angle, in degrees, as defined on the Euler tab in QTM&#39;s workspace options.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Angle 2</td>
+<td>Second Euler angle.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Angle 3</td>
+<td>Third Euler angle.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Residual</td>
+<td>Residual for the 6D body.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="no-more-data-packet-osc-">No More Data packet (OSC)</h3><p>This type of packet is sent when QTM is out of data to send because a
+measurement has stopped or has not even started.</p>
+<p>OSC no data packets are sent in a OSC message with address pattern <code>/qtm/no_data</code>.</p>
+<table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nil</td>
+<td>No data</td>
+<td>OSC Nil type contains no data.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="event-data-packet-osc-">Event Data packet (OSC)</h3><p>OSC event packets are sent in an OSC message with address pattern <code>/qtm/event</code>.</p>
+<table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OSC-string</td>
+<td>Event</td>
+<td>Event string. See <a href="#events-osc-">OSC Events</a>.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="events-osc-">Events (OSC)</h4><p>The RT server sends an event data packet to all its clients when the RT server
+changes state.</p>
+<table>
+<thead>
+<tr>
+<th>Event ID</th>
+<th>Name</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Connected</td>
+<td>Sent when QTM has connected to the camera system.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Connection Closed</td>
+<td>Sent when QTM has disconnected from the camera system.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Capture Started</td>
+<td>Sent when QTM has started a capture.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Capture Stopped</td>
+<td>Sent when QTM has stopped a capture.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Fetching Finished</td>
+<td>Sent when QTM has finished fetching a capture.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Calibration Started</td>
+<td>Sent when QTM has started a calibration.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Calibration Stopped</td>
+<td>Sent when QTM has stopped a calibration.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>RT From File Started</td>
+<td>Sent when QTM has started real time transmissions from a file.</td>
+</tr>
+<tr>
+<td>9</td>
+<td>RT From File Stopped</td>
+<td>Sent when QTM has stopped real time transmissions from a file.</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Waiting For Trigger</td>
+<td>Sent when QTM is starting to wait for trigger to start a measurement.</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Camera Settings Changed</td>
+<td>Sent when the settings have changed for one or several cameras. Not included in the GetState command response.</td>
+</tr>
+<tr>
+<td>12</td>
+<td>QTM Shutting Down</td>
+<td>Sent when QTM is shutting down. Not included in the GetState command response.</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Capture Saved</td>
+<td>Sent when QTM has saved current measurement. Not included in the GetState command response.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="changelog">Changelog</h2><h3 id="changes-in-1-12">Changes in 1.12</h3><ul>
+<li><p>Added Load function for loading measurements in QTM.</p>
+</li>
+<li><p>Added LoadProject function for loading project in QTM.</p>
+</li>
+<li><p>Added new sync out mode SRAM wired in General/Camera settings.</p>
+</li>
+</ul>
+<h3 id="changes-in-1-11">Changes in 1.11</h3><ul>
+<li><p>Changed analog XML parameters. Now all channels have their own unit setting.</p>
+</li>
+<li><p>Changed timestamp in OSC data frame header, from one 64 bit integers, to two
+32 bit integers (hi and lo word). </p>
+</li>
+</ul>
+<h3 id="changes-in-1-10">Changes in 1.10</h3><ul>
+<li>Added general camera XML parameters <code>External_Time_Base</code>,</li>
+<li><p><code>Processing_Actions</code> and Camera/Underwater.</p>
+</li>
+<li><p>Added 3D XML parameters <code>CalibrationTime</code>.</p>
+</li>
+<li><p>Changed Save command. Added overwrite parameter.</p>
+</li>
+<li><p>Made it possible to change the capture frequency via the frequence general
+setting.</p>
+</li>
+<li><p>Changed <code>GetLastEvent</code> to <code>GetState</code>.</p>
+</li>
+<li><p>Support fetching of General and Image parameters even if QTM is not
+connected to a camera system.</p>
+</li>
+<li><p>Changed the Close command. It will now respond with <code>Closing file</code> instead
+of <code>Closing connection</code> when not in RT (preview) mode. The “No connection to
+close” response is now sent as a command response string, not an error
+string.</p>
+</li>
+<li><p>Changed New command response. The <code>Already connected</code> response is now sent
+as a command string, not an error string.</p>
+</li>
+<li><p>Added Capture Saved event.</p>
+</li>
+<li><p>Removed <code>Fetching Finished</code> event.</p>
+</li>
+<li><p>Added <code>GetCaptureQTM</code> command.</p>
+</li>
+<li><p>Changed <code>GetCapture</code> response. Send a command response <code>Sending capture</code>
+before sending the XML packet with the capture file.</p>
+</li>
+<li><p>Added RT server base port to discover response packet.</p>
+</li>
+</ul>
+<h3 id="changes-in-1-9">Changes in 1.9</h3><ul>
+<li><p>Added Force single data component.</p>
+</li>
+<li><p>Fixed bug in OSC Analog, Analog single and Force data components.</p>
+</li>
+<li><p>Fixed bug in OSC 3D no labels data component.</p>
+</li>
+<li><p>Allow capture start via RT server even if camera system isn’t calibrated.</p>
+</li>
+</ul>
+<h3 id="changes-in-1-8">Changes in 1.8</h3><ul>
+<li><p>Added events: <code>Camera Settings Changed</code> and <code>QTM Shutting Down</code>.</p>
+</li>
+<li><p>Added RT server auto discovery.</p>
+</li>
+<li><p>New data frame component: Image</p>
+</li>
+<li><p>Added new XML setting: Image and General Camera setting Orientation.</p>
+</li>
+<li><p>GetParameters command returns <code>Parameters not available</code> error string,
+instead of a <code>No More Data” package</code>.</p>
+</li>
+<li><p>Added status byte to 2D and 2D linearized data components.</p>
+</li>
+<li><p>Changed all 64-bit float coordinates to 32-bit floats in the 3D and 6DOF
+data frames.</p>
+</li>
+<li><p>Removed all 32-bit padding form the protocol.</p>
+</li>
+<li><p>Don&#39;t broadcast string <code>Server shutting down</code> to all clients when shutting
+down. Use event <code>QTM Shutting Down</code> instead.</p>
+</li>
+<li><p>Added password to <code>TakeControl</code>.</p>
+</li>
+<li><p>Fixed bug in AnalogSingle Big Endian data component.</p>
+</li>
+<li><p>Changed name of <code>GetCapture</code> to <code>GetCaptureC3D</code></p>
+</li>
+<li><p>Changed Force plate identification in XML strings from <code>Force_Plate_Index</code>
+to <code>Plate_ID</code>.</p>
+</li>
+<li><p>Changed name of Event command to <code>SetQTMEvent</code>.</p>
+</li>
+</ul>
+<h3 id="changes-in-1-7">Changes in 1.7</h3><ul>
+<li><p>Added <code>Trig</code> command.</p>
+</li>
+<li><p>Added <code>Event</code> command.</p>
+</li>
+<li><p>Added event: <code>Waiting For Trigger</code>.</p>
+</li>
+<li><p>Changed format of XML data packet and added new XML setting. General
+setting: <code>Start On External Trigger</code>.</p>
+</li>
+</ul>
+<h3 id="changes-in-1-6">Changes in 1.6</h3><ul>
+<li><p>Added OSC support.</p>
+</li>
+<li><p>Apply rotation and translation to 6 DOF bodies.</p>
+</li>
+<li><p>Added <code>Camera</code> to general XML parameters.</p>
+</li>
+<li><p>Added <code>Save</code> command.</p>
+</li>
+</ul>
+<h3 id="changes-in-1-5">Changes in 1.5</h3><ul>
+<li><p>Added new command: <code>QTMVersion</code>.</p>
+</li>
+<li><p><code>Version</code> command without argument will return current version used by the
+server.</p>
+</li>
+<li><p>Added new general parameter: <code>Capture Time</code>.</p>
+</li>
+<li><p>Added possibility to change settings via an XML parameter file. Supported
+settings: <code>Capture time</code> and Force plate corners.</p>
+</li>
+<li><p>Added new commands: <code>New</code>, <code>Close</code>, <code>Start</code>, <code>Stop</code>, <code>GetCapture</code> and
+<code>GetLastEvent</code>.</p>
+</li>
+<li><p>Added events: <code>Connected</code>, <code>Closed</code>, <code>Capture started</code> and <code>Capture stopped</code>.</p>
+</li>
+</ul>
+<h3 id="changes-in-1-4">Changes in 1.4</h3><ul>
+<li><p>Added 6D (6 DOF) XML parameters.</p>
+</li>
+<li><p>Added color to 3D XML parameters.</p>
+</li>
+<li><p>Removed LicenceName argument in the CheckLicence command.</p>
+</li>
+</ul>
+<h3 id="changes-in-1-3">Changes in 1.3</h3><ul>
+<li>Added <code>2D Drop Rate</code> and <code>2D Out Of Sync Rate</code> to frame component header for:
+3d, 3DRes, 3DnoLabels and 3DNoLabelsRes.</li>
+</ul>
+<h3 id="changes-in-1-2">Changes in 1.2</h3><ul>
+<li><p><code>2Dlin</code>, <code>3DRes</code>, <code>3DNoLabelsRes</code>, <code>6DRes</code> and <code>6DEulerRes</code> data type components were added.</p>
+</li>
+<li><p>CheckLicense command added.</p>
+</li>
+<li><p><code>&lt;AxisUpwards&gt;</code> item added to XML parameters for 3D. </p>
+</li>
+</ul>
+<h3 id="changes-in-1-1">Changes in 1.1</h3><ul>
+<li><p>UDP support added to the <code>StreamFrames</code> command.</p>
+</li>
+<li><p>Analog data frame component changed. Includes sample number and can contain
+several samples per channel in a single data frame.</p>
+</li>
+<li><p>Force data frame component changed. Includes sample number and can contain
+several samples per force plate in a single data frame.</p>
+</li>
+<li><p>Analog parameters changed, device ID added.</p>
+</li>
+<li><p>Force parameters changed, device ID added.</p>
+</li>
+<li><p><code>SendParameters</code> command changed to <code>GetParameters</code>.</p>
+</li>
+</ul>
+				</div>
+			</div>
+
+		</div>
+
+		<script src="js/app.js"></script>
+		<script type="text/javascript">
+			WebFontConfig = {
+				google: { families: [ 'Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700,800:latin' ] },
+				active: function() { $('body').scrollspy('refresh'); }
+			};
+			(function() {
+				var wf = document.createElement('script');
+				wf.src = ('https:' == document.location.protocol
+					? 'https' : 'http') + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+				wf.type = 'text/javascript';
+				wf.async = 'true';
+				var s = document.getElementsByTagName('script')[0];
+				s.parentNode.insertBefore(wf, s);
+			})();
+		</script>
+
+	</body>
+
+</html>
+
