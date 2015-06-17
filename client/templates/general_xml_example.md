@@ -1,5 +1,5 @@
 ```xml
-<QTM_Parameters_Ver_1.12>
+<QTM_Parameters_Ver_1.13>
     <General>
         <Frequency>240</Frequency>
         <Capture_Time>2.5</Capture_Time>
@@ -35,6 +35,8 @@
             <Underwater>False</Underwater>
             <Serial>7658787</Serial>
             <Mode>Marker</Mode>
+            <Video_Mode>Custom</Video_Mode>
+            <Video_Frequency>30</Video_Frequency>
             <Video_Exposure>
                 <Current>10000</Current>
                 <Min>5</Min>
@@ -98,5 +100,5 @@
             </Sync_Out>
         </Camera>
     </General>
-</QTM_Parameters_Ver_1.12>   
+</QTM_Parameters_Ver_1.13>   
 ```

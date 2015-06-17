@@ -253,6 +253,9 @@ shall start on external trigger. The value can be true or false.
 * **ForceData** - Enable or disable force data processing action. Value can be
   True or False.
 
+* **GazeVector** - Enable or disable gaze vector data processing action. Value can be
+  True or False.
+
 * **GazeVectorData** - Enable or disable gaze vector data processing action.
   Value can be True or False.
 
@@ -271,6 +274,9 @@ shall start on external trigger. The value can be true or false.
 * **ExportMatlabFile**  - Enable or disable export to MATLAB file processing
   action. Value can be True or False.
 
+* **ExportAviFile**  - Enable or disable export to AVI file processing
+  action. Value can be True or False.
+
 ##### Camera
 
 General settings consist of none or several *Camera* elements, with
@@ -286,6 +292,27 @@ following content.
   * Marker 
   * Marker Intensity
   * Video
+
+* **Video\_Mode** - 
+Set video mode. This setting only apply to specific camera models that are not
+used for marker detection. Valid settings are:
+  * Custom
+  * 1080p_24hz
+  * 720p_25hz
+  * 720p_50hz
+  * 540p_25hz
+  * 540p_50hz
+  * 540p_60hz
+  * 480_25hz
+  * 480_50hz
+  * 480_60hz
+  * 480_120hz
+  
+* **Video\_Frequency** - 
+Set video capture frequency for the camera selected by Camera ID, see above.
+The value is either in Hz ( >1 Hz) or in percent of max frequency (0.0 to
+1.0), 32-bit float. Note: It is only possible to set minimum video capture
+frequency, which is 1 Hz, by setting the Video_Frequency setting to 0 (0%).
 
 * **Video\_Exposure** - Set video exposure time for the camera selected by
   Camera ID, see above. The value is either in micro seconds ( \>&nbsp;5&nbsp;&micro;s) or in
@@ -1323,20 +1350,20 @@ Example:
 
 #### 3D XML parameters
 In response to the command GetParameters 3D the QTM RT server will reply with
-an XML data packet, containing a block called The_3D. See below for the format
+an XML data packet, containing a block called `The_3D`. See below for the format
 of this block.
 
-*Note*: XML element names can’t begin with a number, that’s why the element for
-3D parameters is called The_3D.
+*Note*: XML element names can&rsquo;t begin with a number, that&rsquo;s why the element for
+3D parameters is called `The_3D`.
 
 * **AxisUpwards**  
   This parameter tells which axis that is pointing upwards in QTM. The value
-  can be one of following: +X, +Y, +Z, -X, -Y and –Z.
+  can be one of following: +X, +Y, +Z, -X, -Y and -Z.
 
 * **CalibrationTime**  
   This parameter tells the date and time of when the system was last
   calibrated. If the system has no valid calibration the value is empty. The
-  calibration date and time is formatted like this: yyyy.mm.dd hh:mm:ss.
+  calibration date and time is formatted like this: `yyyy.mm.dd hh:mm:ss`.
   Example, "2011.09.23 11:23:11"
 
 * **Labels**  
@@ -1347,20 +1374,28 @@ Block containing label information.
   * Name  
   The name of the label (trajectory).
 
-  * RGBColor
+  * RGBColor  
   The color of the label (trajectory), represented by a three byte integer
   value. Bit 0-7 represents red, bit 8-15 represents green and bit 16-23
   represents blue.
+
+* **Bones**  
+Block containing bone information.
+  * Bone From  
+  The name of the label (trajectory) where the bone starts.
+
+  * Bone To  
+  The name of the label (trajectory) where the bone ends.
 
 Example:
 {{> threed_xml_example }}
 
 #### 6D XML parameters
 In response to the command GetParameters 3D the QTM RT server will reply with
-an XML data packet, containing a block called The_3D. See below for the format
+an XML data packet, containing a block called `The_3D`. See below for the format
 of this block.
 
-*Note*: XML element names can’t begin with a number, that’s why the element for
+*Note*: XML element names can&rsquo;t begin with a number, that&rsquo;s why the element for
 3D parameters is called The_6D.
 
 * **Bodies**  
@@ -1382,6 +1417,23 @@ of this block.
 
 Example:
 {{> sixd_xml_example }}
+
+#### Gaze vector XML parameters
+In response to the command GetParameters GazeVector the QTM RT server will
+reply with an XML data packet, containing a block called Gaze_Vector. See below
+for the format of this block.
+
+* **Vector**  
+  Block containing gaze vector information.
+
+  * Name  
+  The name of the gaze vector body.
+
+  * Frequency  
+  The gaze vector update frequency.
+
+Example:
+{{> gaze_xml_example }}
 
 #### Analog XML parameters
 In response to the command GetParameters Analog the QTM RT server will reply
@@ -1464,7 +1516,7 @@ AMTI, AMTI 8 Channels, Bertec, Kistler and QMH.
   to the force plate. Each Channel contains Channel_No and ConversionFactor.
 
 * **Calibration_Matrix**  
-  Block containing a 6x6 calibration matrix for the force plate.
+  Block containing a 6x6, 6x8 or 12x12 calibration matrix for the force plate.
 
 Example
 {{> force_xml_example }}
@@ -2585,11 +2637,22 @@ Event ID  | Name                    | Comment
 
 ## Changelog
 
+### Changes in 1.13
+ * Added export to AVI file and gaze vector processing actions.
+
+ * Updated Telnet protocol version.
+
+ * Made it possible to change video mode and video capture frequency.
+
+ * Changes to force calibration matrix. Now supports more than 6x6 matrixes.
+
+ * Added support for trajectory bones.
+
 ### Changes in 1.12
 
- * Added Load function for loading measurements in QTM.
+ * Added `Load` function for loading measurements in QTM.
 
- * Added LoadProject function for loading project in QTM.
+ * Added `LoadProject` function for loading project in QTM.
 
  * Added new sync out mode SRAM wired in General/Camera settings.
 

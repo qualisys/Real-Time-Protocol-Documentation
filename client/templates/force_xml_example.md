@@ -1,5 +1,5 @@
 ```xml
-<QTM_Parameters_Ver_1.12>    
+<QTM_Parameters_Ver_1.13>    
     <Force>
         <Unit_Length>mm</Unit_Length>
         <Unit_Force >N</Unit_Force>
@@ -8,7 +8,7 @@
             <Analog_Device_ID>1</Analog_Device_ID>
             <Frequency>1000</Frequency>
             <Type>AMTI</Type>
-		<Name>First force plate</Name>
+            <Name>First force plate</Name>
             <Length>600.0</Length>
             <Width>400.0</Width>
             <Location>
@@ -73,56 +73,70 @@
                 </Channel>
             </Channels>
             <Calibration_Matrix>
-                <Row1>
-                    <Col1>1.00</Col1>
-                    <Col2>0.00</Col2>
-                    <Col3>0.00</Col3>
-                    <Col4>0.00</Col4>
-                    <Col5>0.00</Col5>
-                    <Col6>0.00</Col6>
-                </Row1>
-                <Row2>
-                    <Col1>0.00</Col1>
-                    <Col2>1.00</Col2>
-                    <Col3>0.00</Col3>
-                    <Col4>0.00</Col4>
-                    <Col5>0.00</Col5>
-                    <Col6>0.00</Col6>
-                </Row2>
-                <Row3>
-                    <Col1>0.00</Col1>
-                    <Col2>0.00</Col2>
-                    <Col3>1.00</Col3>
-                    <Col4>0.00</Col4>
-                    <Col5>0.00</Col5>
-                    <Col6>0.00</Col6>
-                </Row3>
-                <Row4>
-                    <Col1>0.00</Col1>
-                    <Col2>0.00</Col2>
-                    <Col3>0.00</Col3>
-                    <Col4>1.00</Col4>
-                    <Col5>0.00</Col5>
-                    <Col6>0.00</Col6>
-                </Row4>
-                <Row5>
-                    <Col1>0.00</Col1>
-                    <Col2>0.00</Col2>
-                    <Col3>0.00</Col3>
-                    <Col4>0.00</Col4>
-                    <Col5>1.00</Col5>
-                    <Col6>0.00</Col6>
-                </Row5>
-                <Row6>
-                    <Col1>0.00</Col1>
-                    <Col2>0.00</Col2>
-                    <Col3>0.00</Col3>
-                    <Col4>0.00</Col4>
-                    <Col5>0.00</Col5>
-                    <Col6>1.00</Col6>
-                </Row6>                
+                <Rows>
+                    <Row>
+                        <Columns>
+                            <Column>1.00</Column>
+                            <Column>0.00</Column>
+                            <Column>0.00</Column>
+                            <Column>0.00</Column>
+                            <Column>0.00</Column>
+                            <Column>0.00</Column>
+                        </Columns>
+                    </Row>
+                    <Row>
+                        <Columns>
+                            <Column>0.00</Column>
+                            <Column>1.00</Column>
+                            <Column>0.00</Column>
+                            <Column>0.00</Column>
+                            <Column>0.00</Column>
+                            <Column>0.00</Column>
+                        </Columns>
+                    </Row>
+                    <Row>
+                        <Columns>
+                            <Column>0.00</Column>
+                            <Column>0.00</Column>
+                            <Column>1.00</Column>
+                            <Column>0.00</Column>
+                            <Column>0.00</Column>
+                            <Column>0.00</Column>
+                        </Columns>
+                    </Row>
+                    <Row>
+                        <Columns>
+                            <Column>0.00</Column>
+                            <Column>0.00</Column>
+                            <Column>0.00</Column>
+                            <Column>1.00</Column>
+                            <Column>0.00</Column>
+                            <Column>0.00</Column>
+                        </Columns>
+                    </Row>
+                    <Row>
+                        <Columns>
+                            <Column>0.00</Column>
+                            <Column>0.00</Column>
+                            <Column>0.00</Column>
+                            <Column>0.00</Column>
+                            <Column>1.00</Column>
+                            <Column>0.00</Column>
+                        </Columns>
+                    </Row>
+                    <Row>
+                        <Columns>
+                            <Column>0.00</Column>
+                            <Column>0.00</Column>
+                            <Column>0.00</Column>
+                            <Column>0.00</Column>
+                            <Column>0.00</Column>
+                            <Column>1.00</Column>
+                        </Columns>
+                    </Row>
+                </Rows>
             </Calibration_Matrix>
         </Plate>
     </Force>
-</QTM_Parameters_Ver_1.12>   
+</QTM_Parameters_Ver_1.13>   
 ```
