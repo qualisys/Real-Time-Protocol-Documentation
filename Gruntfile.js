@@ -133,5 +133,6 @@ module.exports = function(grunt) {
 	});
 
 	grunt.registerTask('doq', 'Run doq.', doqRunner);
-	grunt.registerTask('default', ['less', 'copy', 'concat', 'doq']);
+	grunt.registerTask('default', ['build']);
+	grunt.registerTask('build', ['less', 'concat', 'copy', 'doq']);
 };
