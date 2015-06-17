@@ -1,5 +1,4 @@
-.DS_Store
-bower_components
 node_modules
-index.html
-static/js/app.js
+client/bower_components
+client/font
+

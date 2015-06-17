@@ -66,7 +66,14 @@ module.exports = function(grunt) {
 
 		concat: {
 			dist: {
-				src: ['client/js/debounce.js', 'client/js/toc.js', 'client/js/main.js'],
+				src: [
+					'client/bower_components/jquery/dist/jquery.min.js',
+					'client/bower_components/bootstrap/dist/js/bootstrap.min.js',
+					'client/bower_components/highlightjs/highlight.pack.js',
+					'client/js/debounce.js',
+					'client/js/toc.js',
+					'client/js/main.js'
+				],
 				dest: 'dist/js/app.js',
 			},
 		},
@@ -84,7 +91,7 @@ module.exports = function(grunt) {
 					{
 						expand: true,
 						cwd: 'client/',
-						src: ['images/**/*', 'bower_components/**/*', 'font/**/*'],
+						src: [ 'images/**/*', 'font/**/*'],
 						dest: 'dist/',
 					},
 				]
