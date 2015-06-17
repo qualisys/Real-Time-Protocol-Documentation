@@ -1,6 +1,6 @@
 {
   "name": "qualisys-rt-docs",
-  "version": "1.12.0",
+  "version": "1.13.0",
   "description": "Html documentation for Qualisys real-time protocol.",
   "main": "index.js",
   "scripts": {

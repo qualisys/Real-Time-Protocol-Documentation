@@ -3,10 +3,11 @@ var fs             = require('fs')
   , moment         = require('moment')
   , version        = require('./package.json').version
   , rtVersion      = version.substr(0, version.lastIndexOf('.'))
-  , revision       = version.substr(version.lastIndexOf('.') + 1)
+  , revision       = Number(version.substr(version.lastIndexOf('.'))) + 1
   , livereloadPort = 9005
 ;
 
+console.log('hej', revision);
 var doqRunner = function()
 {
 	var doq        = require('doq')
