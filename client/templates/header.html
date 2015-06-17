@@ -2,11 +2,16 @@
 <html>
 	<head>
 		<title>{{ title }}</title>
-		<link href="static/css/lib/bootstrap.min.css" type="text/css" rel="stylesheet" />
-		<link href="static/css/lib/highlight.vs.css" type="text/css" rel="stylesheet" />
-		<link href="static/css/master.css" type="text/css" rel="stylesheet" />
-		<script src="static/js/lib/jquery.min.js"></script>
-		<script src="static/js/lib/bootstrap.min.js"></script>
+
+		<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+		<link href="bower_components/highlightjs/styles/default.css" type="text/css" rel="stylesheet" />
+		<link href="bower_components/highlightjs/styles/github.css" type="text/css" rel="stylesheet" />
+		<link href="styles/master.css" type="text/css" rel="stylesheet" />
+		<!--<link href="bower_components/highlightjs/xcode.css" type="text/css" rel="stylesheet" />-->
+		<!--<link href="bower_components/highlightjs/vs.css" type="text/css" rel="stylesheet" />-->
+
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 		{{{ livereload }}}
 	</head>
 
@@ -18,7 +23,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-3 col-sm-3 col-xs-12">
-							<a class="logo" href="http://qualisys.com"><img src="static/img/qualisys-logo.png" title="Qualisys Motion capture systems"></a>
+							<a class="logo" href="http://www.qualisys.com"><img src="images/qualisys-logo.png" title="Qualisys Motion capture systems"></a>
 						</div>
 						<div class="h1 col-md-9 col-sm-9 col-xs-12">
 							<strong>QTM Real-time Server Protocol Documentation</strong>

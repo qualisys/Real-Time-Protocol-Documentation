@@ -18,7 +18,7 @@ var doqRunner = function()
 
 	doq({
 		  templates: [
-			{ name: 'templates/header.html', data: {
+			{ name: 'client/templates/header.html', data: {
 					livereload: livereload,
 					version: rtVersion,
 					revision: revision,
@@ -26,12 +26,12 @@ var doqRunner = function()
 					date: moment().format("MMM Do YYYY"),
 				}
 			},
-			{ name: 'index.md', data: {} },
-			{ name: 'templates/footer.html' },
+			{ name: 'client/index.md', data: {} },
+			{ name: 'client/templates/footer.html' },
 		],
-		output: 'index.html',
+		output: 'dist/index.html',
 		debug: 'debug' == this.args[0],
-		templateRoot: 'templates/',
+		templateRoot: 'client/templates/',
 	});
 
 }
@@ -45,25 +45,29 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
+		fontelloUpdate: {
+			options: {
+				config: 'fontello.json',
+				fonts: 'client/font',
+				css: 'client/font',
+			},
+		},
+
 		less: {
 			options: {
 				compress: true,
 			},
 			// Compile & minify less files.
 			main: {
-				src: ['less/index.less'],
-				dest: 'static/css/master.css',
+				src: ['client/styles/index.less'],
+				dest: 'dist/styles/master.css',
 			},
-			bootstrap: {
-				src: ['node_modules/twitter-bootstrap-3.0.0/less/bootstrap.less'],
-				dest: 'static/css/lib/bootstrap.min.css',
-			}
 		},
 
 		concat: {
 			dist: {
-				src: ['js/debounce.js', 'js/toc.js', 'js/main.js'],
-				dest: 'static/js/app.js',
+				src: ['client/js/debounce.js', 'client/js/toc.js', 'client/js/main.js'],
+				dest: 'dist/js/app.js',
 			},
 		},
 
@@ -71,8 +75,23 @@ module.exports = function(grunt) {
 			options: {
 				jshintrc: '.jshintrc'
 			},
-			src: ['static/js/app.js'],
+			src: ['dist/js/app.js'],
 		},
+
+		copy: {
+			dist: {
+				files: [
+					{
+						expand: true,
+						cwd: 'client/',
+						src: ['images/**/*', 'bower_components/**/*', 'font/**/*'],
+						dest: 'dist/',
+					},
+				]
+			}
+		},
+
+		clean: ['dist'],
 
 		watch: {
 			doq: {
@@ -81,7 +100,7 @@ module.exports = function(grunt) {
 					livereload: { port: livereloadPort },
 					atBegin: true,
 				},
-				files: ['**/*.md', 'templates/**/*.html', 'less/**/*.less', 'js/**/*.js', 'static/**/*', './Gruntfile.js'],
+				files: ['client/**/*.md', 'client/templates/**/*.html', 'client/styles/**/*.less', 'client/js/**/*.js', 'client/images/**/*', './Gruntfile.js'],
 				tasks: ['doq:debug'],
 			},
 
@@ -91,7 +110,7 @@ module.exports = function(grunt) {
 					atBegin: true,
 				},
 				tasks: ['concat'],
-				files: 'js/*.js',
+				files: 'client/js/*.js',
 			},
 
 			less: {
@@ -99,7 +118,7 @@ module.exports = function(grunt) {
 					spawn: false,
 					atBegin: true,
 				},
-				files: 'less/*.less',
+				files: 'client/styles/*.less',
 				tasks: ['less:main'],
 			}
 		}
@@ -107,5 +126,5 @@ module.exports = function(grunt) {
 	});
 
 	grunt.registerTask('doq', 'Run doq.', doqRunner);
-	grunt.registerTask('default', ['less:bootstrap', 'less:main', 'doq']);
+	grunt.registerTask('default', ['less', 'copy', 'concat', 'doq']);
 };
