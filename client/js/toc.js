@@ -11,8 +11,8 @@ var setNavHeight = function() {
 
 var setupNav = function()
 {
-	var nav             = $('nav')
-	  , ol              = $('nav ol ol').first().addClass('nav');
+	var nav = $('nav')
+	  , ol  = $('nav ol ol').first().addClass('nav');
 
 	nav.find('ol').first().replaceWith(ol);
 	nav.wrap('<div class="col-lg-3 col-md-4 col-sm-5 col-xs-1 aside-container"><div class="aside affix" data-spy="affix">');
@@ -25,15 +25,13 @@ var setupNav = function()
 	nav.find('a.expand-all').on('click', function(e) {
 		var a = $(this);
 
-		if (a.hasClass('expand-all'))
-		{
+		if (a.hasClass('expand-all')) {
 			a.text('Close all');
 			$('nav li ol').each(function() {
 				expand($(this), false);
 			});
 		}
-		else
-		{
+		else {
 			a.text('Expand all');
 			$('nav li ol').each(function() {
 				collapse($(this), false);
@@ -64,8 +62,7 @@ var setupNav = function()
 };
 
 var expandHeading = function(heading) {
-	var ol = $('nav.toq li.toq-level-2 > span + a[href=#' + heading + ']')
-		.parent().next().find('ol').first();
+	var ol = $('nav.toq li.toq-level-2 > span + a[href="#' + heading + '"]').parent().next().find('ol').first();
 
 	ol.addClass('expanded nocollapse');
 };
@@ -90,13 +87,11 @@ var expand = function(el, autocollapse)
 
 	var ol, li;
 
-	if ('OL' === el.prop('tagName'))
-	{
+	if ('OL' === el.prop('tagName')) {
 		li = el.parent().prev().first();
 		ol = el;
 	}
-	else
-	{
+	else {
 		if (0 == el.find('ol').length)
 			li = el;
 
@@ -152,8 +147,7 @@ var expandToc = function()
 {
 	var li;
 
-	if (autocollapse)
-	{
+	if (autocollapse) {
 		$('nav li.expanded').each(function() {
 			collapse($(this));
 		});
@@ -171,8 +165,7 @@ var expandToc = function()
 
 var insertExpandIcon = function(ol)
 {
-	if (!(ol.hasClass('expanded') || ol.parent().hasClass('toq-level-2')))
-	{
+	if (!(ol.hasClass('expanded') || ol.parent().hasClass('toq-level-2'))) {
 		ol.parent().prev().find('a').prepend('<i class="icon-plus expand"></i>');
 	}
 }
@@ -207,12 +200,10 @@ var setupToc = function()
 	$('nav.toq a i').on('click', function(e) {
 		var li = $(this).closest('li');
 
-		if (li.hasClass('expanded'))
-		{
+		if (li.hasClass('expanded')) {
 			collapse(li, false);
 		}
-		else
-		{
+		else {
 			expand(li, false);
 			li.addClass('nocollapse');
 		}
