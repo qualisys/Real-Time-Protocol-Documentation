@@ -29,6 +29,9 @@
             <ExportMatlabDirect>False</ExportMatlabDirect>
             <ExportMatlabFile>False</ExportMatlabFile>
         </Processing_Actions>
+		<Camera_System>
+			<Type>Oqus</Type>
+		</Camera_System>
         <Camera>
             <ID>1</ID>
             <Model>Oqus 300</Model>

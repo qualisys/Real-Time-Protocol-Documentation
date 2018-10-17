@@ -183,10 +183,30 @@ The Frequency setting tells QTM how long a capture started with the
 The Capture\_Time setting tells QTM how long a capture started with the
 *start* command shall be. The time is expressed in seconds.
 
-##### Start\_On\_External\_Trigger
+##### Start_On_External_Trigger
 
-The Start\_On\_External\_Trigger setting tells QTM if the measurement
-shall start on external trigger. The value can be true or false.
+The `Start_On_External_Trigger` setting tells QTM if the measurement shall
+start on external trigger. The value can be true or false. Legacy parameter
+that for oqus is the trigger input but for the Miqus Sync Unit specifies any
+of the Trig NO or Trig NC ports.
+
+##### Start_On_Trigger_NO
+
+The `Start_On_Trigger_NO` setting tells QTM if the measurement shall start on
+external trigger signal from Miqus Sync Unit Trig NO port or the Oqus trigger
+input. The value can be true or false.
+
+##### Start_On_Trigger_NC
+
+The `Start_On_Trigger_NC` setting tells QTM if the measurement shall start on
+external trigger signal from Miqus Sync Unit Trig NC port. The value can be
+true or false.
+
+##### Start_On_Trigger_Software
+The `Start_On_Trigger_Software` setting tells QTM if the measurement shall
+start on external trigger signal from a software trigger. It can be devices
+and applications like keyboard, RT clients, telnet command etc. The value can
+be true or false.
 
 ##### External\_Time\_Base
 
@@ -233,51 +253,32 @@ shall start on external trigger. The value can be true or false.
 * **Non\_Periodic\_Timeout** - Max number of seconds expected between two
   frames in non-periodic mode. Value is a float.
 
-##### Processing\_Actions
+#### Processing_Actions
+{{> processing_actions }}
 
-* **Tracking** - Enable or disable 3D or 2D tracking processing action. Value
-  can be 3D, 2D or False.
+* **TwinSystemMerge**  
+  Twin system merge processing action. Value can be True or False.
 
-* **TwinSystemMerge** - Enable or disable twin system merge processing action.
-  Value can be True or False.
+* **SplineFill**  
+  Spline fill processing action. Value can be True or False.
 
-* **SplineFill** - Enable or disable spline fill processing action. Value can
-  be True or False.
+#### RealTime_Processing_Actions
+{{> processing_actions }}
 
-* **AIM** - Enable or disable AIM processing action. Value can be True or
-  False.
+* **ExportFBX**  
+Enable or disable export to FBX processing action. Value can be True or False.
 
-* **Track6DOF** - Enable or disable 6DOF tracking processing action. Value can
-  be True or False.
+#### Reprocessing_Actions
+{{> processing_actions }}
 
-* **ForceData** - Enable or disable force data processing action. Value can be
-  True or False.
+* **TwinSystemMerge**  
+  Twin system merge processing action. Value can be True or False.
 
-* **GazeVector** - Enable or disable gaze vector data processing action. Value can be
-  True or False.
+* **SplineFill**  
+  Spline fill processing action. Value can be True or False.
 
-* **GazeVectorData** - Enable or disable gaze vector data processing action.
-  Value can be True or False.
 
-* **ExportTSV** - Enable or disable export to TSV processing action. Value can
-  be True or False.
-
-* **ExportC3D** - Enable or disable export to C3D processing action. Value can
-  be True or False.
-
-* **ExportDiff** - Enable or disable export to Diff format processing action.
-  Value can be True or False.
-
-* **ExportMatlabDirect** - Enable or disable export to Matlab directly
-  processing action. Value can be True or False.  
- 
-* **ExportMatlabFile**  - Enable or disable export to MATLAB file processing
-  action. Value can be True or False.
-
-* **ExportAviFile**  - Enable or disable export to AVI file processing
-  action. Value can be True or False.
-
-##### Camera
+#### Camera
 
 General settings consist of none or several *Camera* elements, with
 following content.
@@ -307,6 +308,7 @@ used for marker detection. Valid settings are:
   * 480_50hz
   * 480_60hz
   * 480_120hz
+
   
 * **Video\_Frequency** - 
 Set video capture frequency for the camera selected by Camera ID, see above.
@@ -334,8 +336,8 @@ frequency, which is 1 Hz, by setting the Video_Frequency setting to 0 (0%).
   ID, see above. The setting affects the 2D camera view in QTM. The value is in
   degrees (0, 90, 180 or 270), 32-bit integer.
 
-* **Sync\_Out** - Camera settings consist of none or one *Sync\_Out * block,
-  with following content:
+* **Sync_Out/Sync_Out2** - Camera settings consist of none or one *Sync_Out*,
+  or one *Sync_Out2* element, with following content:
 
   * **Mode** - Synchronization mode for the selected camera. Available modes:
     * Shutter out 
@@ -344,8 +346,6 @@ frequency, which is 1 Hz, by setting the Video_Frequency setting to 0 (0%).
     * Camera independent
     * Measurement time
     * Continuous 100Hz
-    * SRAM wired
-
 
   * **Value** - This integer value is only used for three of the sync out
     modes. The content is different depending on the *Mode* setting.
@@ -353,12 +353,20 @@ frequency, which is 1 Hz, by setting the Video_Frequency setting to 0 (0%).
     * **Divisor** -  Divisor applied to the camera frequency
     * **Camera** - independent Camera independent frequency
 
-
-  * **Duty\_Cycle** - Output duty cycle in per cent (float). Only used in
+  * **Duty_Cycle** - Output duty cycle in per cent (float). Only used in
     multiplier, divisor and camera independent mode.
 
-
   * **Signal\_Polarity** - TTL signal polarity. Possible values:
+    * Positive
+    * Negative
+
+
+* **Sync_Out_MT** - Camera settings consist of none or one *Sync_Out_MT* element, with following
+content:
+  
+  * **Signal_Polarity**  
+    TTL signal polarity. Not used in Continuous 100Hz mode. Possible values:
+
     * Positive
     * Negative
 
@@ -1015,7 +1023,7 @@ Response:   Event set                                    or
 ### Reprocess
 
 This command will reprocess current measurement. It is only possible to issue
-this command if you have the control over the QTM RT interface. See [Events](#events).
+this command if you have the control over the QTM RT interface. See [TakeControl](#takecontrol).
 
 Example:
 ```coffeescript
@@ -1272,11 +1280,19 @@ Enable or disable export to FBX processing action. Value can be True or False.
 * **ExportFBX**  
 Enable or disable export to FBX processing action. Value can be True or False.
 
+**Camera_System**  
+
+* **Type**  
+  Type of camera system. Available types are:
+  
+   * Unknown - Oqus
+   * Miqus
+
 **Camera**  
 General settings consist of none or several Camera blocks, with following
 content:
 
-* **ID**
+* **ID**  
   Identity of the camera to which the settings apply.
 
 * **Model**  
@@ -1294,10 +1310,17 @@ Model of selected camera. Available models are:
  * Oqus 500
  * Oqus 500 Plus
  * Oqus 700
+ * Miqus M1
+ * Miqus M3
+ * Miqus M5
+ * Miqus Sync Unit
 
 
 * **Underwater**  
 True if the camera is an underwater camera.
+
+* **Supports_HW_Sync**
+True if the camera supports hardware synchronization.
 
 * **Serial**  
 Serial number of the selected camera.
@@ -1352,38 +1375,50 @@ coordinates are in pixels.
 Video field of view for selected camera. Left, top, right and bottom
 coordinates are in pixels.
 
-* **Sync_Out**  
-Camera settings consist of none or one Sync_Out  block, with following content:
+* **Sync_Out/Sync_Out2**  
+Camera settings consist of none or one *Sync_Out*, or one *Sync_Out2*
+element, with following content:
 
-* **Mode**  
-Synchronization mode for the selected camera. Available modes:
-  * Shutter out
-  * Multiplier
-  * Divisor
-  * Camera independent
-  * Measurement time
-  * SRAM wired
-  * Continuous 100Hz
+  * **Mode**  
+  Synchronization mode for the selected camera. Available modes:
+    * Shutter out
+    * Multiplier
+    * Divisor
+    * Camera independent
+    * Measurement time
+    * Continuous 100Hz
 
-* **Value**  
-Integer value with different content depending on the Mode setting.
-  * Shutter out.	- Not used
-  * Multiplier	- Multiplier applied to the camera frequency
-  * Divisor		- Divisor applied to the camera frequency
-  * Camera independent	- Camera independent frequency
-  * Measurement time	- Not used
-  * Continuous 100Hz	- Not used
+  * **Value**  
+  Integer value with different content depending on the Mode setting.
+    * Shutter out.	- Not used
+    * Multiplier	- Multiplier applied to the camera frequency
+    * Divisor		- Divisor applied to the camera frequency
+    * Camera independent	- Camera independent frequency
+    * Measurement time	- Not used
+    * Continuous 100Hz	- Not used
  
-* **Duty_Cycle**  
-  Output duty cycle in percent (float). Only used in multiplier, divisor and
-  camera independent mode.
+  * **Duty_Cycle**  
+    Output duty cycle in percent (float). Only used in multiplier, divisor and
+    camera independent mode.
+  
+  * **Signal_Polarity**  
+    TTL signal polarity. Not used in Continuous 100Hz mode. Possible values:
+    * Positive
+    * Negative
 
-* **Signal_Polarity**  
-  TTL signal polarity. Not used in SRAM wired and Continuous 100Hz mode. Possible values:
-  * Positive
-  * Negative
-Example:
-{{> general_xml_example }}
+
+* **Sync_Out_MT**  
+Camera settings consist of none or one *Sync_Out_MT* element, with following
+content:
+  
+  * **Signal_Polarity**  
+    TTL signal polarity. Not used in Continuous 100Hz mode. Possible values:
+    * Positive
+    * Negative
+
+
+  Example:
+  {{> general_xml_example }}
 
 #### 3D XML parameters
 In response to the command GetParameters 3D the QTM RT server will reply with
