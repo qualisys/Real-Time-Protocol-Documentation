@@ -217,6 +217,7 @@ be true or false.
  * Control port
  * IR receiver
  * SMPTE
+ * IRIG
  * Video sync
 
 
@@ -399,6 +400,17 @@ content:
 
     * Max
     Maximum lens control focus attribute.
+
+
+ * **AutoExposure**
+  Camera settings consist of none or one `AutoExposure` element (will only be
+  available for cameras that support auto exposure), with following
+  attributes. Enabled (true/false) and Compensation (current auto exposure
+  compensation value).
+
+* **AutoWhiteBalance**
+Camera settings consist of none or one `AutoWhiteBalance` element. (will only be
+available for cameras that support auto white balance). Setting can be True or False.
 
 #### Image settings
 
@@ -1236,6 +1248,22 @@ The length of the QTM capture, started with the start command. The time is expre
 **Start_On_External_Trigger**  
 Measurement starts on external trigger. The value can be true or false.
 
+**Start_On_Trigger_NO**
+The `Start_On_Trigger_NO` setting tells QTM if the measurement shall start on
+external trigger signal from Miqus Sync Unit Trig NO port or the Oqus trigger
+input. The value can be true or false.
+
+**Start_On_Trigger_NC**
+The `Start_On_Trigger_NC` setting tells QTM if the measurement shall start on
+external trigger signal from Miqus Sync Unit Trig NC port. The value can be
+true or false.
+
+**Start_On_Trigger_Software**
+The `Start_On_Trigger_Software` setting tells QTM if the measurement shall
+start on external trigger signal from a software trigger. It can be devices
+and applications like keyboard, RT clients, telnet command etc. The value can
+be true or false.
+
 **External_Time_Base**  
 * **Enabled**  
   Enable or disable external time base. Value can be True or False.
@@ -1246,6 +1274,7 @@ Measurement starts on external trigger. The value can be true or false.
  * Control port
  * IR receiver
  * SMPTE
+ * IRIG
  * Video sync  
   
 
@@ -1772,13 +1801,14 @@ Bytes | Name            | Type           | Value/Description
 4     | Component Count | 32-bit integer | The number of data components in the data packet.
 
 
-**Component data** (Repeated Component Count times)
+**Component data** (Repeated *Component Count* times)
 
 Bytes    |  Name           | Type           | Value/Description
 -------- | --------------- | -------------- | ------------------
 4        |  Component Size | 32-bit integer |  Size of Component Data + 8 bytes component header.
 4        |  Component Type | 32-bit integer | The type of the component. Defined in the following section.
 Size - 8 |  Component Data | Mixed          | Component-specific data. Defined in [Data component types](#data-component-types) and [2D and 2D linearized component](#2d-and-2d-linearized-component) sections.
+
 
 #### Data component types
 
@@ -1803,6 +1833,9 @@ Type     | Name                   | Description
 13       | Analog Single          | Analog data from available analog devices. Only one sample per channel and camera frame. The latest sample is used if more than one sample is available.
 14       | Image                  | Image frame from a specific camera. Image size and format is set with the XML settings, see [Image settings](#image-settings).
 15       | Force Single           | Force data from available force plates. Only one sample per plate and camera frame. The latest sample is used if more than one sample is available.
+16       | Gaze Vector            | Gaze vector data defined by a unit vector and position.
+17       | Timecode               | IRIG or SMPTE timecode
+ 
 
 #### 2D and 2D linearized component
 
@@ -1818,7 +1851,7 @@ Bytes | Name                | Type           | Description
 2     | 2D Out Of Sync Rate | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
 
 
-Repeated Camera Count times:
+Repeated *Camera Count* times:
 
 Bytes             | Name         | Type           | Description
 ----------------- | ------------ | -------------- | -----------
@@ -1826,7 +1859,7 @@ Bytes             | Name         | Type           | Description
 1                 | Status Flags | 8-bit integer  | Bit 1: Too much light enters the camera. Please increase the threshold level or <br>lower the exposure time. If measuring at high frequencies, try to reduce the image size.<br><br>Bit 2-8: Not used.
 12 * Marker Count | 2D data      | Mixed          | 2D marker data from the camera, described below:
 
-2D Data, repeated Marker Count times:
+2D Data, repeated *Marker Count* times:
 
 Bytes | Name       | Type           | Description
 ----- | ---------- | -------------- | -----------
@@ -1852,7 +1885,7 @@ Bytes | Name                  | Type           | Description
 2     | 2D Drop Rate          | 16-bit integer | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.
 2     | 2D Out Of Sync Rate   | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
 
-Repeated Marker Count times:
+Repeated *Marker Count* times:
 
 Bytes | Name | Type         | Description
 ----- | ---- | ------------ | -----------
@@ -1880,7 +1913,7 @@ Bytes | Name                  | Type           | Description
 2     | 2D Drop Rate          | 16-bit integer | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.
 2     | 2D Out Of Sync Rate   | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
 
-Repeated Marker Count times:
+Repeated *Marker Count* times:
 
 Bytes | Name     | Type         | Description
 ----- | -------- | ------------ | -----------
@@ -1900,7 +1933,7 @@ Bytes | Name                  | Type           | Description
 2     | 2D Out Of Sync Rate   | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
 
 
-Repeated Marker Count times:
+Repeated *Marker Count* times:
 
 Bytes | Name | Type           | Description
 ----- | ---- | -------------- | -----------
@@ -1920,7 +1953,7 @@ Bytes | Name                  | Type           | Description
 2     | 2D Out Of Sync Rate   | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
 
 
-Repeated Marker Count times:
+Repeated *Marker Count* times:
 
 Bytes | Name     | Type           | Description
 ----- | -------- | -------------- | -----------
@@ -1941,7 +1974,7 @@ Bytes | Name                | Type           | Description
 2     | 2D Out Of Sync Rate | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
 
 
-Repeated Body Count times:
+Repeated *Body Count* times:
 
 Bytes | Name     | Type                  | Description
 ----- | -------- | --------------------- | -----------
@@ -1961,7 +1994,7 @@ Bytes | Name                | Type           | Description
 2     | 2D Out Of Sync Rate | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
 
 
-Repeated Body Count times:
+Repeated *Body Count* times:
 
 Bytes | Name     | Type                   | Description
 ----- | -------- | ---------------------- | -----------
@@ -1982,7 +2015,7 @@ Bytes | Name                   | Type           | Description
 2     | 2D Out Of Sync Rate    | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
 
 
-Repeated Body Count times:
+Repeated *Body Count* times:
 
 Bytes | Name    | Type         | Description
 ----- | ------- | ------------ | -----------
@@ -2005,7 +2038,7 @@ Bytes | Name                                  | Type           | Description
 2     | 2D Out Of Sync Rate                   | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
 
 
-Repeated Body Count times:
+Repeated *Body Count* times:
 
 Bytes | Name     | Type           | Description
 ----- | -------- | -------------- | -----------
@@ -2025,7 +2058,7 @@ Bytes | Name                  | Type           | Description
 4     | Component Type        | 32-bit integer | Value = 3. See [Data component types](#data-component-types).
 4     | Analog Device Count   | 32-bit integer | Number of analog devices in this component.
 
-Repeated Analog Device Count times:
+Repeated *Analog Device Count* times:
 
 Bytes                              | Name             | Type                   | Description
 ---------------------------------- | ---------------- | ---------------------- | -----------
@@ -2043,7 +2076,7 @@ Bytes | Name                  | Type           | Description
 4     | Component Type        | 32-bit integer | Value = 13. See [Data component types](#data-component-types).
 4     | Analog Device Count   | 32-bit integer | Number of analog devices in this component.
 
-Repeated Analog Device Count times:
+Repeated *Analog Device Count* times:
 
 Bytes             | Name                  | Type                   | Description
 ----------------- | --------------------- | ---------------------- | -----------
@@ -2062,7 +2095,7 @@ Bytes | Name             | Type           | Description
 4     | Plate Count      | 32-bit integer | The number of force plates in this frame.
 
 
-Repeated Plate Count times:
+Repeated *Plate Count* times:
 
 Bytes            | Name             | Type                   | Description
 ---------------- | ---------------- | ---------------------- | -----------
@@ -2080,7 +2113,7 @@ Bytes | Name             | Type           | Description
 4     | Plate Count      | 32-bit integer | The number of force plates in this frame.
 
 
-Repeated Plate Count times:
+Repeated *Plate Count* times:
 
 Bytes            | Name             | Type                   | Description
 ---------------- | ---------------- | ---------------------- | -----------
@@ -2097,7 +2130,7 @@ Bytes | Name             | Type           | Description
 4     | Component Type   | 32-bit integer | Value = 14. See [Data component types](#data-component-types).
 4     | Camera Count     | 32-bit integer | Number of cameras.
 
-Repeated Camera Count times:
+Repeated *Camera Count* times:
 
 Bytes      | Name           | Type           | Description
 ---------- | -------------- | -------------- | -----------
@@ -2111,6 +2144,40 @@ Bytes      | Name           | Type           | Description
 4          | Bottom Crop    | 32-bit float   | Position of the requested image bottom edge relative the original image.  <br>0: Original image top edge.  <br>1: Original image bottom edge.
 4          | Image Size     | 32-bit integer | Size of Image Data in number of bytes.
 Image Size | Image Data     | Binary data    | Image data formatted according to the Image Format parameter.
+
+#### Gaze vector
+
+Bytes | Name              | Type           | Description
+----- | ----------------- | ---------------|------------
+4     | Component Size    | 32-bit integer | The size of the component including the header (Component Size, Component Type and Camera Count).
+4     | Component Type    | 32-bit integer | Value = 16. See [Data component types](#data-component-types).
+4     | Gaze Vector Count | 32-bit integer | Number of gaze vectors in this frame.
+
+Repeated *Gaze Vector Count* times:
+
+Bytes                                    | Name             | Type           | Description
+---------------------------------------- | ---------------- | ---------------|------------
+4                                        | Sample Count     | 32-bit integer | The size of the component including the header (Component Size,<br>Component Type and Camera Count).
+0 (Sample Count=0)<br>4 (Sample Count>0) | Sample Number    | 32-bit float   | Value = 16. See [Data component types](#data-component-types).
+24 * Sample Count                        | Gaze Vector data | 32-bit float[] | X component of the vector.<br>Y component of the vector.<br>Z component of the vector.<br>X coordinate of the vector.<br>Y coordinate of the vector.<br>Z coordinate of the vector.
+
+
+#### Timecode
+
+Bytes | Name              | Type           | Description
+----- | ----------------- | ---------------|------------
+4     | Component Size    | 32-bit integer | The size of the component including the header (Component Size, Component Type and Camera Count).
+4     | Component Type    | 32-bit integer | Value = 17. See [Data component types](#data-component-types).
+4     | Timecode Count    | 32-bit integer | Number of timecodes.
+
+Repeated *Timecode Count* times:
+
+Bytes                    | Name           | Type           | Description
+----- | ---------------- | ---------------|------------
+4     | Timecode type    | 32-bit integer | The type of timecode.<br><br>0: SMPTE (32 bit)<br>1: IRIG (64 bit)<br>2: Camera time (64 bit)
+4     | Timecode Hi      | 32-bit integer | IRIG time code little endian format:<br>Bit 0 – 6: Year<br>Bit 7 – 15: Day of year<br><br>Camera time<br>Hi 32 bits of 64 bit integer timecode.
+4     | Timecode Lo      | 32-bit integer | IRIG time code little endian format:<br>Bit 0 – 4: Hours<br>Bit 5 – 10: Minutes<br>Bit 11 - 16: Seconds<br>bit 17 - 20: Tenth of a seconds<br><br>SMPTE time code little endian format:<br>Bit 0 – 4: Hours<br>Bit 5 – 10: Minutes<br>Bit 11 - 16: Seconds<br>bit 17 - 21: Frame<br>Bit 22 - 31 Not used<br><br>Camera time<br>Lo 32 bits of 64-bit integer timecode.
+
 
 ### No More Data packet
 This type of packet is sent when QTM is out of data to send because a measurement has stopped or has not even started.
@@ -2155,19 +2222,22 @@ changes state.
  
 Event ID     | Name                    | Comment
 -------------|-------------------------|--------
-1            | Connected               |Sent when QTM has connected to the camera system.
-2            | Connection Closed       |Sent when QTM has disconnected from the camera system.
-3            | Capture Started         |Sent when QTM has started a capture.
-4            | Capture Stopped         |Sent when QTM has stopped a capture.
-5            | Not used                |Previously Fetching Finished, deprecated.
-6            | Calibration Started     |Sent when QTM has started a calibration.
-7            | Calibration Stopped     |Sent when QTM has stopped a calibration.
-8            | RT From File Started    |Sent when QTM has started real time transmissions from a file.
-9            | RT From File Stopped    |Sent when QTM has stopped real time transmissions from a file.
-10           | Waiting For Trigger     |Sent when QTM is waiting for the user to press the trigger button.
-11           | Camera Settings Changed |Sent when the settings have changed for one or more cameras. Not included in the GetState response.
-12           | QTM Shutting Down       |Sent when QTM is shutting down. Not included in the GetState response.
-13           | Capture Saved           |Sent when QTM has saved the current measurement. Not included in the GetState response.
+1            | Connected               | Sent when QTM has connected to the camera system.
+2            | Connection Closed       | Sent when QTM has disconnected from the camera system.
+3            | Capture Started         | Sent when QTM has started a capture.
+4            | Capture Stopped         | Sent when QTM has stopped a capture.
+5            | Not used                | Previously Fetching Finished, deprecated.
+6            | Calibration Started     | Sent when QTM has started a calibration.
+7            | Calibration Stopped     | Sent when QTM has stopped a calibration.
+8            | RT From File Started    | Sent when QTM has started real time transmissions from a file.
+9            | RT From File Stopped    | Sent when QTM has stopped real time transmissions from a file.
+10           | Waiting For Trigger     | Sent when QTM is waiting for the user to press the trigger button.
+11           | Camera Settings Changed | Sent when the settings have changed for one or more cameras. Not included in the GetState response.
+12           | QTM Shutting Down       | Sent when QTM is shutting down. Not included in the GetState response.
+13           | Capture Saved           | Sent when QTM has saved the current measurement. Not included in the GetState response.
+14           | Reserved                | Reserved.
+15           | Reserved                | Reserved.
+16           | Trigger                 | This event is sent by the server when QTM has received a trigger. This event will not show in the GetState command response.
 
 
 ### Discover packet
@@ -2575,14 +2645,14 @@ OSC type | Name         | Description
 Int32    | Camera Count | Number of cameras. 32-bit integer.
 
 
-Repeated Camera Count times:
+Repeated *Camera Count* times:
 
 OSC type | Name         | Description
 ---------|--------------|------------
 Int32    | Marker Count | The number of markers for this camera in this frame.
          | 2D data      | 2D marker data from the camera, described below:
 
-2D data, repeated Marker Count times:
+2D data, repeated *Marker Count* times:
 
 
 OSC type | Name       | Description
@@ -2621,7 +2691,7 @@ OSC type | Name         | Description
 ---------|--------------|------------
 Int32    | Marker Count | The number of markers in this frame.
 
-Repeated Marker Count times:
+Repeated *Marker Count* times:
 
 OSC type | Name | Description
 ---------|------|------------
@@ -2636,7 +2706,7 @@ OSC type | Name         | Description
 ---------|--------------|------------
 Int32    | Marker Count | The number of markers in this frame.
 
-Repeated Marker Count times:
+Repeated *Marker Count* times:
 
 OSC type | Name     | Description
 ---------|----------|------------
@@ -2652,7 +2722,7 @@ OSC type | Name                | Description
 ---------|---------------------|------------
 Int32    | Analog Device Count | Number of analog devices in this component.
 
-Repeated Analog Device Count times:
+Repeated *Analog Device Count* times:
 
 OSC type | Name             | Description
 ---------|------------------|------------
@@ -2668,7 +2738,7 @@ OSC type | Name                | Description
 ---------|---------------------|------------
 Int32    | Analog Device Count | Number of analog devices in this component.
 
-Repeated Analog Device Count times:
+Repeated *Analog Device Count* times:
 
 OSC type  | Name               | Description
 ----------|--------------------|------------
@@ -2685,7 +2755,7 @@ OSC type  | Name        | Description
 Int32     | Plate Count | The number of force plates in this frame.
 
 
-Repeated Plate Count times:
+Repeated *Plate Count* times:
 
 OSC type | Name           | Description
 ---------|----------------|------------
@@ -2703,7 +2773,7 @@ OSC type | Name        | Description
 Int32    | Plate Count | The number of force plates in this frame.
 
 
-Repeated Plate Count times:
+Repeated *Plate Count* times:
 
 OSC type | Name           | Description
 ---------|----------------|------------
@@ -2807,6 +2877,13 @@ Event ID  | Name                    | Comment
 
 
 ## Changelog
+
+### Changes in 1.17
+ * Added support for external time base `IRIG`.
+ * Added `IRIG` time code to OSC frame header.
+ * Added new data component, `Timecode`.
+ * Added new event type, `Trigger`.
+ * Added Auto exposure camera settings.
 
 ### Changes in 1.16
  * Added Miqus Video camera type.

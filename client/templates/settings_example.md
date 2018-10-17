@@ -4,6 +4,9 @@
         <Capture_Time>2.5</Capture_Time>
         <Capture_Frequency>25</Capture_Frequency>
         <Start_On_External_Trigger>True</Start_On_External_Trigger>
+		<Start_On_Trigger_NO>True</Start_On_Trigger_NO>
+		<Start_On_Trigger_NC>False</Start_On_Trigger_NC>
+		<Start_On_Trigger_Software>False</Start_On_Trigger_Software>
         <External_Time_Base>
             <Enabled>True</Enabled>
             <Signal_Source>Control port</Signal_Source>

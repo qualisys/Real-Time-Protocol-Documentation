@@ -1,9 +1,12 @@
 ```xml
-<QTM_Parameters_Ver_1.13>
+<QTM_Parameters_Ver_1.17>
     <General>
         <Frequency>240</Frequency>
         <Capture_Time>2.5</Capture_Time>
-        <Start_On_External_Trigger>True</Start_On_External_Trigger>
+		<Start_On_External_Trigger>True</Start_On_External_Trigger>
+		<Start_On_Trigger_NO>True</Start_On_Trigger_NO>
+		<Start_On_Trigger_NC>False</Start_On_Trigger_NC>
+		<Start_On_Trigger_Software>False</Start_On_Trigger_Software>
         <External_Time_Base>
             <Enabled>True</Enabled>
             <Signal_Source>Control_Port</Signal_Source>
@@ -104,5 +107,5 @@
             </Sync_Out>
         </Camera>
     </General>
-</QTM_Parameters_Ver_1.13>   
+</QTM_Parameters_Ver_1.17>
 ```

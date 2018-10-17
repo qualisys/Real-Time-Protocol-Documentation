@@ -1,20 +1,18 @@
 ```xml
-<QTM_Parameters_Ver_1.13>
-    <The_3D>
-        <AxisUpwards>+Z</AxisUpwards>
-        <CalibrationTime>2011.09.23 11:23:11</CalibrationTime>
-        <Labels>2</Labels>
-        <Label>
-             <Name>th12</Name>
-             <RGBColor>ff00ff</RGBColor>
-        </Label>
-        <Label>
-             <Name>r_asis</Name>
-             <RGBColor>00ffff</RGBColor>
-        </Label>
-        <Bones>
-             <Bone From="fromName" To="toName"/>
-        </Bones>
-    </The_3D>
-</QTM_Parameters_Ver_1.13>
+<QTM_Parameters_Ver_1.17>
+	<Gaze_Vector>
+		<Vector>
+			<Name>Gaze 1 (L)</Name>
+			<Frequency>30</Frequency>
+		</Vector>
+		<Vector>
+			<Name>Gaze 1 (R)</Name>
+			<Frequency>30</Frequency>
+		</Vector>
+		<Vector>
+			<Name>Gaze 2</Name>
+			<Frequency>60</Frequency>
+		</Vector>
+	</Gaze_Vector>
+</QTM_Parameters_Ver_1.17>
 ```
