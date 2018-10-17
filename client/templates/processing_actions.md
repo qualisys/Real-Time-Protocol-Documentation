@@ -16,7 +16,7 @@
 * **GazeVector**  
 Enable or disable gaze vector data processing action. Value can be True or False.
 
-* **SkeletonSolve**  
+* **SkeletonData**  
 Enable or disable skeleton data processing action. Value can be True or False.
 
 * **ExportTSV**  

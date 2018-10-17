@@ -56,6 +56,9 @@
         <Camera>
             <ID>1</ID>
             <Mode>Marker</Mode>
+			<Video_Resolution>1080p</Video_Resolution>
+			<Video_Aspect_Ratio>1080p</Video_Aspect_Ratio>
+			<Video_Frequency>30</Video_Frequency>
             <Video_Exposure>0.5</Video_Exposure>
             <Video_Flash_Time>0.3</Video_Flash_Time>
             <Marker_Exposure>0.5</Marker_Exposure>		

@@ -21,6 +21,11 @@
                 <Z>10.5</Z>
             </Point>
         </Body>
+		<Euler>
+			<First>Roll</First>
+			<Second>Pitch</Second>
+			<Third>Yaw</Third>
+		</Euler>
     </The_3D>
 </QTM_Parameters_Ver_1.13>
 ```

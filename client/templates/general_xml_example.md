@@ -38,7 +38,8 @@
             <Underwater>False</Underwater>
             <Serial>7658787</Serial>
             <Mode>Marker</Mode>
-            <Video_Mode>Custom</Video_Mode>
+			<Video_Resolution>1080p</Video_Resolution>
+			<Video_Aspect_Ratio>1080p</Video_Aspect_Ratio>
             <Video_Frequency>30</Video_Frequency>
             <Video_Exposure>
                 <Current>10000</Current>

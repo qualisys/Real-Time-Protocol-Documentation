@@ -294,22 +294,23 @@ following content.
   * Marker Intensity
   * Video
 
-* **Video\_Mode** - 
-Set video mode. This setting only apply to specific camera models that are not
-used for marker detection. Valid settings are:
-  * Custom
-  * 1080p_24hz
-  * 720p_25hz
-  * 720p_50hz
-  * 540p_25hz
-  * 540p_50hz
-  * 540p_60hz
-  * 480_25hz
-  * 480_50hz
-  * 480_60hz
-  * 480_120hz
-
   
+* **Video_Resolution** - Change video resolution for non-marker cameras (Oqus
+ 2c and Miqus Video). Available resolutions are:
+
+ * 1080p
+ * 720p 
+ * 540p 
+ * 480p
+
+* **Video_Aspect_Ratio** - Change video aspect ratio for non-marker cameras
+  (Oqus 2c and Miqus Video). Available aspect ratios are:
+  
+  * 16x9
+  * 4x3
+  * 1x1
+
+
 * **Video\_Frequency** - 
 Set video capture frequency for the camera selected by Camera ID, see above.
 The value is either in Hz ( >1 Hz) or in percent of max frequency (0.0 to
@@ -369,6 +370,35 @@ content:
 
     * Positive
     * Negative
+
+
+* **LensControl** - Camera settings consist of none or one LensControl element
+  (will only be available for cameras that support lens control), with
+  following content:
+
+  * Focus
+   Camera lens control focus settings. Below are the attributes used, all as 32-bit float values.
+
+    * Value
+    Current lens control focus value.
+
+    * Min
+    Minimum lens control focus value.
+
+    * Max
+    Maximum lens control focus attribute.
+
+  * Aperture
+  Camera lens control aperture settings. Below are the attributes used, all as 32-bit float values.
+
+    * Value
+    Current lens control aperture value.
+
+    * Min
+    Minimum lens control aperture value.
+
+    * Max
+    Maximum lens control focus attribute.
 
 #### Image settings
 
@@ -548,7 +578,7 @@ current version.
 If you don't set the protocol version yourself, QTM will set it to **version
 1.1** by default.
 
-Example:
+###### Example:
 ```coffeescript
 Command:    Version 1.12
 Response:   Version set to 1.12    or  
@@ -563,7 +593,7 @@ Response:   Version is 1.12
 
 Returns the QTM version on which the RT server is running.
 
-Example:
+###### Example:
 ```coffeescript
 Command:    QTMVersion
 Response:   QTM Version is 2.3 (build 464)
@@ -574,7 +604,7 @@ Response:   QTM Version is 2.3 (build 464)
 
 Returns the current byte order.
 
-Example:
+###### Example:
 ```coffeescript
 Command:    ByteOrder
 Response:   Byte order is little endian or
@@ -590,7 +620,7 @@ command. If the client is connected via Telnet, then the response will be sent
 as an ASCII string. `GetState` will not show the **Camera Settings Changed**,
 **QTM Shutting Down** and **Capture Saved events**.
 
-Example:
+###### Example:
 ```coffeescript
 Command:    GetState
 Response:   Event data packet with last QTM event.
@@ -614,7 +644,7 @@ This command retrieves the settings for the requested component(s) of QTM in
 XML format. The XML parameters are described [here](#xml-packet).
 
 
-Example:
+###### Example:
 ```coffeescript
 Command:    GetParameters 3D Force
 Response:   Parameters not available                    or
@@ -656,7 +686,7 @@ Points worth noting are:
   server waits until the next frame of data is available before sending it to
   the client.
 
-Example:
+###### Example:
 ```coffeescript
 Command:    GetCurrentFrame 3D Analog
 Response:   One data frame is sent to the client according to the 
@@ -772,7 +802,7 @@ Points worth noting are:
   first was finished: send the StreamFrames Stop command.
 
 
-Example:
+###### Example:
 ```coffeescript
 Command:    StreamFrames Frequency:30 UDP:2234 3D Analog
 Response:   30 frames per second containing 3D data and Analog data 
@@ -790,7 +820,7 @@ stop capture and get a capture. The password argument is optional and is only
 needed if it is required by QTM. QTM can be configured to deny all clients
 control, only allow clients with correct password or allow all clients control.
 
-Example:
+###### Example:
 ```coffeescript
 Command:    TakeControl x364k6Gt
 Response:   You are now master                    or
@@ -804,7 +834,7 @@ Response:   You are now master                    or
 Release the control over the QTM RT interface, so that another client can take
 over the control.
 
-Example:
+###### Example:
 ```coffeescript
 Command:    ReleaseControl
 Response:   You are now a regular client      or
@@ -817,7 +847,7 @@ This command will create a new measurement in QTM, connect to the cameras and
 enter RT (preview) mode. It is only possible to issue this command if you have
 the control over the QTM RT interface. See [TakeControl](#takecontrol).
 
-Example:
+###### Example:
 ```coffeescript
 Command:    New
 Response:   Creating new connection                                  or
@@ -835,7 +865,7 @@ data will be lost. If QTM is running RT from file, the playback will stop and
 the file will be closed. It is only possible to issue this command if you have
 the control over the QTM RT interface. See [TakeControl](#takecontrol).
 
-Example:
+###### Example:
 ```coffeescript
 Command:    Close
 Response:   Closing connection                          or
@@ -852,7 +882,7 @@ will start streaming real-time data from current QTM file. If there is any file
 open. It is only possible to issue this command if you have the control over
 the QTM RT interface. See [TakeControl](#takecontrol).
 
-Example:
+###### Example:
 ```coffeescript
 Command:    Start
 Response:   Starting measurement                         or
@@ -870,7 +900,7 @@ This command will stop an ongoing capture or playback of RT from file. It is
 only possible to issue this command if you have the control over the QTM RT
 interface. See [TakeControl](#takecontrol).
 
-Example:
+###### Example:
 ```coffeescript
 Command:    Stop
 Response:   Stopping measurement                         or
@@ -895,7 +925,7 @@ an active camera connection exists, the measurement will not load.
 It is only possible to issue this command if you have the control over the QTM
 RT interface. See [TakeControl](#takecontrol).
 
-Example:
+###### Example:
 ```coffeescript
 Command:    Load
 Response:   Measurement loaded                          or
@@ -929,7 +959,7 @@ the file name (_##).
 It is only possible to issue this command if you have the control over the QTM
 RT interface. See [TakeControl](#takecontrol).
 
-Example:
+###### Example:
 ```coffeescript
 Command:    Save
 Response:   Measurement saved                                   or
@@ -953,7 +983,7 @@ the project will not load. C:\Users\lnn\QTM files\Imagination
 It is only possible to issue this command if you have the control over the QTM
 RT interface. See [TakeControl](#takecontrol).
 
-Example:
+###### Example:
 ```coffeescript
 Command:    Load
 Response:   Project loaded                             or
@@ -968,7 +998,7 @@ Response:   Project loaded                             or
 ### GetCaptureC3D
 This command will download the latest capture as a C3D file.
 
-Example:
+###### Example:
 ```coffeescript
 Command:    GetCapture
 Response:   Sending capture followed by a C3D data packet containing current capture.    or
@@ -979,7 +1009,7 @@ Response:   Sending capture followed by a C3D data packet containing current cap
 ### GetCaptureQTM
 This command will download the latest capture as a QTM file.
 
-Example:
+###### Example:
 ```coffeescript
 Command:    GetCapture
 Response:   Sending capture followed by a QTM data packet containing current capture.    or
@@ -995,7 +1025,7 @@ external trigger. The RT server will send a WaitingForTrigger event when it is
 waiting for a trigger. See [Events](#events). It is only possible to issue this command if
 you have the control over the QTM RT interface. See [TakeControl](#takecontrol).
 
-Example:
+###### Example:
 ```coffeescript
 Command:    Trig
 Response:   Trig ok                                     or
@@ -1011,7 +1041,7 @@ given, the label will be set to “Manual event”.
 
 This command will set an event in QTM. 
 
-Example:
+###### Example:
 ```coffeescript
 Command:    Event test_event
 Response:   Event set                                    or
@@ -1025,7 +1055,7 @@ Response:   Event set                                    or
 This command will reprocess current measurement. It is only possible to issue
 this command if you have the control over the QTM RT interface. See [TakeControl](#takecontrol).
 
-Example:
+###### Example:
 ```coffeescript
 Command:    Reprocess
 Response:   Reprocessing file                            or
@@ -1046,7 +1076,7 @@ This command can turn the leds on a Miqus camera on/off. You can specify if
 the Miqus leds should be on, off or pulsing in all or individual colors
 (green, amber).
 
-Example:
+###### Example:
 ```coffeescript
 Command:    Led
 Response:   Parse error                                         or
@@ -1060,7 +1090,7 @@ This command ends the current telnet session. The Quit command only works if
 you have connected to the RT server on the telnet port. Default telnet port is
 22221.
 
-Example:
+###### Example:
 ```coffeescript
 Command:    Quit
 Response:   Bye bye
@@ -1285,7 +1315,8 @@ Enable or disable export to FBX processing action. Value can be True or False.
 * **Type**  
   Type of camera system. Available types are:
   
-   * Unknown - Oqus
+   * Unknown
+   * Oqus
    * Miqus
 
 **Camera**  
@@ -1309,11 +1340,14 @@ Model of selected camera. Available models are:
  * Oqus 400
  * Oqus 500
  * Oqus 500 Plus
+ * Oqus 600 Plus
  * Oqus 700
  * Miqus M1
  * Miqus M3
  * Miqus M5
  * Miqus Sync Unit
+ * Miqus Video
+ * Miqus Video Color
 
 
 * **Underwater**  
@@ -1332,6 +1366,27 @@ Camera mode for selected camera. Available camera modes are:
   * Video
 
 
+* **Video_Resolution**  
+Change video resolution for non-marker cameras (Oqus 2c and Miqus Video).
+Available resolutions are:
+
+ * 1080p
+ * 720p 
+ * 540p 
+ * 480p
+
+* **Video_Aspect_Ratio**  
+Change video aspect ratio for non-marker cameras (Oqus 2c and Miqus Video).
+Available aspect ratios are:
+  
+  * 16x9
+  * 4x3
+  * 1x1
+
+
+* **Video_Frequency**  
+Video capture frequency for selected camera
+
 * **Video_Exposure**  
 There are three video exposure times for the selected camera. Current value,
 min and max value, which sets the boundaries for the exposure time. The values
@@ -1341,6 +1396,34 @@ are in micro seconds.
 There are three video flash times for the selected camera. Current value, min
 and max value, which sets the boundaries for the flash time. The values are in
 micro seconds.
+
+* **LensControl**  
+Camera settings consist of none or one LensControl element (will only be
+available for cameras that support lens control), with following content:
+
+  * Focus
+   Camera lens control focus settings. Below are the attributes used, all as 32-bit float values.
+
+    * Value
+    Current lens control focus value.
+
+    * Min
+    Minimum lens control focus value.
+
+    * Max
+    Maximum lens control focus attribute.
+
+  * Aperture
+  Camera lens control aperture settings. Below are the attributes used, all as 32-bit float values.
+
+    * Value
+    Current lens control aperture value.
+
+    * Min
+    Minimum lens control aperture value.
+
+    * Max
+    Maximum lens control focus attribute.
 
 * **Marker_Exposure**  
 There are three marker exposure times for the selected camera. Current value,
@@ -1417,7 +1500,7 @@ content:
     * Negative
 
 
-  Example:
+###### Example:
   {{> general_xml_example }}
 
 #### 3D XML parameters
@@ -1462,7 +1545,7 @@ Block containing bone information.
   * Color
   The color of the bone.
 
-Example:
+###### Example:
 {{> threed_xml_example }}
 
 #### 6D XML parameters
@@ -1490,7 +1573,20 @@ of this block.
   The X, Y and Z coordinate of one of the points that defines the 6DOF body.
   The body is defined by 3 or more points.
 
-Example:
+* **Euler**  
+ Block containing 6DOF Euler rotation names.
+
+  * First
+  The name of the first Euler angle.
+
+  * Second
+  The name of the second Euler angle.
+
+  * Third
+  The name of the third Euler angle.
+
+
+###### Example:
 {{> sixd_xml_example }}
 
 #### Gaze vector XML parameters
@@ -1507,7 +1603,7 @@ for the format of this block.
   * Frequency  
   The gaze vector update frequency.
 
-Example:
+###### Example:
 {{> gaze_xml_example }}
 
 #### Analog XML parameters
@@ -1539,7 +1635,7 @@ format of this block.
 * **Label**  
   Channel name. There shall be as many labels as there are channels.
 
-Example
+###### Example:
 {{> analog_xml_example }}
 
 #### Force XML parameters
@@ -1593,7 +1689,7 @@ AMTI, AMTI 8 Channels, Bertec, Kistler and QMH.
 * **Calibration_Matrix**  
   Block containing a 6x6, 6x8 or 12x12 calibration matrix for the force plate.
 
-Example
+###### Example:
 {{> force_xml_example }}
 
 The parameters for force plates follow roughly the standard of the [C3D file
@@ -1656,7 +1752,7 @@ Camera ID for the camera to which the settings apply.
   0.0 = Original image top edge.  
   1.0 = Original image bottom edge **(Default)**.
 
-Example
+###### Example:
 {{> image_xml_example }}
 
 ### Data packet
@@ -2160,7 +2256,7 @@ protocol currently used.
 It is not possible to set the version when connected via the OSC protocol. You
 can only retrieve current version.
 
-Example:
+###### Example:
 ```coffeescript
 Command:    Version
 Response:   Version is 1.12
@@ -2169,7 +2265,7 @@ Response:   Version is 1.12
 #### QTMVersion (OSC)
 Returns the QTM version on which the RT server is running.
 
-Example:
+###### Example:
 ```coffeescript
 Command:    QTMVersion
 Response:   QTM Version is 2.3 (build 464)
@@ -2182,7 +2278,7 @@ command. If the client is connected via Telnet, then the response will be sent
 as an ASCII string. GetState will not show the Camera Settings Changed, QTM
 Shutting Down and Capture Saved events.
 
-Example:
+###### Example:
 ```coffeescript
 Command:    GetState
 Response:   Event data packet with last QTM event.
@@ -2214,7 +2310,7 @@ the license key for the RT client is valid.
 The QTM RT server will respond with License pass or License fail, depending on
 whether a valid license key has been entered into QTM. 
 
-Example:
+###### Example:
 ```coffeescript
 Command:    CheckLicense dh4xx56krnj8KR3o8yk1nfr
 Response:   License pass                         or
@@ -2227,7 +2323,7 @@ Response:   License pass                         or
 This command retrieves the settings for the requested component(s) of QTM in
 XML format. The XML parameters are described [here](#xml-paramters).
 
-Example:
+###### Example:
 ```coffeescript
 Command:    GetParameters 3D Force
 Response:   XML string containing requested parameters
@@ -2265,7 +2361,7 @@ Points worth noting are:
   server waits until the next frame of data is available before sending it to
   the client.
 
-Example:
+###### Example:
 ```coffeescript
 Command:    GetCurrentFrame 3D Analog
 Response:   One data frame is sent to the client according to the 
@@ -2348,7 +2444,7 @@ Points worth noting are:
    first was finished: send the StreamFrames Stop command.
 
 
-Example:
+###### Example:
 ```coffeescript
 Command:    StreamFrames Frequency:30 UDP:2234 3D Analog
 Response:   30 frames per second containing 3D data and Analog data 
@@ -2712,6 +2808,13 @@ Event ID  | Name                    | Comment
 
 ## Changelog
 
+### Changes in 1.16
+ * Added Miqus Video camera type.
+ * Removed Video modes settings from general camera settings.
+ * Added video Resolution and Aspect_Ratio settings to general camera settings.
+ * Added Euler rotation names to 6DOF settings.
+ * Added Lens Control focus and aperture settings.
+
 ### Changes in 1.15
  * Added `Led` command.
  * Added `Reprocess` command.
@@ -2770,7 +2873,7 @@ Event ID  | Name                    | Comment
 
  * Changed Save command. Added overwrite parameter.
 
- * Made it possible to change the capture frequency via the frequence general
+ * Made it possible to change the capture frequency via the frequency general
    setting.
 
  * Changed `GetLastEvent` to `GetState`.
