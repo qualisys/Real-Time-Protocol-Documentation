@@ -403,14 +403,14 @@ content:
 
 
  * **AutoExposure**
-  Camera settings consist of none or one `AutoExposure` element (will only be
-  available for cameras that support auto exposure), with following
-  attributes. Enabled (true/false) and Compensation (current auto exposure
-  compensation value).
+   Camera settings consist of none or one `AutoExposure` element (will only be
+   available for cameras that support auto exposure), with following
+   attributes. Enabled (true/false) and Compensation (current auto exposure
+   compensation value).
 
-* **AutoWhiteBalance**
-Camera settings consist of none or one `AutoWhiteBalance` element. (will only be
-available for cameras that support auto white balance). Setting can be True or False.
+ * **AutoWhiteBalance**
+   Camera settings consist of none or one `AutoWhiteBalance` element. (will only be
+   av ailable for cameras that support auto white balance). Setting can be True or False.
 
 #### Image settings
 
@@ -1453,6 +1453,16 @@ available for cameras that support lens control), with following content:
 
     * Max
     Maximum lens control focus attribute.
+
+* **AutoExposure**
+Camera settings consist of none or one `AutoExposure` element (will only be
+available for cameras that support auto exposure), with following
+attributes. Enabled (true/false) and Compensation (current auto exposure
+compensation value).
+
+* **AutoWhiteBalance**
+Camera settings consist of none or one `AutoWhiteBalance` element. (will only be
+av ailable for cameras that support auto white balance). Setting can be True or False.
 
 * **Marker_Exposure**  
 There are three marker exposure times for the selected camera. Current value,
@@ -2877,6 +2887,10 @@ Event ID  | Name                    | Comment
 
 
 ## Changelog
+ 
+### Changes in 1.18
+ * Added Miqus Video Color camera type.
+ * Added Auto white balance camera settings
 
 ### Changes in 1.17
  * Added support for external time base `IRIG`.

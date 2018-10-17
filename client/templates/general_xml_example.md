@@ -54,6 +54,7 @@
                 <Min>5</Min>
                 <Max>2000</Max>
             </Video_Flash_Time>
+			<Video_Auto_White_Balance>True</Video_Auto_White_Balance>
             <Marker_Exposure>
                 <Current>1000</Current>
                 <Min>5</Min>
