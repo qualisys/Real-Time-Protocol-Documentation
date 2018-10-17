@@ -22,12 +22,11 @@ var doqRunner = function()
 			{ name: 'client/templates/header.html', data: {
 					livereload: livereload,
 					version: rtVersion,
-					revision: revision,
 					title: 'QTM Real-time Server Protocol documentation',
 					date: moment().format("MMM Do YYYY"),
 				}
 			},
-			{ name: 'client/index.md', data: {} },
+			{ name: 'client/index.md', data: { version: rtVersion } },
 			{ name: 'client/templates/footer.html' },
 		],
 		output: 'dist/index.html',

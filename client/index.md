@@ -11,9 +11,9 @@ connection in real-time. This document describes the protocol used in such a
 connection.
 
 
-### Protocol versions
+### Protocol version
 
-This document describes the 1.12 version of the QTM RT server protocol.
+This document describes version {{ version }} of the QTM RT server protocol.
 
 
 ### Standard
