@@ -487,8 +487,8 @@ QTMVersion           | -
 ByteOrder            | -
 GetState             | -
 GetParameters        | `All` &#124; `([General] [3D] [6D] [Analog] [Force] [Image])`
-GetCurrentFrame      | `All` &#124; `([2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes]`<br>`[Analog] [AnalogSingle] [Force] [6D] [6DRes] [6DEuler] [6DEulerRes] [Image])`
-StreamFrames         | `Stop` &#124; `((FrequencyDivisor:n` &#124; `Frequency:n` &#124; `AllFrames)`<br>`[UDP[:address]:port] (All` &#124; `([2D] [2DLin] [3D] [3DRes]`<br>`[3DNoLabels] [3DNoLabelsRes] [Analog] [AnalogSingle]`<br>`[Force] [6D] [6DRes] [6DEuler] [6DEulerRes] [Image])))` 
+GetCurrentFrame      | `All` &#124; `([2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes]`<br>`[Analog[:channels]] [AnalogSingle[:channels]] [Force] [6D] [6DRes]`<br>` [6DEuler] [6DEulerRes] [Image])`
+StreamFrames         | `Stop` &#124; `((FrequencyDivisor:n` &#124; `Frequency:n` &#124; `AllFrames)`<br>`[UDP[:address]:port] (All` &#124; `([2D] [2DLin] [3D] [3DRes]`<br>`[3DNoLabels] [3DNoLabelsRes] [Analog[:channels]] [AnalogSingle[:channels]]`<br>`[Force] [6D] [6DRes] [6DEuler] [6DEulerRes] [Image])))` 
 TakeControl          | `[Password]`
 ReleaseControl       | -
 New                  | -
@@ -614,8 +614,13 @@ Response:   Parameters not available                    or
 
 ### GetCurrentFrame
 > **`GetCurrentFrame`** `All | ([2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes]
-                  [Analog] [AnalogSingle] [Force] [6D] [6DRes] [6DEuler]
+                  [Analog:[channels]] [AnalogSingle:[channels]] [Force] [6D] [6DRes] [6DEuler]
                   [6DEulerRes] [Image])`
+
+<div class="well">The optional channels for Analog and AnalogSingle, is a
+string containing a list of channels to read from the server. The channels
+are separated by a `,` and can also contain ranges defined by a `-`. Here is
+an example: `1,2,3-6,16`</div>
 
 This command returns the current frame of real-time data from the server.  
 
@@ -651,8 +656,13 @@ Response:   One data frame is sent to the client according to the
 ### StreamFrames
 > **`StreamFrames`** `Stop | ((FrequencyDivisor:n | Frequency:n | AllFrames)
                       [UDP[:address]:port] (All |  ([2D] [2DLin] [3D] [3DRes] [3DNoLabels]
-                      [3DNoLabelsRes] [Analog] [AnalogSingle] [Force] [6D] [6DRes] [6DEuler]
+                      [3DNoLabelsRes] [Analog:[channels]] [AnalogSingle:[channels]] [Force] [6D] [6DRes] [6DEuler]
                       [6DEulerRes] [Image])))`
+
+<div class="well">The optional channels for Analog and AnalogSingle, is a
+string containing a list of channels to read from the server. The channels
+are separated by a `,` and can also contain ranges defined by a `-`. Here
+is an example: `1,2,3-6,16`</div>
 
 This command makes the QTM RT server start streaming data frames in real-time.  
 
@@ -1201,8 +1211,7 @@ Max number of seconds expected between two frames in non-periodic mode. Value
 is a float.
 
 **Processing_Actions**
-* **Tracking**  
-  2D or 3D tracking processing action. Value can be 2D, 3D or False.
+{{> processing_actions }}
 
 * **TwinSystemMerge**  
   Twin system merge processing action. Value can be True or False.
@@ -1210,29 +1219,23 @@ is a float.
 * **SplineFill**  
   Spline fill processing action. Value can be True or False.
 
-* **AIM**  
-  AIM processing action. Value can be True or False.
+**RealTime_Processing_Actions**
+{{> processing_actions }}
 
-* **Track6DOF**  
-  6 DOF tracking processing action. Value can be True or False.
+* **ExportFBX**  
+Enable or disable export to FBX processing action. Value can be True or False.
 
-* **ForceData**  
-  Force data processing action. Value can be True or False.
+**Reprocessing_Actions**
+{{> processing_actions }}
 
-* **ExportTSV**  
-Export to TSV processing action. Value can be True or False.
+* **TwinSystemMerge**  
+  Twin system merge processing action. Value can be True or False.
 
-* **ExportC3D**  
-Export to C3D processing action. Value can be True or False.
+* **SplineFill**  
+  Spline fill processing action. Value can be True or False.
 
-* **ExportDiff**  
-Export to Diff format processing action. Value can be True or False.
-
-* **ExportMatlabDirect**  
-Export to Matlab directly processing action. Value can be True or False.
-
-* **ExportMatlabFile**  
-Export to MATLAB file processing action. Value can be True or False.
+* **ExportFBX**  
+Enable or disable export to FBX processing action. Value can be True or False.
 
 **Camera**  
 General settings consist of none or several Camera blocks, with following
@@ -1344,7 +1347,6 @@ Integer value with different content depending on the Mode setting.
   TTL signal polarity. Not used in SRAM wired and Continuous 100Hz mode. Possible values:
   * Positive
   * Negative
-
 Example:
 {{> general_xml_example }}
 
@@ -1386,6 +1388,9 @@ Block containing bone information.
 
   * Bone To  
   The name of the label (trajectory) where the bone ends.
+
+  * Color
+  The color of the bone.
 
 Example:
 {{> threed_xml_example }}
@@ -2636,6 +2641,17 @@ Event ID  | Name                    | Comment
 
 
 ## Changelog
+
+### Changes in 1.14
+ * Added bone color to 3d XML parameters.
+
+ * Added support for new processing action: 2d pre processing.
+
+ * Added support for real-time processing actions and reprocessing actions settings.
+
+ * Changed XML settings tag from “Duty cycle” to “Duty_Cycle”.
+
+ * Added option to only stream data from selected analog channels.
 
 ### Changes in 1.13
  * Added export to AVI file and gaze vector processing actions.

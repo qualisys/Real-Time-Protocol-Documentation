@@ -95,7 +95,7 @@
             <Sync_Out>
                 <Mode>Camera independent</Mode>
                 <Value>120</Value>
-                <Duty cycle>50.000</Duty cycle>
+                <Duty_cycle>50.000</Duty_cycle>
                 <Signal_Polarity>Negative</Signal_Polarity>
             </Sync_Out>
         </Camera>

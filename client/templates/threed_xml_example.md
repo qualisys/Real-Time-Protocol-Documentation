@@ -13,7 +13,7 @@
              <RGBColor>00ffff</RGBColor>
         </Label>
         <Bones>
-             <Bone From="fromName" To="toName"/>
+             <Bone From="fromName" To="toName" Color="ffff00" />
         </Bones>
     </The_3D>
 </QTM_Parameters_Ver_1.13>
