@@ -2920,38 +2920,27 @@ Event ID  | Name                    | Comment
 
 ### Changes in 1.14
  * Added bone color to 3d XML parameters.
-
  * Added support for new processing action: `PreProcessing2D`.
-
  * Added support for real-time processing actions and reprocessing actions settings.
-
  * Changed XML settings tag from `Duty cycle` to `Duty_Cycle`.
-
  * Added option to only stream data from selected analog channels.
 
 ### Changes in 1.13
  * Added export to AVI file and gaze vector processing actions.
-
  * Updated Telnet protocol version.
-
  * Made it possible to change video mode and video capture frequency.
-
  * Changes to force calibration matrix. Now supports more than 6x6 matrixes.
-
  * Added support for trajectory bones.
 
 ### Changes in 1.12
 
  * Added `Load` function for loading measurements in QTM.
-
  * Added `LoadProject` function for loading project in QTM.
-
  * Added new sync out mode SRAM wired in General/Camera settings.
 
 ### Changes in 1.11
 
  * Changed analog XML parameters. Now all channels have their own unit setting.
-
  * Changed timestamp in OSC data frame header, from one 64 bit integers, to two
    32 bit integers (hi and lo word). 
 
@@ -2959,150 +2948,96 @@ Event ID  | Name                    | Comment
 
  * Added general camera XML parameters `External_Time_Base`,
  * `Processing_Actions` and Camera/Underwater.
-
  * Added 3D XML parameters `CalibrationTime`.
-
  * Changed Save command. Added overwrite parameter.
-
  * Made it possible to change the capture frequency via the frequency general
    setting.
-
  * Changed `GetLastEvent` to `GetState`.
-
  * Support fetching of General and Image parameters even if QTM is not
    connected to a camera system.
-
  * Changed the Close command. It will now respond with `Closing file` instead
    of `Closing connection` when not in RT (preview) mode. The “No connection to
    close” response is now sent as a command response string, not an error
    string.
-
  * Changed New command response. The `Already connected` response is now sent
    as a command string, not an error string.
-
  * Added Capture Saved event.
-
  * Removed `Fetching Finished` event.
-
  * Added `GetCaptureQTM` command.
-
  * Changed `GetCapture` response. Send a command response `Sending capture`
    before sending the XML packet with the capture file.
-
  * Added RT server base port to discover response packet.
 
 ### Changes in 1.9
-
  * Added Force single data component.
-
  * Fixed bug in OSC Analog, Analog single and Force data components.
-
  * Fixed bug in OSC 3D no labels data component.
-
  * Allow capture start via RT server even if camera system isn’t calibrated.
 
 ### Changes in 1.8
-
  * Added events: `Camera Settings Changed` and `QTM Shutting Down`.
-
  * Added RT server auto discovery.
-
  * New data frame component: Image
-
  * Added new XML setting: Image and General Camera setting Orientation.
-
  * GetParameters command returns `Parameters not available` error string,
    instead of a `No More Data” package`.
-
  * Added status byte to 2D and 2D linearized data components.
-
  * Changed all 64-bit float coordinates to 32-bit floats in the 3D and 6DOF
    data frames.
-
  * Removed all 32-bit padding form the protocol.
-
  * Don't broadcast string `Server shutting down` to all clients when shutting
    down. Use event `QTM Shutting Down` instead.
-
  * Added password to `TakeControl`.
-
  * Fixed bug in AnalogSingle Big Endian data component.
-
  * Changed name of `GetCapture` to `GetCaptureC3D`
-
  * Changed Force plate identification in XML strings from `Force_Plate_Index`
    to `Plate_ID`.
-
  * Changed name of Event command to `SetQTMEvent`.
 
 ### Changes in 1.7
-
  * Added `Trig` command.
-
  * Added `Event` command.
-
  * Added event: `Waiting For Trigger`.
-
  * Changed format of XML data packet and added new XML setting. General
    setting: `Start On External Trigger`.
 
 ### Changes in 1.6
  * Added OSC support.
-
  * Apply rotation and translation to 6 DOF bodies.
-
  * Added `Camera` to general XML parameters.
-
  * Added `Save` command.
 
 ### Changes in 1.5
 * Added new command: `QTMVersion`.
-
 * `Version` command without argument will return current version used by the
   server.
-
 * Added new general parameter: `Capture Time`.
-
 * Added possibility to change settings via an XML parameter file. Supported
   settings: `Capture time` and Force plate corners.
-
 * Added new commands: `New`, `Close`, `Start`, `Stop`, `GetCapture` and
   `GetLastEvent`.
-
 * Added events: `Connected`, `Closed`, `Capture started` and `Capture stopped`.
 
 ### Changes in 1.4
  * Added 6D (6 DOF) XML parameters.
-
  * Added color to 3D XML parameters.
-
  * Removed LicenceName argument in the CheckLicence command.
 
 ### Changes in 1.3
-
  * Added `2D Drop Rate` and `2D Out Of Sync Rate` to frame component header for:
    3d, 3DRes, 3DnoLabels and 3DNoLabelsRes.
 
 ### Changes in 1.2
-
  * `2Dlin`, `3DRes`, `3DNoLabelsRes`, `6DRes` and `6DEulerRes` data type components were added.
-
  * CheckLicense command added.
-
  * `<AxisUpwards>` item added to XML parameters for 3D. 
 
 ### Changes in 1.1
-
  * UDP support added to the `StreamFrames` command.
-
  * Analog data frame component changed. Includes sample number and can contain
    several samples per channel in a single data frame.
-
  * Force data frame component changed. Includes sample number and can contain
    several samples per force plate in a single data frame.
-
  * Analog parameters changed, device ID added.
-
  * Force parameters changed, device ID added.
-
  * `SendParameters` command changed to `GetParameters`.
