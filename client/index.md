@@ -312,36 +312,44 @@ following content.
   * 1x1
 
 
-* **Video\_Frequency** - 
+* **Video\_Frequency**  
 Set video capture frequency for the camera selected by Camera ID, see above.
 The value is either in Hz ( >1 Hz) or in percent of max frequency (0.0 to
 1.0), 32-bit float. Note: It is only possible to set minimum video capture
 frequency, which is 1 Hz, by setting the Video_Frequency setting to 0 (0%).
 
-* **Video\_Exposure** - Set video exposure time for the camera selected by
-  Camera ID, see above. The value is either in micro seconds ( \>&nbsp;5&nbsp;&micro;s) or in
-  percent of max value (0.0 to 1.0), 32-bit float.
+* **Video\_Exposure**  
+Set video exposure time for the camera selected by Camera ID, see above. The
+value is either in micro seconds ( \>&nbsp;5&nbsp;&micro;s) or in percent of
+max value (0.0 to 1.0), 32-bit float.
 
-* **Video\_Flash\_Time** - Set video flash time for the camera selected by
-  Camera ID, see above. The value is either in micro seconds ( \>&nbsp;5&nbsp;&micro;s) or in
-  percent of max value (0.0 to 1.0), 32-bit float.
+* **Video\_Flash\_Time**  
+Set video flash time for the camera selected by Camera ID, see above. The
+value is either in micro seconds ( \>&nbsp;5&nbsp;&micro;s) or in percent of
+max value (0.0 to 1.0), 32-bit float.
 
-* **Marker\_Exposure** - Set marker exposure time for the camera selected by
-  Camera ID, see above. The value is either in micro seconds ( \>&nbsp;5&nbsp;&micro;s) or in
-  percent of max value (0.0 to 1.0), 32-bit float.
+* **Marker\_Exposure**  
+Set marker exposure time for the camera selected by Camera ID, see above. The
+value is either in micro seconds ( \>&nbsp;5&nbsp;&micro;s) or in percent of
+max value (0.0 to 1.0), 32-bit float.
 
-* **Marker\_Threshold** - Set marker threshold for the camera selected by
-  Camera ID, see above. The value is either an absolute value (50&nbsp;-&nbsp;900) or in
-  percent of max value (0.0 to 1.0), 32-bit float.
+* **Marker\_Threshold**  
+Set marker threshold for the camera selected by Camera ID, see above. The
+value is either an absolute value (50&nbsp;-&nbsp;900) or in percent of max
+value (0.0 to 1.0), 32-bit float.
 
-* **Orientation** - Set camera orientation for the camera selected by Camera
-  ID, see above. The setting affects the 2D camera view in QTM. The value is in
-  degrees (0, 90, 180 or 270), 32-bit integer.
+* **Orientation**  
+Set camera orientation for the camera selected by Camera ID, see above. The
+setting affects the 2D camera view in QTM. The value is in degrees (0, 90,
+180 or 270), 32-bit integer.
 
-* **Sync_Out/Sync_Out2** - Camera settings consist of none or one *Sync_Out*,
-  or one *Sync_Out2* element, with following content:
+* **Sync_Out/Sync_Out2**  
+Camera settings consist of none or one *Sync_Out*, or one *Sync_Out2*
+element, with following content:
 
-  * **Mode** - Synchronization mode for the selected camera. Available modes:
+  * **Mode**  
+  Synchronization mode for the selected camera. Available modes:
+
     * Shutter out 
     * Multiplier
     * Divisor
@@ -349,21 +357,27 @@ frequency, which is 1 Hz, by setting the Video_Frequency setting to 0 (0%).
     * Measurement time
     * Continuous 100Hz
 
-  * **Value** - This integer value is only used for three of the sync out
-    modes. The content is different depending on the *Mode* setting.
+  * **Value**  
+  This integer value is only used for three of the sync out modes. The
+  content is different depending on the *Mode* setting.
+
     * **Multiplier** - Multiplier applied to the camera frequency
     * **Divisor** -  Divisor applied to the camera frequency
     * **Camera** - independent Camera independent frequency
 
-  * **Duty_Cycle** - Output duty cycle in per cent (float). Only used in
-    multiplier, divisor and camera independent mode.
+  * **Duty_Cycle** 
+  Output duty cycle in per cent (float). Only used in multiplier, divisor and
+  camera independent mode.
 
-  * **Signal\_Polarity** - TTL signal polarity. Possible values:
+  * **Signal\_Polarity**  
+  TTL signal polarity. Possible values:
+
     * Positive
     * Negative
 
 
-* **Sync_Out_MT** - Camera settings consist of none or one *Sync_Out_MT* element, with following
+* **Sync_Out_MT**  
+Camera settings consist of none or one *Sync_Out_MT* element, with following
 content:
   
   * **Signal_Polarity**  
@@ -373,9 +387,9 @@ content:
     * Negative
 
 
-* **LensControl** - Camera settings consist of none or one LensControl element
-  (will only be available for cameras that support lens control), with
-  following content:
+* **LensControl**  
+Camera settings consist of none or one LensControl element (will only be
+available for cameras that support lens control), with following content:
 
   * Focus
    Camera lens control focus settings. Below are the attributes used, all as 32-bit float values.
@@ -427,47 +441,56 @@ camera is not enabled since before, the default values will be used for all
 image settings that are not present in the *Camera*element. Otherwise current
 image settings will be used.
 
-* **ID** - Select camera to fetch images from. This value must always be
-  present in the image settings.
+* **ID**  
+Select camera to fetch images from. This value must always be present in the
+image settings.
 
-* **Enabled** - Enable or disable transmission of image data from camera
-  selected by Camera ID, see above. True or False
+* **Enabled**  
+Enable or disable transmission of image data from camera selected by Camera
+ID, see above. True or False
 
-* **Format** - Available image formats.
+* **Format**  
+Available image formats.
 
   * RAWGrayscale 
   * RAWBGR
   * JPG (Default)
   * PNG
 
-* **Width** - Width of the requested image. This does not take into account the
-  cropping. The width is the dimensions had the image not been cropped at all.
-  32-bit integer.
+* **Width**  
+Width of the requested image. This does not take into account the cropping.
+The width is the dimensions had the image not been cropped at all. 32-bit
+integer.
 
-* **Height** - Height of the requested image. This does not take into account
-  the cropping. The height is the dimensions had the image not been cropped at
-  all. 32-bit integer.
+* **Height**  
+Height of the requested image. This does not take into account the cropping.
+The height is the dimensions had the image not been cropped at all. 32-bit
+integer.
 
-* **Left\_Crop** - Position of the requested image left edge relative the
-  original image. 32-bit float.
+* **Left\_Crop**  
+Position of the requested image left edge relative the original image. 32-bit
+float.
 
   * 0.0 = Original image left edge (Default).
   * 1.0 = Original image right edge.
 
-* **Top\_Crop** - Position of requested image top edge relative the original
-  image. 32-bit float.
+* **Top\_Crop**  
+Position of requested image top edge relative the original image. 32-bit
+float.
 
   * 0.0 = Original image top edge (Default).  
   * 1.0 = Original image bottom edge.
 
-* **Right\_Crop** - Position of requested image right edge relative the
-  original image. 32-bit float.
+* **Right\_Crop**  
+Position of requested image right edge relative the original image. 32-bit
+float.
 
   * 0.0 = Original image left edge.
   * 1.0 = Original image right edge (Default).
 
-* **Bottom\_Crop** Position of requested image bottom edge relative the
-  original image. 32-bit float.
+* **Bottom\_Crop**  
+Position of requested image bottom edge relative the original image. 32-bit
+float.
 
   * 0.0 = Original image top edge.
   * 1.0 = Original image bottom edge (Default).
@@ -478,20 +501,20 @@ The Force section in the XML data packet consists of none or several
 *Plate* elements. 
 
 **Plate**
-
 Each *Plate* element consists of a *Force\_Plate\_Index* and a *Location*
 element. The settings within a plate element must come in a predefined order,
 see [Settings example](#settings-example).
 
-* **Force\_ID** - ID of camera to fetch images from. This value must always be
-  present in the image settings.
+* **Force\_ID**  
+ID of camera to fetch images from. This value must always be present in the
+image settings.
 
-* **Location** - The *Location* element consists of four corner elements:
-  *Corner1, Corner2, Corner3* and *Corner4*. Each corner element consists of X,
-  Y and Z elements with the coordinates for the force plate (32 bit floats).
+* **Location**  
+The *Location* element consists of four corner elements: *Corner1*,
+*Corner2*, *Corner3* and *Corner4*. Each corner element consists of X, Y and Z
+*elements with the coordinates for the force plate (32 bit floats).
 
 #### Settings example
-
 Send the following XML data packet to the RT server:
 
 {{> settings_example }}
@@ -508,7 +531,6 @@ Setting parameters failed
 ```
 
 ### Streaming data
-
 The client has two options when requesting data frames from the QTM RT
 server: polling mode or streaming mode. 
 
@@ -2887,7 +2909,7 @@ Event ID  | Name                    | Comment
 
 
 ## Changelog
- 
+
 ### Changes in 1.18
  * Added Miqus Video Color camera type.
  * Added Auto white balance camera settings
