@@ -502,6 +502,8 @@ GetCaptureC3D        | -
 GetCaptureQTM        | -
 Trig                 | -
 SetQTMEvent          | `Label`
+Reprocess            | -
+Led                  | (Camera) (On | Off | Pulsing) (Green | Amber | All)
 Quit                 | -
 
 
@@ -614,7 +616,7 @@ Response:   Parameters not available                    or
 
 ### GetCurrentFrame
 > **`GetCurrentFrame`** `All | ([2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes]
-                  [Analog:[channels]] [AnalogSingle:[channels]] [Force] [6D] [6DRes] [6DEuler]
+                  [Analog[:channels]] [AnalogSingle[:channels]] [Force] [6D] [6DRes] [6DEuler]
                   [6DEulerRes] [Image])`
 
 <div class="well">The optional channels for Analog and AnalogSingle, is a
@@ -656,7 +658,7 @@ Response:   One data frame is sent to the client according to the
 ### StreamFrames
 > **`StreamFrames`** `Stop | ((FrequencyDivisor:n | Frequency:n | AllFrames)
                       [UDP[:address]:port] (All |  ([2D] [2DLin] [3D] [3DRes] [3DNoLabels]
-                      [3DNoLabelsRes] [Analog:[channels]] [AnalogSingle:[channels]] [Force] [6D] [6DRes] [6DEuler]
+                      [3DNoLabelsRes] [Analog[:channels]] [AnalogSingle[:channels]] [Force] [6D] [6DRes] [6DEuler]
                       [6DEulerRes] [Image])))`
 
 <div class="well">The optional channels for Analog and AnalogSingle, is a
@@ -1007,6 +1009,39 @@ Command:    Event test_event
 Response:   Event set                                    or
             Event label too long                         or
             QTM is not capturing                         or
+            You must be master to issue this command
+```
+
+### Reprocess
+
+This command will reprocess current measurement. It is only possible to issue
+this command if you have the control over the QTM RT interface. See [Events](#events).
+
+Example:
+```coffeescript
+Command:    Reprocess
+Response:   Reprocessing file                            or
+            No file open                                 or
+            RT from file running
+```
+
+### Led
+> **`Led`** `camera mode color`
+
+**camera**: Number of the Miqus camera to change the LED.
+
+**mode**: This can be one of `On`, `Off` or `Pulsing`.
+
+**color**: This can be one of `Green`, `Amber` or `All`.
+
+This command can turn the leds on a Miqus camera on/off. You can specify if
+the Miqus leds should be on, off or pulsing in all or individual colors
+(green, amber).
+
+Example:
+```coffeescript
+Command:    Led
+Response:   Parse error                                         or
             You must be master to issue this command
 ```
 
@@ -2642,14 +2677,26 @@ Event ID  | Name                    | Comment
 
 ## Changelog
 
+### Changes in 1.15
+ * Added `Led` command.
+ * Added `Reprocess` command.
+ * Added Miqus Sync Unit camera type.
+ * Added general camera settings for Miqus Sync Unit trigger settings
+   (`Start_On_Trigger_NO`, `Start_On_Trigger_NC`,
+   `Start_On_Trigger_Software`)
+ * Added general camera setting, `Supports_HW_Sync`, `Sync_Out2` and
+   `Sync_Out_MT`.
+ * Removed SRAM wired sync out mode.
+ * Added `Camera_System` and subvalue `Type` to general XML.
+
 ### Changes in 1.14
  * Added bone color to 3d XML parameters.
 
- * Added support for new processing action: 2d pre processing.
+ * Added support for new processing action: `PreProcessing2D`.
 
  * Added support for real-time processing actions and reprocessing actions settings.
 
- * Changed XML settings tag from “Duty cycle” to “Duty_Cycle”.
+ * Changed XML settings tag from `Duty cycle` to `Duty_Cycle`.
 
  * Added option to only stream data from selected analog channels.
 
