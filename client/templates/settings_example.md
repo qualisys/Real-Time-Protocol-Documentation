@@ -16,20 +16,43 @@
             <Signal_Shutter_Delay>10000</Signal_Shutter_Delay>
             <Non_Periodic_Timeout>10</Non_Periodic_Timeout>
         </External_Time_Base>
-        <Processing_Actions>
-            <Tracking>3D</Tracking>
-            <TwinSystemMerge>False</TwinSystemMerge>
-            <SplineFill>True</SplineFill>
-            <AIM>True</AIM>
-            <Track6DOF>False</Track6DOF>
-            <ForceData>False</ForceData>
-            <GazeVectorData>False</GazeVectorData>
-            <ExportTSV>False</ExportTSV>
-            <ExportC3D>False</ExportC3D>
-            <ExportDiff>False</ExportDiff>
-            <ExportMatlabDirect>False</ExportMatlabDirect>
-            <ExportMatlabFile>False</ExportMatlabFile>
-        </Processing_Actions>
+		<Processing_Actions>
+			<PreProcess2D>False</PreProcess2D>
+			<Tracking>3D</Tracking>
+			<TwinSystemMerge>False</TwinSystemMerge>
+			<SplineFill>True</SplineFill>
+			<AIM>True</AIM>
+			<Track6DOF>False</Track6DOF>
+			<ForceData>False</ForceData>
+			<GazeVectorData>False</GazeVectorData>
+			<SkeletonData>False</SkeletonData>
+			<ExportTSV>False</ExportTSV>
+			<ExportC3D>False</ExportC3D>
+			<ExportMatlabFile>False</ExportMatlabFile>
+		</Processing_Actions>
+		<RealTime_Processing_Actions>
+			<PreProcess2D>False</PreProcess2D>
+			<Tracking>3D</Tracking>
+			<AIM>True</AIM>
+			<Track6DOF>False</Track6DOF>
+			<ForceData>False</ForceData>
+			<GazeVectorData>False</GazeVectorData>
+			<SkeletonData>False</SkeletonData>
+		</RealTime_Processing_Actions>
+		<Reprocessing_Actions>
+			<PreProcess2D>False</PreProcess2D>
+			<Tracking>3D</Tracking>
+			<TwinSystemMerge>False</TwinSystemMerge>
+			<SplineFill>True</SplineFill>
+			<AIM>True</AIM>
+			<Track6DOF>False</Track6DOF>
+			<ForceData>False</ForceData>
+			<GazeVectorData>False</GazeVectorData>
+			<SkeletonData>False</SkeletonData>
+			<ExportTSV>False</ExportTSV>
+			<ExportC3D>False</ExportC3D>
+			<ExportMatlabFile>False</ExportMatlabFile>
+		</Reprocessing_Actions>
         <Camera>
             <ID>1</ID>
             <Mode>Marker</Mode>
