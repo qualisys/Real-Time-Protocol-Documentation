@@ -36,16 +36,14 @@
 							<tr>
 								<th>Written by</th>
 								<th>Document number</th>
-								<th>Revision</th>
 								<th>Date </th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td>Lars Nilsson</td>
-								<td class="document-number">QDEV-QTM-EXTERN-SDK_RTQTM_RT_SERVER_V_1_13</td>
-								<td>1</td>
-								<td>Jun 23rd 2015</td>
+								<td>Qualisys Software Team</td>
+								<td class="document-number">QDEV-QTM-EXTERN-SDK_RTQTM_RT_SERVER_V_1_18</td>
+								<td>Oct 17th 2018</td>
 							</tr>
 						</tbody>
 					</table>
@@ -58,20 +56,20 @@
 			<div class="row title">
 				<div class="col-sm-12">
 					<h1 id="qtm-real-time-server-protocol-documentation">QTM Real-time Server Protocol Documentation</h1>
-					<h3 id="title-version">Version 1.13</h3>
+					<h3 id="title-version">Version 1.17</h3>
 				</div>
 			</div>
 			<div class="row content">
 				<div class="col-lg-9 col-md-8 col-sm-7 col-xs-11 body">
 
-<nav class="toq"><ol class="nav"><li class="toq-level-1"><ol><li class="toq-level-2"><span>1</span> <a href="#qtm-real-time-server-protocol-documentation">QTM Real-time Server Protocol Documentation</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>1.1</span> <a href="#title-version">Version 1.13</a></li></ol></li><li class="toq-level-2"><span>2</span> <a href="#introduction">Introduction</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>2.1</span> <a href="#protocol-versions">Protocol versions</a></li><li class="toq-level-3"><span>2.2</span> <a href="#standard">Standard</a></li><li class="toq-level-3"><span>2.3</span> <a href="#open-sound-control">Open sound control</a></li></ol></li><li class="toq-level-2"><span>3</span> <a href="#overview">Overview</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>3.1</span> <a href="#protocol-details">Protocol details</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>3.1.1</span> <a href="#standards-used">Standards used</a></li><li class="toq-level-4"><span>3.1.2</span> <a href="#byte-order">Byte order</a></li><li class="toq-level-4"><span>3.1.3</span> <a href="#floating-point-values">Floating point values</a></li></ol></li><li class="toq-level-3"><span>3.2</span> <a href="#auto-discover">Auto discover</a></li><li class="toq-level-3"><span>3.3</span> <a href="#connecting">Connecting</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>3.3.1</span> <a href="#disabling-nagle-39-s-algorithm">Disabling Nagle&#39;s algorithm</a></li><li class="toq-level-4"><span>3.3.2</span> <a href="#ip-port-numbers">IP port numbers</a></li></ol></li><li class="toq-level-3"><span>3.4</span> <a href="#protocol-structure">Protocol structure</a></li><li class="toq-level-3"><span>3.5</span> <a href="#retrieving-settings">Retrieving settings</a></li><li class="toq-level-3"><span>3.6</span> <a href="#change-settings">Change settings</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>3.6.1</span> <a href="#general-settings">General settings</a></li><li class="toq-level-4"><ol><li class="toq-level-5"><span>3.6.1.1</span> <a href="#frequency">Frequency</a></li><li class="toq-level-5"><span>3.6.1.2</span> <a href="#capture_time">Capture_Time</a></li><li class="toq-level-5"><span>3.6.1.3</span> <a href="#start_on_external_trigger">Start_On_External_Trigger</a></li><li class="toq-level-5"><span>3.6.1.4</span> <a href="#external_time_base">External_Time_Base</a></li><li class="toq-level-5"><span>3.6.1.5</span> <a href="#processing_actions">Processing_Actions</a></li><li class="toq-level-5"><span>3.6.1.6</span> <a href="#camera">Camera</a></li></ol></li><li class="toq-level-4"><span>3.6.2</span> <a href="#image-settings">Image settings</a></li><li class="toq-level-4"><ol><li class="toq-level-5"><span>3.6.2.1</span> <a href="#camera-2">Camera</a></li></ol></li><li class="toq-level-4"><span>3.6.3</span> <a href="#force-settings">Force settings</a></li><li class="toq-level-4"><span>3.6.4</span> <a href="#settings-example">Settings example</a></li></ol></li><li class="toq-level-3"><span>3.7</span> <a href="#streaming-data">Streaming data</a></li><li class="toq-level-3"><span>3.8</span> <a href="#command-summary">Command summary</a></li></ol></li><li class="toq-level-2"><span>4</span> <a href="#commands">Commands</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>4.1</span> <a href="#version">Version</a></li><li class="toq-level-3"><span>4.2</span> <a href="#qtmversion">QTMVersion</a></li><li class="toq-level-3"><span>4.3</span> <a href="#byteorder">ByteOrder</a></li><li class="toq-level-3"><span>4.4</span> <a href="#getstate">GetState</a></li><li class="toq-level-3"><span>4.5</span> <a href="#getparameters">GetParameters</a></li><li class="toq-level-3"><span>4.6</span> <a href="#getcurrentframe">GetCurrentFrame</a></li><li class="toq-level-3"><span>4.7</span> <a href="#streamframes">StreamFrames</a></li><li class="toq-level-3"><span>4.8</span> <a href="#takecontrol">TakeControl</a></li><li class="toq-level-3"><span>4.9</span> <a href="#releasecontrol">ReleaseControl</a></li><li class="toq-level-3"><span>4.10</span> <a href="#new">New</a></li><li class="toq-level-3"><span>4.11</span> <a href="#close">Close</a></li><li class="toq-level-3"><span>4.12</span> <a href="#start">Start</a></li><li class="toq-level-3"><span>4.13</span> <a href="#stop">Stop</a></li><li class="toq-level-3"><span>4.14</span> <a href="#load">Load</a></li><li class="toq-level-3"><span>4.15</span> <a href="#save">Save</a></li><li class="toq-level-3"><span>4.16</span> <a href="#loadproject">LoadProject</a></li><li class="toq-level-3"><span>4.17</span> <a href="#getcapturec3d">GetCaptureC3D</a></li><li class="toq-level-3"><span>4.18</span> <a href="#getcaptureqtm">GetCaptureQTM</a></li><li class="toq-level-3"><span>4.19</span> <a href="#trig">Trig</a></li><li class="toq-level-3"><span>4.20</span> <a href="#setqtmevent">SetQTMEvent</a></li><li class="toq-level-3"><span>4.21</span> <a href="#quit">Quit</a></li></ol></li><li class="toq-level-2"><span>5</span> <a href="#qtm-rt-packets">QTM RT Packets</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>5.1</span> <a href="#structure">Structure</a></li><li class="toq-level-3"><span>5.2</span> <a href="#packet-types">Packet types</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>5.2.1</span> <a href="#error-packet">Error packet</a></li><li class="toq-level-4"><span>5.2.2</span> <a href="#command-command-response-packet">Command / Command Response packet</a></li><li class="toq-level-4"><span>5.2.3</span> <a href="#xml-packet">XML packet</a></li></ol></li><li class="toq-level-3"><span>5.3</span> <a href="#xml-parameters">XML Parameters</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>5.3.1</span> <a href="#general-xml-parameters">General XML parameters</a></li><li class="toq-level-4"><span>5.3.2</span> <a href="#3d-xml-parameters">3D XML parameters</a></li><li class="toq-level-4"><span>5.3.3</span> <a href="#6d-xml-parameters">6D XML parameters</a></li><li class="toq-level-4"><span>5.3.4</span> <a href="#gaze-vector-xml-parameters">Gaze vector XML parameters</a></li><li class="toq-level-4"><span>5.3.5</span> <a href="#analog-xml-parameters">Analog XML parameters</a></li><li class="toq-level-4"><span>5.3.6</span> <a href="#force-xml-parameters">Force XML parameters</a></li><li class="toq-level-4"><span>5.3.7</span> <a href="#image-xml-parameters">Image XML parameters</a></li></ol></li><li class="toq-level-3"><span>5.4</span> <a href="#data-packet">Data packet</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>5.4.1</span> <a href="#data-component-types">Data component types</a></li><li class="toq-level-4"><span>5.4.2</span> <a href="#2d-and-2d-linearized-component">2D and 2D linearized component</a></li><li class="toq-level-4"><span>5.4.3</span> <a href="#3d-component">3D component</a></li><li class="toq-level-4"><span>5.4.4</span> <a href="#3d-with-residuals-component">3D with residuals component</a></li><li class="toq-level-4"><span>5.4.5</span> <a href="#3d-no-labels-component">3D no labels component</a></li><li class="toq-level-4"><span>5.4.6</span> <a href="#3d-no-labels-with-residuals-component">3D no labels with residuals component</a></li><li class="toq-level-4"><span>5.4.7</span> <a href="#6dof-component">6DOF component</a></li><li class="toq-level-4"><span>5.4.8</span> <a href="#6dof-with-residuals-component">6DOF with residuals component</a></li><li class="toq-level-4"><span>5.4.9</span> <a href="#6dof-euler-component">6DOF Euler component</a></li><li class="toq-level-4"><span>5.4.10</span> <a href="#6dof-euler-with-residuals-component">6DOF Euler with residuals component</a></li><li class="toq-level-4"><span>5.4.11</span> <a href="#analog-component">Analog component</a></li><li class="toq-level-4"><span>5.4.12</span> <a href="#analog-single-component">Analog single component</a></li><li class="toq-level-4"><span>5.4.13</span> <a href="#force-component">Force component</a></li><li class="toq-level-4"><span>5.4.14</span> <a href="#force-single-component">Force single component</a></li><li class="toq-level-4"><span>5.4.15</span> <a href="#image-component">Image component</a></li></ol></li><li class="toq-level-3"><span>5.5</span> <a href="#no-more-data-packet">No More Data packet</a></li><li class="toq-level-3"><span>5.6</span> <a href="#c3d-packet">C3D packet</a></li><li class="toq-level-3"><span>5.7</span> <a href="#qtm-packet">QTM packet</a></li><li class="toq-level-3"><span>5.8</span> <a href="#event-packet">Event packet</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>5.8.1</span> <a href="#events">Events</a></li></ol></li><li class="toq-level-3"><span>5.9</span> <a href="#discover-packet">Discover packet</a></li><li class="toq-level-3"><span>5.10</span> <a href="#discover-response-packet">Discover response packet</a></li></ol></li><li class="toq-level-2"><span>6</span> <a href="#open-sound-control-osc-">Open Sound Control (OSC)</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>6.1</span> <a href="#connecting-osc-">Connecting (OSC)</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>6.1.1</span> <a href="#port-number-osc-">Port number (OSC)</a></li></ol></li><li class="toq-level-3"><span>6.2</span> <a href="#commands-osc-">Commands (OSC)</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>6.2.1</span> <a href="#connect-osc-">Connect (OSC)</a></li><li class="toq-level-4"><span>6.2.2</span> <a href="#disconnect-osc-">Disconnect (OSC)</a></li><li class="toq-level-4"><span>6.2.3</span> <a href="#version-osc-">Version (OSC)</a></li><li class="toq-level-4"><span>6.2.4</span> <a href="#qtmversion-osc-">QTMVersion (OSC)</a></li><li class="toq-level-4"><span>6.2.5</span> <a href="#getstate-osc-">GetState (OSC)</a></li><li class="toq-level-4"><span>6.2.6</span> <a href="#checklicense-osc-">CheckLicense (OSC)</a></li><li class="toq-level-4"><span>6.2.7</span> <a href="#getparameters-osc-">GetParameters (OSC)</a></li><li class="toq-level-4"><span>6.2.8</span> <a href="#getcurrentframe-osc-">GetCurrentFrame (OSC)</a></li><li class="toq-level-4"><span>6.2.9</span> <a href="#streamframes-osc-">StreamFrames (OSC)</a></li></ol></li><li class="toq-level-3"><span>6.3</span> <a href="#qtm-rt-packets-osc-">QTM RT Packets (OSC)</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>6.3.1</span> <a href="#structure-osc-">Structure (OSC)</a></li><li class="toq-level-4"><span>6.3.2</span> <a href="#packet-types-osc-">Packet types (OSC)</a></li><li class="toq-level-4"><span>6.3.3</span> <a href="#error-packet-osc-">Error packet (OSC)</a></li><li class="toq-level-4"><span>6.3.4</span> <a href="#command-packet-osc-">Command packet (OSC)</a></li><li class="toq-level-4"><span>6.3.5</span> <a href="#command-response-packet-osc-">Command response packet (OSC)</a></li><li class="toq-level-4"><span>6.3.6</span> <a href="#xml-packet-osc-">XML packet (OSC)</a></li><li class="toq-level-4"><span>6.3.7</span> <a href="#data-packet-osc-">Data packet (OSC)</a></li><li class="toq-level-4"><ol><li class="toq-level-5"><span>6.3.7.1</span> <a href="#data-frame-header-osc-">Data frame header (OSC)</a></li><li class="toq-level-5"><span>6.3.7.2</span> <a href="#data-frame-component-types-osc-">Data frame component types (OSC)</a></li><li class="toq-level-5"><span>6.3.7.3</span> <a href="#2d-and-2d-linearized-component-osc-">2D and 2D linearized component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.4</span> <a href="#3d-component-osc-">3D component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.5</span> <a href="#3d-with-residuals-component-osc-">3D with residuals component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.6</span> <a href="#3d-no-labels-component-osc-">3D no labels component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.7</span> <a href="#3d-no-labels-with-residuals-component-osc-">3D no labels with residuals component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.8</span> <a href="#analog-component-osc-">Analog component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.9</span> <a href="#analog-single-component-osc-">Analog single component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.10</span> <a href="#force-component-osc-">Force component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.11</span> <a href="#force-single-component-osc-">Force single component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.12</span> <a href="#6dof-component-osc-">6DOF component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.13</span> <a href="#6dof-with-residuals-component-osc-">6DOF with residuals component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.14</span> <a href="#6dof-euler-component-osc-">6DOF Euler component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.15</span> <a href="#6dof-euler-with-residuals-component-osc-">6DOF Euler with residuals component (OSC)</a></li></ol></li></ol></li><li class="toq-level-3"><span>6.4</span> <a href="#no-more-data-packet-osc-">No More Data packet (OSC)</a></li><li class="toq-level-3"><span>6.5</span> <a href="#event-data-packet-osc-">Event Data packet (OSC)</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>6.5.1</span> <a href="#events-osc-">Events (OSC)</a></li></ol></li></ol></li><li class="toq-level-2"><span>7</span> <a href="#changelog">Changelog</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>7.1</span> <a href="#changes-in-1-13">Changes in 1.13</a></li><li class="toq-level-3"><span>7.2</span> <a href="#changes-in-1-12">Changes in 1.12</a></li><li class="toq-level-3"><span>7.3</span> <a href="#changes-in-1-11">Changes in 1.11</a></li><li class="toq-level-3"><span>7.4</span> <a href="#changes-in-1-10">Changes in 1.10</a></li><li class="toq-level-3"><span>7.5</span> <a href="#changes-in-1-9">Changes in 1.9</a></li><li class="toq-level-3"><span>7.6</span> <a href="#changes-in-1-8">Changes in 1.8</a></li><li class="toq-level-3"><span>7.7</span> <a href="#changes-in-1-7">Changes in 1.7</a></li><li class="toq-level-3"><span>7.8</span> <a href="#changes-in-1-6">Changes in 1.6</a></li><li class="toq-level-3"><span>7.9</span> <a href="#changes-in-1-5">Changes in 1.5</a></li><li class="toq-level-3"><span>7.10</span> <a href="#changes-in-1-4">Changes in 1.4</a></li><li class="toq-level-3"><span>7.11</span> <a href="#changes-in-1-3">Changes in 1.3</a></li><li class="toq-level-3"><span>7.12</span> <a href="#changes-in-1-2">Changes in 1.2</a></li><li class="toq-level-3"><span>7.13</span> <a href="#changes-in-1-1">Changes in 1.1</a></li></ol></li></ol></li></ol></nav>
+<nav class="toq"><ol class="nav"><li class="toq-level-1"><ol><li class="toq-level-2"><span>1</span> <a href="#qtm-real-time-server-protocol-documentation">QTM Real-time Server Protocol Documentation</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>1.1</span> <a href="#title-version">Version 1.17</a></li></ol></li><li class="toq-level-2"><span>2</span> <a href="#introduction">Introduction</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>2.1</span> <a href="#protocol-version">Protocol version</a></li><li class="toq-level-3"><span>2.2</span> <a href="#standard">Standard</a></li><li class="toq-level-3"><span>2.3</span> <a href="#open-sound-control">Open sound control</a></li></ol></li><li class="toq-level-2"><span>3</span> <a href="#overview">Overview</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>3.1</span> <a href="#protocol-details">Protocol details</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>3.1.1</span> <a href="#standards-used">Standards used</a></li><li class="toq-level-4"><span>3.1.2</span> <a href="#byte-order">Byte order</a></li><li class="toq-level-4"><span>3.1.3</span> <a href="#floating-point-values">Floating point values</a></li></ol></li><li class="toq-level-3"><span>3.2</span> <a href="#auto-discover">Auto discover</a></li><li class="toq-level-3"><span>3.3</span> <a href="#connecting">Connecting</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>3.3.1</span> <a href="#disabling-nagle-39-s-algorithm">Disabling Nagle&#39;s algorithm</a></li><li class="toq-level-4"><span>3.3.2</span> <a href="#ip-port-numbers">IP port numbers</a></li></ol></li><li class="toq-level-3"><span>3.4</span> <a href="#protocol-structure">Protocol structure</a></li><li class="toq-level-3"><span>3.5</span> <a href="#retrieving-settings">Retrieving settings</a></li><li class="toq-level-3"><span>3.6</span> <a href="#change-settings">Change settings</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>3.6.1</span> <a href="#general-settings">General settings</a></li><li class="toq-level-4"><ol><li class="toq-level-5"><span>3.6.1.1</span> <a href="#frequency">Frequency</a></li><li class="toq-level-5"><span>3.6.1.2</span> <a href="#capture_time">Capture_Time</a></li><li class="toq-level-5"><span>3.6.1.3</span> <a href="#start_on_external_trigger">Start_On_External_Trigger</a></li><li class="toq-level-5"><span>3.6.1.4</span> <a href="#start_on_trigger_no">Start_On_Trigger_NO</a></li><li class="toq-level-5"><span>3.6.1.5</span> <a href="#start_on_trigger_nc">Start_On_Trigger_NC</a></li><li class="toq-level-5"><span>3.6.1.6</span> <a href="#start_on_trigger_software">Start_On_Trigger_Software</a></li><li class="toq-level-5"><span>3.6.1.7</span> <a href="#external_time_base">External_Time_Base</a></li></ol></li><li class="toq-level-4"><span>3.6.2</span> <a href="#processing_actions">Processing_Actions</a></li><li class="toq-level-4"><span>3.6.3</span> <a href="#realtime_processing_actions">RealTime_Processing_Actions</a></li><li class="toq-level-4"><span>3.6.4</span> <a href="#reprocessing_actions">Reprocessing_Actions</a></li><li class="toq-level-4"><span>3.6.5</span> <a href="#camera">Camera</a></li><li class="toq-level-4"><span>3.6.6</span> <a href="#image-settings">Image settings</a></li><li class="toq-level-4"><ol><li class="toq-level-5"><span>3.6.6.1</span> <a href="#camera-2">Camera</a></li></ol></li><li class="toq-level-4"><span>3.6.7</span> <a href="#force-settings">Force settings</a></li><li class="toq-level-4"><span>3.6.8</span> <a href="#settings-example">Settings example</a></li></ol></li><li class="toq-level-3"><span>3.7</span> <a href="#streaming-data">Streaming data</a></li><li class="toq-level-3"><span>3.8</span> <a href="#command-summary">Command summary</a></li></ol></li><li class="toq-level-2"><span>4</span> <a href="#commands">Commands</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>4.1</span> <a href="#version">Version</a></li><li class="toq-level-3"><span>4.2</span> <a href="#qtmversion">QTMVersion</a></li><li class="toq-level-3"><span>4.3</span> <a href="#byteorder">ByteOrder</a></li><li class="toq-level-3"><span>4.4</span> <a href="#getstate">GetState</a></li><li class="toq-level-3"><span>4.5</span> <a href="#getparameters">GetParameters</a></li><li class="toq-level-3"><span>4.6</span> <a href="#getcurrentframe">GetCurrentFrame</a></li><li class="toq-level-3"><span>4.7</span> <a href="#streamframes">StreamFrames</a></li><li class="toq-level-3"><span>4.8</span> <a href="#takecontrol">TakeControl</a></li><li class="toq-level-3"><span>4.9</span> <a href="#releasecontrol">ReleaseControl</a></li><li class="toq-level-3"><span>4.10</span> <a href="#new">New</a></li><li class="toq-level-3"><span>4.11</span> <a href="#close">Close</a></li><li class="toq-level-3"><span>4.12</span> <a href="#start">Start</a></li><li class="toq-level-3"><span>4.13</span> <a href="#stop">Stop</a></li><li class="toq-level-3"><span>4.14</span> <a href="#load">Load</a></li><li class="toq-level-3"><span>4.15</span> <a href="#save">Save</a></li><li class="toq-level-3"><span>4.16</span> <a href="#loadproject">LoadProject</a></li><li class="toq-level-3"><span>4.17</span> <a href="#getcapturec3d">GetCaptureC3D</a></li><li class="toq-level-3"><span>4.18</span> <a href="#getcaptureqtm">GetCaptureQTM</a></li><li class="toq-level-3"><span>4.19</span> <a href="#trig">Trig</a></li><li class="toq-level-3"><span>4.20</span> <a href="#setqtmevent">SetQTMEvent</a></li><li class="toq-level-3"><span>4.21</span> <a href="#reprocess">Reprocess</a></li><li class="toq-level-3"><span>4.22</span> <a href="#led">Led</a></li><li class="toq-level-3"><span>4.23</span> <a href="#quit">Quit</a></li></ol></li><li class="toq-level-2"><span>5</span> <a href="#qtm-rt-packets">QTM RT Packets</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>5.1</span> <a href="#structure">Structure</a></li><li class="toq-level-3"><span>5.2</span> <a href="#packet-types">Packet types</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>5.2.1</span> <a href="#error-packet">Error packet</a></li><li class="toq-level-4"><span>5.2.2</span> <a href="#command-command-response-packet">Command / Command Response packet</a></li><li class="toq-level-4"><span>5.2.3</span> <a href="#xml-packet">XML packet</a></li></ol></li><li class="toq-level-3"><span>5.3</span> <a href="#xml-parameters">XML Parameters</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>5.3.1</span> <a href="#general-xml-parameters">General XML parameters</a></li><li class="toq-level-4"><span>5.3.2</span> <a href="#3d-xml-parameters">3D XML parameters</a></li><li class="toq-level-4"><span>5.3.3</span> <a href="#6d-xml-parameters">6D XML parameters</a></li><li class="toq-level-4"><span>5.3.4</span> <a href="#gaze-vector-xml-parameters">Gaze vector XML parameters</a></li><li class="toq-level-4"><span>5.3.5</span> <a href="#analog-xml-parameters">Analog XML parameters</a></li><li class="toq-level-4"><span>5.3.6</span> <a href="#force-xml-parameters">Force XML parameters</a></li><li class="toq-level-4"><span>5.3.7</span> <a href="#image-xml-parameters">Image XML parameters</a></li></ol></li><li class="toq-level-3"><span>5.4</span> <a href="#data-packet">Data packet</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>5.4.1</span> <a href="#data-component-types">Data component types</a></li><li class="toq-level-4"><span>5.4.2</span> <a href="#2d-and-2d-linearized-component">2D and 2D linearized component</a></li><li class="toq-level-4"><span>5.4.3</span> <a href="#3d-component">3D component</a></li><li class="toq-level-4"><span>5.4.4</span> <a href="#3d-with-residuals-component">3D with residuals component</a></li><li class="toq-level-4"><span>5.4.5</span> <a href="#3d-no-labels-component">3D no labels component</a></li><li class="toq-level-4"><span>5.4.6</span> <a href="#3d-no-labels-with-residuals-component">3D no labels with residuals component</a></li><li class="toq-level-4"><span>5.4.7</span> <a href="#6dof-component">6DOF component</a></li><li class="toq-level-4"><span>5.4.8</span> <a href="#6dof-with-residuals-component">6DOF with residuals component</a></li><li class="toq-level-4"><span>5.4.9</span> <a href="#6dof-euler-component">6DOF Euler component</a></li><li class="toq-level-4"><span>5.4.10</span> <a href="#6dof-euler-with-residuals-component">6DOF Euler with residuals component</a></li><li class="toq-level-4"><span>5.4.11</span> <a href="#analog-component">Analog component</a></li><li class="toq-level-4"><span>5.4.12</span> <a href="#analog-single-component">Analog single component</a></li><li class="toq-level-4"><span>5.4.13</span> <a href="#force-component">Force component</a></li><li class="toq-level-4"><span>5.4.14</span> <a href="#force-single-component">Force single component</a></li><li class="toq-level-4"><span>5.4.15</span> <a href="#image-component">Image component</a></li><li class="toq-level-4"><span>5.4.16</span> <a href="#gaze-vector">Gaze vector</a></li><li class="toq-level-4"><span>5.4.17</span> <a href="#timecode">Timecode</a></li></ol></li><li class="toq-level-3"><span>5.5</span> <a href="#no-more-data-packet">No More Data packet</a></li><li class="toq-level-3"><span>5.6</span> <a href="#c3d-packet">C3D packet</a></li><li class="toq-level-3"><span>5.7</span> <a href="#qtm-packet">QTM packet</a></li><li class="toq-level-3"><span>5.8</span> <a href="#event-packet">Event packet</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>5.8.1</span> <a href="#events">Events</a></li></ol></li><li class="toq-level-3"><span>5.9</span> <a href="#discover-packet">Discover packet</a></li><li class="toq-level-3"><span>5.10</span> <a href="#discover-response-packet">Discover response packet</a></li></ol></li><li class="toq-level-2"><span>6</span> <a href="#open-sound-control-osc-">Open Sound Control (OSC)</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>6.1</span> <a href="#connecting-osc-">Connecting (OSC)</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>6.1.1</span> <a href="#port-number-osc-">Port number (OSC)</a></li></ol></li><li class="toq-level-3"><span>6.2</span> <a href="#commands-osc-">Commands (OSC)</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>6.2.1</span> <a href="#connect-osc-">Connect (OSC)</a></li><li class="toq-level-4"><span>6.2.2</span> <a href="#disconnect-osc-">Disconnect (OSC)</a></li><li class="toq-level-4"><span>6.2.3</span> <a href="#version-osc-">Version (OSC)</a></li><li class="toq-level-4"><span>6.2.4</span> <a href="#qtmversion-osc-">QTMVersion (OSC)</a></li><li class="toq-level-4"><span>6.2.5</span> <a href="#getstate-osc-">GetState (OSC)</a></li><li class="toq-level-4"><span>6.2.6</span> <a href="#checklicense-osc-">CheckLicense (OSC)</a></li><li class="toq-level-4"><span>6.2.7</span> <a href="#getparameters-osc-">GetParameters (OSC)</a></li><li class="toq-level-4"><span>6.2.8</span> <a href="#getcurrentframe-osc-">GetCurrentFrame (OSC)</a></li><li class="toq-level-4"><span>6.2.9</span> <a href="#streamframes-osc-">StreamFrames (OSC)</a></li></ol></li><li class="toq-level-3"><span>6.3</span> <a href="#qtm-rt-packets-osc-">QTM RT Packets (OSC)</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>6.3.1</span> <a href="#structure-osc-">Structure (OSC)</a></li><li class="toq-level-4"><span>6.3.2</span> <a href="#packet-types-osc-">Packet types (OSC)</a></li><li class="toq-level-4"><span>6.3.3</span> <a href="#error-packet-osc-">Error packet (OSC)</a></li><li class="toq-level-4"><span>6.3.4</span> <a href="#command-packet-osc-">Command packet (OSC)</a></li><li class="toq-level-4"><span>6.3.5</span> <a href="#command-response-packet-osc-">Command response packet (OSC)</a></li><li class="toq-level-4"><span>6.3.6</span> <a href="#xml-packet-osc-">XML packet (OSC)</a></li><li class="toq-level-4"><span>6.3.7</span> <a href="#data-packet-osc-">Data packet (OSC)</a></li><li class="toq-level-4"><ol><li class="toq-level-5"><span>6.3.7.1</span> <a href="#data-frame-header-osc-">Data frame header (OSC)</a></li><li class="toq-level-5"><span>6.3.7.2</span> <a href="#data-frame-component-types-osc-">Data frame component types (OSC)</a></li><li class="toq-level-5"><span>6.3.7.3</span> <a href="#2d-and-2d-linearized-component-osc-">2D and 2D linearized component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.4</span> <a href="#3d-component-osc-">3D component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.5</span> <a href="#3d-with-residuals-component-osc-">3D with residuals component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.6</span> <a href="#3d-no-labels-component-osc-">3D no labels component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.7</span> <a href="#3d-no-labels-with-residuals-component-osc-">3D no labels with residuals component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.8</span> <a href="#analog-component-osc-">Analog component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.9</span> <a href="#analog-single-component-osc-">Analog single component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.10</span> <a href="#force-component-osc-">Force component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.11</span> <a href="#force-single-component-osc-">Force single component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.12</span> <a href="#6dof-component-osc-">6DOF component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.13</span> <a href="#6dof-with-residuals-component-osc-">6DOF with residuals component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.14</span> <a href="#6dof-euler-component-osc-">6DOF Euler component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.15</span> <a href="#6dof-euler-with-residuals-component-osc-">6DOF Euler with residuals component (OSC)</a></li></ol></li></ol></li><li class="toq-level-3"><span>6.4</span> <a href="#no-more-data-packet-osc-">No More Data packet (OSC)</a></li><li class="toq-level-3"><span>6.5</span> <a href="#event-data-packet-osc-">Event Data packet (OSC)</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>6.5.1</span> <a href="#events-osc-">Events (OSC)</a></li></ol></li></ol></li><li class="toq-level-2"><span>7</span> <a href="#changelog">Changelog</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>7.1</span> <a href="#changes-in-1-18">Changes in 1.18</a></li><li class="toq-level-3"><span>7.2</span> <a href="#changes-in-1-17">Changes in 1.17</a></li><li class="toq-level-3"><span>7.3</span> <a href="#changes-in-1-16">Changes in 1.16</a></li><li class="toq-level-3"><span>7.4</span> <a href="#changes-in-1-15">Changes in 1.15</a></li><li class="toq-level-3"><span>7.5</span> <a href="#changes-in-1-14">Changes in 1.14</a></li><li class="toq-level-3"><span>7.6</span> <a href="#changes-in-1-13">Changes in 1.13</a></li><li class="toq-level-3"><span>7.7</span> <a href="#changes-in-1-12">Changes in 1.12</a></li><li class="toq-level-3"><span>7.8</span> <a href="#changes-in-1-11">Changes in 1.11</a></li><li class="toq-level-3"><span>7.9</span> <a href="#changes-in-1-10">Changes in 1.10</a></li><li class="toq-level-3"><span>7.10</span> <a href="#changes-in-1-9">Changes in 1.9</a></li><li class="toq-level-3"><span>7.11</span> <a href="#changes-in-1-8">Changes in 1.8</a></li><li class="toq-level-3"><span>7.12</span> <a href="#changes-in-1-7">Changes in 1.7</a></li><li class="toq-level-3"><span>7.13</span> <a href="#changes-in-1-6">Changes in 1.6</a></li><li class="toq-level-3"><span>7.14</span> <a href="#changes-in-1-5">Changes in 1.5</a></li><li class="toq-level-3"><span>7.15</span> <a href="#changes-in-1-4">Changes in 1.4</a></li><li class="toq-level-3"><span>7.16</span> <a href="#changes-in-1-3">Changes in 1.3</a></li><li class="toq-level-3"><span>7.17</span> <a href="#changes-in-1-2">Changes in 1.2</a></li><li class="toq-level-3"><span>7.18</span> <a href="#changes-in-1-1">Changes in 1.1</a></li></ol></li></ol></li></ol></nav>
 <h2 id="introduction">Introduction</h2><p>The Qualisys Track Manager software is used to collect and process motion capture
 data from Qualisys motion capture cameras. The software is running under Windows
 and offers both post-processing and real-time processing functionality.
 The processed real-time data can be retrieved from QTM over a TCP/IP (or UDP/IP)
 connection in real-time. This document describes the protocol used in such a
 connection.</p>
-<h3 id="protocol-versions">Protocol versions</h3><p>This document describes the 1.12 version of the QTM RT server protocol.</p>
+<h3 id="protocol-version">Protocol version</h3><p>This document describes version 1.17 of the QTM RT server protocol.</p>
 <h3 id="standard">Standard</h3><p>QTM is backwards compatible with all previous versions of the protocol. The QTM RT
 server keeps track of the protocol version used by each RT client connected to it, and
 adapts the data to be sent to each client according to their selected protocol version.  </p>
@@ -197,8 +195,20 @@ changed. Settings that are possible to change are:
 <em>start</em> command shall be. The time is expressed in seconds.</p>
 <h5 id="capture_time">Capture_Time</h5><p>The Capture_Time setting tells QTM how long a capture started with the
 <em>start</em> command shall be. The time is expressed in seconds.</p>
-<h5 id="start_on_external_trigger">Start_On_External_Trigger</h5><p>The Start_On_External_Trigger setting tells QTM if the measurement
-shall start on external trigger. The value can be true or false.</p>
+<h5 id="start_on_external_trigger">Start_On_External_Trigger</h5><p>The <code>Start_On_External_Trigger</code> setting tells QTM if the measurement shall
+start on external trigger. The value can be true or false. Legacy parameter
+that for oqus is the trigger input but for the Miqus Sync Unit specifies any
+of the Trig NO or Trig NC ports.</p>
+<h5 id="start_on_trigger_no">Start_On_Trigger_NO</h5><p>The <code>Start_On_Trigger_NO</code> setting tells QTM if the measurement shall start on
+external trigger signal from Miqus Sync Unit Trig NO port or the Oqus trigger
+input. The value can be true or false.</p>
+<h5 id="start_on_trigger_nc">Start_On_Trigger_NC</h5><p>The <code>Start_On_Trigger_NC</code> setting tells QTM if the measurement shall start on
+external trigger signal from Miqus Sync Unit Trig NC port. The value can be
+true or false.</p>
+<h5 id="start_on_trigger_software">Start_On_Trigger_Software</h5><p>The <code>Start_On_Trigger_Software</code> setting tells QTM if the measurement shall
+start on external trigger signal from a software trigger. It can be devices
+and applications like keyboard, RT clients, telnet command etc. The value can
+be true or false.</p>
 <h5 id="external_time_base">External_Time_Base</h5><ul>
 <li><p><strong>Enabled</strong> - Enable or disable external time base. Value can be True or False.</p>
 </li>
@@ -207,6 +217,7 @@ shall start on external trigger. The value can be true or false.</p>
 <li>Control port</li>
 <li>IR receiver</li>
 <li>SMPTE</li>
+<li>IRIG</li>
 <li>Video sync</li>
 </ul>
 </li>
@@ -250,51 +261,89 @@ seconds. Value is an integer.</p>
 frames in non-periodic mode. Value is a float.</p>
 </li>
 </ul>
-<h5 id="processing_actions">Processing_Actions</h5><ul>
-<li><p><strong>Tracking</strong> - Enable or disable 3D or 2D tracking processing action. Value
-can be 3D, 2D or False.</p>
+<h4 id="processing_actions">Processing_Actions</h4><ul>
+<li><p><strong>PreProcessing2D</strong><br>Enable or disable 2D pre-processing action. Value can be True or False.</p>
 </li>
-<li><p><strong>TwinSystemMerge</strong> - Enable or disable twin system merge processing action.
-Value can be True or False.</p>
+<li><p><strong>Tracking</strong><br>2D or 3D tracking processing action. Value can be 2D, 3D or False.</p>
 </li>
-<li><p><strong>SplineFill</strong> - Enable or disable spline fill processing action. Value can
-be True or False.</p>
+<li><p><strong>AIM</strong><br>AIM processing action. Value can be True or False.</p>
 </li>
-<li><p><strong>AIM</strong> - Enable or disable AIM processing action. Value can be True or
-False.</p>
+<li><p><strong>Track6DOF</strong><br>6 DOF tracking processing action. Value can be True or False.</p>
 </li>
-<li><p><strong>Track6DOF</strong> - Enable or disable 6DOF tracking processing action. Value can
-be True or False.</p>
+<li><p><strong>ForceData</strong><br>Force data processing action. Value can be True or False.</p>
 </li>
-<li><p><strong>ForceData</strong> - Enable or disable force data processing action. Value can be
-True or False.</p>
+<li><p><strong>GazeVector</strong><br>Enable or disable gaze vector data processing action. Value can be True or False.</p>
 </li>
-<li><p><strong>GazeVector</strong> - Enable or disable gaze vector data processing action. Value can be
-True or False.</p>
+<li><p><strong>SkeletonData</strong><br>Enable or disable skeleton data processing action. Value can be True or False.</p>
 </li>
-<li><p><strong>GazeVectorData</strong> - Enable or disable gaze vector data processing action.
-Value can be True or False.</p>
+<li><p><strong>ExportTSV</strong><br>Export to TSV processing action. Value can be True or False.</p>
 </li>
-<li><p><strong>ExportTSV</strong> - Enable or disable export to TSV processing action. Value can
-be True or False.</p>
+<li><p><strong>ExportC3D</strong><br>Export to C3D processing action. Value can be True or False.</p>
 </li>
-<li><p><strong>ExportC3D</strong> - Enable or disable export to C3D processing action. Value can
-be True or False.</p>
+<li><p><strong>ExportMatlabFile</strong><br>Export to MATLAB file processing action. Value can be True or False.</p>
 </li>
-<li><p><strong>ExportDiff</strong> - Enable or disable export to Diff format processing action.
-Value can be True or False.</p>
+<li><p><strong>ExportAviFile</strong><br>Enable or disable export to AVI video file processing action. Value can be True or False.</p>
 </li>
-<li><p><strong>ExportMatlabDirect</strong> - Enable or disable export to Matlab directly
-processing action. Value can be True or False.  </p>
+<li><p><strong>TwinSystemMerge</strong><br>Twin system merge processing action. Value can be True or False.</p>
 </li>
-<li><p><strong>ExportMatlabFile</strong>  - Enable or disable export to MATLAB file processing
-action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportAviFile</strong>  - Enable or disable export to AVI file processing
-action. Value can be True or False.</p>
+<li><p><strong>SplineFill</strong><br>Spline fill processing action. Value can be True or False.</p>
 </li>
 </ul>
-<h5 id="camera">Camera</h5><p>General settings consist of none or several <em>Camera</em> elements, with
+<h4 id="realtime_processing_actions">RealTime_Processing_Actions</h4><ul>
+<li><p><strong>PreProcessing2D</strong><br>Enable or disable 2D pre-processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>Tracking</strong><br>2D or 3D tracking processing action. Value can be 2D, 3D or False.</p>
+</li>
+<li><p><strong>AIM</strong><br>AIM processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>Track6DOF</strong><br>6 DOF tracking processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ForceData</strong><br>Force data processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>GazeVector</strong><br>Enable or disable gaze vector data processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>SkeletonData</strong><br>Enable or disable skeleton data processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ExportTSV</strong><br>Export to TSV processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ExportC3D</strong><br>Export to C3D processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ExportMatlabFile</strong><br>Export to MATLAB file processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ExportAviFile</strong><br>Enable or disable export to AVI video file processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ExportFBX</strong><br>Enable or disable export to FBX processing action. Value can be True or False.</p>
+</li>
+</ul>
+<h4 id="reprocessing_actions">Reprocessing_Actions</h4><ul>
+<li><p><strong>PreProcessing2D</strong><br>Enable or disable 2D pre-processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>Tracking</strong><br>2D or 3D tracking processing action. Value can be 2D, 3D or False.</p>
+</li>
+<li><p><strong>AIM</strong><br>AIM processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>Track6DOF</strong><br>6 DOF tracking processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ForceData</strong><br>Force data processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>GazeVector</strong><br>Enable or disable gaze vector data processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>SkeletonData</strong><br>Enable or disable skeleton data processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ExportTSV</strong><br>Export to TSV processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ExportC3D</strong><br>Export to C3D processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ExportMatlabFile</strong><br>Export to MATLAB file processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ExportAviFile</strong><br>Enable or disable export to AVI video file processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>TwinSystemMerge</strong><br>Twin system merge processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>SplineFill</strong><br>Spline fill processing action. Value can be True or False.</p>
+</li>
+</ul>
+<h4 id="camera">Camera</h4><p>General settings consist of none or several <em>Camera</em> elements, with
 following content.</p>
 <ul>
 <li><p><strong>ID</strong> - Select camera to which the settings shall apply. If the camera id is
@@ -309,83 +358,144 @@ are:</p>
 <li>Video</li>
 </ul>
 </li>
-<li><p><strong>Video_Mode</strong> - 
-Set video mode. This setting only apply to specific camera models that are not
-used for marker detection. Valid settings are:</p>
+</ul>
 <ul>
-<li>Custom</li>
-<li>1080p_24hz</li>
-<li>720p_25hz</li>
-<li>720p_50hz</li>
-<li>540p_25hz</li>
-<li>540p_50hz</li>
-<li>540p_60hz</li>
-<li>480_25hz</li>
-<li>480_50hz</li>
-<li>480_60hz</li>
-<li>480_120hz</li>
+<li><p><strong>Video_Resolution</strong> - Change video resolution for non-marker cameras (Oqus
+2c and Miqus Video). Available resolutions are:</p>
+<ul>
+<li>1080p</li>
+<li>720p </li>
+<li>540p </li>
+<li>480p</li>
 </ul>
 </li>
-<li><p><strong>Video_Frequency</strong> - 
-Set video capture frequency for the camera selected by Camera ID, see above.
+<li><p><strong>Video_Aspect_Ratio</strong> - Change video aspect ratio for non-marker cameras
+(Oqus 2c and Miqus Video). Available aspect ratios are:</p>
+<ul>
+<li>16x9</li>
+<li>4x3</li>
+<li>1x1</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>Video_Frequency</strong><br>Set video capture frequency for the camera selected by Camera ID, see above.
 The value is either in Hz ( &gt;1 Hz) or in percent of max frequency (0.0 to
 1.0), 32-bit float. Note: It is only possible to set minimum video capture
 frequency, which is 1 Hz, by setting the Video_Frequency setting to 0 (0%).</p>
 </li>
-<li><p><strong>Video_Exposure</strong> - Set video exposure time for the camera selected by
-Camera ID, see above. The value is either in micro seconds ( >&nbsp;5&nbsp;&micro;s) or in
-percent of max value (0.0 to 1.0), 32-bit float.</p>
+<li><p><strong>Video_Exposure</strong><br>Set video exposure time for the camera selected by Camera ID, see above. The
+value is either in micro seconds ( >&nbsp;5&nbsp;&micro;s) or in percent of
+max value (0.0 to 1.0), 32-bit float.</p>
 </li>
-<li><p><strong>Video_Flash_Time</strong> - Set video flash time for the camera selected by
-Camera ID, see above. The value is either in micro seconds ( >&nbsp;5&nbsp;&micro;s) or in
-percent of max value (0.0 to 1.0), 32-bit float.</p>
+<li><p><strong>Video_Flash_Time</strong><br>Set video flash time for the camera selected by Camera ID, see above. The
+value is either in micro seconds ( >&nbsp;5&nbsp;&micro;s) or in percent of
+max value (0.0 to 1.0), 32-bit float.</p>
 </li>
-<li><p><strong>Marker_Exposure</strong> - Set marker exposure time for the camera selected by
-Camera ID, see above. The value is either in micro seconds ( >&nbsp;5&nbsp;&micro;s) or in
-percent of max value (0.0 to 1.0), 32-bit float.</p>
+<li><p><strong>Marker_Exposure</strong><br>Set marker exposure time for the camera selected by Camera ID, see above. The
+value is either in micro seconds ( >&nbsp;5&nbsp;&micro;s) or in percent of
+max value (0.0 to 1.0), 32-bit float.</p>
 </li>
-<li><p><strong>Marker_Threshold</strong> - Set marker threshold for the camera selected by
-Camera ID, see above. The value is either an absolute value (50&nbsp;-&nbsp;900) or in
-percent of max value (0.0 to 1.0), 32-bit float.</p>
+<li><p><strong>Marker_Threshold</strong><br>Set marker threshold for the camera selected by Camera ID, see above. The
+value is either an absolute value (50&nbsp;-&nbsp;900) or in percent of max
+value (0.0 to 1.0), 32-bit float.</p>
 </li>
-<li><p><strong>Orientation</strong> - Set camera orientation for the camera selected by Camera
-ID, see above. The setting affects the 2D camera view in QTM. The value is in
-degrees (0, 90, 180 or 270), 32-bit integer.</p>
+<li><p><strong>Orientation</strong><br>Set camera orientation for the camera selected by Camera ID, see above. The
+setting affects the 2D camera view in QTM. The value is in degrees (0, 90,
+180 or 270), 32-bit integer.</p>
 </li>
-<li><p><strong>Sync_Out</strong> - Camera settings consist of none or one <em>Sync_Out </em> block,
-with following content:</p>
+<li><p><strong>Sync_Out/Sync_Out2</strong><br>Camera settings consist of none or one <em>Sync_Out</em>, or one <em>Sync_Out2</em>
+element, with following content:</p>
 <ul>
-<li><strong>Mode</strong> - Synchronization mode for the selected camera. Available modes:<ul>
+<li><p><strong>Mode</strong><br>Synchronization mode for the selected camera. Available modes:</p>
+<ul>
 <li>Shutter out </li>
 <li>Multiplier</li>
 <li>Divisor</li>
 <li>Camera independent</li>
 <li>Measurement time</li>
 <li>Continuous 100Hz</li>
-<li>SRAM wired</li>
 </ul>
 </li>
-</ul>
-</li>
-</ul>
+<li><p><strong>Value</strong><br>This integer value is only used for three of the sync out modes. The
+content is different depending on the <em>Mode</em> setting.</p>
 <ul>
-<li><strong>Value</strong> - This integer value is only used for three of the sync out
-modes. The content is different depending on the <em>Mode</em> setting.<ul>
 <li><strong>Multiplier</strong> - Multiplier applied to the camera frequency</li>
 <li><strong>Divisor</strong> -  Divisor applied to the camera frequency</li>
 <li><strong>Camera</strong> - independent Camera independent frequency</li>
 </ul>
 </li>
-</ul>
+<li><p><strong>Duty_Cycle</strong> 
+Output duty cycle in per cent (float). Only used in multiplier, divisor and
+camera independent mode.</p>
+</li>
+<li><p><strong>Signal_Polarity</strong><br>TTL signal polarity. Possible values:</p>
 <ul>
-<li><strong>Duty_Cycle</strong> - Output duty cycle in per cent (float). Only used in
-multiplier, divisor and camera independent mode.</li>
-</ul>
-<ul>
-<li><strong>Signal_Polarity</strong> - TTL signal polarity. Possible values:<ul>
 <li>Positive</li>
 <li>Negative</li>
 </ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>Sync_Out_MT</strong><br>Camera settings consist of none or one <em>Sync_Out_MT</em> element, with following
+content:</p>
+<ul>
+<li><p><strong>Signal_Polarity</strong><br>TTL signal polarity. Not used in Continuous 100Hz mode. Possible values:</p>
+<ul>
+<li>Positive</li>
+<li>Negative</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>LensControl</strong><br>Camera settings consist of none or one LensControl element (will only be
+available for cameras that support lens control), with following content:</p>
+<ul>
+<li><p>Focus
+Camera lens control focus settings. Below are the attributes used, all as 32-bit float values.</p>
+<ul>
+<li><p>Value
+Current lens control focus value.</p>
+</li>
+<li><p>Min
+Minimum lens control focus value.</p>
+</li>
+<li><p>Max
+Maximum lens control focus attribute.</p>
+</li>
+</ul>
+</li>
+<li><p>Aperture
+Camera lens control aperture settings. Below are the attributes used, all as 32-bit float values.</p>
+<ul>
+<li><p>Value
+Current lens control aperture value.</p>
+</li>
+<li><p>Min
+Minimum lens control aperture value.</p>
+</li>
+<li><p>Max
+Maximum lens control focus attribute.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>AutoExposure</strong>
+Camera settings consist of none or one <code>AutoExposure</code> element (will only be
+available for cameras that support auto exposure), with following
+attributes. Enabled (true/false) and Compensation (current auto exposure
+compensation value).</p>
+</li>
+<li><p><strong>AutoWhiteBalance</strong>
+Camera settings consist of none or one <code>AutoWhiteBalance</code> element. (will only be
+av ailable for cameras that support auto white balance). Setting can be True or False.</p>
 </li>
 </ul>
 <h4 id="image-settings">Image settings</h4><p>The <em>Image</em> element in the XML data packet consists of none or several
@@ -398,13 +508,13 @@ camera is not enabled since before, the default values will be used for all
 image settings that are not present in the <em>Camera</em>element. Otherwise current
 image settings will be used.</p>
 <ul>
-<li><p><strong>ID</strong> - Select camera to fetch images from. This value must always be
-present in the image settings.</p>
+<li><p><strong>ID</strong><br>Select camera to fetch images from. This value must always be present in the
+image settings.</p>
 </li>
-<li><p><strong>Enabled</strong> - Enable or disable transmission of image data from camera
-selected by Camera ID, see above. True or False</p>
+<li><p><strong>Enabled</strong><br>Enable or disable transmission of image data from camera selected by Camera
+ID, see above. True or False</p>
 </li>
-<li><p><strong>Format</strong> - Available image formats.</p>
+<li><p><strong>Format</strong><br>Available image formats.</p>
 <ul>
 <li>RAWGrayscale </li>
 <li>RAWBGR</li>
@@ -412,37 +522,37 @@ selected by Camera ID, see above. True or False</p>
 <li>PNG</li>
 </ul>
 </li>
-<li><p><strong>Width</strong> - Width of the requested image. This does not take into account the
-cropping. The width is the dimensions had the image not been cropped at all.
-32-bit integer.</p>
+<li><p><strong>Width</strong><br>Width of the requested image. This does not take into account the cropping.
+The width is the dimensions had the image not been cropped at all. 32-bit
+integer.</p>
 </li>
-<li><p><strong>Height</strong> - Height of the requested image. This does not take into account
-the cropping. The height is the dimensions had the image not been cropped at
-all. 32-bit integer.</p>
+<li><p><strong>Height</strong><br>Height of the requested image. This does not take into account the cropping.
+The height is the dimensions had the image not been cropped at all. 32-bit
+integer.</p>
 </li>
-<li><p><strong>Left_Crop</strong> - Position of the requested image left edge relative the
-original image. 32-bit float.</p>
+<li><p><strong>Left_Crop</strong><br>Position of the requested image left edge relative the original image. 32-bit
+float.</p>
 <ul>
 <li>0.0 = Original image left edge (Default).</li>
 <li>1.0 = Original image right edge.</li>
 </ul>
 </li>
-<li><p><strong>Top_Crop</strong> - Position of requested image top edge relative the original
-image. 32-bit float.</p>
+<li><p><strong>Top_Crop</strong><br>Position of requested image top edge relative the original image. 32-bit
+float.</p>
 <ul>
 <li>0.0 = Original image top edge (Default).  </li>
 <li>1.0 = Original image bottom edge.</li>
 </ul>
 </li>
-<li><p><strong>Right_Crop</strong> - Position of requested image right edge relative the
-original image. 32-bit float.</p>
+<li><p><strong>Right_Crop</strong><br>Position of requested image right edge relative the original image. 32-bit
+float.</p>
 <ul>
 <li>0.0 = Original image left edge.</li>
 <li>1.0 = Original image right edge (Default).</li>
 </ul>
 </li>
-<li><p><strong>Bottom_Crop</strong> Position of requested image bottom edge relative the
-original image. 32-bit float.</p>
+<li><p><strong>Bottom_Crop</strong><br>Position of requested image bottom edge relative the original image. 32-bit
+float.</p>
 <ul>
 <li>0.0 = Original image top edge.</li>
 <li>1.0 = Original image bottom edge (Default).</li>
@@ -451,17 +561,17 @@ original image. 32-bit float.</p>
 </ul>
 <h4 id="force-settings">Force settings</h4><p>The Force section in the XML data packet consists of none or several
 <em>Plate</em> elements. </p>
-<p><strong>Plate</strong></p>
-<p>Each <em>Plate</em> element consists of a <em>Force_Plate_Index</em> and a <em>Location</em>
+<p><strong>Plate</strong>
+Each <em>Plate</em> element consists of a <em>Force_Plate_Index</em> and a <em>Location</em>
 element. The settings within a plate element must come in a predefined order,
 see <a href="#settings-example">Settings example</a>.</p>
 <ul>
-<li><p><strong>Force_ID</strong> - ID of camera to fetch images from. This value must always be
-present in the image settings.</p>
+<li><p><strong>Force_ID</strong><br>ID of camera to fetch images from. This value must always be present in the
+image settings.</p>
 </li>
-<li><p><strong>Location</strong> - The <em>Location</em> element consists of four corner elements:
-<em>Corner1, Corner2, Corner3</em> and <em>Corner4</em>. Each corner element consists of X,
-Y and Z elements with the coordinates for the force plate (32 bit floats).</p>
+<li><p><strong>Location</strong><br>The <em>Location</em> element consists of four corner elements: <em>Corner1</em>,
+<em>Corner2</em>, <em>Corner3</em> and <em>Corner4</em>. Each corner element consists of X, Y and Z
+*elements with the coordinates for the force plate (32 bit floats).</p>
 </li>
 </ul>
 <h4 id="settings-example">Settings example</h4><p>Send the following XML data packet to the RT server:</p>
@@ -470,6 +580,9 @@ Y and Z elements with the coordinates for the force plate (32 bit floats).</p>
         &lt;Capture_Time&gt;2.5&lt;/Capture_Time&gt;
         &lt;Capture_Frequency&gt;25&lt;/Capture_Frequency&gt;
         &lt;Start_On_External_Trigger&gt;True&lt;/Start_On_External_Trigger&gt;
+        &lt;Start_On_Trigger_NO&gt;True&lt;/Start_On_Trigger_NO&gt;
+        &lt;Start_On_Trigger_NC&gt;False&lt;/Start_On_Trigger_NC&gt;
+        &lt;Start_On_Trigger_Software&gt;False&lt;/Start_On_Trigger_Software&gt;
         &lt;External_Time_Base&gt;
             &lt;Enabled&gt;True&lt;/Enabled&gt;
             &lt;Signal_Source&gt;Control port&lt;/Signal_Source&gt;
@@ -483,6 +596,7 @@ Y and Z elements with the coordinates for the force plate (32 bit floats).</p>
             &lt;Non_Periodic_Timeout&gt;10&lt;/Non_Periodic_Timeout&gt;
         &lt;/External_Time_Base&gt;
         &lt;Processing_Actions&gt;
+            &lt;PreProcess2D&gt;False&lt;/PreProcess2D&gt;
             &lt;Tracking&gt;3D&lt;/Tracking&gt;
             &lt;TwinSystemMerge&gt;False&lt;/TwinSystemMerge&gt;
             &lt;SplineFill&gt;True&lt;/SplineFill&gt;
@@ -490,15 +604,40 @@ Y and Z elements with the coordinates for the force plate (32 bit floats).</p>
             &lt;Track6DOF&gt;False&lt;/Track6DOF&gt;
             &lt;ForceData&gt;False&lt;/ForceData&gt;
             &lt;GazeVectorData&gt;False&lt;/GazeVectorData&gt;
+            &lt;SkeletonData&gt;False&lt;/SkeletonData&gt;
             &lt;ExportTSV&gt;False&lt;/ExportTSV&gt;
             &lt;ExportC3D&gt;False&lt;/ExportC3D&gt;
-            &lt;ExportDiff&gt;False&lt;/ExportDiff&gt;
-            &lt;ExportMatlabDirect&gt;False&lt;/ExportMatlabDirect&gt;
             &lt;ExportMatlabFile&gt;False&lt;/ExportMatlabFile&gt;
         &lt;/Processing_Actions&gt;
+        &lt;RealTime_Processing_Actions&gt;
+            &lt;PreProcess2D&gt;False&lt;/PreProcess2D&gt;
+            &lt;Tracking&gt;3D&lt;/Tracking&gt;
+            &lt;AIM&gt;True&lt;/AIM&gt;
+            &lt;Track6DOF&gt;False&lt;/Track6DOF&gt;
+            &lt;ForceData&gt;False&lt;/ForceData&gt;
+            &lt;GazeVectorData&gt;False&lt;/GazeVectorData&gt;
+            &lt;SkeletonData&gt;False&lt;/SkeletonData&gt;
+        &lt;/RealTime_Processing_Actions&gt;
+        &lt;Reprocessing_Actions&gt;
+            &lt;PreProcess2D&gt;False&lt;/PreProcess2D&gt;
+            &lt;Tracking&gt;3D&lt;/Tracking&gt;
+            &lt;TwinSystemMerge&gt;False&lt;/TwinSystemMerge&gt;
+            &lt;SplineFill&gt;True&lt;/SplineFill&gt;
+            &lt;AIM&gt;True&lt;/AIM&gt;
+            &lt;Track6DOF&gt;False&lt;/Track6DOF&gt;
+            &lt;ForceData&gt;False&lt;/ForceData&gt;
+            &lt;GazeVectorData&gt;False&lt;/GazeVectorData&gt;
+            &lt;SkeletonData&gt;False&lt;/SkeletonData&gt;
+            &lt;ExportTSV&gt;False&lt;/ExportTSV&gt;
+            &lt;ExportC3D&gt;False&lt;/ExportC3D&gt;
+            &lt;ExportMatlabFile&gt;False&lt;/ExportMatlabFile&gt;
+        &lt;/Reprocessing_Actions&gt;
         &lt;Camera&gt;
             &lt;ID&gt;1&lt;/ID&gt;
             &lt;Mode&gt;Marker&lt;/Mode&gt;
+            &lt;Video_Resolution&gt;1080p&lt;/Video_Resolution&gt;
+            &lt;Video_Aspect_Ratio&gt;1080p&lt;/Video_Aspect_Ratio&gt;
+            &lt;Video_Frequency&gt;30&lt;/Video_Frequency&gt;
             &lt;Video_Exposure&gt;0.5&lt;/Video_Exposure&gt;
             &lt;Video_Flash_Time&gt;0.3&lt;/Video_Flash_Time&gt;
             &lt;Marker_Exposure&gt;0.5&lt;/Marker_Exposure&gt;        
@@ -507,7 +646,7 @@ Y and Z elements with the coordinates for the force plate (32 bit floats).</p>
             &lt;Sync_Out&gt;
                 &lt;Mode&gt;Camera independent&lt;/Mode&gt;
                 &lt;Value&gt;120&lt;/Value&gt;
-                &lt;Duty cycle&gt;50.000&lt;/Duty cycle&gt;
+                &lt;Duty_cycle&gt;50.000&lt;/Duty_cycle&gt;
                 &lt;Signal_Polarity&gt;Negative&lt;/Signal_Polarity&gt;
             &lt;/Sync_Out&gt;
         &lt;/Camera&gt;
@@ -605,11 +744,11 @@ via UDP. </p>
 </tr>
 <tr>
 <td>GetCurrentFrame</td>
-<td><code>All</code> &#124; <code>([2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes]</code><br><code>[Analog] [AnalogSingle] [Force] [6D] [6DRes] [6DEuler] [6DEulerRes] [Image])</code></td>
+<td><code>All</code> &#124; <code>([2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes]</code><br><code>[Analog[:channels]] [AnalogSingle[:channels]] [Force] [6D] [6DRes]</code><br><code>[6DEuler] [6DEulerRes] [Image])</code></td>
 </tr>
 <tr>
 <td>StreamFrames</td>
-<td><code>Stop</code> &#124; <code>((FrequencyDivisor:n</code> &#124; <code>Frequency:n</code> &#124; <code>AllFrames)</code><br><code>[UDP[:address]:port] (All</code> &#124; <code>([2D] [2DLin] [3D] [3DRes]</code><br><code>[3DNoLabels] [3DNoLabelsRes] [Analog] [AnalogSingle]</code><br><code>[Force] [6D] [6DRes] [6DEuler] [6DEulerRes] [Image])))</code> </td>
+<td><code>Stop</code> &#124; <code>((FrequencyDivisor:n</code> &#124; <code>Frequency:n</code> &#124; <code>AllFrames)</code><br><code>[UDP[:address]:port] (All</code> &#124; <code>([2D] [2DLin] [3D] [3DRes]</code><br><code>[3DNoLabels] [3DNoLabelsRes] [Analog[:channels]] [AnalogSingle[:channels]]</code><br><code>[Force] [6D] [6DRes] [6DEuler] [6DEulerRes] [Image])))</code> </td>
 </tr>
 <tr>
 <td>TakeControl</td>
@@ -664,6 +803,18 @@ via UDP. </p>
 <td><code>Label</code></td>
 </tr>
 <tr>
+<td>Reprocess</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Led</td>
+<td>(Camera) (On</td>
+<td>Off</td>
+<td>Pulsing) (Green</td>
+<td>Amber</td>
+<td>All)</td>
+</tr>
+<tr>
 <td>Quit</td>
 <td>-</td>
 </tr>
@@ -694,8 +845,7 @@ version selected. If no argument is used, the server will respond with the
 current version.</p>
 <p>If you don&#39;t set the protocol version yourself, QTM will set it to <strong>version
 1.1</strong> by default.</p>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    Version 1.12
+<h6 id="example-">Example:</h6><pre><code class="lang-coffeescript">Command:    Version 1.12
 Response:   Version set to 1.12    or  
             Version NOT supported
 
@@ -706,16 +856,14 @@ Response:   Version is 1.12
 <p><strong><code>QTMVersion</code></strong></p>
 </blockquote>
 <p>Returns the QTM version on which the RT server is running.</p>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    QTMVersion
+<h6 id="example--2">Example:</h6><pre><code class="lang-coffeescript">Command:    QTMVersion
 Response:   QTM Version is 2.3 (build 464)
 </code></pre>
 <h3 id="byteorder">ByteOrder</h3><blockquote>
 <p><strong><code>ByteOrder</code></strong></p>
 </blockquote>
 <p>Returns the current byte order.</p>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    ByteOrder
+<h6 id="example--3">Example:</h6><pre><code class="lang-coffeescript">Command:    ByteOrder
 Response:   Byte order is little endian or
             Byte order is big endian
 </code></pre>
@@ -727,8 +875,7 @@ packet. The event packet will only be sent to the client that sent the GetState
 command. If the client is connected via Telnet, then the response will be sent
 as an ASCII string. <code>GetState</code> will not show the <strong>Camera Settings Changed</strong>,
 <strong>QTM Shutting Down</strong> and <strong>Capture Saved events</strong>.</p>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    GetState
+<h6 id="example--4">Example:</h6><pre><code class="lang-coffeescript">Command:    GetState
 Response:   Event data packet with last QTM event.
 
 (Telnet)
@@ -747,16 +894,20 @@ Response:   Connected               or
 </blockquote>
 <p>This command retrieves the settings for the requested component(s) of QTM in
 XML format. The XML parameters are described <a href="#xml-packet">here</a>.</p>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    GetParameters 3D Force
+<h6 id="example--5">Example:</h6><pre><code class="lang-coffeescript">Command:    GetParameters 3D Force
 Response:   Parameters not available                    or
             XML string containing requested parameters
 </code></pre>
 <h3 id="getcurrentframe">GetCurrentFrame</h3><blockquote>
 <p><strong><code>GetCurrentFrame</code></strong> <code>All | ([2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes]
-                  [Analog] [AnalogSingle] [Force] [6D] [6DRes] [6DEuler]
+                  [Analog[:channels]] [AnalogSingle[:channels]] [Force] [6D] [6DRes] [6DEuler]
                   [6DEulerRes] [Image])</code></p>
 </blockquote>
+<div class="well">The optional channels for Analog and AnalogSingle, is a
+string containing a list of channels to read from the server. The channels
+are separated by a <code>,</code> and can also contain ranges defined by a <code>-</code>. Here is
+an example: <code>1,2,3-6,16</code></div>
+
 <p>This command returns the current frame of real-time data from the server.  </p>
 <p>Points worth noting are:  </p>
 <ul>
@@ -782,17 +933,21 @@ server waits until the next frame of data is available before sending it to
 the client.</p>
 </li>
 </ul>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    GetCurrentFrame 3D Analog
+<h6 id="example--6">Example:</h6><pre><code class="lang-coffeescript">Command:    GetCurrentFrame 3D Analog
 Response:   One data frame is sent to the client according to the 
             data frame protocol described in the Data packet section.
 </code></pre>
 <h3 id="streamframes">StreamFrames</h3><blockquote>
 <p><strong><code>StreamFrames</code></strong> <code>Stop | ((FrequencyDivisor:n | Frequency:n | AllFrames)
                       [UDP[:address]:port] (All |  ([2D] [2DLin] [3D] [3DRes] [3DNoLabels]
-                      [3DNoLabelsRes] [Analog] [AnalogSingle] [Force] [6D] [6DRes] [6DEuler]
+                      [3DNoLabelsRes] [Analog[:channels]] [AnalogSingle[:channels]] [Force] [6D] [6DRes] [6DEuler]
                       [6DEulerRes] [Image])))</code></p>
 </blockquote>
+<div class="well">The optional channels for Analog and AnalogSingle, is a
+string containing a list of channels to read from the server. The channels
+are separated by a <code>,</code> and can also contain ranges defined by a <code>-</code>. Here
+is an example: <code>1,2,3-6,16</code></div>
+
 <p>This command makes the QTM RT server start streaming data frames in real-time.  </p>
 <p>Points worth noting are:</p>
 <ul>
@@ -890,8 +1045,7 @@ to prevent data from being sent if a new measurement is started after the
 first was finished: send the StreamFrames Stop command.</p>
 </li>
 </ul>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    StreamFrames Frequency:30 UDP:2234 3D Analog
+<h6 id="example--7">Example:</h6><pre><code class="lang-coffeescript">Command:    StreamFrames Frequency:30 UDP:2234 3D Analog
 Response:   30 frames per second containing 3D data and Analog data 
             are streamed over UDP/IP to port 2234 of the client computer. The
             data frame protocol is described in the Data packet section.
@@ -905,8 +1059,7 @@ change settings, create a new measurement, close measurement, start capture,
 stop capture and get a capture. The password argument is optional and is only
 needed if it is required by QTM. QTM can be configured to deny all clients
 control, only allow clients with correct password or allow all clients control.</p>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    TakeControl x364k6Gt
+<h6 id="example--8">Example:</h6><pre><code class="lang-coffeescript">Command:    TakeControl x364k6Gt
 Response:   You are now master                    or
             You are already master                or
             127.0.0.1 (1832) is already master    or
@@ -915,16 +1068,14 @@ Response:   You are now master                    or
 </code></pre>
 <h3 id="releasecontrol">ReleaseControl</h3><p>Release the control over the QTM RT interface, so that another client can take
 over the control.</p>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    ReleaseControl
+<h6 id="example--9">Example:</h6><pre><code class="lang-coffeescript">Command:    ReleaseControl
 Response:   You are now a regular client      or
             You are already a regular client
 </code></pre>
 <h3 id="new">New</h3><p>This command will create a new measurement in QTM, connect to the cameras and
 enter RT (preview) mode. It is only possible to issue this command if you have
 the control over the QTM RT interface. See <a href="#takecontrol">TakeControl</a>.</p>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    New
+<h6 id="example--10">Example:</h6><pre><code class="lang-coffeescript">Command:    New
 Response:   Creating new connection                                  or
             Already connected                                        or
             The previous measurement has not been saved or closed    or
@@ -936,8 +1087,7 @@ will close any open QTM measurement file. If the measurement isn’t saved, all
 data will be lost. If QTM is running RT from file, the playback will stop and
 the file will be closed. It is only possible to issue this command if you have
 the control over the QTM RT interface. See <a href="#takecontrol">TakeControl</a>.</p>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    Close
+<h6 id="example--11">Example:</h6><pre><code class="lang-coffeescript">Command:    Close
 Response:   Closing connection                          or
             Closing file                                or
             No connection to close                      or
@@ -950,8 +1100,7 @@ Response:   Closing connection                          or
 will start streaming real-time data from current QTM file. If there is any file
 open. It is only possible to issue this command if you have the control over
 the QTM RT interface. See <a href="#takecontrol">TakeControl</a>.</p>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    Start
+<h6 id="example--12">Example:</h6><pre><code class="lang-coffeescript">Command:    Start
 Response:   Starting measurement                         or
             Measurement is already running               or
             Not connected. Create connection with new    or
@@ -963,8 +1112,7 @@ Response:   Starting measurement                         or
 <h3 id="stop">Stop</h3><p>This command will stop an ongoing capture or playback of RT from file. It is
 only possible to issue this command if you have the control over the QTM RT
 interface. See <a href="#takecontrol">TakeControl</a>.</p>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    Stop
+<h6 id="example--13">Example:</h6><pre><code class="lang-coffeescript">Command:    Stop
 Response:   Stopping measurement                         or
             No measurement is running                    or
             Parse error                                  or
@@ -983,8 +1131,7 @@ project folder. If the file doesn’t exist, current measurement isn’t saved o
 an active camera connection exists, the measurement will not load.</p>
 <p>It is only possible to issue this command if you have the control over the QTM
 RT interface. See <a href="#takecontrol">TakeControl</a>.</p>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    Load
+<h6 id="example--14">Example:</h6><pre><code class="lang-coffeescript">Command:    Load
 Response:   Measurement loaded                          or
             Missing file name                           or
             Failed to load measurement                  or
@@ -1011,8 +1158,7 @@ Overwrite parameter is present. Otherwise a counter will be added to the end of
 the file name (_##).</p>
 <p>It is only possible to issue this command if you have the control over the QTM
 RT interface. See <a href="#takecontrol">TakeControl</a>.</p>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    Save
+<h6 id="example--15">Example:</h6><pre><code class="lang-coffeescript">Command:    Save
 Response:   Measurement saved                                   or
             Measurement saved as &#39;new filename with counter&#39;    or
             Failed to save measurement                          or
@@ -1030,8 +1176,7 @@ exist, current measurement isn’t saved or an active camera connection exists,
 the project will not load. C:\Users\lnn\QTM files\Imagination</p>
 <p>It is only possible to issue this command if you have the control over the QTM
 RT interface. See <a href="#takecontrol">TakeControl</a>.</p>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    Load
+<h6 id="example--16">Example:</h6><pre><code class="lang-coffeescript">Command:    Load
 Response:   Project loaded                             or
             Missing project name                       or
             Failed to load project                     or
@@ -1041,15 +1186,13 @@ Response:   Project loaded                             or
             You must be master to issue this command
 </code></pre>
 <h3 id="getcapturec3d">GetCaptureC3D</h3><p>This command will download the latest capture as a C3D file.</p>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    GetCapture
+<h6 id="example--17">Example:</h6><pre><code class="lang-coffeescript">Command:    GetCapture
 Response:   Sending capture followed by a C3D data packet containing current capture.    or
             No capture to get                                                            or
             Error sending C3D file
 </code></pre>
 <h3 id="getcaptureqtm">GetCaptureQTM</h3><p>This command will download the latest capture as a QTM file.</p>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    GetCapture
+<h6 id="example--18">Example:</h6><pre><code class="lang-coffeescript">Command:    GetCapture
 Response:   Sending capture followed by a QTM data packet containing current capture.    or
             No capture to get                                                            or
             Error sending QTM file
@@ -1061,8 +1204,7 @@ Response:   Sending capture followed by a QTM data packet containing current cap
 external trigger. The RT server will send a WaitingForTrigger event when it is
 waiting for a trigger. See <a href="#events">Events</a>. It is only possible to issue this command if
 you have the control over the QTM RT interface. See <a href="#takecontrol">TakeControl</a>.</p>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    Trig
+<h6 id="example--19">Example:</h6><pre><code class="lang-coffeescript">Command:    Trig
 Response:   Trig ok                                     or
             QTM not waiting for trig                    or
             You must be master to issue this command
@@ -1073,11 +1215,30 @@ Response:   Trig ok                                     or
 <p><strong>Label</strong>: A string containing the label name of the event. If no name is
 given, the label will be set to “Manual event”.</p>
 <p>This command will set an event in QTM. </p>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    Event test_event
+<h6 id="example--20">Example:</h6><pre><code class="lang-coffeescript">Command:    Event test_event
 Response:   Event set                                    or
             Event label too long                         or
             QTM is not capturing                         or
+            You must be master to issue this command
+</code></pre>
+<h3 id="reprocess">Reprocess</h3><p>This command will reprocess current measurement. It is only possible to issue
+this command if you have the control over the QTM RT interface. See <a href="#takecontrol">TakeControl</a>.</p>
+<h6 id="example--21">Example:</h6><pre><code class="lang-coffeescript">Command:    Reprocess
+Response:   Reprocessing file                            or
+            No file open                                 or
+            RT from file running
+</code></pre>
+<h3 id="led">Led</h3><blockquote>
+<p><strong><code>Led</code></strong> <code>camera mode color</code></p>
+</blockquote>
+<p><strong>camera</strong>: Number of the Miqus camera to change the LED.</p>
+<p><strong>mode</strong>: This can be one of <code>On</code>, <code>Off</code> or <code>Pulsing</code>.</p>
+<p><strong>color</strong>: This can be one of <code>Green</code>, <code>Amber</code> or <code>All</code>.</p>
+<p>This command can turn the leds on a Miqus camera on/off. You can specify if
+the Miqus leds should be on, off or pulsing in all or individual colors
+(green, amber).</p>
+<h6 id="example--22">Example:</h6><pre><code class="lang-coffeescript">Command:    Led
+Response:   Parse error                                         or
             You must be master to issue this command
 </code></pre>
 <h3 id="quit">Quit</h3><blockquote>
@@ -1086,8 +1247,7 @@ Response:   Event set                                    or
 <p>This command ends the current telnet session. The Quit command only works if
 you have connected to the RT server on the telnet port. Default telnet port is
 22221.</p>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    Quit
+<h6 id="example--23">Example:</h6><pre><code class="lang-coffeescript">Command:    Quit
 Response:   Bye bye
 </code></pre>
 <h2 id="qtm-rt-packets">QTM RT Packets</h2><h3 id="structure">Structure</h3><p>All packets sent to or from the server have the same general layout.</p>
@@ -1417,6 +1577,19 @@ format of this block.</p>
 <p><strong>Frequency</strong><br>The QTM capture frequency.</p>
 <p><strong>Capture_Time</strong><br>The length of the QTM capture, started with the start command. The time is expressed in seconds.</p>
 <p><strong>Start_On_External_Trigger</strong><br>Measurement starts on external trigger. The value can be true or false.</p>
+<p><strong>Start_On_Trigger_NO</strong>
+The <code>Start_On_Trigger_NO</code> setting tells QTM if the measurement shall start on
+external trigger signal from Miqus Sync Unit Trig NO port or the Oqus trigger
+input. The value can be true or false.</p>
+<p><strong>Start_On_Trigger_NC</strong>
+The <code>Start_On_Trigger_NC</code> setting tells QTM if the measurement shall start on
+external trigger signal from Miqus Sync Unit Trig NC port. The value can be
+true or false.</p>
+<p><strong>Start_On_Trigger_Software</strong>
+The <code>Start_On_Trigger_Software</code> setting tells QTM if the measurement shall
+start on external trigger signal from a software trigger. It can be devices
+and applications like keyboard, RT clients, telnet command etc. The value can
+be true or false.</p>
 <p><strong>External_Time_Base</strong>  </p>
 <ul>
 <li><p><strong>Enabled</strong><br>Enable or disable external time base. Value can be True or False.</p>
@@ -1426,6 +1599,7 @@ format of this block.</p>
 <li>Control port</li>
 <li>IR receiver</li>
 <li>SMPTE</li>
+<li>IRIG</li>
 <li>Video sync  </li>
 </ul>
 </li>
@@ -1465,11 +1639,9 @@ is a float.</p>
 </ul>
 <p><strong>Processing_Actions</strong></p>
 <ul>
+<li><p><strong>PreProcessing2D</strong><br>Enable or disable 2D pre-processing action. Value can be True or False.</p>
+</li>
 <li><p><strong>Tracking</strong><br>2D or 3D tracking processing action. Value can be 2D, 3D or False.</p>
-</li>
-<li><p><strong>TwinSystemMerge</strong><br>Twin system merge processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>SplineFill</strong><br>Spline fill processing action. Value can be True or False.</p>
 </li>
 <li><p><strong>AIM</strong><br>AIM processing action. Value can be True or False.</p>
 </li>
@@ -1477,22 +1649,95 @@ is a float.</p>
 </li>
 <li><p><strong>ForceData</strong><br>Force data processing action. Value can be True or False.</p>
 </li>
+<li><p><strong>GazeVector</strong><br>Enable or disable gaze vector data processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>SkeletonData</strong><br>Enable or disable skeleton data processing action. Value can be True or False.</p>
+</li>
 <li><p><strong>ExportTSV</strong><br>Export to TSV processing action. Value can be True or False.</p>
 </li>
 <li><p><strong>ExportC3D</strong><br>Export to C3D processing action. Value can be True or False.</p>
 </li>
-<li><p><strong>ExportDiff</strong><br>Export to Diff format processing action. Value can be True or False.</p>
+<li><p><strong>ExportMatlabFile</strong><br>Export to MATLAB file processing action. Value can be True or False.</p>
 </li>
-<li><p><strong>ExportMatlabDirect</strong><br>Export to Matlab directly processing action. Value can be True or False.</p>
+<li><p><strong>ExportAviFile</strong><br>Enable or disable export to AVI video file processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>TwinSystemMerge</strong><br>Twin system merge processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>SplineFill</strong><br>Spline fill processing action. Value can be True or False.</p>
+</li>
+</ul>
+<p><strong>RealTime_Processing_Actions</strong></p>
+<ul>
+<li><p><strong>PreProcessing2D</strong><br>Enable or disable 2D pre-processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>Tracking</strong><br>2D or 3D tracking processing action. Value can be 2D, 3D or False.</p>
+</li>
+<li><p><strong>AIM</strong><br>AIM processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>Track6DOF</strong><br>6 DOF tracking processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ForceData</strong><br>Force data processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>GazeVector</strong><br>Enable or disable gaze vector data processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>SkeletonData</strong><br>Enable or disable skeleton data processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ExportTSV</strong><br>Export to TSV processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ExportC3D</strong><br>Export to C3D processing action. Value can be True or False.</p>
 </li>
 <li><p><strong>ExportMatlabFile</strong><br>Export to MATLAB file processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ExportAviFile</strong><br>Enable or disable export to AVI video file processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ExportFBX</strong><br>Enable or disable export to FBX processing action. Value can be True or False.</p>
+</li>
+</ul>
+<p><strong>Reprocessing_Actions</strong></p>
+<ul>
+<li><p><strong>PreProcessing2D</strong><br>Enable or disable 2D pre-processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>Tracking</strong><br>2D or 3D tracking processing action. Value can be 2D, 3D or False.</p>
+</li>
+<li><p><strong>AIM</strong><br>AIM processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>Track6DOF</strong><br>6 DOF tracking processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ForceData</strong><br>Force data processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>GazeVector</strong><br>Enable or disable gaze vector data processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>SkeletonData</strong><br>Enable or disable skeleton data processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ExportTSV</strong><br>Export to TSV processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ExportC3D</strong><br>Export to C3D processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ExportMatlabFile</strong><br>Export to MATLAB file processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ExportAviFile</strong><br>Enable or disable export to AVI video file processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>TwinSystemMerge</strong><br>Twin system merge processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>SplineFill</strong><br>Spline fill processing action. Value can be True or False.</p>
+</li>
+<li><p><strong>ExportFBX</strong><br>Enable or disable export to FBX processing action. Value can be True or False.</p>
+</li>
+</ul>
+<p><strong>Camera_System</strong>  </p>
+<ul>
+<li><p><strong>Type</strong><br>Type of camera system. Available types are:</p>
+<ul>
+<li>Unknown</li>
+<li>Oqus</li>
+<li>Miqus</li>
+</ul>
 </li>
 </ul>
 <p><strong>Camera</strong><br>General settings consist of none or several Camera blocks, with following
 content:</p>
 <ul>
-<li><p><strong>ID</strong>
-Identity of the camera to which the settings apply.</p>
+<li><p><strong>ID</strong><br>Identity of the camera to which the settings apply.</p>
 </li>
 <li><p><strong>Model</strong><br>Model of selected camera. Available models are:</p>
 <ul>
@@ -1508,12 +1753,22 @@ Identity of the camera to which the settings apply.</p>
 <li>Oqus 400</li>
 <li>Oqus 500</li>
 <li>Oqus 500 Plus</li>
+<li>Oqus 600 Plus</li>
 <li>Oqus 700</li>
+<li>Miqus M1</li>
+<li>Miqus M3</li>
+<li>Miqus M5</li>
+<li>Miqus Sync Unit</li>
+<li>Miqus Video</li>
+<li>Miqus Video Color</li>
 </ul>
 </li>
 </ul>
 <ul>
 <li><p><strong>Underwater</strong><br>True if the camera is an underwater camera.</p>
+</li>
+<li><p><strong>Supports_HW_Sync</strong>
+True if the camera supports hardware synchronization.</p>
 </li>
 <li><p><strong>Serial</strong><br>Serial number of the selected camera.</p>
 </li>
@@ -1526,6 +1781,27 @@ Identity of the camera to which the settings apply.</p>
 </li>
 </ul>
 <ul>
+<li><p><strong>Video_Resolution</strong><br>Change video resolution for non-marker cameras (Oqus 2c and Miqus Video).
+Available resolutions are:</p>
+<ul>
+<li>1080p</li>
+<li>720p </li>
+<li>540p </li>
+<li>480p</li>
+</ul>
+</li>
+<li><p><strong>Video_Aspect_Ratio</strong><br>Change video aspect ratio for non-marker cameras (Oqus 2c and Miqus Video).
+Available aspect ratios are:</p>
+<ul>
+<li>16x9</li>
+<li>4x3</li>
+<li>1x1</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>Video_Frequency</strong><br>Video capture frequency for selected camera</p>
+</li>
 <li><p><strong>Video_Exposure</strong><br>There are three video exposure times for the selected camera. Current value,
 min and max value, which sets the boundaries for the exposure time. The values
 are in micro seconds.</p>
@@ -1533,6 +1809,49 @@ are in micro seconds.</p>
 <li><p><strong>Video_Flash_Time</strong><br>There are three video flash times for the selected camera. Current value, min
 and max value, which sets the boundaries for the flash time. The values are in
 micro seconds.</p>
+</li>
+<li><p><strong>LensControl</strong><br>Camera settings consist of none or one LensControl element (will only be
+available for cameras that support lens control), with following content:</p>
+<ul>
+<li><p>Focus
+Camera lens control focus settings. Below are the attributes used, all as 32-bit float values.</p>
+<ul>
+<li><p>Value
+Current lens control focus value.</p>
+</li>
+<li><p>Min
+Minimum lens control focus value.</p>
+</li>
+<li><p>Max
+Maximum lens control focus attribute.</p>
+</li>
+</ul>
+</li>
+<li><p>Aperture
+Camera lens control aperture settings. Below are the attributes used, all as 32-bit float values.</p>
+<ul>
+<li><p>Value
+Current lens control aperture value.</p>
+</li>
+<li><p>Min
+Minimum lens control aperture value.</p>
+</li>
+<li><p>Max
+Maximum lens control focus attribute.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>AutoExposure</strong>
+Camera settings consist of none or one <code>AutoExposure</code> element (will only be
+available for cameras that support auto exposure), with following
+attributes. Enabled (true/false) and Compensation (current auto exposure
+compensation value).</p>
+</li>
+<li><p><strong>AutoWhiteBalance</strong>
+Camera settings consist of none or one <code>AutoWhiteBalance</code> element. (will only be
+av ailable for cameras that support auto white balance). Setting can be True or False.</p>
 </li>
 <li><p><strong>Marker_Exposure</strong><br>There are three marker exposure times for the selected camera. Current value,
 min and max value, which sets the boundaries for the exposure time. The values
@@ -1559,8 +1878,9 @@ coordinates are in pixels.</p>
 <li><p><strong>Video_FOV</strong><br>Video field of view for selected camera. Left, top, right and bottom
 coordinates are in pixels.</p>
 </li>
-<li><p><strong>Sync_Out</strong><br>Camera settings consist of none or one Sync_Out  block, with following content:</p>
-</li>
+<li><p><strong>Sync_Out/Sync_Out2</strong><br>Camera settings consist of none or one <em>Sync_Out</em>, or one <em>Sync_Out2</em>
+element, with following content:</p>
+<ul>
 <li><p><strong>Mode</strong><br>Synchronization mode for the selected camera. Available modes:</p>
 <ul>
 <li>Shutter out</li>
@@ -1568,7 +1888,6 @@ coordinates are in pixels.</p>
 <li>Divisor</li>
 <li>Camera independent</li>
 <li>Measurement time</li>
-<li>SRAM wired</li>
 <li>Continuous 100Hz</li>
 </ul>
 </li>
@@ -1585,19 +1904,35 @@ coordinates are in pixels.</p>
 <li><p><strong>Duty_Cycle</strong><br>Output duty cycle in percent (float). Only used in multiplier, divisor and
 camera independent mode.</p>
 </li>
-<li><p><strong>Signal_Polarity</strong><br>TTL signal polarity. Not used in SRAM wired and Continuous 100Hz mode. Possible values:</p>
+<li><p><strong>Signal_Polarity</strong><br>TTL signal polarity. Not used in Continuous 100Hz mode. Possible values:</p>
 <ul>
 <li>Positive</li>
 <li>Negative</li>
 </ul>
 </li>
 </ul>
-<p>Example:</p>
-<pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.13&gt;
+</li>
+</ul>
+<ul>
+<li><p><strong>Sync_Out_MT</strong><br>Camera settings consist of none or one <em>Sync_Out_MT</em> element, with following
+content:</p>
+<ul>
+<li><strong>Signal_Polarity</strong><br>TTL signal polarity. Not used in Continuous 100Hz mode. Possible values:<ul>
+<li>Positive</li>
+<li>Negative</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h6 id="example--24">Example:</h6><pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.17&gt;
     &lt;General&gt;
         &lt;Frequency&gt;240&lt;/Frequency&gt;
         &lt;Capture_Time&gt;2.5&lt;/Capture_Time&gt;
         &lt;Start_On_External_Trigger&gt;True&lt;/Start_On_External_Trigger&gt;
+        &lt;Start_On_Trigger_NO&gt;True&lt;/Start_On_Trigger_NO&gt;
+        &lt;Start_On_Trigger_NC&gt;False&lt;/Start_On_Trigger_NC&gt;
+        &lt;Start_On_Trigger_Software&gt;False&lt;/Start_On_Trigger_Software&gt;
         &lt;External_Time_Base&gt;
             &lt;Enabled&gt;True&lt;/Enabled&gt;
             &lt;Signal_Source&gt;Control_Port&lt;/Signal_Source&gt;
@@ -1623,13 +1958,17 @@ camera independent mode.</p>
             &lt;ExportMatlabDirect&gt;False&lt;/ExportMatlabDirect&gt;
             &lt;ExportMatlabFile&gt;False&lt;/ExportMatlabFile&gt;
         &lt;/Processing_Actions&gt;
+        &lt;Camera_System&gt;
+            &lt;Type&gt;Oqus&lt;/Type&gt;
+        &lt;/Camera_System&gt;
         &lt;Camera&gt;
             &lt;ID&gt;1&lt;/ID&gt;
             &lt;Model&gt;Oqus 300&lt;/Model&gt;
             &lt;Underwater&gt;False&lt;/Underwater&gt;
             &lt;Serial&gt;7658787&lt;/Serial&gt;
             &lt;Mode&gt;Marker&lt;/Mode&gt;
-            &lt;Video_Mode&gt;Custom&lt;/Video_Mode&gt;
+            &lt;Video_Resolution&gt;1080p&lt;/Video_Resolution&gt;
+            &lt;Video_Aspect_Ratio&gt;1080p&lt;/Video_Aspect_Ratio&gt;
             &lt;Video_Frequency&gt;30&lt;/Video_Frequency&gt;
             &lt;Video_Exposure&gt;
                 &lt;Current&gt;10000&lt;/Current&gt;
@@ -1641,6 +1980,7 @@ camera independent mode.</p>
                 &lt;Min&gt;5&lt;/Min&gt;
                 &lt;Max&gt;2000&lt;/Max&gt;
             &lt;/Video_Flash_Time&gt;
+            &lt;Video_Auto_White_Balance&gt;True&lt;/Video_Auto_White_Balance&gt;
             &lt;Marker_Exposure&gt;
                 &lt;Current&gt;1000&lt;/Current&gt;
                 &lt;Min&gt;5&lt;/Min&gt;
@@ -1689,12 +2029,12 @@ camera independent mode.</p>
             &lt;Sync_Out&gt;
                 &lt;Mode&gt;Camera independent&lt;/Mode&gt;
                 &lt;Value&gt;120&lt;/Value&gt;
-                &lt;Duty cycle&gt;50.000&lt;/Duty cycle&gt;
+                &lt;Duty_cycle&gt;50.000&lt;/Duty_cycle&gt;
                 &lt;Signal_Polarity&gt;Negative&lt;/Signal_Polarity&gt;
             &lt;/Sync_Out&gt;
         &lt;/Camera&gt;
     &lt;/General&gt;
-&lt;/QTM_Parameters_Ver_1.13&gt;
+&lt;/QTM_Parameters_Ver_1.17&gt;
 </code></pre>
 <h4 id="3d-xml-parameters">3D XML parameters</h4><p>In response to the command GetParameters 3D the QTM RT server will reply with
 an XML data packet, containing a block called <code>The_3D</code>. See below for the format
@@ -1728,11 +2068,13 @@ represents blue.</p>
 </li>
 <li><p>Bone To<br>The name of the label (trajectory) where the bone ends.</p>
 </li>
+<li><p>Color
+The color of the bone.</p>
+</li>
 </ul>
 </li>
 </ul>
-<p>Example:</p>
-<pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.13&gt;
+<h6 id="example--25">Example:</h6><pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.13&gt;
     &lt;The_3D&gt;
         &lt;AxisUpwards&gt;+Z&lt;/AxisUpwards&gt;
         &lt;CalibrationTime&gt;2011.09.23 11:23:11&lt;/CalibrationTime&gt;
@@ -1746,7 +2088,7 @@ represents blue.</p>
              &lt;RGBColor&gt;00ffff&lt;/RGBColor&gt;
         &lt;/Label&gt;
         &lt;Bones&gt;
-             &lt;Bone From=&quot;fromName&quot; To=&quot;toName&quot;/&gt;
+             &lt;Bone From=&quot;fromName&quot; To=&quot;toName&quot; Color=&quot;ffff00&quot; /&gt;
         &lt;/Bones&gt;
     &lt;/The_3D&gt;
 &lt;/QTM_Parameters_Ver_1.13&gt;
@@ -1771,9 +2113,21 @@ The body is defined by 3 or more points.</p>
 </li>
 </ul>
 </li>
+<li><p><strong>Euler</strong><br>Block containing 6DOF Euler rotation names.</p>
+<ul>
+<li><p>First
+The name of the first Euler angle.</p>
+</li>
+<li><p>Second
+The name of the second Euler angle.</p>
+</li>
+<li><p>Third
+The name of the third Euler angle.</p>
+</li>
 </ul>
-<p>Example:</p>
-<pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.13&gt;
+</li>
+</ul>
+<h6 id="example--26">Example:</h6><pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.13&gt;
     &lt;The_6D&gt;
         &lt;Bodies&gt;1&lt;/Bodies&gt;
         &lt;Body&gt;
@@ -1795,6 +2149,11 @@ The body is defined by 3 or more points.</p>
                 &lt;Z&gt;10.5&lt;/Z&gt;
             &lt;/Point&gt;
         &lt;/Body&gt;
+        &lt;Euler&gt;
+            &lt;First&gt;Roll&lt;/First&gt;
+            &lt;Second&gt;Pitch&lt;/Second&gt;
+            &lt;Third&gt;Yaw&lt;/Third&gt;
+        &lt;/Euler&gt;
     &lt;/The_3D&gt;
 &lt;/QTM_Parameters_Ver_1.13&gt;
 </code></pre>
@@ -1811,25 +2170,22 @@ for the format of this block.</p>
 </ul>
 </li>
 </ul>
-<p>Example:</p>
-<pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.13&gt;
-    &lt;The_3D&gt;
-        &lt;AxisUpwards&gt;+Z&lt;/AxisUpwards&gt;
-        &lt;CalibrationTime&gt;2011.09.23 11:23:11&lt;/CalibrationTime&gt;
-        &lt;Labels&gt;2&lt;/Labels&gt;
-        &lt;Label&gt;
-             &lt;Name&gt;th12&lt;/Name&gt;
-             &lt;RGBColor&gt;ff00ff&lt;/RGBColor&gt;
-        &lt;/Label&gt;
-        &lt;Label&gt;
-             &lt;Name&gt;r_asis&lt;/Name&gt;
-             &lt;RGBColor&gt;00ffff&lt;/RGBColor&gt;
-        &lt;/Label&gt;
-        &lt;Bones&gt;
-             &lt;Bone From=&quot;fromName&quot; To=&quot;toName&quot;/&gt;
-        &lt;/Bones&gt;
-    &lt;/The_3D&gt;
-&lt;/QTM_Parameters_Ver_1.13&gt;
+<h6 id="example--27">Example:</h6><pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.17&gt;
+    &lt;Gaze_Vector&gt;
+        &lt;Vector&gt;
+            &lt;Name&gt;Gaze 1 (L)&lt;/Name&gt;
+            &lt;Frequency&gt;30&lt;/Frequency&gt;
+        &lt;/Vector&gt;
+        &lt;Vector&gt;
+            &lt;Name&gt;Gaze 1 (R)&lt;/Name&gt;
+            &lt;Frequency&gt;30&lt;/Frequency&gt;
+        &lt;/Vector&gt;
+        &lt;Vector&gt;
+            &lt;Name&gt;Gaze 2&lt;/Name&gt;
+            &lt;Frequency&gt;60&lt;/Frequency&gt;
+        &lt;/Vector&gt;
+    &lt;/Gaze_Vector&gt;
+&lt;/QTM_Parameters_Ver_1.17&gt;
 </code></pre>
 <h4 id="analog-xml-parameters">Analog XML parameters</h4><p>In response to the command GetParameters Analog the QTM RT server will reply
 with XML data packet, containing a block called Analog. See below for the
@@ -1852,8 +2208,7 @@ format of this block.</p>
 <li><p><strong>Label</strong><br>Channel name. There shall be as many labels as there are channels.</p>
 </li>
 </ul>
-<p>Example</p>
-<pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.13&gt;
+<h6 id="example--28">Example:</h6><pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.13&gt;
     &lt;Analog&gt;
         &lt;Device&gt;
             &lt;Device_ID&gt;1&lt;/Device_ID&gt;
@@ -1882,7 +2237,7 @@ format of this block.</p>
             &lt;/Channel&gt;
         &lt;/Device&gt;
     &lt;/Analog&gt;
-&lt;/QTM_Parameters_Ver_1.13&gt;
+&lt;/QTM_Parameters_Ver_1.13&gt;   
 </code></pre>
 <h4 id="force-xml-parameters">Force XML parameters</h4><p>In response to the command <code>GetParameters Force</code> the QTM RT server will reply
 with XML data packet, containing a block called Force. See below for the format
@@ -1921,8 +2276,7 @@ to the force plate. Each Channel contains Channel_No and ConversionFactor.</p>
 <li><p><strong>Calibration_Matrix</strong><br>Block containing a 6x6, 6x8 or 12x12 calibration matrix for the force plate.</p>
 </li>
 </ul>
-<p>Example</p>
-<pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.13&gt;    
+<h6 id="example--29">Example:</h6><pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.13&gt;    
     &lt;Force&gt;
         &lt;Unit_Length&gt;mm&lt;/Unit_Length&gt;
         &lt;Unit_Force &gt;N&lt;/Unit_Force&gt;
@@ -2061,7 +2415,7 @@ to the force plate. Each Channel contains Channel_No and ConversionFactor.</p>
             &lt;/Calibration_Matrix&gt;
         &lt;/Plate&gt;
     &lt;/Force&gt;
-&lt;/QTM_Parameters_Ver_1.13&gt;
+&lt;/QTM_Parameters_Ver_1.13&gt;   
 </code></pre>
 <p>The parameters for force plates follow roughly the standard of the <a href="http://www.c3d.org">C3D file
 format</a>. </p>
@@ -2104,8 +2458,7 @@ float.  </p>
 <p>0.0 = Original image top edge.<br>1.0 = Original image bottom edge <strong>(Default)</strong>.</p>
 </li>
 </ul>
-<p>Example</p>
-<pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.13&gt;
+<h6 id="example--30">Example:</h6><pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.13&gt;
     &lt;Image&gt;
         &lt;Camera&gt;
             &lt;ID&gt;1&lt;/ID&gt;
@@ -2119,7 +2472,7 @@ float.  </p>
             &lt;Bottom_Crop&gt;1.0&lt;/Bottom_Crop&gt;
         &lt;/Camera&gt;
     &lt;/Image&gt;
-&lt;/QTM_Parameters_Ver_1.13&gt;
+&lt;/QTM_Parameters_Ver_1.13&gt;   
 </code></pre>
 <h3 id="data-packet">Data packet</h3><p>Each data frame is made up of one or more components, as specified in the
 commands GetCurrentFrame or StreamFrames. The data frame contains a Count field
@@ -2168,7 +2521,7 @@ with a component header – identical (in layout) to the packet header. </p>
 </tr>
 </tbody>
 </table>
-<p><strong>Component data</strong> (Repeated Component Count times)</p>
+<p><strong>Component data</strong> (Repeated <em>Component Count</em> times)</p>
 <table>
 <thead>
 <tr>
@@ -2286,6 +2639,16 @@ types that are defined in the protocol so far.</p>
 <td>Force Single</td>
 <td>Force data from available force plates. Only one sample per plate and camera frame. The latest sample is used if more than one sample is available.</td>
 </tr>
+<tr>
+<td>16</td>
+<td>Gaze Vector</td>
+<td>Gaze vector data defined by a unit vector and position.</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Timecode</td>
+<td>IRIG or SMPTE timecode</td>
+</tr>
 </tbody>
 </table>
 <h4 id="2d-and-2d-linearized-component">2D and 2D linearized component</h4><p>The 2D and 2D linearized data frame format are the same. The only difference is
@@ -2332,7 +2695,7 @@ that the coordinates are linearized in 2D linearized.</p>
 </tr>
 </tbody>
 </table>
-<p>Repeated Camera Count times:</p>
+<p>Repeated <em>Camera Count</em> times:</p>
 <table>
 <thead>
 <tr>
@@ -2363,7 +2726,7 @@ that the coordinates are linearized in 2D linearized.</p>
 </tr>
 </tbody>
 </table>
-<p>2D Data, repeated Marker Count times:</p>
+<p>2D Data, repeated <em>Marker Count</em> times:</p>
 <table>
 <thead>
 <tr>
@@ -2447,7 +2810,7 @@ Not-A-Number according to the IEEE 754 floating point standard. </p>
 </tr>
 </tbody>
 </table>
-<p>Repeated Marker Count times:</p>
+<p>Repeated <em>Marker Count</em> times:</p>
 <table>
 <thead>
 <tr>
@@ -2528,7 +2891,7 @@ point.</p>
 </tr>
 </tbody>
 </table>
-<p>Repeated Marker Count times:</p>
+<p>Repeated <em>Marker Count</em> times:</p>
 <table>
 <thead>
 <tr>
@@ -2607,7 +2970,7 @@ point.</p>
 </tr>
 </tbody>
 </table>
-<p>Repeated Marker Count times:</p>
+<p>Repeated <em>Marker Count</em> times:</p>
 <table>
 <thead>
 <tr>
@@ -2686,7 +3049,7 @@ point.</p>
 </tr>
 </tbody>
 </table>
-<p>Repeated Marker Count times:</p>
+<p>Repeated <em>Marker Count</em> times:</p>
 <table>
 <thead>
 <tr>
@@ -2771,7 +3134,7 @@ point.</p>
 </tr>
 </tbody>
 </table>
-<p>Repeated Body Count times:</p>
+<p>Repeated <em>Body Count</em> times:</p>
 <table>
 <thead>
 <tr>
@@ -2850,7 +3213,7 @@ point.</p>
 </tr>
 </tbody>
 </table>
-<p>Repeated Body Count times:</p>
+<p>Repeated <em>Body Count</em> times:</p>
 <table>
 <thead>
 <tr>
@@ -2935,7 +3298,7 @@ point.</p>
 </tr>
 </tbody>
 </table>
-<p>Repeated Body Count times:</p>
+<p>Repeated <em>Body Count</em> times:</p>
 <table>
 <thead>
 <tr>
@@ -3026,7 +3389,7 @@ point.</p>
 </tr>
 </tbody>
 </table>
-<p>Repeated Body Count times:</p>
+<p>Repeated <em>Body Count</em> times:</p>
 <table>
 <thead>
 <tr>
@@ -3111,7 +3474,7 @@ point.</p>
 </tr>
 </tbody>
 </table>
-<p>Repeated Analog Device Count times:</p>
+<p>Repeated <em>Analog Device Count</em> times:</p>
 <table>
 <thead>
 <tr>
@@ -3184,7 +3547,7 @@ point.</p>
 </tr>
 </tbody>
 </table>
-<p>Repeated Analog Device Count times:</p>
+<p>Repeated <em>Analog Device Count</em> times:</p>
 <table>
 <thead>
 <tr>
@@ -3246,7 +3609,7 @@ point.</p>
 </tr>
 </tbody>
 </table>
-<p>Repeated Plate Count times:</p>
+<p>Repeated <em>Plate Count</em> times:</p>
 <table>
 <thead>
 <tr>
@@ -3313,7 +3676,7 @@ point.</p>
 </tr>
 </tbody>
 </table>
-<p>Repeated Plate Count times:</p>
+<p>Repeated <em>Plate Count</em> times:</p>
 <table>
 <thead>
 <tr>
@@ -3369,7 +3732,7 @@ point.</p>
 </tr>
 </tbody>
 </table>
-<p>Repeated Camera Count times:</p>
+<p>Repeated <em>Camera Count</em> times:</p>
 <table>
 <thead>
 <tr>
@@ -3439,6 +3802,128 @@ point.</p>
 <td>Image Data</td>
 <td>Binary data</td>
 <td>Image data formatted according to the Image Format parameter.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="gaze-vector">Gaze vector</h4><table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Component Size</td>
+<td>32-bit integer</td>
+<td>The size of the component including the header (Component Size, Component Type and Camera Count).</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Component Type</td>
+<td>32-bit integer</td>
+<td>Value = 16. See <a href="#data-component-types">Data component types</a>.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Gaze Vector Count</td>
+<td>32-bit integer</td>
+<td>Number of gaze vectors in this frame.</td>
+</tr>
+</tbody>
+</table>
+<p>Repeated <em>Gaze Vector Count</em> times:</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Sample Count</td>
+<td>32-bit integer</td>
+<td>The size of the component including the header (Component Size,<br>Component Type and Camera Count).</td>
+</tr>
+<tr>
+<td>0 (Sample Count=0)<br>4 (Sample Count&gt;0)</td>
+<td>Sample Number</td>
+<td>32-bit float</td>
+<td>Value = 16. See <a href="#data-component-types">Data component types</a>.</td>
+</tr>
+<tr>
+<td>24 * Sample Count</td>
+<td>Gaze Vector data</td>
+<td>32-bit float[]</td>
+<td>X component of the vector.<br>Y component of the vector.<br>Z component of the vector.<br>X coordinate of the vector.<br>Y coordinate of the vector.<br>Z coordinate of the vector.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="timecode">Timecode</h4><table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Component Size</td>
+<td>32-bit integer</td>
+<td>The size of the component including the header (Component Size, Component Type and Camera Count).</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Component Type</td>
+<td>32-bit integer</td>
+<td>Value = 17. See <a href="#data-component-types">Data component types</a>.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Timecode Count</td>
+<td>32-bit integer</td>
+<td>Number of timecodes.</td>
+</tr>
+</tbody>
+</table>
+<p>Repeated <em>Timecode Count</em> times:</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Timecode type</td>
+<td>32-bit integer</td>
+<td>The type of timecode.<br><br>0: SMPTE (32 bit)<br>1: IRIG (64 bit)<br>2: Camera time (64 bit)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Timecode Hi</td>
+<td>32-bit integer</td>
+<td>IRIG time code little endian format:<br>Bit 0 – 6: Year<br>Bit 7 – 15: Day of year<br><br>Camera time<br>Hi 32 bits of 64 bit integer timecode.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Timecode Lo</td>
+<td>32-bit integer</td>
+<td>IRIG time code little endian format:<br>Bit 0 – 4: Hours<br>Bit 5 – 10: Minutes<br>Bit 11 - 16: Seconds<br>bit 17 - 20: Tenth of a seconds<br><br>SMPTE time code little endian format:<br>Bit 0 – 4: Hours<br>Bit 5 – 10: Minutes<br>Bit 11 - 16: Seconds<br>bit 17 - 21: Frame<br>Bit 22 - 31 Not used<br><br>Camera time<br>Lo 32 bits of 64-bit integer timecode.</td>
 </tr>
 </tbody>
 </table>
@@ -3638,6 +4123,21 @@ changes state.</p>
 <td>Capture Saved</td>
 <td>Sent when QTM has saved the current measurement. Not included in the GetState response.</td>
 </tr>
+<tr>
+<td>14</td>
+<td>Reserved</td>
+<td>Reserved.</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Reserved</td>
+<td>Reserved.</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Trigger</td>
+<td>This event is sent by the server when QTM has received a trigger. This event will not show in the GetState command response.</td>
+</tr>
 </tbody>
 </table>
 <h3 id="discover-packet">Discover packet</h3><p>When this type of packet is broadcasted to QTM&#39;s auto discovery port, see <a href="#ip-port-numbers">IP port numbers</a>,
@@ -3751,13 +4251,11 @@ Port argument is the UDP port on which the client listens for server responses. 
 protocol currently used.</p>
 <p>It is not possible to set the version when connected via the OSC protocol. You
 can only retrieve current version.</p>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    Version
+<h6 id="example--31">Example:</h6><pre><code class="lang-coffeescript">Command:    Version
 Response:   Version is 1.12
 </code></pre>
 <h4 id="qtmversion-osc-">QTMVersion (OSC)</h4><p>Returns the QTM version on which the RT server is running.</p>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    QTMVersion
+<h6 id="example--32">Example:</h6><pre><code class="lang-coffeescript">Command:    QTMVersion
 Response:   QTM Version is 2.3 (build 464)
 </code></pre>
 <h4 id="getstate-osc-">GetState (OSC)</h4><p>This command makes the RT server send current QTM state as an event data
@@ -3765,8 +4263,7 @@ packet. The event packet will only be sent to the client that sent the GetState
 command. If the client is connected via Telnet, then the response will be sent
 as an ASCII string. GetState will not show the Camera Settings Changed, QTM
 Shutting Down and Capture Saved events.</p>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    GetState
+<h6 id="example--33">Example:</h6><pre><code class="lang-coffeescript">Command:    GetState
 Response:   Event data packet with last QTM event.
 Response    (Telnet): Connected                      or
             Connection Closed                        or
@@ -3790,8 +4287,7 @@ LicenseCode code string sent by the RT client with this command to verify that
 the license key for the RT client is valid. </p>
 <p>The QTM RT server will respond with License pass or License fail, depending on
 whether a valid license key has been entered into QTM. </p>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    CheckLicense dh4xx56krnj8KR3o8yk1nfr
+<h6 id="example--34">Example:</h6><pre><code class="lang-coffeescript">Command:    CheckLicense dh4xx56krnj8KR3o8yk1nfr
 Response:   License pass                         or
             License fail
 </code></pre>
@@ -3800,8 +4296,7 @@ Response:   License pass                         or
 </blockquote>
 <p>This command retrieves the settings for the requested component(s) of QTM in
 XML format. The XML parameters are described <a href="#xml-paramters">here</a>.</p>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    GetParameters 3D Force
+<h6 id="example--35">Example:</h6><pre><code class="lang-coffeescript">Command:    GetParameters 3D Force
 Response:   XML string containing requested parameters
 </code></pre>
 <h4 id="getcurrentframe-osc-">GetCurrentFrame (OSC)</h4><blockquote>
@@ -3835,8 +4330,7 @@ server waits until the next frame of data is available before sending it to
 the client.</p>
 </li>
 </ul>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    GetCurrentFrame 3D Analog
+<h6 id="example--36">Example:</h6><pre><code class="lang-coffeescript">Command:    GetCurrentFrame 3D Analog
 Response:   One data frame is sent to the client according to the 
             data frame protocol described in section the Data packet section.
 </code></pre>
@@ -3917,8 +4411,7 @@ first was finished: send the StreamFrames Stop command.</p>
 </ul>
 </li>
 </ul>
-<p>Example:</p>
-<pre><code class="lang-coffeescript">Command:    StreamFrames Frequency:30 UDP:2234 3D Analog
+<h6 id="example--37">Example:</h6><pre><code class="lang-coffeescript">Command:    StreamFrames Frequency:30 UDP:2234 3D Analog
 Response:   30 frames per second containing 3D data and Analog data 
             are streamed over UDP/IP to the client computer’s port 
             2234. The data frame protocol is described in the Data packet section.
@@ -4210,7 +4703,7 @@ that the coordinates are linearized in 2D linearized.</p>
 </tr>
 </tbody>
 </table>
-<p>Repeated Camera Count times:</p>
+<p>Repeated <em>Camera Count</em> times:</p>
 <table>
 <thead>
 <tr>
@@ -4232,7 +4725,7 @@ that the coordinates are linearized in 2D linearized.</p>
 </tr>
 </tbody>
 </table>
-<p>2D data, repeated Marker Count times:</p>
+<p>2D data, repeated <em>Marker Count</em> times:</p>
 <table>
 <thead>
 <tr>
@@ -4343,7 +4836,7 @@ Example: <code>/qtm/3d/marker1</code>.</p>
 </tr>
 </tbody>
 </table>
-<p>Repeated Marker Count times:</p>
+<p>Repeated <em>Marker Count</em> times:</p>
 <table>
 <thead>
 <tr>
@@ -4391,7 +4884,7 @@ Example: <code>/qtm/3d/marker1</code>.</p>
 </tr>
 </tbody>
 </table>
-<p>Repeated Marker Count times:</p>
+<p>Repeated <em>Marker Count</em> times:</p>
 <table>
 <thead>
 <tr>
@@ -4444,7 +4937,7 @@ Example: <code>/qtm/3d/marker1</code>.</p>
 </tr>
 </tbody>
 </table>
-<p>Repeated Analog Device Count times:</p>
+<p>Repeated <em>Analog Device Count</em> times:</p>
 <table>
 <thead>
 <tr>
@@ -4497,7 +4990,7 @@ Example: <code>/qtm/3d/marker1</code>.</p>
 </tr>
 </tbody>
 </table>
-<p>Repeated Analog Device Count times:</p>
+<p>Repeated <em>Analog Device Count</em> times:</p>
 <table>
 <thead>
 <tr>
@@ -4541,7 +5034,7 @@ Example: <code>/qtm/3d/marker1</code>.</p>
 </tr>
 </tbody>
 </table>
-<p>Repeated Plate Count times:</p>
+<p>Repeated <em>Plate Count</em> times:</p>
 <table>
 <thead>
 <tr>
@@ -4590,7 +5083,7 @@ Example: <code>/qtm/3d/marker1</code>.</p>
 </tr>
 </tbody>
 </table>
-<p>Repeated Plate Count times:</p>
+<p>Repeated <em>Plate Count</em> times:</p>
 <table>
 <thead>
 <tr>
@@ -4893,186 +5386,156 @@ changes state.</p>
 </tr>
 </tbody>
 </table>
-<h2 id="changelog">Changelog</h2><h3 id="changes-in-1-13">Changes in 1.13</h3><ul>
-<li><p>Added export to AVI file and gaze vector processing actions.</p>
-</li>
-<li><p>Updated Telnet protocol version.</p>
-</li>
-<li><p>Made it possible to change video mode and video capture frequency.</p>
-</li>
-<li><p>Changes to force calibration matrix. Now supports more than 6x6 matrixes.</p>
-</li>
-<li><p>Added support for trajectory bones.</p>
-</li>
+<h2 id="changelog">Changelog</h2><h3 id="changes-in-1-18">Changes in 1.18</h3><ul>
+<li>Added Miqus Video Color camera type.</li>
+<li>Added Auto white balance camera settings</li>
+</ul>
+<h3 id="changes-in-1-17">Changes in 1.17</h3><ul>
+<li>Added support for external time base <code>IRIG</code>.</li>
+<li>Added <code>IRIG</code> time code to OSC frame header.</li>
+<li>Added new data component, <code>Timecode</code>.</li>
+<li>Added new event type, <code>Trigger</code>.</li>
+<li>Added Auto exposure camera settings.</li>
+</ul>
+<h3 id="changes-in-1-16">Changes in 1.16</h3><ul>
+<li>Added Miqus Video camera type.</li>
+<li>Removed Video modes settings from general camera settings.</li>
+<li>Added video Resolution and Aspect_Ratio settings to general camera settings.</li>
+<li>Added Euler rotation names to 6DOF settings.</li>
+<li>Added Lens Control focus and aperture settings.</li>
+</ul>
+<h3 id="changes-in-1-15">Changes in 1.15</h3><ul>
+<li>Added <code>Led</code> command.</li>
+<li>Added <code>Reprocess</code> command.</li>
+<li>Added Miqus Sync Unit camera type.</li>
+<li>Added general camera settings for Miqus Sync Unit trigger settings
+(<code>Start_On_Trigger_NO</code>, <code>Start_On_Trigger_NC</code>,
+<code>Start_On_Trigger_Software</code>)</li>
+<li>Added general camera setting, <code>Supports_HW_Sync</code>, <code>Sync_Out2</code> and
+<code>Sync_Out_MT</code>.</li>
+<li>Removed SRAM wired sync out mode.</li>
+<li>Added <code>Camera_System</code> and subvalue <code>Type</code> to general XML.</li>
+</ul>
+<h3 id="changes-in-1-14">Changes in 1.14</h3><ul>
+<li>Added bone color to 3d XML parameters.</li>
+<li>Added support for new processing action: <code>PreProcessing2D</code>.</li>
+<li>Added support for real-time processing actions and reprocessing actions settings.</li>
+<li>Changed XML settings tag from <code>Duty cycle</code> to <code>Duty_Cycle</code>.</li>
+<li>Added option to only stream data from selected analog channels.</li>
+</ul>
+<h3 id="changes-in-1-13">Changes in 1.13</h3><ul>
+<li>Added export to AVI file and gaze vector processing actions.</li>
+<li>Updated Telnet protocol version.</li>
+<li>Made it possible to change video mode and video capture frequency.</li>
+<li>Changes to force calibration matrix. Now supports more than 6x6 matrixes.</li>
+<li>Added support for trajectory bones.</li>
 </ul>
 <h3 id="changes-in-1-12">Changes in 1.12</h3><ul>
-<li><p>Added <code>Load</code> function for loading measurements in QTM.</p>
-</li>
-<li><p>Added <code>LoadProject</code> function for loading project in QTM.</p>
-</li>
-<li><p>Added new sync out mode SRAM wired in General/Camera settings.</p>
-</li>
+<li>Added <code>Load</code> function for loading measurements in QTM.</li>
+<li>Added <code>LoadProject</code> function for loading project in QTM.</li>
+<li>Added new sync out mode SRAM wired in General/Camera settings.</li>
 </ul>
 <h3 id="changes-in-1-11">Changes in 1.11</h3><ul>
-<li><p>Changed analog XML parameters. Now all channels have their own unit setting.</p>
-</li>
-<li><p>Changed timestamp in OSC data frame header, from one 64 bit integers, to two
-32 bit integers (hi and lo word). </p>
-</li>
+<li>Changed analog XML parameters. Now all channels have their own unit setting.</li>
+<li>Changed timestamp in OSC data frame header, from one 64 bit integers, to two
+32 bit integers (hi and lo word). </li>
 </ul>
 <h3 id="changes-in-1-10">Changes in 1.10</h3><ul>
 <li>Added general camera XML parameters <code>External_Time_Base</code>,</li>
-<li><p><code>Processing_Actions</code> and Camera/Underwater.</p>
-</li>
-<li><p>Added 3D XML parameters <code>CalibrationTime</code>.</p>
-</li>
-<li><p>Changed Save command. Added overwrite parameter.</p>
-</li>
-<li><p>Made it possible to change the capture frequency via the frequence general
-setting.</p>
-</li>
-<li><p>Changed <code>GetLastEvent</code> to <code>GetState</code>.</p>
-</li>
-<li><p>Support fetching of General and Image parameters even if QTM is not
-connected to a camera system.</p>
-</li>
-<li><p>Changed the Close command. It will now respond with <code>Closing file</code> instead
+<li><code>Processing_Actions</code> and Camera/Underwater.</li>
+<li>Added 3D XML parameters <code>CalibrationTime</code>.</li>
+<li>Changed Save command. Added overwrite parameter.</li>
+<li>Made it possible to change the capture frequency via the frequency general
+setting.</li>
+<li>Changed <code>GetLastEvent</code> to <code>GetState</code>.</li>
+<li>Support fetching of General and Image parameters even if QTM is not
+connected to a camera system.</li>
+<li>Changed the Close command. It will now respond with <code>Closing file</code> instead
 of <code>Closing connection</code> when not in RT (preview) mode. The “No connection to
 close” response is now sent as a command response string, not an error
-string.</p>
-</li>
-<li><p>Changed New command response. The <code>Already connected</code> response is now sent
-as a command string, not an error string.</p>
-</li>
-<li><p>Added Capture Saved event.</p>
-</li>
-<li><p>Removed <code>Fetching Finished</code> event.</p>
-</li>
-<li><p>Added <code>GetCaptureQTM</code> command.</p>
-</li>
-<li><p>Changed <code>GetCapture</code> response. Send a command response <code>Sending capture</code>
-before sending the XML packet with the capture file.</p>
-</li>
-<li><p>Added RT server base port to discover response packet.</p>
-</li>
+string.</li>
+<li>Changed New command response. The <code>Already connected</code> response is now sent
+as a command string, not an error string.</li>
+<li>Added Capture Saved event.</li>
+<li>Removed <code>Fetching Finished</code> event.</li>
+<li>Added <code>GetCaptureQTM</code> command.</li>
+<li>Changed <code>GetCapture</code> response. Send a command response <code>Sending capture</code>
+before sending the XML packet with the capture file.</li>
+<li>Added RT server base port to discover response packet.</li>
 </ul>
 <h3 id="changes-in-1-9">Changes in 1.9</h3><ul>
-<li><p>Added Force single data component.</p>
-</li>
-<li><p>Fixed bug in OSC Analog, Analog single and Force data components.</p>
-</li>
-<li><p>Fixed bug in OSC 3D no labels data component.</p>
-</li>
-<li><p>Allow capture start via RT server even if camera system isn’t calibrated.</p>
-</li>
+<li>Added Force single data component.</li>
+<li>Fixed bug in OSC Analog, Analog single and Force data components.</li>
+<li>Fixed bug in OSC 3D no labels data component.</li>
+<li>Allow capture start via RT server even if camera system isn’t calibrated.</li>
 </ul>
 <h3 id="changes-in-1-8">Changes in 1.8</h3><ul>
-<li><p>Added events: <code>Camera Settings Changed</code> and <code>QTM Shutting Down</code>.</p>
-</li>
-<li><p>Added RT server auto discovery.</p>
-</li>
-<li><p>New data frame component: Image</p>
-</li>
-<li><p>Added new XML setting: Image and General Camera setting Orientation.</p>
-</li>
-<li><p>GetParameters command returns <code>Parameters not available</code> error string,
-instead of a <code>No More Data” package</code>.</p>
-</li>
-<li><p>Added status byte to 2D and 2D linearized data components.</p>
-</li>
-<li><p>Changed all 64-bit float coordinates to 32-bit floats in the 3D and 6DOF
-data frames.</p>
-</li>
-<li><p>Removed all 32-bit padding form the protocol.</p>
-</li>
-<li><p>Don&#39;t broadcast string <code>Server shutting down</code> to all clients when shutting
-down. Use event <code>QTM Shutting Down</code> instead.</p>
-</li>
-<li><p>Added password to <code>TakeControl</code>.</p>
-</li>
-<li><p>Fixed bug in AnalogSingle Big Endian data component.</p>
-</li>
-<li><p>Changed name of <code>GetCapture</code> to <code>GetCaptureC3D</code></p>
-</li>
-<li><p>Changed Force plate identification in XML strings from <code>Force_Plate_Index</code>
-to <code>Plate_ID</code>.</p>
-</li>
-<li><p>Changed name of Event command to <code>SetQTMEvent</code>.</p>
-</li>
+<li>Added events: <code>Camera Settings Changed</code> and <code>QTM Shutting Down</code>.</li>
+<li>Added RT server auto discovery.</li>
+<li>New data frame component: Image</li>
+<li>Added new XML setting: Image and General Camera setting Orientation.</li>
+<li>GetParameters command returns <code>Parameters not available</code> error string,
+instead of a <code>No More Data” package</code>.</li>
+<li>Added status byte to 2D and 2D linearized data components.</li>
+<li>Changed all 64-bit float coordinates to 32-bit floats in the 3D and 6DOF
+data frames.</li>
+<li>Removed all 32-bit padding form the protocol.</li>
+<li>Don&#39;t broadcast string <code>Server shutting down</code> to all clients when shutting
+down. Use event <code>QTM Shutting Down</code> instead.</li>
+<li>Added password to <code>TakeControl</code>.</li>
+<li>Fixed bug in AnalogSingle Big Endian data component.</li>
+<li>Changed name of <code>GetCapture</code> to <code>GetCaptureC3D</code></li>
+<li>Changed Force plate identification in XML strings from <code>Force_Plate_Index</code>
+to <code>Plate_ID</code>.</li>
+<li>Changed name of Event command to <code>SetQTMEvent</code>.</li>
 </ul>
 <h3 id="changes-in-1-7">Changes in 1.7</h3><ul>
-<li><p>Added <code>Trig</code> command.</p>
-</li>
-<li><p>Added <code>Event</code> command.</p>
-</li>
-<li><p>Added event: <code>Waiting For Trigger</code>.</p>
-</li>
-<li><p>Changed format of XML data packet and added new XML setting. General
-setting: <code>Start On External Trigger</code>.</p>
-</li>
+<li>Added <code>Trig</code> command.</li>
+<li>Added <code>Event</code> command.</li>
+<li>Added event: <code>Waiting For Trigger</code>.</li>
+<li>Changed format of XML data packet and added new XML setting. General
+setting: <code>Start On External Trigger</code>.</li>
 </ul>
 <h3 id="changes-in-1-6">Changes in 1.6</h3><ul>
-<li><p>Added OSC support.</p>
-</li>
-<li><p>Apply rotation and translation to 6 DOF bodies.</p>
-</li>
-<li><p>Added <code>Camera</code> to general XML parameters.</p>
-</li>
-<li><p>Added <code>Save</code> command.</p>
-</li>
+<li>Added OSC support.</li>
+<li>Apply rotation and translation to 6 DOF bodies.</li>
+<li>Added <code>Camera</code> to general XML parameters.</li>
+<li>Added <code>Save</code> command.</li>
 </ul>
 <h3 id="changes-in-1-5">Changes in 1.5</h3><ul>
-<li><p>Added new command: <code>QTMVersion</code>.</p>
-</li>
-<li><p><code>Version</code> command without argument will return current version used by the
-server.</p>
-</li>
-<li><p>Added new general parameter: <code>Capture Time</code>.</p>
-</li>
-<li><p>Added possibility to change settings via an XML parameter file. Supported
-settings: <code>Capture time</code> and Force plate corners.</p>
-</li>
-<li><p>Added new commands: <code>New</code>, <code>Close</code>, <code>Start</code>, <code>Stop</code>, <code>GetCapture</code> and
-<code>GetLastEvent</code>.</p>
-</li>
-<li><p>Added events: <code>Connected</code>, <code>Closed</code>, <code>Capture started</code> and <code>Capture stopped</code>.</p>
-</li>
+<li>Added new command: <code>QTMVersion</code>.</li>
+<li><code>Version</code> command without argument will return current version used by the
+server.</li>
+<li>Added new general parameter: <code>Capture Time</code>.</li>
+<li>Added possibility to change settings via an XML parameter file. Supported
+settings: <code>Capture time</code> and Force plate corners.</li>
+<li>Added new commands: <code>New</code>, <code>Close</code>, <code>Start</code>, <code>Stop</code>, <code>GetCapture</code> and
+<code>GetLastEvent</code>.</li>
+<li>Added events: <code>Connected</code>, <code>Closed</code>, <code>Capture started</code> and <code>Capture stopped</code>.</li>
 </ul>
 <h3 id="changes-in-1-4">Changes in 1.4</h3><ul>
-<li><p>Added 6D (6 DOF) XML parameters.</p>
-</li>
-<li><p>Added color to 3D XML parameters.</p>
-</li>
-<li><p>Removed LicenceName argument in the CheckLicence command.</p>
-</li>
+<li>Added 6D (6 DOF) XML parameters.</li>
+<li>Added color to 3D XML parameters.</li>
+<li>Removed LicenceName argument in the CheckLicence command.</li>
 </ul>
 <h3 id="changes-in-1-3">Changes in 1.3</h3><ul>
 <li>Added <code>2D Drop Rate</code> and <code>2D Out Of Sync Rate</code> to frame component header for:
 3d, 3DRes, 3DnoLabels and 3DNoLabelsRes.</li>
 </ul>
 <h3 id="changes-in-1-2">Changes in 1.2</h3><ul>
-<li><p><code>2Dlin</code>, <code>3DRes</code>, <code>3DNoLabelsRes</code>, <code>6DRes</code> and <code>6DEulerRes</code> data type components were added.</p>
-</li>
-<li><p>CheckLicense command added.</p>
-</li>
-<li><p><code>&lt;AxisUpwards&gt;</code> item added to XML parameters for 3D. </p>
-</li>
+<li><code>2Dlin</code>, <code>3DRes</code>, <code>3DNoLabelsRes</code>, <code>6DRes</code> and <code>6DEulerRes</code> data type components were added.</li>
+<li>CheckLicense command added.</li>
+<li><code>&lt;AxisUpwards&gt;</code> item added to XML parameters for 3D. </li>
 </ul>
 <h3 id="changes-in-1-1">Changes in 1.1</h3><ul>
-<li><p>UDP support added to the <code>StreamFrames</code> command.</p>
-</li>
-<li><p>Analog data frame component changed. Includes sample number and can contain
-several samples per channel in a single data frame.</p>
-</li>
-<li><p>Force data frame component changed. Includes sample number and can contain
-several samples per force plate in a single data frame.</p>
-</li>
-<li><p>Analog parameters changed, device ID added.</p>
-</li>
-<li><p>Force parameters changed, device ID added.</p>
-</li>
-<li><p><code>SendParameters</code> command changed to <code>GetParameters</code>.</p>
-</li>
+<li>UDP support added to the <code>StreamFrames</code> command.</li>
+<li>Analog data frame component changed. Includes sample number and can contain
+several samples per channel in a single data frame.</li>
+<li>Force data frame component changed. Includes sample number and can contain
+several samples per force plate in a single data frame.</li>
+<li>Analog parameters changed, device ID added.</li>
+<li>Force parameters changed, device ID added.</li>
+<li><code>SendParameters</code> command changed to <code>GetParameters</code>.</li>
 </ul>
 				</div>
 			</div>
