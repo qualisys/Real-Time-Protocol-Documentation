@@ -7,7 +7,6 @@ var fs             = require('fs')
   , livereloadPort = 9005
 ;
 
-console.log('hej', revision);
 var doqRunner = function()
 {
 	var doq        = require('doq')
