@@ -28,7 +28,7 @@
 			<Track6DOF>False</Track6DOF>
 			<ForceData>False</ForceData>
 			<GazeVectorData>False</GazeVectorData>
-			<SkeletonData>False</SkeletonData>
+			<SkeletonSolve>False</SkeletonSolve>
 			<ExportTSV>False</ExportTSV>
 			<ExportC3D>False</ExportC3D>
 			<ExportMatlabFile>False</ExportMatlabFile>
@@ -40,7 +40,7 @@
 			<Track6DOF>False</Track6DOF>
 			<ForceData>False</ForceData>
 			<GazeVectorData>False</GazeVectorData>
-			<SkeletonData>False</SkeletonData>
+			<SkeletonSolve>False</SkeletonSolve>
 		</RealTime_Processing_Actions>
 		<Reprocessing_Actions>
 			<PreProcess2D>False</PreProcess2D>
@@ -51,7 +51,7 @@
 			<Track6DOF>False</Track6DOF>
 			<ForceData>False</ForceData>
 			<GazeVectorData>False</GazeVectorData>
-			<SkeletonData>False</SkeletonData>
+			<SkeletonSolve>False</SkeletonSolve>
 			<ExportTSV>False</ExportTSV>
 			<ExportC3D>False</ExportC3D>
 			<ExportMatlabFile>False</ExportMatlabFile>
