@@ -1,5 +1,5 @@
 ```xml
-<QTM_Parameters_Ver_1.17>
+<QTM_Parameters_Ver_{{ version }}>
     <General>
         <Frequency>240</Frequency>
         <Capture_Time>2.5</Capture_Time>
@@ -89,16 +89,16 @@
                 <Height>1024</Height>
             </Video_Res>
             <Marker_FOV>
-                         <Left>0</Left>
-                         <Top>0</Top>
-                         <Right>1279</Right>
-                         <Bottom>1023</Bottom>
+                <Left>0</Left>
+                <Top>0</Top>
+                <Right>1279</Right>
+                <Bottom>1023</Bottom>
             </Marker_FOV>
             <Video_FOV>
-                         <Left>0</Left>
-                         <Top>0</Top>
-                         <Right>1279</Right>
-                         <Bottom>1023</Bottom>
+                <Left>0</Left>
+                <Top>0</Top>
+                <Right>1279</Right>
+                <Bottom>1023</Bottom>
             </Video_FOV>
             <Sync_Out>
                 <Mode>Camera independent</Mode>
@@ -108,5 +108,5 @@
             </Sync_Out>
         </Camera>
     </General>
-</QTM_Parameters_Ver_1.17>
+</QTM_Parameters_Ver_{{ version }}>
 ```

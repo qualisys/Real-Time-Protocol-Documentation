@@ -1,5 +1,5 @@
 ```xml
-<QTM_Parameters_Ver_1.13>
+<QTM_Parameters_Ver_{{ version }}>
     <Analog>
         <Device>
             <Device_ID>1</Device_ID>
@@ -28,5 +28,5 @@
             </Channel>
         </Device>
     </Analog>
-</QTM_Parameters_Ver_1.13>   
+</QTM_Parameters_Ver_{{ version }}>   
 ```

@@ -1,5 +1,5 @@
 ```xml
-<QTM_Parameters_Ver_1.13>    
+<QTM_Parameters_Ver_{{ version }}>    
     <Force>
         <Unit_Length>mm</Unit_Length>
         <Unit_Force >N</Unit_Force>
@@ -138,5 +138,5 @@
             </Calibration_Matrix>
         </Plate>
     </Force>
-</QTM_Parameters_Ver_1.13>   
+</QTM_Parameters_Ver_{{ version }}>   
 ```

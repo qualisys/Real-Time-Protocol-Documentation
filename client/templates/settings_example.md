@@ -27,7 +27,7 @@
 			<AIM>True</AIM>
 			<Track6DOF>False</Track6DOF>
 			<ForceData>False</ForceData>
-			<GazeVectorData>False</GazeVectorData>
+			<GazeVector>False</GazeVector>
 			<SkeletonSolve>False</SkeletonSolve>
 			<ExportTSV>False</ExportTSV>
 			<ExportC3D>False</ExportC3D>
@@ -39,7 +39,7 @@
 			<AIM>True</AIM>
 			<Track6DOF>False</Track6DOF>
 			<ForceData>False</ForceData>
-			<GazeVectorData>False</GazeVectorData>
+			<GazeVector>False</GazeVector>
 			<SkeletonSolve>False</SkeletonSolve>
 		</RealTime_Processing_Actions>
 		<Reprocessing_Actions>
@@ -50,7 +50,7 @@
 			<AIM>True</AIM>
 			<Track6DOF>False</Track6DOF>
 			<ForceData>False</ForceData>
-			<GazeVectorData>False</GazeVectorData>
+			<GazeVector>False</GazeVector>
 			<SkeletonSolve>False</SkeletonSolve>
 			<ExportTSV>False</ExportTSV>
 			<ExportC3D>False</ExportC3D>
@@ -60,7 +60,7 @@
             <ID>1</ID>
             <Mode>Marker</Mode>
 			<Video_Resolution>1080p</Video_Resolution>
-			<Video_Aspect_Ratio>1080p</Video_Aspect_Ratio>
+			<Video_Aspect_Ratio>16x9</Video_Aspect_Ratio>
 			<Video_Frequency>30</Video_Frequency>
             <Video_Exposure>0.5</Video_Exposure>
             <Video_Flash_Time>0.3</Video_Flash_Time>

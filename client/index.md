@@ -21,10 +21,10 @@ This document describes version {{ version }} of the QTM RT server protocol.
 QTM is backwards compatible with all previous versions of the protocol. The QTM RT
 server keeps track of the protocol version used by each RT client connected to it, and
 adapts the data to be sent to each client according to their selected protocol version.  
-  
+
 To ensure that a particular client will work with all future releases of QTM, the client
 only needs to send the `Version` command to the QTM RT server when connecting to it.  
-  
+
 At the end of this document there is a [list of the changes](#changelog) that
 have been made to the protocol between different versions.
 
@@ -210,76 +210,141 @@ be true or false.
 
 ##### External\_Time\_Base
 
-* **Enabled** - Enable or disable external time base. Value can be True or False.
+* **Enabled** 
+   Enable or disable external time base. Value can be True or False.
 
-* **Signal\_Source** - Signal source used for external time base. Selectable values:
+* **Signal\_Source** 
+Signal source used for external time base. Selectable values:
+   * Control port
+   * IR receiver
+   * SMPTE
+   * IRIG
+   * Video sync
 
- * Control port
- * IR receiver
- * SMPTE
- * IRIG
- * Video sync
-
-
-* **Signal\_Mode** - Selectable values:
-
+* **Signal\_Mode** 
+Selectable values:
   * Periodic
   * Non-periodic
 
-
-* **Frequency\_Multiplier** - Multiply incoming frequency by this integer to
+* **Frequency\_Multiplier** 
+  Multiply incoming frequency by this integer to
   get the camera frequency. Can be combined with frequency divisor. Value is an
-  integer.
-
-* **Frequency\_Divisor** - Divide incoming frequency by this integer to get the
+integer.
+  
+* **Frequency\_Divisor** 
+  Divide incoming frequency by this integer to get the
   camera frequency. Can be combined with frequency multiplier. Value is an
-  integer.
-
-* **Frequency\_Tolerance** - Frequency tolerance in ppm of period time. Value
-  is an integer. 
-
-* **Nominal\_Frequency** - Nominal frequency used by QTM. To disable nominal
+integer.
+  
+* **Frequency\_Tolerance** 
+  Frequency tolerance in ppm of period time. Value
+is an integer. 
+  
+* **Nominal\_Frequency** 
+  Nominal frequency used by QTM. To disable nominal
   frequency set the value to *None.* To enable nominal frequency set a float
-  value.
-
-* **Signal\_Edge** - Control port TTL signal edge.
-
+value.
+  
+* **Signal\_Edge** 
+Control port TTL signal edge.
   * Negative
   * Positive
 
-
-* **Signal\_Shutter\_Delay** - Delay from signal to shutter opening in micro
-  seconds. Value is an integer.
-
-* **Non\_Periodic\_Timeout** - Max number of seconds expected between two
+* **Signal\_Shutter\_Delay** 
+  Delay from signal to shutter opening in micro
+seconds. Value is an integer.
+  
+* **Non\_Periodic\_Timeout** 
+  Max number of seconds expected between two
   frames in non-periodic mode. Value is a float.
 
-#### Processing_Actions
-{{> processing_actions }}
-
-* **TwinSystemMerge**  
+##### Processing_Actions
+- **PreProcessing2D**  
+  Enable or disable 2D pre-processing action. Value can be True or False.
+- **Tracking**  
+  2D or 3D tracking processing action. Value can be 2D, 3D or False.
+- **TwinSystemMerge**  
   Twin system merge processing action. Value can be True or False.
-
-* **SplineFill**  
+- **SplineFill**  
   Spline fill processing action. Value can be True or False.
+- **AIM**  
+  AIM processing action. Value can be True or False.
+- **Track6DOF**  
+  6 DOF tracking processing action. Value can be True or False.
+- **ForceData**  
+  Force data processing action. Value can be True or False.
+- **GazeVector**  
+  Enable or disable gaze vector data processing action. Value can be True or False.
+- **SkeletonSolve**  
+  Enable or disable skeleton data processing action. Value can be True or False.
+- **ExportTSV**  
+  Export to TSV processing action. Value can be True or False.
+- **ExportC3D**  
+  Export to C3D processing action. Value can be True or False.
+- **ExportMatlabFile**  
+  Export to MATLAB file processing action. Value can be True or False.
+- **ExportAviFile**  
+  Enable or disable export to AVI video file processing action. Value can be True or False.
 
-#### RealTime_Processing_Actions
-{{> processing_actions }}
+##### RealTime_Processing_Actions
+- **PreProcessing2D**  
+  Enable or disable 2D pre-processing action. Value can be True or False.
 
-* **ExportFBX**  
+- **Tracking**  
+  2D or 3D tracking processing action. Value can be 2D, 3D or False.
+- **AIM**  
+  AIM processing action. Value can be True or False.
+- **Track6DOF**  
+  6 DOF tracking processing action. Value can be True or False.
+- **ForceData**  
+  Force data processing action. Value can be True or False.
+- **GazeVector**  
+  Enable or disable gaze vector data processing action. Value can be True or False.
+- **SkeletonSolve**  
+  Enable or disable skeleton data processing action. Value can be True or False.
+- **ExportTSV**  
+  Export to TSV processing action. Value can be True or False.
+- **ExportC3D**  
+  Export to C3D processing action. Value can be True or False.
+- **ExportMatlabFile**  
+  Export to MATLAB file processing action. Value can be True or False.
+- **ExportAviFile**  
+  Enable or disable export to AVI video file processing action. Value can be True or False.
+- **ExportFBX**  
 Enable or disable export to FBX processing action. Value can be True or False.
 
-#### Reprocessing_Actions
-{{> processing_actions }}
+##### Reprocessing_Actions
+- **PreProcessing2D**  
+    Enable or disable 2D pre-processing action. Value can be True or False.
 
-* **TwinSystemMerge**  
+- **Tracking**  
+  2D or 3D tracking processing action. Value can be 2D, 3D or False.
+- **TwinSystemMerge**  
   Twin system merge processing action. Value can be True or False.
-
-* **SplineFill**  
+- **SplineFill**  
   Spline fill processing action. Value can be True or False.
+- **AIM**  
+  AIM processing action. Value can be True or False.
+- **Track6DOF**  
+  6 DOF tracking processing action. Value can be True or False.
+- **ForceData**  
+  Force data processing action. Value can be True or False.
+- **GazeVector**  
+  Enable or disable gaze vector data processing action. Value can be True or False.
+- **SkeletonSolve**  
+  Enable or disable skeleton data processing action. Value can be True or False.
+- **ExportTSV**  
+  Export to TSV processing action. Value can be True or False.
+- **ExportC3D**  
+  Export to C3D processing action. Value can be True or False.
+- **ExportMatlabFile**  
+  Export to MATLAB file processing action. Value can be True or False.
+- **ExportAviFile**  
+  Enable or disable export to AVI video file processing action. Value can be True or False.
+- **ExportFBX**  
+Enable or disable export to FBX processing action. Value can be True or False.
 
-
-#### Camera
+##### Camera
 
 General settings consist of none or several *Camera* elements, with
 following content.
@@ -295,7 +360,6 @@ following content.
   * Marker Intensity
   * Video
 
-  
 * **Video_Resolution** - Change video resolution for non-marker cameras (Oqus
  2c and Miqus Video). Available resolutions are:
 
@@ -558,9 +622,9 @@ Version              | [n.n]
 QTMVersion           | -
 ByteOrder            | -
 GetState             | -
-GetParameters        | `All` &#124; `([General] [3D] [6D] [Analog] [Force] [Image])`
-GetCurrentFrame      | `All` &#124; `([2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes]`<br>`[Analog[:channels]] [AnalogSingle[:channels]] [Force] [6D] [6DRes]`<br>` [6DEuler] [6DEulerRes] [Image])`
-StreamFrames         | `Stop` &#124; `((FrequencyDivisor:n` &#124; `Frequency:n` &#124; `AllFrames)`<br>`[UDP[:address]:port] (All` &#124; `([2D] [2DLin] [3D] [3DRes]`<br>`[3DNoLabels] [3DNoLabelsRes] [Analog[:channels]] [AnalogSingle[:channels]]`<br>`[Force] [6D] [6DRes] [6DEuler] [6DEulerRes] [Image])))` 
+GetParameters        | `All` &#124; `([General] [3D] [6D] [Analog] [Force] [Image] [GazeVector] [Skeleton])` 
+GetCurrentFrame      | `All` &#124; `([2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes] [Analog[:channels]] [AnalogSingle[:channels]] [Force] [ForceSingle] [6D] [6DRes] [6DEuler] [6DEulerRes] [Image] [GazeVector] [Timecode] [Skeleton[:global]])` 
+StreamFrames         | `Stop` &#124; `((FrequencyDivisor:n` &#124; `Frequency:n` &#124; `AllFrames) [UDP[:address]:port] ([2D] [2DLin] [3D] [3DRes][3DNoLabels] [3DNoLabelsRes] [Analog[:channels]] [AnalogSingle[:channels]] [Force] [ForceSingle] [6D] [6DRes] [6DEuler] [6DEulerRes] [Image] [GazeVector] [Timecode] [Skeleton[:global]]))` 
 TakeControl          | `[Password]`
 ReleaseControl       | -
 New                  | -
@@ -575,7 +639,7 @@ GetCaptureQTM        | -
 Trig                 | -
 SetQTMEvent          | `Label`
 Reprocess            | -
-Led                  | (Camera) (On | Off | Pulsing) (Green | Amber | All)
+Led                  | `Camera (On` &#124; `Off` &#124; `Pulsing) (Green`&#124;`Amber`&#124;`All)`
 Quit                 | -
 
 
@@ -614,12 +678,12 @@ If you don't set the protocol version yourself, QTM will set it to **version
 
 ###### Example:
 ```coffeescript
-Command:    Version 1.12
-Response:   Version set to 1.12    or  
+Command:    Version {{ version }}
+Response:   Version set to {{ version }}    or  
 			Version NOT supported
 
 Command:    Version
-Response:   Version is 1.12
+Response:   Version is {{ version }}
 ```
 
 ### QTMVersion
@@ -643,7 +707,7 @@ Returns the current byte order.
 Command:    ByteOrder
 Response:   Byte order is little endian or
             Byte order is big endian
-``` 
+```
 
 ### GetState
 > **`GetState`**
@@ -660,23 +724,26 @@ Command:    GetState
 Response:   Event data packet with last QTM event.
 
 (Telnet)
-Response:   Connected               or
-            Connection Closed       or
-            Capture Started         or
-            Capture Stopped         or
-            Calibration Started     or
-            Calibration Stopped     or
-            RT From File Started    or
-            RT From File Stopped    or
-            Waiting For Trigger
+Response:   Connected                 or
+            Connection Closed         or
+            Capture Started           or
+            Capture Stopped           or
+            Capture Fetching Finished or
+            Calibration Started       or
+            Calibration Stopped       or
+            RT From File Started      or
+            RT From File Stopped      or
+            Waiting For Trigger       or
+            Capture Saved
 ```
 
 ### GetParameters
-> **`GetParameters`** `All | ([General] [3D] [6D] [Analog] [Force] [Image])`
+> **`GetParameters`** `All | ([General] [3D] [6D] [Analog] [Force] [Image] [GazeVector] [Skeleton[:global]])`
 
 This command retrieves the settings for the requested component(s) of QTM in
 XML format. The XML parameters are described [here](#xml-packet).
 
+By default, skeleton data is in local coordinates. Skeleton:global will change the skeleton data to global coordinates
 
 ###### Example:
 ```coffeescript
@@ -685,16 +752,15 @@ Response:   Parameters not available                    or
             XML string containing requested parameters
 ```
 
-
 ### GetCurrentFrame
-> **`GetCurrentFrame`** `All | ([2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes]
-                  [Analog[:channels]] [AnalogSingle[:channels]] [Force] [6D] [6DRes] [6DEuler]
-                  [6DEulerRes] [Image])`
+> **`GetCurrentFrame`** `[2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes] [Analog[:channels]] [AnalogSingle[:channels]] [Force] [ForceSingle] [6D] [6DRes] [6DEuler] [6DEulerRes] [Image] [GazeVector] [Timecode] [Skeleton[:global]]`
 
 <div class="well">The optional channels for Analog and AnalogSingle, is a
 string containing a list of channels to read from the server. The channels
 are separated by a `,` and can also contain ranges defined by a `-`. Here is
 an example: `1,2,3-6,16`</div>
+
+By default, skeleton data is in local coordinates. Skeleton:global will change the skeleton data to global coordinates.
 
 This command returns the current frame of real-time data from the server.  
 
@@ -728,15 +794,14 @@ Response:   One data frame is sent to the client according to the
 ```
 
 ### StreamFrames
-> **`StreamFrames`** `Stop | ((FrequencyDivisor:n | Frequency:n | AllFrames)
-                      [UDP[:address]:port] (All |  ([2D] [2DLin] [3D] [3DRes] [3DNoLabels]
-                      [3DNoLabelsRes] [Analog[:channels]] [AnalogSingle[:channels]] [Force] [6D] [6DRes] [6DEuler]
-                      [6DEulerRes] [Image])))`
+> **`StreamFrames`** `Stop | ((FrequencyDivisor:n | Frequency:n | AllFrames) [UDP[:address]:port] [2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes] [Analog[:channels]] [AnalogSingle[:channels]] [Force] [ForceSingle] [6D] [6DRes] [6DEuler] [6DEulerRes] [Image] [GazeVector] [Timecode] [Skeleton[:global]])`
 
 <div class="well">The optional channels for Analog and AnalogSingle, is a
 string containing a list of channels to read from the server. The channels
 are separated by a `,` and can also contain ranges defined by a `-`. Here
 is an example: `1,2,3-6,16`</div>
+
+By default, skeleton data is in local coordinates. Skeleton:global will change the skeleton data to global coordinates.
 
 This command makes the QTM RT server start streaming data frames in real-time.  
 
@@ -790,8 +855,8 @@ Points worth noting are:
      25Hz. 
 
     * **Frequency:n**  
-    With a specific frequency setting, the QTM RT server will transmit frames
-    at a rate of approximately n Hz.  
+      With a specific frequency setting, the QTM RT server will transmit frames
+      at a rate of approximately n Hz.  
 
     *Example*: QTM is measuring in 200 Hz and real-time tracking in 100 Hz.
     If a client specifies Frequency:60 QTM will send data at an approximate
@@ -800,8 +865,8 @@ Points worth noting are:
     reach 60Hz instead of 50). 
 
     * **AllFrames**  
-    When a client specifies AllFrames in the StreamFrames command, every
-    real-time frame processed by QTM is transmitted to the client.  
+      When a client specifies AllFrames in the StreamFrames command, every
+      real-time frame processed by QTM is transmitted to the client.  
 
 * UDP notes:
 
@@ -1133,6 +1198,7 @@ Response:   Bye bye
 ## QTM RT Packets
 
 ### Structure
+
 All packets sent to or from the server have the same general layout.
 
 The first part consists of a packet header of 8 bytes:
@@ -1160,7 +1226,7 @@ four bytes from the stream to see how big the packet is, then read (Size – 4)
 bytes from the TCP/IP stream to make sure you have received a whole packet.
 Then handle the packet according to its Type member.
 
-### Packet types
+#### Packet types
 The Type field of a QTM RT server packet header is a number that should be
 interpreted according to the table below. These are the data types that are
 defined in the protocol so far. Detailed descriptions of the data packets for
@@ -1178,7 +1244,7 @@ Type no  | Name                       | Description
 7        | Discover                   | Auto discover packet.
 8        | QTM file                   | Data sent from the server in form of a QTM file.
 
-#### Error packet
+### Error packet
 Error messages from the server are sent in an error packet. Whenever you read a
 response from the server, it may be an error packet instead of the packet type
 you expect. 
@@ -1200,7 +1266,7 @@ Byte  | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8   | 9 | 10 | 11 | 12  | 13 | 14 | 15 | 16 
 Value | C | o | m | m | a | n | d | \32 | n | o  | t  | \32 | s  | u  | p  | p  | o  | r  | t  | e  | d  | .  | \0
 
 
-#### Command / Command Response packet
+### Command / Command Response packet
 Commands and responses to commands are sent in packets of type 1 (see table
 above). Command response strings sent from the server are always
 NULL-terminated but
@@ -1223,7 +1289,7 @@ Byte  | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8   | 9 | 10 | 11 | 12
 ----- | --------------------------------------------------
 Value | V | e | r | s | i | o | n | \32 | 1 | .  | 2  | \0
 
-#### XML packet
+### XML packet
 XML is used to exchange parameters between the server and the client. This has
 several benefits, including extendibility. Clients should not assume that the
 XML sent by the server looks exactly like the examples below - there may be any
@@ -1240,26 +1306,23 @@ packets.
 
 The packet header is followed by a `NULL`-terminated ASCII string.  Interpret
 the string as XML according to the following paragraphs. All XML data strings
-sent from the QTM RT server are enclosed by a block named from the version of
-the protocol used (``QTM_Parameters_Ver_1.12`` in this version of the
+sent from the QTM RT server are enclosed by a element named from the version of
+the protocol used (``QTM_Parameters_Ver_{{ version }}`` in this version of the
 protocol).
 
 When requesting more than one type of parameters at the same time, all of them
-are placed in the same `<QTM_Parameters_Ver_1.12>` block. The individual blocks
-may appear in any order inside this block.
+are placed in the same `<QTM_Parameters_Ver_{{ version }}>` element. The individual elements may appear in any order inside this element.
 
 Bytes | Name                  | Value
 ----- | --------------------- | -----
 4     | Size                  | 8 bytes header + XML string length
 4     | Type                  | 2
-      | Data                  | XML string data, NULL terminated.<br><br>The XML data can consist of one or several of following parameters:<br>[General](#general-xml-parameters), [3D](#3d-xml-parameters), [6D](#6d-xml-parameters), [Analog](#analog-xml-parameters), [Force](#force-xml-parameters) and [Image](#image-xml-parameters).
-
-### XML Parameters
+      | Data                  | XML string data, NULL terminated.<br>The XML data can consist of one or several of following parameters:<br>[General](#general-xml-parameters), [3D](#3d-xml-parameters), [6D](#6d-xml-parameters), [GazeVector](#GazeVector-xml-parameters), [Analog](#analog-xml-parameters), [Force](#force-xml-parameters) [Image](#image-xml-parameters) and [Skeleton](#Skeleton-xml-parameters). 
 
 #### General XML parameters
 In response to the command GetParameters General the QTM RT server will reply
-with an XML data packet, containing a block called General. See below for the
-format of this block.
+with an XML data packet, containing an element called General. See below for the
+format of this element.
 
 **Frequency**  
 The QTM capture frequency.
@@ -1292,19 +1355,19 @@ be true or false.
 
 * **Signal_Source**   
   Signal source used for external time base. Possible values:
-
  * Control port
- * IR receiver
- * SMPTE
- * IRIG
- * Video sync  
-  
+   * IR receiver
+   * SMPTE
+   * IRIG
+   * Video sync  
+
 
 * **Signal_Mode**  
   Possible values:
- * Periodic
- * Non-periodic
- 
+  
+   * Periodic
+   * Non-periodic
+
 
 * **Frequency_Multiplier**  
 Incoming frequency is multiplied by this integer to get the camera frequency.
@@ -1335,43 +1398,94 @@ Max number of seconds expected between two frames in non-periodic mode. Value
 is a float.
 
 **Processing_Actions**
-{{> processing_actions }}
 
-* **TwinSystemMerge**  
+- **PreProcessing2D**  
+  Enable or disable 2D pre-processing action. Value can be True or False.
+- **Tracking**  
+  2D or 3D tracking processing action. Value can be 2D, 3D or False.
+- **TwinSystemMerge**  
   Twin system merge processing action. Value can be True or False.
-
-* **SplineFill**  
+- **SplineFill**  
   Spline fill processing action. Value can be True or False.
+- **AIM**  
+  AIM processing action. Value can be True or False.
+- **Track6DOF**  
+  6 DOF tracking processing action. Value can be True or False.
+- **ForceData**  
+  Force data processing action. Value can be True or False.
+- **GazeVector**  
+  Enable or disable gaze vector data processing action. Value can be True or False.
+- **SkeletonSolve**  
+  Enable or disable skeleton data processing action. Value can be True or False.
+- **ExportTSV**  
+  Export to TSV processing action. Value can be True or False.
+- **ExportC3D**  
+  Export to C3D processing action. Value can be True or False.
+- **ExportMatlabFile**  
+  Export to MATLAB file processing action. Value can be True or False.
+- **ExportAviFile**  
+  Enable or disable export to AVI video file processing action. Value can be True or False.
 
 **RealTime_Processing_Actions**
-{{> processing_actions }}
 
-* **ExportFBX**  
-Enable or disable export to FBX processing action. Value can be True or False.
+- **PreProcessing2D**  
+  Enable or disable 2D pre-processing action. Value can be True or False.
+- **Tracking**  
+  2D or 3D tracking processing action. Value can be 2D, 3D or False.
+- **AIM**  
+  AIM processing action. Value can be True or False.
+- **Track6DOF**  
+  6 DOF tracking processing action. Value can be True or False.
+- **ForceData**  
+  Force data processing action. Value can be True or False.
+- **GazeVector**  
+  Enable or disable gaze vector data processing action. Value can be True or False.
+- **SkeletonSolve**  
+  Enable or disable skeleton data processing action. Value can be True or False.
+- **ExportTSV**  
+  Export to TSV processing action. Value can be True or False.
+- **ExportC3D**  
+  Export to C3D processing action. Value can be True or False.
+- **ExportMatlabFile**  
+  Export to MATLAB file processing action. Value can be True or False.
+- **ExportAviFile**  
+  Enable or disable export to AVI video file processing action. Value can be True or False.
+- **ExportFBX**  
+  Enable or disable export to FBX processing action. Value can be True or False.
 
 **Reprocessing_Actions**
-{{> processing_actions }}
 
-* **TwinSystemMerge**  
+- **PreProcessing2D**  
+  Enable or disable 2D pre-processing action. Value can be True or False.
+- **Tracking**  
+  2D or 3D tracking processing action. Value can be 2D, 3D or False.
+- **TwinSystemMerge**  
   Twin system merge processing action. Value can be True or False.
-
-* **SplineFill**  
+- **SplineFill**  
   Spline fill processing action. Value can be True or False.
-
-* **ExportFBX**  
-Enable or disable export to FBX processing action. Value can be True or False.
-
-**Camera_System**  
-
-* **Type**  
-  Type of camera system. Available types are:
-  
-   * Unknown
-   * Oqus
-   * Miqus
+- **AIM**  
+  AIM processing action. Value can be True or False.
+- **Track6DOF**  
+  6 DOF tracking processing action. Value can be True or False.
+- **ForceData**  
+  Force data processing action. Value can be True or False.
+- **GazeVector**  
+  Enable or disable gaze vector data processing action. Value can be True or False.
+- **SkeletonSolve**  
+  Enable or disable skeleton data processing action. Value can be True or False.
+- **ExportTSV**  
+  Export to TSV processing action. Value can be True or False.
+- **ExportC3D**  
+  Export to C3D processing action. Value can be True or False.
+- **ExportMatlabFile**  
+  Export to MATLAB file processing action. Value can be True or False.
+- **ExportAviFile**  
+  Enable or disable export to AVI video file processing action. Value can be True or False.
+- **ExportFBX**  
+  Enable or disable export to FBX processing action. Value can be True or False.
 
 **Camera**  
-General settings consist of none or several Camera blocks, with following
+General settings consist of none or several Camera elements, with following
 content:
 
 * **ID**  
@@ -1540,7 +1654,7 @@ element, with following content:
     * Camera independent	- Camera independent frequency
     * Measurement time	- Not used
     * Continuous 100Hz	- Not used
- 
+
   * **Duty_Cycle**  
     Output duty cycle in percent (float). Only used in multiplier, divisor and
     camera independent mode.
@@ -1561,13 +1675,13 @@ content:
     * Negative
 
 
-###### Example:
+##### Example:
   {{> general_xml_example }}
 
 #### 3D XML parameters
 In response to the command GetParameters 3D the QTM RT server will reply with
-an XML data packet, containing a block called `The_3D`. See below for the format
-of this block.
+an XML data packet, containing an element called `The_3D`. See below for the format
+of this element.
 
 *Note*: XML element names can&rsquo;t begin with a number, that&rsquo;s why the element for
 3D parameters is called `The_3D`.
@@ -1586,7 +1700,7 @@ of this block.
   Number of labelled trajectories (markers).
 
 * **Label**  
-Block containing label information.
+Element containing label information.
   * Name  
   The name of the label (trajectory).
 
@@ -1596,7 +1710,7 @@ Block containing label information.
   represents blue.
 
 * **Bones**  
-Block containing bone information.
+Element containing bone information.
   * Bone From  
   The name of the label (trajectory) where the bone starts.
 
@@ -1606,13 +1720,13 @@ Block containing bone information.
   * Color
   The color of the bone.
 
-###### Example:
+##### Example:
 {{> threed_xml_example }}
 
 #### 6D XML parameters
 In response to the command GetParameters 3D the QTM RT server will reply with
-an XML data packet, containing a block called `The_3D`. See below for the format
-of this block.
+an XML data packet, containing an element called `The_3D`. See below for the format
+of this element.
 
 *Note*: XML element names can&rsquo;t begin with a number, that&rsquo;s why the element for
 3D parameters is called The_6D.
@@ -1621,136 +1735,134 @@ of this block.
   Number of 6DOF bodies.
 
 * **Body**  
-  Block containing 6DOF body information.
-
+  Element containing 6DOF body information.
   * Name  
-  The name of the 6DOF body.
-
+    The name of the 6DOF body.
+    
   * RGBColor  
-  The color of the 6DOF body, represented by a three byte integer value. Bit
-  0-7 represents red, bit 8-15 represents green and bit 16-23 represents blue.
-
+    The color of the 6DOF body, represented by a three byte integer value. Bit
+    0-7 represents red, bit 8-15 represents green and bit 16-23 represents blue.
+    
   * Point  
-  The X, Y and Z coordinate of one of the points that defines the 6DOF body.
-  The body is defined by 3 or more points.
-
+    The X, Y and Z coordinate of one of the points that defines the 6DOF body.
+    The body is defined by 3 or more points.
+  
 * **Euler**  
- Block containing 6DOF Euler rotation names.
+ Element containing 6DOF Euler rotation names.
+ * First
+   The name of the first Euler angle.
+   
+ * Second
+   The name of the second Euler angle.
+   
+ * Third
+   The name of the third Euler angle.
 
-  * First
-  The name of the first Euler angle.
 
-  * Second
-  The name of the second Euler angle.
-
-  * Third
-  The name of the third Euler angle.
-
-
-###### Example:
+##### Example:
 {{> sixd_xml_example }}
 
 #### Gaze vector XML parameters
 In response to the command GetParameters GazeVector the QTM RT server will
-reply with an XML data packet, containing a block called Gaze_Vector. See below
-for the format of this block.
+reply with an XML data packet, containing an element called Gaze_Vector. See below
+for the format of this element.
 
 * **Vector**  
-  Block containing gaze vector information.
-
+  Element containing gaze vector information.
   * Name  
-  The name of the gaze vector body.
-
+    The name of the gaze vector body.
+    
   * Frequency  
-  The gaze vector update frequency.
+    The gaze vector update frequency.
 
-###### Example:
+##### Example:
 {{> gaze_xml_example }}
 
 #### Analog XML parameters
 In response to the command GetParameters Analog the QTM RT server will reply
-with XML data packet, containing a block called Analog. See below for the
-format of this block.
+with XML data packet, containing an element called Analog. See below for the
+format of this element.
 
 * **Device**  
-  Block containing analog device information.
+  Element containing analog device information.
 
-* **Device_ID**  
-  Unique ID of the analog device. An integer value starting with 1.
+  * **Device_ID**  
+    Unique ID of the analog device. An integer value starting with 1.
+  
+  * **Device_Name**  
+    Analog device name.
+  
+  * **Channels**  
+    Number of analog channels.
+  
+  * **Frequency**  
+    Analog measurement frequency.
+  
+  * **Unit**  
+    Measurement unit.
+  
+  * **Range**  
+    Min and max analog measurement values.
+  
+  * **Label**  
+    Channel name. There shall be as many labels as there are channels.
 
-* **Device_Name**  
-  Analog device name.
-
-* **Channels**  
-  Number of analog channels.
-
-* **Frequency**  
-  Analog measurement frequency.
-
-* **Unit**  
-  Measurement unit.
-
-* **Range**  
-  Min and max analog measurement values.
-
-* **Label**  
-  Channel name. There shall be as many labels as there are channels.
-
-###### Example:
+##### Example:
 {{> analog_xml_example }}
 
 #### Force XML parameters
 In response to the command `GetParameters Force` the QTM RT server will reply
-with XML data packet, containing a block called Force. See below for the format
-of this block.
+with XML data packet, containing an element called Force. See below for the format
+of this element.
 
 * **Unit_Length**  
-  Length unit used in the Force XML block.
+  Length unit used in the Force XML element.
 
 * **Unit_Force**  
-  Force unit used in the Force XML block.
+  Force unit used in the Force XML element.
 
 * **Plate**  
-  Block containing force plate information.
+  Element containing force plate information.
 
-* **Plate_ID**  
-  Unique ID of the force plate. An integer value starting with 1.
+  * **Plate_ID**  
+    Unique ID of the force plate. An integer value starting with 1.
+  
+  * **Analog_Device_ID**  
+    ID of the analog device connected to the force plate. If the ID is 0, there
+    is no analog device associated with this force plate.
+  
+  * **Frequency**  
+    Measurement frequency of the analog device connected to the force plate.
+  
+  * **Type**  
+    Force plate type. Supported force plates:
+  AMTI, AMTI 8 Channels, Bertec, Kistler and QMH.
+  
+  * **Name**  
+    Force plate name.
+  
+  * **Length**  
+    Force plate length.
+  
+  * **Width**  
+    Force plate width.
+  
+  * **Location**  
+    Element containing four elements with the corners of the force plate. Corner1,
+    Corner2, Corner3 and Corner4. Each corner has an X, Y and Z coordinate value.
+  
+  * **Origin**  
+    Element containing X, Y and Z coordinates for the force plate origin.
+  
+  * **Channels**  
+    Element containing elements called Channel. One for each analog channel connected
+    to the force plate. Each Channel contains Channel_No and ConversionFactor.
+  
+  * **Calibration_Matrix**  
+    Element containing a 6x6, 6x8 or 12x12 calibration matrix for the force plate.
+  
+  ##### Example:
 
-* **Analog_Device_ID**  
-  ID of the analog device connected to the force plate. If the ID is 0, there
-  is no analog device associated with this force plate.
-
-* **Frequency**  
-  Measurement frequence of the analog device connected to the force plate.
-
-* **Type**  
-  Force plate type. Supported force plates:
-AMTI, AMTI 8 Channels, Bertec, Kistler and QMH.
-
-* **Name**  
-  Force plate name.
-
-* **Length**  
-  Force plate length.
-
-* **Width**  
-  Force plate width.
-
-* **Location**  
-  Block containing four blocks with the corners of the force plate. Corner1,
-  Corner2, Corner3 and Corner4. Each corner has an X, Y and Z coordinate value.
-
-* **Origin**  
-  Block containing X, Y and Z coordinates for the force plate origin.
-
-* **Channels**  
-  Block containing blocks called Channel. One for each analog channel connected
-  to the force plate. Each Channel contains Channel_No and ConversionFactor.
-
-* **Calibration_Matrix**  
-  Block containing a 6x6, 6x8 or 12x12 calibration matrix for the force plate.
-
-###### Example:
 {{> force_xml_example }}
 
 The parameters for force plates follow roughly the standard of the [C3D file
@@ -1758,65 +1870,103 @@ format](http://www.c3d.org).
 
 #### Image XML parameters
 In response to the command GetParameters Image the QTM RT server will reply
-with XML data packet, containing a block called Image. See below for the format
-of this block.
+with XML data packet, containing an element called Image. See below for the format
+of this element.
 
 * **Camera**  
-The Image block contains one or several Camera blocks. 
+  The Image element contains one or several Camera elements. 
 
-* **ID**  
-Camera ID for the camera to which the settings apply.
+  * **ID**  
+  Camera ID for the camera to which the settings apply.
 
-* **Enabled**  
-  Turn on or of Image streaming from the selected camera.
+  * **Enabled**  
+    Turn on or of Image streaming from the selected camera.
 
-* **Format**  
-  Picture format of the image stream. Available formats are: `RAWGrayscale`,
-  `RAWBGR`, `JPG` and `PNG`.
+  * **Format**  
+    Picture format of the image stream. Available formats are: `RAWGrayscale`,
+    `RAWBGR`, `JPG` and `PNG`.
 
-* **Width**  
-  Width of the streaming image. This does not take into account the cropping.
-  The width is the dimensions had the image not been cropped at all. Note that
-  this does not have to be the same as the requested width, due to scaling in
-  QTM. 32-bit integer.
+  * **Width**  
+    Width of the streaming image. This does not take into account the cropping.
+    The width is the dimensions had the image not been cropped at all. Note that
+    this does not have to be the same as the requested width, due to scaling in
+    QTM. 32-bit integer.
 
-* **Height**  
-  Height of the streaming image. This does not take into account the cropping.
-  The height is the dimensions had the image not been cropped at all. Note that
-  this does not have to be the same as the requested width, due to scaling in
-  QTM.
+  * **Height**  
+    Height of the streaming image. This does not take into account the cropping.
+    The height is the dimensions had the image not been cropped at all. Note that
+    this does not have to be the same as the requested width, due to scaling in
+    QTM.
 
-* **Left_Crop**  
-  Position of the requested image left edge relative the original image. 32-bit
-  float.  
+  * **Left_Crop**  
+    Position of the requested image left edge relative the original image. 32-bit
+    float.  
 
-  0.0 = Original image left edge **(Default)**.  
-  1.0 = Original image right edge.
+    0.0 = Original image left edge **(Default)**.  
+    1.0 = Original image right edge.
 
-* **Top_Crop**  
-  Position of the requested image top edge relative the original image. 32-bit
-  float.  
+  * **Top_Crop**  
+    Position of the requested image top edge relative the original image. 32-bit
+    float.  
 
-  0.0 = Original image top edge **(Default)**.  
-  1.0 = Original image bottom edge.
+    0.0 = Original image top edge **(Default)**.  
+    1.0 = Original image bottom edge.
 
-* **Right_Crop**  
-  Position of the requested image right edge relative the original image.
-  32-bit float.  
+  * **Right_Crop**  
+    Position of the requested image right edge relative the original image.
+    32-bit float.  
 
-  0.0 = Original image left edge.  
-  1.0 = Original image right edge **(Default)**.  
+    0.0 = Original image left edge.  
+    1.0 = Original image right edge **(Default)**.  
 
-* **Bottom_Crop**  
-  Position of the requested image bottom edge relative the original image. 32-bit float.
+  * **Bottom_Crop**  
+    Position of the requested image bottom edge relative the original image. 32-bit float.
 
-  0.0 = Original image top edge.  
-  1.0 = Original image bottom edge **(Default)**.
+    0.0 = Original image top edge.  
+    1.0 = Original image bottom edge **(Default)**.
 
-###### Example:
+##### Example:
 {{> image_xml_example }}
 
-### Data packet
+#### Skeleton XML parameters
+
+In response to the command GetParameters Skeleton the QTM RT server will reply
+with XML data packet, containing an element called Skeletons. See below for the format
+of this element.
+
+* **Skeleton**
+    Element containing skeleton information.
+    
+    * **Name**
+Attribute with the name of the skeleton.
+    
+* **Segment**
+  Element containing skeleton Segment information.
+
+    * **Name**
+      Attribute with the name of the skeleton segment.
+      
+  * **ID**
+
+       Attribute with the id of the skeleton segment.
+
+  * **Parent_ID**
+
+    Attribute with the id of the parent skeleton segment. Parent_ID is omitted if this is the skeleton root segment.
+
+  * **Position**
+
+    Element containing attributes (x, y, z) with skeleton T-pose segment position.
+
+  * **Rotation**
+
+    Element containing attributes (x, y, z, w) with skeleton T-pose segment rotation. The segment rotation quaternion is in global coordinates.
+
+##### Example:
+
+{{> skeleton_xml_example }}
+
+#### Data packet
 Each data frame is made up of one or more components, as specified in the
 commands GetCurrentFrame or StreamFrames. The data frame contains a Count field
 that specifies the number of components in the frame. Every component starts
@@ -1842,7 +1992,7 @@ Bytes    |  Name           | Type           | Value/Description
 Size - 8 |  Component Data | Mixed          | Component-specific data. Defined in [Data component types](#data-component-types) and [2D and 2D linearized component](#2d-and-2d-linearized-component) sections.
 
 
-#### Data component types
+##### Data component types
 
 The `Component Type` field of the data component header is a number that should
 be interpreted according to the table below. These are the data frame component
@@ -1867,9 +2017,10 @@ Type     | Name                   | Description
 15       | Force Single           | Force data from available force plates. Only one sample per plate and camera frame. The latest sample is used if more than one sample is available.
 16       | Gaze Vector            | Gaze vector data defined by a unit vector and position.
 17       | Timecode               | IRIG or SMPTE timecode
- 
+18       | Skeleton               | Skeleton segment information
 
-#### 2D and 2D linearized component
+
+##### 2D and 2D linearized component
 
 The 2D and 2D linearized data frame format are the same. The only difference is
 that the coordinates are linearized in 2D linearized.
@@ -1900,7 +2051,7 @@ Bytes | Name       | Type           | Description
 2     | Diameter X | 16-bit integer | Marker X size.
 2     | Diameter Y | 16-bit integer | Marker Y size.
 
-#### 3D component
+##### 3D component
 
 The markers of the 3D data always follow the labels of the 3D parameters. The
 same number of markers are sent each frame, and in the same order as the labels
@@ -1925,7 +2076,7 @@ Bytes | Name | Type         | Description
 4     | Y    | 32-bit float | Y coordinate of the marker.
 4     | Z    | 32-bit float | Z coordinate of the marker.
 
-#### 3D with residuals component
+##### 3D with residuals component
 
 The markers of the 3D data always follow the labels of the 3D parameters. The
 same number of markers are sent each frame, and in the same order as the labels
@@ -1954,7 +2105,7 @@ Bytes | Name     | Type         | Description
 4     | Z        | 32-bit float | Z coordinate of the marker.
 4     | Residual | 32-bit float | Residual for the 3D point.
 
-#### 3D no labels component
+##### 3D no labels component
 
 Bytes | Name                  | Type           | Description
 ----- | --------------------- | -------------- | -----------
@@ -1974,7 +2125,7 @@ Bytes | Name | Type           | Description
 4     | Z    | 32-bit float   | Z coordinate of the marker.
 4     | ID   | 32-bit integer | An unsigned integer ID that serves to identify markers between frames.
 
-#### 3D no labels with residuals component
+##### 3D no labels with residuals component
 
 Bytes | Name                  | Type           | Description
 ----- | --------------------- | -------------- | -----------
@@ -1995,7 +2146,7 @@ Bytes | Name     | Type           | Description
 4     | ID       | 32-bit integer | An unsigned integer ID that serves to identify markers between frames.
 4     | Residual | 32-bit float   | Residual for the 3D point.
 
-#### 6DOF component
+##### 6DOF component
 
 Bytes | Name                | Type           | Description
 ----- | ------------------- | -------------- | -----------
@@ -2015,7 +2166,7 @@ Bytes | Name     | Type                  | Description
 4     | Z        | 32-bit float          | Z coordinate of the body.
 9 * 4 | Rotation | 32-bt float&#91;&#93; | Rotation matrix of the body, 9 floats.
 
-#### 6DOF with residuals component
+##### 6DOF with residuals component
 
 Bytes | Name                | Type           | Description
 ----- | ------------------- | -------------- | -----------
@@ -2036,30 +2187,29 @@ Bytes | Name     | Type                   | Description
 9 * 4 | Rotation | 32-bit float&#91;&#93; | Rotation matrix of the body, 9 floats.
 4     | Residual | 32-bit float           | Residual for the 6D body.
 
-#### 6DOF Euler component
+##### 6DOF Euler component
 
-Bytes | Name                   | Type           | Description
------ | ---------------------- | -------------- | -----------
-4     | Component Size         | 32-bit integer | The size of the component including the header (Component Size, Component Type and Body Count).
-4     | Component Type         | 32-bit integer | Value = 6. See [Data component types](#data-component-types).
-4     | Body Count             | 32-bit integer | The number of 6DOF bodies in this frame.
-2     | 2D Drop Rate           | 16-bit integer | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.
-2     | 2D Out Of Sync Rate    | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
-
+| Bytes | Name                | Type           | Description                                                  |
+| ----- | ------------------- | -------------- | ------------------------------------------------------------ |
+| 4     | Component Size      | 32-bit integer | The size of the component including the header (Component Size, Component Type and Body Count). |
+| 4     | Component Type      | 32-bit integer | Value = 6. See [Data component types](#data-component-types). |
+| 4     | Body Count          | 32-bit integer | The number of 6DOF bodies in this frame.                     |
+| 2     | 2D Drop Rate        | 16-bit integer | Number of individual 2D frames that have been lost in the communication between QTM and the cameras. The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably. |
+| 2     | 2D Out Of Sync Rate | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames. The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time. |
 
 Repeated *Body Count* times:
 
-Bytes | Name    | Type         | Description
------ | ------- | ------------ | -----------
-4     | X       | 32-bit float | X coordinate of the body.
-4     | Y       | 32-bit float | Y coordinate of the body.
-4     | Z       | 32-bit float | Z coordinate of the body.
-4     | Angle 1 | 32-bit float | First Euler angle, in degrees, as defined on the Euler tab in QTM's workspace options.
-4     | Angle 2 | 32-bit float | Second Euler angle.
-4     | Angle 3 | 32-bit float | Third Euler angle.
+| Bytes | Name    | Type         | Description                                                  |
+| ----- | ------- | ------------ | ------------------------------------------------------------ |
+| 4     | X       | 32-bit float | X coordinate of the body.                                    |
+| 4     | Y       | 32-bit float | Y coordinate of the body.                                    |
+| 4     | Z       | 32-bit float | Z coordinate of the body.                                    |
+| 4     | Angle 1 | 32-bit float | First Euler angle, in degrees, as defined on the Euler tab<br />in QTM's workspace options. |
+| 4     | Angle 2 | 32-bit float | Second Euler angle, in degrees, as defined on the Euler tab<br />in QTM's workspace options. |
+| 4     | Angle 3 | 32-bit float | Third Euler angle, in degrees, as defined on the Euler tab<br />in QTM's workspace options. |
 
 
-#### 6DOF Euler with residuals component
+##### 6DOF Euler with residuals component
 
 Bytes | Name                                  | Type           | Description
 ----- | ------------------------------------- | -------------- | -----------
@@ -2082,7 +2232,7 @@ Bytes | Name     | Type           | Description
 4     | Angle 3  | 32-bit float   | Third Euler angle.
 4     | Residual | 32-bit float   | Residual for the 6D body.
 
-#### Analog component
+##### Analog component
 
 Bytes | Name                  | Type           | Description
 ----- | --------------------- | -------------- | -----------
@@ -2100,7 +2250,7 @@ Bytes                              | Name             | Type                   |
 4                                  | Sample Number    | 32-bit integer         | Order number of first sample in this frame. Sample Number is increased with the analog frequency. There are Channel Count values per sample number.<br><br>Sample Number is omitted if Sample Count is 0.
 4 \* Channel Count \* Sample Count | Analog Data      | 32-bit float&#91;&#93; | Voltage values for all samples of all channels. The samples are ordered like this:<br><br>Channel 1, Sample *Sample Number*<br>Channel 1, Sample *Sample Number* + 1<br>Channel 1, Sample *Sample Number* + 2<br>&hellip;<br>Channel 1, Sample *Sample Number* + Sample Count - 1<br>Channel 2, Sample *Sample Number* Channel 2, Sample *Sample Number + 1*<br>&hellip;<br><br>Analog Data is omitted if Sample Count is 0.
 
-#### Analog single component
+##### Analog single component
 
 Bytes | Name                  | Type           | Description
 ----- | --------------------- | -------------- | -----------
@@ -2118,7 +2268,7 @@ Bytes             | Name                  | Type                   | Description
 
 If no analog data is available, Analog Data will contain IEEE NaN (Not a number) float values.
 
-#### Force component
+##### Force component
 
 Bytes | Name             | Type           | Description
 ----- | ---------------- | -------------- | -----------
@@ -2134,15 +2284,15 @@ Bytes            | Name             | Type                   | Description
 4                | Force Plate ID   | 32-bit integer         | Id of the analog device in this frame. Id starts at 1.
 4                | Force Count      | 32-bit integer         | The number of forces in this frame.
 4                | Force Number     | 32-bit integer         | Order number of first force in this frame. Force Number is increased with the force frequency.
-36 * Force Count | Force Data       | 32-bit float&#91;&#93; | Each force sample consists of 9 float values: <br><br>X coordinate of the force <br>Y coordinate of the force <br>Z coordinate of the force <br>X coordinate of the moment <br>Y coordinate of the moment <br>Z coordinate of the moment <br>X coordinate of the force application point <br>Y coordinate of the force application point <br>Z coordinate of the force application point
+36 * Force Count | Force Data       | 32-bit float | Each force sample consists of 9 float values: <br><br>X coordinate of the force <br>Y coordinate of the force <br>Z coordinate of the force <br>X coordinate of the moment <br>Y coordinate of the moment <br>Z coordinate of the moment <br>X coordinate of the force application point <br>Y coordinate of the force application point <br>Z coordinate of the force application point
 
-#### Force single component
+##### Force single component
 
-Bytes | Name             | Type           | Description
------ | ---------------- | -------------- | -----------
-4     | Component Size   | 32-bit integer | The size of the component including the header (Component Size, Component Type and Plate Count).
-4     | Component Type   | 32-bit integer | Value = 15. See [Data component types](#data-component-types).
-4     | Plate Count      | 32-bit integer | The number of force plates in this frame.
+| Bytes | Name           | Type           | Description                                                  |
+| ----- | -------------- | -------------- | ------------------------------------------------------------ |
+| 4     | Component Size | 32-bit integer | The size of the component including the header (Component Size, Component Type and Plate Count). |
+| 4     | Component Type | 32-bit integer | Value = 15. See [Data component types](#data-component-types). |
+| 4     | Plate Count    | 32-bit integer | The number of force plates in this frame.                    |
 
 
 Repeated *Plate Count* times:
@@ -2154,7 +2304,7 @@ Bytes            | Name             | Type                   | Description
 
 If no force data is available, Force Data will contain IEEE NaN (Not a number) float values.
 
-#### Image component
+##### Image component
 
 Bytes | Name             | Type           | Description
 ----- | ---------------- | -------------- | -----------
@@ -2177,28 +2327,28 @@ Bytes      | Name           | Type           | Description
 4          | Image Size     | 32-bit integer | Size of Image Data in number of bytes.
 Image Size | Image Data     | Binary data    | Image data formatted according to the Image Format parameter.
 
-#### Gaze vector
+##### Gaze vector
 
 Bytes | Name              | Type           | Description
 ----- | ----------------- | ---------------|------------
-4     | Component Size    | 32-bit integer | The size of the component including the header (Component Size, Component Type and Camera Count).
+4     | Component Size    | 32-bit integer | The size of the component including the header (Component Size, Component Type and Gaze Vector Count).
 4     | Component Type    | 32-bit integer | Value = 16. See [Data component types](#data-component-types).
 4     | Gaze Vector Count | 32-bit integer | Number of gaze vectors in this frame.
 
 Repeated *Gaze Vector Count* times:
 
-Bytes                                    | Name             | Type           | Description
----------------------------------------- | ---------------- | ---------------|------------
-4                                        | Sample Count     | 32-bit integer | The size of the component including the header (Component Size,<br>Component Type and Camera Count).
-0 (Sample Count=0)<br>4 (Sample Count>0) | Sample Number    | 32-bit float   | Value = 16. See [Data component types](#data-component-types).
-24 * Sample Count                        | Gaze Vector data | 32-bit float[] | X component of the vector.<br>Y component of the vector.<br>Z component of the vector.<br>X coordinate of the vector.<br>Y coordinate of the vector.<br>Z coordinate of the vector.
+ Bytes                                    | Name             | Type           | Description                                                  
+ ---------------------------------------- | ---------------- | -------------- | ------------------------------------------------------------ 
+ 4                                        | Sample Count     | 32-bit integer | The size of the component including the header (Component Size,<br>Component Type and Camera Count). 
+ 0 (Sample Count=0)<br>4 (Sample Count>0) | Sample Number    | 32-bit float   | Value = 16. See [Data component types](#data-component-types). 
+ 24 * Sample Count                        | Gaze Vector data | 32-bit float   | X component of the vector.<br>Y component of the vector.<br>Z component of the vector.<br>X coordinate of the vector.<br>Y coordinate of the vector.<br>Z coordinate of the vector. 
 
 
-#### Timecode
+##### Timecode
 
 Bytes | Name              | Type           | Description
 ----- | ----------------- | ---------------|------------
-4     | Component Size    | 32-bit integer | The size of the component including the header (Component Size, Component Type and Camera Count).
+4     | Component Size    | 32-bit integer | The size of the component including the header (Component Size, Component Type and Timecode Count).
 4     | Component Type    | 32-bit integer | Value = 17. See [Data component types](#data-component-types).
 4     | Timecode Count    | 32-bit integer | Number of timecodes.
 
@@ -2211,7 +2361,39 @@ Bytes                    | Name           | Type           | Description
 4     | Timecode Lo      | 32-bit integer | IRIG time code little endian format:<br>Bit 0 – 4: Hours<br>Bit 5 – 10: Minutes<br>Bit 11 - 16: Seconds<br>bit 17 - 20: Tenth of a seconds<br><br>SMPTE time code little endian format:<br>Bit 0 – 4: Hours<br>Bit 5 – 10: Minutes<br>Bit 11 - 16: Seconds<br>bit 17 - 21: Frame<br>Bit 22 - 31 Not used<br><br>Camera time<br>Lo 32 bits of 64-bit integer timecode.
 
 
+##### Skeleton
+
+Bytes | Name              | Type           | Description
+----- | ----------------- | ---------------|------------
+4     | Component Size   | 32-bit integer | The size of the component including the header (Component Size, Component Type and Skeleton Count).
+4     | Component Type    | 32-bit integer | Value = 18. See [Data component types](#data-component-types).
+4     | Skeleton Count    | 32-bit integer | Number of skeletonss.
+
+Repeated *Skeleton Count* times:
+
+Bytes                    | Name           | Type           | Description
+----- | ---------------- | ---------------|------------
+4     | Segment Count   | 32-bit integer | Number of segments in skeleton. 
+
+Repeated *Segment Count* times (32 * Segment Count Bytes):
+
+| Bytes | Name       | Type           | Description                     |
+| ----- | ---------- | -------------- | ------------------------------- |
+| 4     | Segment ID | 32-bit integer | ID of the segments in skeleton. |
+| 4     | Position X | 32-bit float   | Segment position x coordinate.  |
+| 4     | Position Y | 32-bit float   | Segment position y coordinate.  |
+| 4     | Position Z | 32-bit float   | Segment position z coordinate.  |
+| 4     | Rotation X | 32-bit float   | Segment rotation quaternion x.  |
+| 4     | Rotation Y | 32-bit float   | Segment rotation quaternion y.  |
+| 4     | Rotation Z | 32-bit float   | Segment rotation quaternion z.  |
+| 4     | Rotation W | 32-bit float   | Segment rotation quaternion w.  |
+
+If a skeleton is not visible in a frame, the segment count will be set to 0.
+
+The rotation quaternion is sent in local coordinates. It can be changed to global coordinates by selecting skeleton:global as data type.
+
 ### No More Data packet
+
 This type of packet is sent when QTM is out of data to send because a measurement has stopped or has not even started.
 
 Bytes | Name   | Type           | Value
@@ -2251,7 +2433,7 @@ Bytes | Name  | Type           | Value
 #### Events
 The RT server sends an event data packet to all its clients when the RT server
 changes state.
- 
+
 Event ID     | Name                    | Comment
 -------------|-------------------------|--------
 1            | Connected               | Sent when QTM has connected to the camera system.
@@ -2287,7 +2469,7 @@ Size and type is always sent as little endian 32 bit integers.
 The Response Port is the UDP port number to which QTM sends a discover response
 message. The response port is big endian.
 
-### Discover response packet
+#### Discover response packet
 The discover response packet is a special command message of type 1. The
 message contains a null terminated string, followed by the server's base port
 number. 
@@ -2305,7 +2487,7 @@ Example of a server info string: `MyComputer, QTM 2.5 (build 568), 5 cameras`.
 
 **Note**: The base port number is only used for version 1.0 of the RT server,
 see [IP port numbers](#ip-port-numbers) to get the desired port number.
- 
+
 ## Open Sound Control (OSC)
 
 The OSC version of the QTM RT server uses the [Open Sound Control 1.0 specification](http://opensoundcontrol.org).
@@ -2361,7 +2543,7 @@ can only retrieve current version.
 ###### Example:
 ```coffeescript
 Command:    Version
-Response:   Version is 1.12
+Response:   Version is {{ version }}
 ```
 
 #### QTMVersion (OSC)
@@ -2384,16 +2566,19 @@ Shutting Down and Capture Saved events.
 ```coffeescript
 Command:    GetState
 Response:   Event data packet with last QTM event.
-Response    (Telnet): Connected                      or
-            Connection Closed                        or
-            Capture Started                          or
-            Capture Stopped                          or
-            Capture Fetching Finished                or
-            Calibration Started                      or
-            Calibration Stopped                      or
-            RT From File Started                     or
-            RT From File Stopped                     or
-            Waiting For Trigger
+
+(Telnet)
+Response:   Connected                 or
+            Connection Closed         or
+            Capture Started           or
+            Capture Stopped           or
+            Capture Fetching Finished or
+            Calibration Started       or
+            Calibration Stopped       or
+            RT From File Started      or
+            RT From File Stopped      or
+            Waiting For Trigger       or
+            Capture Saved
 ```
 
 #### CheckLicense (OSC)
@@ -2433,12 +2618,17 @@ Response:   XML string containing requested parameters
 
 #### GetCurrentFrame (OSC)
 
-> **`GetCurrentFrame`** `All |
-  ([2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes]
-  [Analog] [AnalogSingle] [Force] [ForceSingle] [6D]
-  [6DRes] [6DEuler] [6DEulerRes])`
+> **`GetCurrentFrame`** `[2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes]
+  [Analog[:channels]] [AnalogSingle[:channels]] [Force] [ForceSingle] [6D]
+  [6DRes] [6DEuler] [6DEulerRes] [GazeVector] [Timecode] [Skeleton[:global]]`
 
 This command returns the current frame of real-time data from the server. 
+
+The optional channels for Analog and AnalogSingle, is a string containing a list of channels to read from the
+server. The channels are separated by a ‘,’ and can also contain ranges defined by a ‘-’. Example: 1,2,3-6,16.
+
+By default, skeleton data is in local coordinates. Skeleton:global will change the skeleton data to global coordinates.
+
 Points worth noting are:
 
 * The frame is composed of the parts specified in the parameters to the
@@ -2472,12 +2662,17 @@ Response:   One data frame is sent to the client according to the
 
 #### StreamFrames (OSC)
 > **`StreamFrame`** `Stop |
-  ((FrequencyDivisor:n | Frequency:n | AllFrames) All |	
-  ([2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes]
+  ((FrequencyDivisor:n | Frequency:n | AllFrames) 
+  [2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes]
   [Analog] [AnalogSingle] [Force] [ForceSingle] [6D]
-  [6DRes] [6DEuler] [6DEulerRes]))`
+  [6DRes] [6DEuler] [6DEulerRes] [GazeVector] [Timecode] [Skeleton[:global]])`
 
-This command makes the QTM RT server start streaming data frames in real-time. 
+This command makes the QTM RT server start streaming data frames in real-time.
+
+The optional channels for Analog and AnalogSingle, is a string containing a list of channels to read from the
+server. The channels are separated by a ‘,’ and can also contain ranges defined by a ‘-’. Example: 1,2,3-6,16.
+
+By default, skeleton data is in local coordinates. Skeleton:global will change the skeleton data to global coordinates.
 
 Points worth noting are:
 
@@ -2538,8 +2733,8 @@ Points worth noting are:
 	  real-time frame processed by QTM is transmitted to the client.
 
  * When the measurement is finished, or has not yet started, a special
-  [empty data frame](#no-more-data-packet) packet signaling that no data is
-  available is sent to the client.
+    [empty data frame](#no-more-data-packet) packet signaling that no data is
+    available is sent to the client.
 
  * To stop the data stream before it has reached the end of the measurement or
    to prevent data from being sent if a new measurement is started after the
@@ -2665,6 +2860,8 @@ Force Single           | /qtm/force_single     | Force data from available force
 6D Residuals           | /qtm/6d_res           | 6D data - position and rotation matrix with residuals. Each body has its own OSC address. See [6DOF with residuals component](#6dof-with-residuals-component-osc-).
 6D Euler               | /qtm/6d_euler         | 6D data - position and Euler angles. Each body has its own OSC address. See [6DOF Euler component](#6dof-euler-component-osc-).
 6D Euler Residuals     | /qtm/6d_euler_res     | 6D data - position and Euler angles with residuals. Each body has its own OSC address. See [6DOF Euler with residuals component](#6dof-euler-with-residuals-component-osc-).
+Gaze Vector | /qtm/gaze_vector | Gaze vector data – Unit vector and position. Each gaze vector has its own OSC address. 
+Skeleton | /qtm/skeleton | Skeleton data – Position and rotation of all segments in the skeleton. Each skeleton has its own OSC address. 
 
 
 
@@ -2698,7 +2895,7 @@ Int32    | Diameter Y | Marker Y size.
 Each marker is sent in a separate OSC message. The OSC address of this message
 is `/qtm/3d/` with the name of the marker in the end of the address string.
 Example: `/qtm/3d/marker1`.
- 
+
 OSC type | Name | Description
 ---------|------|------------
 Float32  | X    | X coordinate of the marker.
@@ -2870,7 +3067,46 @@ Float32  | Angle 2  | Second Euler angle.
 Float32  | Angle 3  | Third Euler angle.
 Float32  | Residual | Residual for the 6D body.
 
+##### Gaze vector component (OSC)
+
+Each gaze vector is sent in a separate OSC message. The OSC address of this message is /qtm/gaze_vector/
+with the name of the gaze vector in the end of the address string. Example: /qtm/gaze_vector/Eye.
+
+| OSC type | Name          | Description                                                  |
+| -------- | ------------- | ------------------------------------------------------------ |
+| Int32    | Sample Count  | Number of vector samples in this frame.                      |
+| Int32    | Sample Number | Order number of first gaze vector sample in this frame. *Sample Number* is increased with the gaze vector frequency. |
+
+Repeated *Sample Count* times:
+
+| OSC type | Name       | Description                          |
+| -------- | ---------- | ------------------------------------ |
+| Float32  | Vector X   | X component of the gaze unit vector. |
+| Float32  | Vector Y   | Y component of the gaze unit vector. |
+| Float32  | Vector Z   | Z component of the gaze unit vector. |
+| Float32  | Position Z | X coordinate of the gaze vector.     |
+| Float32  | Rotation X | Y coordinate of the gaze vector.     |
+| Float32  | Rotation Y | Z coordinate of the gaze vector.     |
+
+##### Skeleton component (OSC)
+
+Each skeleton consists of several segments. All segments are sent in a separate OSC message. The OSC address of this message is /qtm/skeleton/*skeleton_name*/*segment_name*.
+
+Example: /qtm/skeleton/JohonDoe/Waist.
+
+| OSC type | Name       | Description                    |
+| -------- | ---------- | ------------------------------ |
+| Int32    | ID         | Segment id.                    |
+| Float32  | Position X | Segment position x coordinate. |
+| Float32  | Position Y | Segment position y coordinate. |
+| Float32  | Position Z | Segment position z coordinate. |
+| Float32  | Rotation X | Segment rotation quaternion x. |
+| Float32  | Rotation Y | Segment rotation quaternion y. |
+| Float32  | Rotation Z | Segment rotation quaternion z. |
+| Float32  | Rotation W | Segment rotation quaternion w. |
+
 ### No More Data packet (OSC)
+
 This type of packet is sent when QTM is out of data to send because a
 measurement has stopped or has not even started.
 
@@ -2891,24 +3127,33 @@ OSC-string | Event | Event string. See [OSC Events](#events-osc-).
 The RT server sends an event data packet to all its clients when the RT server
 changes state.
 
-Event ID  | Name                    | Comment
-----------|-------------------------|--------
-1         | Connected               | Sent when QTM has connected to the camera system.
-2         | Connection Closed       | Sent when QTM has disconnected from the camera system.
-3         | Capture Started         | Sent when QTM has started a capture.
-4         | Capture Stopped         | Sent when QTM has stopped a capture.
-5         | Fetching Finished       | Sent when QTM has finished fetching a capture.
-6         | Calibration Started     | Sent when QTM has started a calibration.
-7         | Calibration Stopped     | Sent when QTM has stopped a calibration.
-8         | RT From File Started    | Sent when QTM has started real time transmissions from a file.
-9         | RT From File Stopped    | Sent when QTM has stopped real time transmissions from a file.
-10        | Waiting For Trigger     | Sent when QTM is starting to wait for trigger to start a measurement.
-11        | Camera Settings Changed | Sent when the settings have changed for one or several cameras. Not included in the GetState command response.
-12        | QTM Shutting Down       | Sent when QTM is shutting down. Not included in the GetState command response.
-13        | Capture Saved           | Sent when QTM has saved current measurement. Not included in the GetState command response.
+| Event ID | Name                    | Comment                                                      |
+| -------- | ----------------------- | ------------------------------------------------------------ |
+| 1        | Connected               | Sent when QTM has connected to the camera system.            |
+| 2        | Connection Closed       | Sent when QTM has disconnected from the camera system.       |
+| 3        | Capture Started         | Sent when QTM has started a capture.                         |
+| 4        | Capture Stopped         | Sent when QTM has stopped a capture.                         |
+| 5        | Fetching Finished       | Sent when QTM has finished fetching a capture.               |
+| 6        | Calibration Started     | Sent when QTM has started a calibration.                     |
+| 7        | Calibration Stopped     | Sent when QTM has stopped a calibration.                     |
+| 8        | RT From File Started    | Sent when QTM has started real time transmissions from a file. |
+| 9        | RT From File Stopped    | Sent when QTM has stopped real time transmissions from a file. |
+| 10       | Waiting For Trigger     | Sent when QTM is starting to wait for trigger to start a measurement. |
+| 11       | Camera Settings Changed | Sent when the settings have changed for one or several cameras. Not included in the GetState command response. |
+| 12       | QTM Shutting Down       | Sent when QTM is shutting down. Not included in the GetState command response. |
+| 13       | Capture Saved           | Sent when QTM has saved current measurement. Not included in the GetState command response. |
 
 
 ## Changelog
+
+### Changes in 1.20
+
+- Removed Camera_System from settings.
+
+### Changes in 1.19
+
+- Added new data component, skeleton.
+- Removed data component All from GetCurrentFrame and StreamFrames.
 
 ### Changes in 1.18
  * Added Miqus Video Color camera type.

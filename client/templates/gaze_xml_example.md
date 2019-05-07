@@ -1,5 +1,5 @@
 ```xml
-<QTM_Parameters_Ver_1.17>
+<QTM_Parameters_Ver_{{ version }}>
 	<Gaze_Vector>
 		<Vector>
 			<Name>Gaze 1 (L)</Name>
@@ -14,5 +14,5 @@
 			<Frequency>60</Frequency>
 		</Vector>
 	</Gaze_Vector>
-</QTM_Parameters_Ver_1.17>
+</QTM_Parameters_Ver_{{ version }}>
 ```

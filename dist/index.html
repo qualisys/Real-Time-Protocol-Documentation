@@ -43,7 +43,7 @@
 							<tr>
 								<td>Qualisys Software Team</td>
 								<td class="document-number">QDEV-QTM-EXTERN-SDK_RTQTM_RT_SERVER_V_1_18</td>
-								<td>Oct 17th 2018</td>
+								<td>May 7th 2019</td>
 							</tr>
 						</tbody>
 					</table>
@@ -62,7 +62,7 @@
 			<div class="row content">
 				<div class="col-lg-9 col-md-8 col-sm-7 col-xs-11 body">
 
-<nav class="toq"><ol class="nav"><li class="toq-level-1"><ol><li class="toq-level-2"><span>1</span> <a href="#qtm-real-time-server-protocol-documentation">QTM Real-time Server Protocol Documentation</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>1.1</span> <a href="#title-version">Version 1.17</a></li></ol></li><li class="toq-level-2"><span>2</span> <a href="#introduction">Introduction</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>2.1</span> <a href="#protocol-version">Protocol version</a></li><li class="toq-level-3"><span>2.2</span> <a href="#standard">Standard</a></li><li class="toq-level-3"><span>2.3</span> <a href="#open-sound-control">Open sound control</a></li></ol></li><li class="toq-level-2"><span>3</span> <a href="#overview">Overview</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>3.1</span> <a href="#protocol-details">Protocol details</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>3.1.1</span> <a href="#standards-used">Standards used</a></li><li class="toq-level-4"><span>3.1.2</span> <a href="#byte-order">Byte order</a></li><li class="toq-level-4"><span>3.1.3</span> <a href="#floating-point-values">Floating point values</a></li></ol></li><li class="toq-level-3"><span>3.2</span> <a href="#auto-discover">Auto discover</a></li><li class="toq-level-3"><span>3.3</span> <a href="#connecting">Connecting</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>3.3.1</span> <a href="#disabling-nagle-39-s-algorithm">Disabling Nagle&#39;s algorithm</a></li><li class="toq-level-4"><span>3.3.2</span> <a href="#ip-port-numbers">IP port numbers</a></li></ol></li><li class="toq-level-3"><span>3.4</span> <a href="#protocol-structure">Protocol structure</a></li><li class="toq-level-3"><span>3.5</span> <a href="#retrieving-settings">Retrieving settings</a></li><li class="toq-level-3"><span>3.6</span> <a href="#change-settings">Change settings</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>3.6.1</span> <a href="#general-settings">General settings</a></li><li class="toq-level-4"><ol><li class="toq-level-5"><span>3.6.1.1</span> <a href="#frequency">Frequency</a></li><li class="toq-level-5"><span>3.6.1.2</span> <a href="#capture_time">Capture_Time</a></li><li class="toq-level-5"><span>3.6.1.3</span> <a href="#start_on_external_trigger">Start_On_External_Trigger</a></li><li class="toq-level-5"><span>3.6.1.4</span> <a href="#start_on_trigger_no">Start_On_Trigger_NO</a></li><li class="toq-level-5"><span>3.6.1.5</span> <a href="#start_on_trigger_nc">Start_On_Trigger_NC</a></li><li class="toq-level-5"><span>3.6.1.6</span> <a href="#start_on_trigger_software">Start_On_Trigger_Software</a></li><li class="toq-level-5"><span>3.6.1.7</span> <a href="#external_time_base">External_Time_Base</a></li></ol></li><li class="toq-level-4"><span>3.6.2</span> <a href="#processing_actions">Processing_Actions</a></li><li class="toq-level-4"><span>3.6.3</span> <a href="#realtime_processing_actions">RealTime_Processing_Actions</a></li><li class="toq-level-4"><span>3.6.4</span> <a href="#reprocessing_actions">Reprocessing_Actions</a></li><li class="toq-level-4"><span>3.6.5</span> <a href="#camera">Camera</a></li><li class="toq-level-4"><span>3.6.6</span> <a href="#image-settings">Image settings</a></li><li class="toq-level-4"><ol><li class="toq-level-5"><span>3.6.6.1</span> <a href="#camera-2">Camera</a></li></ol></li><li class="toq-level-4"><span>3.6.7</span> <a href="#force-settings">Force settings</a></li><li class="toq-level-4"><span>3.6.8</span> <a href="#settings-example">Settings example</a></li></ol></li><li class="toq-level-3"><span>3.7</span> <a href="#streaming-data">Streaming data</a></li><li class="toq-level-3"><span>3.8</span> <a href="#command-summary">Command summary</a></li></ol></li><li class="toq-level-2"><span>4</span> <a href="#commands">Commands</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>4.1</span> <a href="#version">Version</a></li><li class="toq-level-3"><span>4.2</span> <a href="#qtmversion">QTMVersion</a></li><li class="toq-level-3"><span>4.3</span> <a href="#byteorder">ByteOrder</a></li><li class="toq-level-3"><span>4.4</span> <a href="#getstate">GetState</a></li><li class="toq-level-3"><span>4.5</span> <a href="#getparameters">GetParameters</a></li><li class="toq-level-3"><span>4.6</span> <a href="#getcurrentframe">GetCurrentFrame</a></li><li class="toq-level-3"><span>4.7</span> <a href="#streamframes">StreamFrames</a></li><li class="toq-level-3"><span>4.8</span> <a href="#takecontrol">TakeControl</a></li><li class="toq-level-3"><span>4.9</span> <a href="#releasecontrol">ReleaseControl</a></li><li class="toq-level-3"><span>4.10</span> <a href="#new">New</a></li><li class="toq-level-3"><span>4.11</span> <a href="#close">Close</a></li><li class="toq-level-3"><span>4.12</span> <a href="#start">Start</a></li><li class="toq-level-3"><span>4.13</span> <a href="#stop">Stop</a></li><li class="toq-level-3"><span>4.14</span> <a href="#load">Load</a></li><li class="toq-level-3"><span>4.15</span> <a href="#save">Save</a></li><li class="toq-level-3"><span>4.16</span> <a href="#loadproject">LoadProject</a></li><li class="toq-level-3"><span>4.17</span> <a href="#getcapturec3d">GetCaptureC3D</a></li><li class="toq-level-3"><span>4.18</span> <a href="#getcaptureqtm">GetCaptureQTM</a></li><li class="toq-level-3"><span>4.19</span> <a href="#trig">Trig</a></li><li class="toq-level-3"><span>4.20</span> <a href="#setqtmevent">SetQTMEvent</a></li><li class="toq-level-3"><span>4.21</span> <a href="#reprocess">Reprocess</a></li><li class="toq-level-3"><span>4.22</span> <a href="#led">Led</a></li><li class="toq-level-3"><span>4.23</span> <a href="#quit">Quit</a></li></ol></li><li class="toq-level-2"><span>5</span> <a href="#qtm-rt-packets">QTM RT Packets</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>5.1</span> <a href="#structure">Structure</a></li><li class="toq-level-3"><span>5.2</span> <a href="#packet-types">Packet types</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>5.2.1</span> <a href="#error-packet">Error packet</a></li><li class="toq-level-4"><span>5.2.2</span> <a href="#command-command-response-packet">Command / Command Response packet</a></li><li class="toq-level-4"><span>5.2.3</span> <a href="#xml-packet">XML packet</a></li></ol></li><li class="toq-level-3"><span>5.3</span> <a href="#xml-parameters">XML Parameters</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>5.3.1</span> <a href="#general-xml-parameters">General XML parameters</a></li><li class="toq-level-4"><span>5.3.2</span> <a href="#3d-xml-parameters">3D XML parameters</a></li><li class="toq-level-4"><span>5.3.3</span> <a href="#6d-xml-parameters">6D XML parameters</a></li><li class="toq-level-4"><span>5.3.4</span> <a href="#gaze-vector-xml-parameters">Gaze vector XML parameters</a></li><li class="toq-level-4"><span>5.3.5</span> <a href="#analog-xml-parameters">Analog XML parameters</a></li><li class="toq-level-4"><span>5.3.6</span> <a href="#force-xml-parameters">Force XML parameters</a></li><li class="toq-level-4"><span>5.3.7</span> <a href="#image-xml-parameters">Image XML parameters</a></li></ol></li><li class="toq-level-3"><span>5.4</span> <a href="#data-packet">Data packet</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>5.4.1</span> <a href="#data-component-types">Data component types</a></li><li class="toq-level-4"><span>5.4.2</span> <a href="#2d-and-2d-linearized-component">2D and 2D linearized component</a></li><li class="toq-level-4"><span>5.4.3</span> <a href="#3d-component">3D component</a></li><li class="toq-level-4"><span>5.4.4</span> <a href="#3d-with-residuals-component">3D with residuals component</a></li><li class="toq-level-4"><span>5.4.5</span> <a href="#3d-no-labels-component">3D no labels component</a></li><li class="toq-level-4"><span>5.4.6</span> <a href="#3d-no-labels-with-residuals-component">3D no labels with residuals component</a></li><li class="toq-level-4"><span>5.4.7</span> <a href="#6dof-component">6DOF component</a></li><li class="toq-level-4"><span>5.4.8</span> <a href="#6dof-with-residuals-component">6DOF with residuals component</a></li><li class="toq-level-4"><span>5.4.9</span> <a href="#6dof-euler-component">6DOF Euler component</a></li><li class="toq-level-4"><span>5.4.10</span> <a href="#6dof-euler-with-residuals-component">6DOF Euler with residuals component</a></li><li class="toq-level-4"><span>5.4.11</span> <a href="#analog-component">Analog component</a></li><li class="toq-level-4"><span>5.4.12</span> <a href="#analog-single-component">Analog single component</a></li><li class="toq-level-4"><span>5.4.13</span> <a href="#force-component">Force component</a></li><li class="toq-level-4"><span>5.4.14</span> <a href="#force-single-component">Force single component</a></li><li class="toq-level-4"><span>5.4.15</span> <a href="#image-component">Image component</a></li><li class="toq-level-4"><span>5.4.16</span> <a href="#gaze-vector">Gaze vector</a></li><li class="toq-level-4"><span>5.4.17</span> <a href="#timecode">Timecode</a></li></ol></li><li class="toq-level-3"><span>5.5</span> <a href="#no-more-data-packet">No More Data packet</a></li><li class="toq-level-3"><span>5.6</span> <a href="#c3d-packet">C3D packet</a></li><li class="toq-level-3"><span>5.7</span> <a href="#qtm-packet">QTM packet</a></li><li class="toq-level-3"><span>5.8</span> <a href="#event-packet">Event packet</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>5.8.1</span> <a href="#events">Events</a></li></ol></li><li class="toq-level-3"><span>5.9</span> <a href="#discover-packet">Discover packet</a></li><li class="toq-level-3"><span>5.10</span> <a href="#discover-response-packet">Discover response packet</a></li></ol></li><li class="toq-level-2"><span>6</span> <a href="#open-sound-control-osc-">Open Sound Control (OSC)</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>6.1</span> <a href="#connecting-osc-">Connecting (OSC)</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>6.1.1</span> <a href="#port-number-osc-">Port number (OSC)</a></li></ol></li><li class="toq-level-3"><span>6.2</span> <a href="#commands-osc-">Commands (OSC)</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>6.2.1</span> <a href="#connect-osc-">Connect (OSC)</a></li><li class="toq-level-4"><span>6.2.2</span> <a href="#disconnect-osc-">Disconnect (OSC)</a></li><li class="toq-level-4"><span>6.2.3</span> <a href="#version-osc-">Version (OSC)</a></li><li class="toq-level-4"><span>6.2.4</span> <a href="#qtmversion-osc-">QTMVersion (OSC)</a></li><li class="toq-level-4"><span>6.2.5</span> <a href="#getstate-osc-">GetState (OSC)</a></li><li class="toq-level-4"><span>6.2.6</span> <a href="#checklicense-osc-">CheckLicense (OSC)</a></li><li class="toq-level-4"><span>6.2.7</span> <a href="#getparameters-osc-">GetParameters (OSC)</a></li><li class="toq-level-4"><span>6.2.8</span> <a href="#getcurrentframe-osc-">GetCurrentFrame (OSC)</a></li><li class="toq-level-4"><span>6.2.9</span> <a href="#streamframes-osc-">StreamFrames (OSC)</a></li></ol></li><li class="toq-level-3"><span>6.3</span> <a href="#qtm-rt-packets-osc-">QTM RT Packets (OSC)</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>6.3.1</span> <a href="#structure-osc-">Structure (OSC)</a></li><li class="toq-level-4"><span>6.3.2</span> <a href="#packet-types-osc-">Packet types (OSC)</a></li><li class="toq-level-4"><span>6.3.3</span> <a href="#error-packet-osc-">Error packet (OSC)</a></li><li class="toq-level-4"><span>6.3.4</span> <a href="#command-packet-osc-">Command packet (OSC)</a></li><li class="toq-level-4"><span>6.3.5</span> <a href="#command-response-packet-osc-">Command response packet (OSC)</a></li><li class="toq-level-4"><span>6.3.6</span> <a href="#xml-packet-osc-">XML packet (OSC)</a></li><li class="toq-level-4"><span>6.3.7</span> <a href="#data-packet-osc-">Data packet (OSC)</a></li><li class="toq-level-4"><ol><li class="toq-level-5"><span>6.3.7.1</span> <a href="#data-frame-header-osc-">Data frame header (OSC)</a></li><li class="toq-level-5"><span>6.3.7.2</span> <a href="#data-frame-component-types-osc-">Data frame component types (OSC)</a></li><li class="toq-level-5"><span>6.3.7.3</span> <a href="#2d-and-2d-linearized-component-osc-">2D and 2D linearized component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.4</span> <a href="#3d-component-osc-">3D component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.5</span> <a href="#3d-with-residuals-component-osc-">3D with residuals component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.6</span> <a href="#3d-no-labels-component-osc-">3D no labels component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.7</span> <a href="#3d-no-labels-with-residuals-component-osc-">3D no labels with residuals component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.8</span> <a href="#analog-component-osc-">Analog component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.9</span> <a href="#analog-single-component-osc-">Analog single component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.10</span> <a href="#force-component-osc-">Force component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.11</span> <a href="#force-single-component-osc-">Force single component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.12</span> <a href="#6dof-component-osc-">6DOF component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.13</span> <a href="#6dof-with-residuals-component-osc-">6DOF with residuals component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.14</span> <a href="#6dof-euler-component-osc-">6DOF Euler component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.15</span> <a href="#6dof-euler-with-residuals-component-osc-">6DOF Euler with residuals component (OSC)</a></li></ol></li></ol></li><li class="toq-level-3"><span>6.4</span> <a href="#no-more-data-packet-osc-">No More Data packet (OSC)</a></li><li class="toq-level-3"><span>6.5</span> <a href="#event-data-packet-osc-">Event Data packet (OSC)</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>6.5.1</span> <a href="#events-osc-">Events (OSC)</a></li></ol></li></ol></li><li class="toq-level-2"><span>7</span> <a href="#changelog">Changelog</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>7.1</span> <a href="#changes-in-1-18">Changes in 1.18</a></li><li class="toq-level-3"><span>7.2</span> <a href="#changes-in-1-17">Changes in 1.17</a></li><li class="toq-level-3"><span>7.3</span> <a href="#changes-in-1-16">Changes in 1.16</a></li><li class="toq-level-3"><span>7.4</span> <a href="#changes-in-1-15">Changes in 1.15</a></li><li class="toq-level-3"><span>7.5</span> <a href="#changes-in-1-14">Changes in 1.14</a></li><li class="toq-level-3"><span>7.6</span> <a href="#changes-in-1-13">Changes in 1.13</a></li><li class="toq-level-3"><span>7.7</span> <a href="#changes-in-1-12">Changes in 1.12</a></li><li class="toq-level-3"><span>7.8</span> <a href="#changes-in-1-11">Changes in 1.11</a></li><li class="toq-level-3"><span>7.9</span> <a href="#changes-in-1-10">Changes in 1.10</a></li><li class="toq-level-3"><span>7.10</span> <a href="#changes-in-1-9">Changes in 1.9</a></li><li class="toq-level-3"><span>7.11</span> <a href="#changes-in-1-8">Changes in 1.8</a></li><li class="toq-level-3"><span>7.12</span> <a href="#changes-in-1-7">Changes in 1.7</a></li><li class="toq-level-3"><span>7.13</span> <a href="#changes-in-1-6">Changes in 1.6</a></li><li class="toq-level-3"><span>7.14</span> <a href="#changes-in-1-5">Changes in 1.5</a></li><li class="toq-level-3"><span>7.15</span> <a href="#changes-in-1-4">Changes in 1.4</a></li><li class="toq-level-3"><span>7.16</span> <a href="#changes-in-1-3">Changes in 1.3</a></li><li class="toq-level-3"><span>7.17</span> <a href="#changes-in-1-2">Changes in 1.2</a></li><li class="toq-level-3"><span>7.18</span> <a href="#changes-in-1-1">Changes in 1.1</a></li></ol></li></ol></li></ol></nav>
+<nav class="toq"><ol class="nav"><li class="toq-level-1"><ol><li class="toq-level-2"><span>1</span> <a href="#qtm-real-time-server-protocol-documentation">QTM Real-time Server Protocol Documentation</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>1.1</span> <a href="#title-version">Version 1.17</a></li></ol></li><li class="toq-level-2"><span>2</span> <a href="#introduction">Introduction</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>2.1</span> <a href="#protocol-version">Protocol version</a></li><li class="toq-level-3"><span>2.2</span> <a href="#standard">Standard</a></li><li class="toq-level-3"><span>2.3</span> <a href="#open-sound-control">Open sound control</a></li></ol></li><li class="toq-level-2"><span>3</span> <a href="#overview">Overview</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>3.1</span> <a href="#protocol-details">Protocol details</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>3.1.1</span> <a href="#standards-used">Standards used</a></li><li class="toq-level-4"><span>3.1.2</span> <a href="#byte-order">Byte order</a></li><li class="toq-level-4"><span>3.1.3</span> <a href="#floating-point-values">Floating point values</a></li></ol></li><li class="toq-level-3"><span>3.2</span> <a href="#auto-discover">Auto discover</a></li><li class="toq-level-3"><span>3.3</span> <a href="#connecting">Connecting</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>3.3.1</span> <a href="#disabling-nagle-39-s-algorithm">Disabling Nagle&#39;s algorithm</a></li><li class="toq-level-4"><span>3.3.2</span> <a href="#ip-port-numbers">IP port numbers</a></li></ol></li><li class="toq-level-3"><span>3.4</span> <a href="#protocol-structure">Protocol structure</a></li><li class="toq-level-3"><span>3.5</span> <a href="#retrieving-settings">Retrieving settings</a></li><li class="toq-level-3"><span>3.6</span> <a href="#change-settings">Change settings</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>3.6.1</span> <a href="#general-settings">General settings</a></li><li class="toq-level-4"><ol><li class="toq-level-5"><span>3.6.1.1</span> <a href="#frequency">Frequency</a></li><li class="toq-level-5"><span>3.6.1.2</span> <a href="#capture_time">Capture_Time</a></li><li class="toq-level-5"><span>3.6.1.3</span> <a href="#start_on_external_trigger">Start_On_External_Trigger</a></li><li class="toq-level-5"><span>3.6.1.4</span> <a href="#start_on_trigger_no">Start_On_Trigger_NO</a></li><li class="toq-level-5"><span>3.6.1.5</span> <a href="#start_on_trigger_nc">Start_On_Trigger_NC</a></li><li class="toq-level-5"><span>3.6.1.6</span> <a href="#start_on_trigger_software">Start_On_Trigger_Software</a></li><li class="toq-level-5"><span>3.6.1.7</span> <a href="#external_time_base">External_Time_Base</a></li><li class="toq-level-5"><span>3.6.1.8</span> <a href="#processing_actions">Processing_Actions</a></li><li class="toq-level-5"><span>3.6.1.9</span> <a href="#realtime_processing_actions">RealTime_Processing_Actions</a></li><li class="toq-level-5"><span>3.6.1.10</span> <a href="#reprocessing_actions">Reprocessing_Actions</a></li><li class="toq-level-5"><span>3.6.1.11</span> <a href="#camera">Camera</a></li></ol></li><li class="toq-level-4"><span>3.6.2</span> <a href="#image-settings">Image settings</a></li><li class="toq-level-4"><ol><li class="toq-level-5"><span>3.6.2.1</span> <a href="#camera-2">Camera</a></li></ol></li><li class="toq-level-4"><span>3.6.3</span> <a href="#force-settings">Force settings</a></li><li class="toq-level-4"><span>3.6.4</span> <a href="#settings-example">Settings example</a></li></ol></li><li class="toq-level-3"><span>3.7</span> <a href="#streaming-data">Streaming data</a></li><li class="toq-level-3"><span>3.8</span> <a href="#command-summary">Command summary</a></li></ol></li><li class="toq-level-2"><span>4</span> <a href="#commands">Commands</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>4.1</span> <a href="#version">Version</a></li><li class="toq-level-3"><span>4.2</span> <a href="#qtmversion">QTMVersion</a></li><li class="toq-level-3"><span>4.3</span> <a href="#byteorder">ByteOrder</a></li><li class="toq-level-3"><span>4.4</span> <a href="#getstate">GetState</a></li><li class="toq-level-3"><span>4.5</span> <a href="#getparameters">GetParameters</a></li><li class="toq-level-3"><span>4.6</span> <a href="#getcurrentframe">GetCurrentFrame</a></li><li class="toq-level-3"><span>4.7</span> <a href="#streamframes">StreamFrames</a></li><li class="toq-level-3"><span>4.8</span> <a href="#takecontrol">TakeControl</a></li><li class="toq-level-3"><span>4.9</span> <a href="#releasecontrol">ReleaseControl</a></li><li class="toq-level-3"><span>4.10</span> <a href="#new">New</a></li><li class="toq-level-3"><span>4.11</span> <a href="#close">Close</a></li><li class="toq-level-3"><span>4.12</span> <a href="#start">Start</a></li><li class="toq-level-3"><span>4.13</span> <a href="#stop">Stop</a></li><li class="toq-level-3"><span>4.14</span> <a href="#load">Load</a></li><li class="toq-level-3"><span>4.15</span> <a href="#save">Save</a></li><li class="toq-level-3"><span>4.16</span> <a href="#loadproject">LoadProject</a></li><li class="toq-level-3"><span>4.17</span> <a href="#getcapturec3d">GetCaptureC3D</a></li><li class="toq-level-3"><span>4.18</span> <a href="#getcaptureqtm">GetCaptureQTM</a></li><li class="toq-level-3"><span>4.19</span> <a href="#trig">Trig</a></li><li class="toq-level-3"><span>4.20</span> <a href="#setqtmevent">SetQTMEvent</a></li><li class="toq-level-3"><span>4.21</span> <a href="#reprocess">Reprocess</a></li><li class="toq-level-3"><span>4.22</span> <a href="#led">Led</a></li><li class="toq-level-3"><span>4.23</span> <a href="#quit">Quit</a></li></ol></li><li class="toq-level-2"><span>5</span> <a href="#qtm-rt-packets">QTM RT Packets</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>5.1</span> <a href="#structure">Structure</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>5.1.1</span> <a href="#packet-types">Packet types</a></li></ol></li><li class="toq-level-3"><span>5.2</span> <a href="#error-packet">Error packet</a></li><li class="toq-level-3"><span>5.3</span> <a href="#command-command-response-packet">Command / Command Response packet</a></li><li class="toq-level-3"><span>5.4</span> <a href="#xml-packet">XML packet</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>5.4.1</span> <a href="#general-xml-parameters">General XML parameters</a></li><li class="toq-level-4"><ol><li class="toq-level-5"><span>5.4.1.1</span> <a href="#example--24">Example:</a></li></ol></li><li class="toq-level-4"><span>5.4.2</span> <a href="#3d-xml-parameters">3D XML parameters</a></li><li class="toq-level-4"><ol><li class="toq-level-5"><span>5.4.2.1</span> <a href="#example--25">Example:</a></li></ol></li><li class="toq-level-4"><span>5.4.3</span> <a href="#6d-xml-parameters">6D XML parameters</a></li><li class="toq-level-4"><ol><li class="toq-level-5"><span>5.4.3.1</span> <a href="#example--26">Example:</a></li></ol></li><li class="toq-level-4"><span>5.4.4</span> <a href="#gaze-vector-xml-parameters">Gaze vector XML parameters</a></li><li class="toq-level-4"><ol><li class="toq-level-5"><span>5.4.4.1</span> <a href="#example--27">Example:</a></li></ol></li><li class="toq-level-4"><span>5.4.5</span> <a href="#analog-xml-parameters">Analog XML parameters</a></li><li class="toq-level-4"><ol><li class="toq-level-5"><span>5.4.5.1</span> <a href="#example--28">Example:</a></li></ol></li><li class="toq-level-4"><span>5.4.6</span> <a href="#force-xml-parameters">Force XML parameters</a></li><li class="toq-level-4"><ol><li class="toq-level-5"><span>5.4.6.1</span> <a href="#example--29">Example:</a></li></ol></li><li class="toq-level-4"><span>5.4.7</span> <a href="#image-xml-parameters">Image XML parameters</a></li><li class="toq-level-4"><ol><li class="toq-level-5"><span>5.4.7.1</span> <a href="#example--30">Example:</a></li></ol></li><li class="toq-level-4"><span>5.4.8</span> <a href="#skeleton-xml-parameters">Skeleton XML parameters</a></li><li class="toq-level-4"><ol><li class="toq-level-5"><span>5.4.8.1</span> <a href="#example--31">Example:</a></li></ol></li><li class="toq-level-4"><span>5.4.9</span> <a href="#data-packet">Data packet</a></li><li class="toq-level-4"><ol><li class="toq-level-5"><span>5.4.9.1</span> <a href="#data-component-types">Data component types</a></li><li class="toq-level-5"><span>5.4.9.2</span> <a href="#2d-and-2d-linearized-component">2D and 2D linearized component</a></li><li class="toq-level-5"><span>5.4.9.3</span> <a href="#3d-component">3D component</a></li><li class="toq-level-5"><span>5.4.9.4</span> <a href="#3d-with-residuals-component">3D with residuals component</a></li><li class="toq-level-5"><span>5.4.9.5</span> <a href="#3d-no-labels-component">3D no labels component</a></li><li class="toq-level-5"><span>5.4.9.6</span> <a href="#3d-no-labels-with-residuals-component">3D no labels with residuals component</a></li><li class="toq-level-5"><span>5.4.9.7</span> <a href="#6dof-component">6DOF component</a></li><li class="toq-level-5"><span>5.4.9.8</span> <a href="#6dof-with-residuals-component">6DOF with residuals component</a></li><li class="toq-level-5"><span>5.4.9.9</span> <a href="#6dof-euler-component">6DOF Euler component</a></li><li class="toq-level-5"><span>5.4.9.10</span> <a href="#6dof-euler-with-residuals-component">6DOF Euler with residuals component</a></li><li class="toq-level-5"><span>5.4.9.11</span> <a href="#analog-component">Analog component</a></li><li class="toq-level-5"><span>5.4.9.12</span> <a href="#analog-single-component">Analog single component</a></li><li class="toq-level-5"><span>5.4.9.13</span> <a href="#force-component">Force component</a></li><li class="toq-level-5"><span>5.4.9.14</span> <a href="#force-single-component">Force single component</a></li><li class="toq-level-5"><span>5.4.9.15</span> <a href="#image-component">Image component</a></li><li class="toq-level-5"><span>5.4.9.16</span> <a href="#gaze-vector">Gaze vector</a></li><li class="toq-level-5"><span>5.4.9.17</span> <a href="#timecode">Timecode</a></li><li class="toq-level-5"><span>5.4.9.18</span> <a href="#skeleton">Skeleton</a></li></ol></li></ol></li><li class="toq-level-3"><span>5.5</span> <a href="#no-more-data-packet">No More Data packet</a></li><li class="toq-level-3"><span>5.6</span> <a href="#c3d-packet">C3D packet</a></li><li class="toq-level-3"><span>5.7</span> <a href="#qtm-packet">QTM packet</a></li><li class="toq-level-3"><span>5.8</span> <a href="#event-packet">Event packet</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>5.8.1</span> <a href="#events">Events</a></li></ol></li><li class="toq-level-3"><span>5.9</span> <a href="#discover-packet">Discover packet</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>5.9.1</span> <a href="#discover-response-packet">Discover response packet</a></li></ol></li></ol></li><li class="toq-level-2"><span>6</span> <a href="#open-sound-control-osc-">Open Sound Control (OSC)</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>6.1</span> <a href="#connecting-osc-">Connecting (OSC)</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>6.1.1</span> <a href="#port-number-osc-">Port number (OSC)</a></li></ol></li><li class="toq-level-3"><span>6.2</span> <a href="#commands-osc-">Commands (OSC)</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>6.2.1</span> <a href="#connect-osc-">Connect (OSC)</a></li><li class="toq-level-4"><span>6.2.2</span> <a href="#disconnect-osc-">Disconnect (OSC)</a></li><li class="toq-level-4"><span>6.2.3</span> <a href="#version-osc-">Version (OSC)</a></li><li class="toq-level-4"><span>6.2.4</span> <a href="#qtmversion-osc-">QTMVersion (OSC)</a></li><li class="toq-level-4"><span>6.2.5</span> <a href="#getstate-osc-">GetState (OSC)</a></li><li class="toq-level-4"><span>6.2.6</span> <a href="#checklicense-osc-">CheckLicense (OSC)</a></li><li class="toq-level-4"><span>6.2.7</span> <a href="#getparameters-osc-">GetParameters (OSC)</a></li><li class="toq-level-4"><span>6.2.8</span> <a href="#getcurrentframe-osc-">GetCurrentFrame (OSC)</a></li><li class="toq-level-4"><span>6.2.9</span> <a href="#streamframes-osc-">StreamFrames (OSC)</a></li></ol></li><li class="toq-level-3"><span>6.3</span> <a href="#qtm-rt-packets-osc-">QTM RT Packets (OSC)</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>6.3.1</span> <a href="#structure-osc-">Structure (OSC)</a></li><li class="toq-level-4"><span>6.3.2</span> <a href="#packet-types-osc-">Packet types (OSC)</a></li><li class="toq-level-4"><span>6.3.3</span> <a href="#error-packet-osc-">Error packet (OSC)</a></li><li class="toq-level-4"><span>6.3.4</span> <a href="#command-packet-osc-">Command packet (OSC)</a></li><li class="toq-level-4"><span>6.3.5</span> <a href="#command-response-packet-osc-">Command response packet (OSC)</a></li><li class="toq-level-4"><span>6.3.6</span> <a href="#xml-packet-osc-">XML packet (OSC)</a></li><li class="toq-level-4"><span>6.3.7</span> <a href="#data-packet-osc-">Data packet (OSC)</a></li><li class="toq-level-4"><ol><li class="toq-level-5"><span>6.3.7.1</span> <a href="#data-frame-header-osc-">Data frame header (OSC)</a></li><li class="toq-level-5"><span>6.3.7.2</span> <a href="#data-frame-component-types-osc-">Data frame component types (OSC)</a></li><li class="toq-level-5"><span>6.3.7.3</span> <a href="#2d-and-2d-linearized-component-osc-">2D and 2D linearized component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.4</span> <a href="#3d-component-osc-">3D component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.5</span> <a href="#3d-with-residuals-component-osc-">3D with residuals component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.6</span> <a href="#3d-no-labels-component-osc-">3D no labels component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.7</span> <a href="#3d-no-labels-with-residuals-component-osc-">3D no labels with residuals component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.8</span> <a href="#analog-component-osc-">Analog component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.9</span> <a href="#analog-single-component-osc-">Analog single component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.10</span> <a href="#force-component-osc-">Force component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.11</span> <a href="#force-single-component-osc-">Force single component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.12</span> <a href="#6dof-component-osc-">6DOF component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.13</span> <a href="#6dof-with-residuals-component-osc-">6DOF with residuals component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.14</span> <a href="#6dof-euler-component-osc-">6DOF Euler component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.15</span> <a href="#6dof-euler-with-residuals-component-osc-">6DOF Euler with residuals component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.16</span> <a href="#gaze-vector-component-osc-">Gaze vector component (OSC)</a></li><li class="toq-level-5"><span>6.3.7.17</span> <a href="#skeleton-component-osc-">Skeleton component (OSC)</a></li></ol></li></ol></li><li class="toq-level-3"><span>6.4</span> <a href="#no-more-data-packet-osc-">No More Data packet (OSC)</a></li><li class="toq-level-3"><span>6.5</span> <a href="#event-data-packet-osc-">Event Data packet (OSC)</a></li><li class="toq-level-3"><ol><li class="toq-level-4"><span>6.5.1</span> <a href="#events-osc-">Events (OSC)</a></li></ol></li></ol></li><li class="toq-level-2"><span>7</span> <a href="#changelog">Changelog</a></li><li class="toq-level-2"><ol><li class="toq-level-3"><span>7.1</span> <a href="#changes-in-1-20">Changes in 1.20</a></li><li class="toq-level-3"><span>7.2</span> <a href="#changes-in-1-19">Changes in 1.19</a></li><li class="toq-level-3"><span>7.3</span> <a href="#changes-in-1-18">Changes in 1.18</a></li><li class="toq-level-3"><span>7.4</span> <a href="#changes-in-1-17">Changes in 1.17</a></li><li class="toq-level-3"><span>7.5</span> <a href="#changes-in-1-16">Changes in 1.16</a></li><li class="toq-level-3"><span>7.6</span> <a href="#changes-in-1-15">Changes in 1.15</a></li><li class="toq-level-3"><span>7.7</span> <a href="#changes-in-1-14">Changes in 1.14</a></li><li class="toq-level-3"><span>7.8</span> <a href="#changes-in-1-13">Changes in 1.13</a></li><li class="toq-level-3"><span>7.9</span> <a href="#changes-in-1-12">Changes in 1.12</a></li><li class="toq-level-3"><span>7.10</span> <a href="#changes-in-1-11">Changes in 1.11</a></li><li class="toq-level-3"><span>7.11</span> <a href="#changes-in-1-10">Changes in 1.10</a></li><li class="toq-level-3"><span>7.12</span> <a href="#changes-in-1-9">Changes in 1.9</a></li><li class="toq-level-3"><span>7.13</span> <a href="#changes-in-1-8">Changes in 1.8</a></li><li class="toq-level-3"><span>7.14</span> <a href="#changes-in-1-7">Changes in 1.7</a></li><li class="toq-level-3"><span>7.15</span> <a href="#changes-in-1-6">Changes in 1.6</a></li><li class="toq-level-3"><span>7.16</span> <a href="#changes-in-1-5">Changes in 1.5</a></li><li class="toq-level-3"><span>7.17</span> <a href="#changes-in-1-4">Changes in 1.4</a></li><li class="toq-level-3"><span>7.18</span> <a href="#changes-in-1-3">Changes in 1.3</a></li><li class="toq-level-3"><span>7.19</span> <a href="#changes-in-1-2">Changes in 1.2</a></li><li class="toq-level-3"><span>7.20</span> <a href="#changes-in-1-1">Changes in 1.1</a></li></ol></li></ol></li></ol></nav>
 <h2 id="introduction">Introduction</h2><p>The Qualisys Track Manager software is used to collect and process motion capture
 data from Qualisys motion capture cameras. The software is running under Windows
 and offers both post-processing and real-time processing functionality.
@@ -210,9 +210,11 @@ start on external trigger signal from a software trigger. It can be devices
 and applications like keyboard, RT clients, telnet command etc. The value can
 be true or false.</p>
 <h5 id="external_time_base">External_Time_Base</h5><ul>
-<li><p><strong>Enabled</strong> - Enable or disable external time base. Value can be True or False.</p>
+<li><p><strong>Enabled</strong> 
+ Enable or disable external time base. Value can be True or False.</p>
 </li>
-<li><p><strong>Signal_Source</strong> - Signal source used for external time base. Selectable values:</p>
+<li><p><strong>Signal_Source</strong> 
+Signal source used for external time base. Selectable values:</p>
 <ul>
 <li>Control port</li>
 <li>IR receiver</li>
@@ -221,129 +223,98 @@ be true or false.</p>
 <li>Video sync</li>
 </ul>
 </li>
-</ul>
-<ul>
-<li><p><strong>Signal_Mode</strong> - Selectable values:</p>
+<li><p><strong>Signal_Mode</strong> 
+Selectable values:</p>
 <ul>
 <li>Periodic</li>
 <li>Non-periodic</li>
 </ul>
 </li>
-</ul>
-<ul>
-<li><p><strong>Frequency_Multiplier</strong> - Multiply incoming frequency by this integer to
+<li><p><strong>Frequency_Multiplier</strong> 
+Multiply incoming frequency by this integer to
 get the camera frequency. Can be combined with frequency divisor. Value is an
 integer.</p>
 </li>
-<li><p><strong>Frequency_Divisor</strong> - Divide incoming frequency by this integer to get the
+<li><p><strong>Frequency_Divisor</strong> 
+Divide incoming frequency by this integer to get the
 camera frequency. Can be combined with frequency multiplier. Value is an
 integer.</p>
 </li>
-<li><p><strong>Frequency_Tolerance</strong> - Frequency tolerance in ppm of period time. Value
+<li><p><strong>Frequency_Tolerance</strong> 
+Frequency tolerance in ppm of period time. Value
 is an integer. </p>
 </li>
-<li><p><strong>Nominal_Frequency</strong> - Nominal frequency used by QTM. To disable nominal
+<li><p><strong>Nominal_Frequency</strong> 
+Nominal frequency used by QTM. To disable nominal
 frequency set the value to <em>None.</em> To enable nominal frequency set a float
 value.</p>
 </li>
-<li><p><strong>Signal_Edge</strong> - Control port TTL signal edge.</p>
+<li><p><strong>Signal_Edge</strong> 
+Control port TTL signal edge.</p>
 <ul>
 <li>Negative</li>
 <li>Positive</li>
 </ul>
 </li>
-</ul>
-<ul>
-<li><p><strong>Signal_Shutter_Delay</strong> - Delay from signal to shutter opening in micro
+<li><p><strong>Signal_Shutter_Delay</strong> 
+Delay from signal to shutter opening in micro
 seconds. Value is an integer.</p>
 </li>
-<li><p><strong>Non_Periodic_Timeout</strong> - Max number of seconds expected between two
+<li><p><strong>Non_Periodic_Timeout</strong> 
+Max number of seconds expected between two
 frames in non-periodic mode. Value is a float.</p>
 </li>
 </ul>
-<h4 id="processing_actions">Processing_Actions</h4><ul>
+<h5 id="processing_actions">Processing_Actions</h5><ul>
+<li><strong>PreProcessing2D</strong><br>Enable or disable 2D pre-processing action. Value can be True or False.</li>
+<li><strong>Tracking</strong><br>2D or 3D tracking processing action. Value can be 2D, 3D or False.</li>
+<li><strong>TwinSystemMerge</strong><br>Twin system merge processing action. Value can be True or False.</li>
+<li><strong>SplineFill</strong><br>Spline fill processing action. Value can be True or False.</li>
+<li><strong>AIM</strong><br>AIM processing action. Value can be True or False.</li>
+<li><strong>Track6DOF</strong><br>6 DOF tracking processing action. Value can be True or False.</li>
+<li><strong>ForceData</strong><br>Force data processing action. Value can be True or False.</li>
+<li><strong>GazeVector</strong><br>Enable or disable gaze vector data processing action. Value can be True or False.</li>
+<li><strong>SkeletonSolve</strong><br>Enable or disable skeleton data processing action. Value can be True or False.</li>
+<li><strong>ExportTSV</strong><br>Export to TSV processing action. Value can be True or False.</li>
+<li><strong>ExportC3D</strong><br>Export to C3D processing action. Value can be True or False.</li>
+<li><strong>ExportMatlabFile</strong><br>Export to MATLAB file processing action. Value can be True or False.</li>
+<li><strong>ExportAviFile</strong><br>Enable or disable export to AVI video file processing action. Value can be True or False.</li>
+</ul>
+<h5 id="realtime_processing_actions">RealTime_Processing_Actions</h5><ul>
 <li><p><strong>PreProcessing2D</strong><br>Enable or disable 2D pre-processing action. Value can be True or False.</p>
 </li>
 <li><p><strong>Tracking</strong><br>2D or 3D tracking processing action. Value can be 2D, 3D or False.</p>
 </li>
-<li><p><strong>AIM</strong><br>AIM processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>Track6DOF</strong><br>6 DOF tracking processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ForceData</strong><br>Force data processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>GazeVector</strong><br>Enable or disable gaze vector data processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>SkeletonData</strong><br>Enable or disable skeleton data processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportTSV</strong><br>Export to TSV processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportC3D</strong><br>Export to C3D processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportMatlabFile</strong><br>Export to MATLAB file processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportAviFile</strong><br>Enable or disable export to AVI video file processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>TwinSystemMerge</strong><br>Twin system merge processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>SplineFill</strong><br>Spline fill processing action. Value can be True or False.</p>
-</li>
+<li><strong>AIM</strong><br>AIM processing action. Value can be True or False.</li>
+<li><strong>Track6DOF</strong><br>6 DOF tracking processing action. Value can be True or False.</li>
+<li><strong>ForceData</strong><br>Force data processing action. Value can be True or False.</li>
+<li><strong>GazeVector</strong><br>Enable or disable gaze vector data processing action. Value can be True or False.</li>
+<li><strong>SkeletonSolve</strong><br>Enable or disable skeleton data processing action. Value can be True or False.</li>
+<li><strong>ExportTSV</strong><br>Export to TSV processing action. Value can be True or False.</li>
+<li><strong>ExportC3D</strong><br>Export to C3D processing action. Value can be True or False.</li>
+<li><strong>ExportMatlabFile</strong><br>Export to MATLAB file processing action. Value can be True or False.</li>
+<li><strong>ExportAviFile</strong><br>Enable or disable export to AVI video file processing action. Value can be True or False.</li>
+<li><strong>ExportFBX</strong><br>Enable or disable export to FBX processing action. Value can be True or False.</li>
 </ul>
-<h4 id="realtime_processing_actions">RealTime_Processing_Actions</h4><ul>
-<li><p><strong>PreProcessing2D</strong><br>Enable or disable 2D pre-processing action. Value can be True or False.</p>
+<h5 id="reprocessing_actions">Reprocessing_Actions</h5><ul>
+<li><p><strong>PreProcessing2D</strong><br>  Enable or disable 2D pre-processing action. Value can be True or False.</p>
 </li>
 <li><p><strong>Tracking</strong><br>2D or 3D tracking processing action. Value can be 2D, 3D or False.</p>
 </li>
-<li><p><strong>AIM</strong><br>AIM processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>Track6DOF</strong><br>6 DOF tracking processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ForceData</strong><br>Force data processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>GazeVector</strong><br>Enable or disable gaze vector data processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>SkeletonData</strong><br>Enable or disable skeleton data processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportTSV</strong><br>Export to TSV processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportC3D</strong><br>Export to C3D processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportMatlabFile</strong><br>Export to MATLAB file processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportAviFile</strong><br>Enable or disable export to AVI video file processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportFBX</strong><br>Enable or disable export to FBX processing action. Value can be True or False.</p>
-</li>
+<li><strong>TwinSystemMerge</strong><br>Twin system merge processing action. Value can be True or False.</li>
+<li><strong>SplineFill</strong><br>Spline fill processing action. Value can be True or False.</li>
+<li><strong>AIM</strong><br>AIM processing action. Value can be True or False.</li>
+<li><strong>Track6DOF</strong><br>6 DOF tracking processing action. Value can be True or False.</li>
+<li><strong>ForceData</strong><br>Force data processing action. Value can be True or False.</li>
+<li><strong>GazeVector</strong><br>Enable or disable gaze vector data processing action. Value can be True or False.</li>
+<li><strong>SkeletonSolve</strong><br>Enable or disable skeleton data processing action. Value can be True or False.</li>
+<li><strong>ExportTSV</strong><br>Export to TSV processing action. Value can be True or False.</li>
+<li><strong>ExportC3D</strong><br>Export to C3D processing action. Value can be True or False.</li>
+<li><strong>ExportMatlabFile</strong><br>Export to MATLAB file processing action. Value can be True or False.</li>
+<li><strong>ExportAviFile</strong><br>Enable or disable export to AVI video file processing action. Value can be True or False.</li>
+<li><strong>ExportFBX</strong><br>Enable or disable export to FBX processing action. Value can be True or False.</li>
 </ul>
-<h4 id="reprocessing_actions">Reprocessing_Actions</h4><ul>
-<li><p><strong>PreProcessing2D</strong><br>Enable or disable 2D pre-processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>Tracking</strong><br>2D or 3D tracking processing action. Value can be 2D, 3D or False.</p>
-</li>
-<li><p><strong>AIM</strong><br>AIM processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>Track6DOF</strong><br>6 DOF tracking processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ForceData</strong><br>Force data processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>GazeVector</strong><br>Enable or disable gaze vector data processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>SkeletonData</strong><br>Enable or disable skeleton data processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportTSV</strong><br>Export to TSV processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportC3D</strong><br>Export to C3D processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportMatlabFile</strong><br>Export to MATLAB file processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportAviFile</strong><br>Enable or disable export to AVI video file processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>TwinSystemMerge</strong><br>Twin system merge processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>SplineFill</strong><br>Spline fill processing action. Value can be True or False.</p>
-</li>
-</ul>
-<h4 id="camera">Camera</h4><p>General settings consist of none or several <em>Camera</em> elements, with
+<h5 id="camera">Camera</h5><p>General settings consist of none or several <em>Camera</em> elements, with
 following content.</p>
 <ul>
 <li><p><strong>ID</strong> - Select camera to which the settings shall apply. If the camera id is
@@ -358,8 +329,6 @@ are:</p>
 <li>Video</li>
 </ul>
 </li>
-</ul>
-<ul>
 <li><p><strong>Video_Resolution</strong> - Change video resolution for non-marker cameras (Oqus
 2c and Miqus Video). Available resolutions are:</p>
 <ul>
@@ -603,8 +572,8 @@ image settings.</p>
             &lt;AIM&gt;True&lt;/AIM&gt;
             &lt;Track6DOF&gt;False&lt;/Track6DOF&gt;
             &lt;ForceData&gt;False&lt;/ForceData&gt;
-            &lt;GazeVectorData&gt;False&lt;/GazeVectorData&gt;
-            &lt;SkeletonData&gt;False&lt;/SkeletonData&gt;
+            &lt;GazeVector&gt;False&lt;/GazeVector&gt;
+            &lt;SkeletonSolve&gt;False&lt;/SkeletonSolve&gt;
             &lt;ExportTSV&gt;False&lt;/ExportTSV&gt;
             &lt;ExportC3D&gt;False&lt;/ExportC3D&gt;
             &lt;ExportMatlabFile&gt;False&lt;/ExportMatlabFile&gt;
@@ -615,8 +584,8 @@ image settings.</p>
             &lt;AIM&gt;True&lt;/AIM&gt;
             &lt;Track6DOF&gt;False&lt;/Track6DOF&gt;
             &lt;ForceData&gt;False&lt;/ForceData&gt;
-            &lt;GazeVectorData&gt;False&lt;/GazeVectorData&gt;
-            &lt;SkeletonData&gt;False&lt;/SkeletonData&gt;
+            &lt;GazeVector&gt;False&lt;/GazeVector&gt;
+            &lt;SkeletonSolve&gt;False&lt;/SkeletonSolve&gt;
         &lt;/RealTime_Processing_Actions&gt;
         &lt;Reprocessing_Actions&gt;
             &lt;PreProcess2D&gt;False&lt;/PreProcess2D&gt;
@@ -626,8 +595,8 @@ image settings.</p>
             &lt;AIM&gt;True&lt;/AIM&gt;
             &lt;Track6DOF&gt;False&lt;/Track6DOF&gt;
             &lt;ForceData&gt;False&lt;/ForceData&gt;
-            &lt;GazeVectorData&gt;False&lt;/GazeVectorData&gt;
-            &lt;SkeletonData&gt;False&lt;/SkeletonData&gt;
+            &lt;GazeVector&gt;False&lt;/GazeVector&gt;
+            &lt;SkeletonSolve&gt;False&lt;/SkeletonSolve&gt;
             &lt;ExportTSV&gt;False&lt;/ExportTSV&gt;
             &lt;ExportC3D&gt;False&lt;/ExportC3D&gt;
             &lt;ExportMatlabFile&gt;False&lt;/ExportMatlabFile&gt;
@@ -636,7 +605,7 @@ image settings.</p>
             &lt;ID&gt;1&lt;/ID&gt;
             &lt;Mode&gt;Marker&lt;/Mode&gt;
             &lt;Video_Resolution&gt;1080p&lt;/Video_Resolution&gt;
-            &lt;Video_Aspect_Ratio&gt;1080p&lt;/Video_Aspect_Ratio&gt;
+            &lt;Video_Aspect_Ratio&gt;16x9&lt;/Video_Aspect_Ratio&gt;
             &lt;Video_Frequency&gt;30&lt;/Video_Frequency&gt;
             &lt;Video_Exposure&gt;0.5&lt;/Video_Exposure&gt;
             &lt;Video_Flash_Time&gt;0.3&lt;/Video_Flash_Time&gt;
@@ -740,15 +709,15 @@ via UDP. </p>
 </tr>
 <tr>
 <td>GetParameters</td>
-<td><code>All</code> &#124; <code>([General] [3D] [6D] [Analog] [Force] [Image])</code></td>
+<td><code>All</code> &#124; <code>([General] [3D] [6D] [Analog] [Force] [Image] [GazeVector] [Skeleton])</code> </td>
 </tr>
 <tr>
 <td>GetCurrentFrame</td>
-<td><code>All</code> &#124; <code>([2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes]</code><br><code>[Analog[:channels]] [AnalogSingle[:channels]] [Force] [6D] [6DRes]</code><br><code>[6DEuler] [6DEulerRes] [Image])</code></td>
+<td><code>All</code> &#124; <code>([2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes] [Analog[:channels]] [AnalogSingle[:channels]] [Force] [ForceSingle] [6D] [6DRes] [6DEuler] [6DEulerRes] [Image] [GazeVector] [Timecode] [Skeleton[:global]])</code> </td>
 </tr>
 <tr>
 <td>StreamFrames</td>
-<td><code>Stop</code> &#124; <code>((FrequencyDivisor:n</code> &#124; <code>Frequency:n</code> &#124; <code>AllFrames)</code><br><code>[UDP[:address]:port] (All</code> &#124; <code>([2D] [2DLin] [3D] [3DRes]</code><br><code>[3DNoLabels] [3DNoLabelsRes] [Analog[:channels]] [AnalogSingle[:channels]]</code><br><code>[Force] [6D] [6DRes] [6DEuler] [6DEulerRes] [Image])))</code> </td>
+<td><code>Stop</code> &#124; <code>((FrequencyDivisor:n</code> &#124; <code>Frequency:n</code> &#124; <code>AllFrames) [UDP[:address]:port] ([2D] [2DLin] [3D] [3DRes][3DNoLabels] [3DNoLabelsRes] [Analog[:channels]] [AnalogSingle[:channels]] [Force] [ForceSingle] [6D] [6DRes] [6DEuler] [6DEulerRes] [Image] [GazeVector] [Timecode] [Skeleton[:global]]))</code> </td>
 </tr>
 <tr>
 <td>TakeControl</td>
@@ -808,11 +777,7 @@ via UDP. </p>
 </tr>
 <tr>
 <td>Led</td>
-<td>(Camera) (On</td>
-<td>Off</td>
-<td>Pulsing) (Green</td>
-<td>Amber</td>
-<td>All)</td>
+<td><code>Camera (On</code> &#124; <code>Off</code> &#124; <code>Pulsing) (Green</code>&#124;<code>Amber</code>&#124;<code>All)</code></td>
 </tr>
 <tr>
 <td>Quit</td>
@@ -845,12 +810,12 @@ version selected. If no argument is used, the server will respond with the
 current version.</p>
 <p>If you don&#39;t set the protocol version yourself, QTM will set it to <strong>version
 1.1</strong> by default.</p>
-<h6 id="example-">Example:</h6><pre><code class="lang-coffeescript">Command:    Version 1.12
-Response:   Version set to 1.12    or  
+<h6 id="example-">Example:</h6><pre><code class="lang-coffeescript">Command:    Version 1.17
+Response:   Version set to 1.17    or  
             Version NOT supported
 
 Command:    Version
-Response:   Version is 1.12
+Response:   Version is 1.17
 </code></pre>
 <h3 id="qtmversion">QTMVersion</h3><blockquote>
 <p><strong><code>QTMVersion</code></strong></p>
@@ -879,35 +844,37 @@ as an ASCII string. <code>GetState</code> will not show the <strong>Camera Setti
 Response:   Event data packet with last QTM event.
 
 (Telnet)
-Response:   Connected               or
-            Connection Closed       or
-            Capture Started         or
-            Capture Stopped         or
-            Calibration Started     or
-            Calibration Stopped     or
-            RT From File Started    or
-            RT From File Stopped    or
-            Waiting For Trigger
+Response:   Connected                 or
+            Connection Closed         or
+            Capture Started           or
+            Capture Stopped           or
+            Capture Fetching Finished or
+            Calibration Started       or
+            Calibration Stopped       or
+            RT From File Started      or
+            RT From File Stopped      or
+            Waiting For Trigger       or
+            Capture Saved
 </code></pre>
 <h3 id="getparameters">GetParameters</h3><blockquote>
-<p><strong><code>GetParameters</code></strong> <code>All | ([General] [3D] [6D] [Analog] [Force] [Image])</code></p>
+<p><strong><code>GetParameters</code></strong> <code>All | ([General] [3D] [6D] [Analog] [Force] [Image] [GazeVector] [Skeleton[:global]])</code></p>
 </blockquote>
 <p>This command retrieves the settings for the requested component(s) of QTM in
 XML format. The XML parameters are described <a href="#xml-packet">here</a>.</p>
+<p>By default, skeleton data is in local coordinates. Skeleton:global will change the skeleton data to global coordinates</p>
 <h6 id="example--5">Example:</h6><pre><code class="lang-coffeescript">Command:    GetParameters 3D Force
 Response:   Parameters not available                    or
             XML string containing requested parameters
 </code></pre>
 <h3 id="getcurrentframe">GetCurrentFrame</h3><blockquote>
-<p><strong><code>GetCurrentFrame</code></strong> <code>All | ([2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes]
-                  [Analog[:channels]] [AnalogSingle[:channels]] [Force] [6D] [6DRes] [6DEuler]
-                  [6DEulerRes] [Image])</code></p>
+<p><strong><code>GetCurrentFrame</code></strong> <code>[2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes] [Analog[:channels]] [AnalogSingle[:channels]] [Force] [ForceSingle] [6D] [6DRes] [6DEuler] [6DEulerRes] [Image] [GazeVector] [Timecode] [Skeleton[:global]]</code></p>
 </blockquote>
 <div class="well">The optional channels for Analog and AnalogSingle, is a
 string containing a list of channels to read from the server. The channels
 are separated by a <code>,</code> and can also contain ranges defined by a <code>-</code>. Here is
 an example: <code>1,2,3-6,16</code></div>
 
+<p>By default, skeleton data is in local coordinates. Skeleton:global will change the skeleton data to global coordinates.</p>
 <p>This command returns the current frame of real-time data from the server.  </p>
 <p>Points worth noting are:  </p>
 <ul>
@@ -938,16 +905,14 @@ Response:   One data frame is sent to the client according to the
             data frame protocol described in the Data packet section.
 </code></pre>
 <h3 id="streamframes">StreamFrames</h3><blockquote>
-<p><strong><code>StreamFrames</code></strong> <code>Stop | ((FrequencyDivisor:n | Frequency:n | AllFrames)
-                      [UDP[:address]:port] (All |  ([2D] [2DLin] [3D] [3DRes] [3DNoLabels]
-                      [3DNoLabelsRes] [Analog[:channels]] [AnalogSingle[:channels]] [Force] [6D] [6DRes] [6DEuler]
-                      [6DEulerRes] [Image])))</code></p>
+<p><strong><code>StreamFrames</code></strong> <code>Stop | ((FrequencyDivisor:n | Frequency:n | AllFrames) [UDP[:address]:port] [2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes] [Analog[:channels]] [AnalogSingle[:channels]] [Force] [ForceSingle] [6D] [6DRes] [6DEuler] [6DEulerRes] [Image] [GazeVector] [Timecode] [Skeleton[:global]])</code></p>
 </blockquote>
 <div class="well">The optional channels for Analog and AnalogSingle, is a
 string containing a list of channels to read from the server. The channels
 are separated by a <code>,</code> and can also contain ranges defined by a <code>-</code>. Here
 is an example: <code>1,2,3-6,16</code></div>
 
+<p>By default, skeleton data is in local coordinates. Skeleton:global will change the skeleton data to global coordinates.</p>
 <p>This command makes the QTM RT server start streaming data frames in real-time.  </p>
 <p>Points worth noting are:</p>
 <ul>
@@ -1304,7 +1269,7 @@ QTM RT server protocol packet. To handle TCP/IP reading properly, first read
 four bytes from the stream to see how big the packet is, then read (Size – 4)
 bytes from the TCP/IP stream to make sure you have received a whole packet.
 Then handle the packet according to its Type member.</p>
-<h3 id="packet-types">Packet types</h3><p>The Type field of a QTM RT server packet header is a number that should be
+<h4 id="packet-types">Packet types</h4><p>The Type field of a QTM RT server packet header is a number that should be
 interpreted according to the table below. These are the data types that are
 defined in the protocol so far. Detailed descriptions of the data packets for
 each type can be found in the sections following this one.</p>
@@ -1364,7 +1329,7 @@ each type can be found in the sections following this one.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="error-packet">Error packet</h4><p>Error messages from the server are sent in an error packet. Whenever you read a
+<h3 id="error-packet">Error packet</h3><p>Error messages from the server are sent in an error packet. Whenever you read a
 response from the server, it may be an error packet instead of the packet type
 you expect. </p>
 <p>Example of an error packet:  </p>
@@ -1455,7 +1420,7 @@ you expect. </p>
 </tr>
 </tbody>
 </table>
-<h4 id="command-command-response-packet">Command / Command Response packet</h4><p>Commands and responses to commands are sent in packets of type 1 (see table
+<h3 id="command-command-response-packet">Command / Command Response packet</h3><p>Commands and responses to commands are sent in packets of type 1 (see table
 above). Command response strings sent from the server are always
 NULL-terminated but
 NULL-termination is optional for command strings sent from the clients. </p>
@@ -1526,7 +1491,7 @@ which is not required of clients).</p>
 </tr>
 </tbody>
 </table>
-<h4 id="xml-packet">XML packet</h4><p>XML is used to exchange parameters between the server and the client. This has
+<h3 id="xml-packet">XML packet</h3><p>XML is used to exchange parameters between the server and the client. This has
 several benefits, including extendibility. Clients should not assume that the
 XML sent by the server looks exactly like the examples below - there may be any
 number of other items included as well, and there may be differences in
@@ -1539,12 +1504,11 @@ should work well together).</p>
 packets.</p>
 <p>The packet header is followed by a <code>NULL</code>-terminated ASCII string.  Interpret
 the string as XML according to the following paragraphs. All XML data strings
-sent from the QTM RT server are enclosed by a block named from the version of
-the protocol used (<code>QTM_Parameters_Ver_1.12</code> in this version of the
+sent from the QTM RT server are enclosed by a element named from the version of
+the protocol used (<code>QTM_Parameters_Ver_1.17</code> in this version of the
 protocol).</p>
 <p>When requesting more than one type of parameters at the same time, all of them
-are placed in the same <code>&lt;QTM_Parameters_Ver_1.12&gt;</code> block. The individual blocks
-may appear in any order inside this block.</p>
+are placed in the same <code>&lt;QTM_Parameters_Ver_1.17&gt;</code> element. The individual elements may appear in any order inside this element.</p>
 <table>
 <thead>
 <tr>
@@ -1567,13 +1531,13 @@ may appear in any order inside this block.</p>
 <tr>
 <td></td>
 <td>Data</td>
-<td>XML string data, NULL terminated.<br><br>The XML data can consist of one or several of following parameters:<br><a href="#general-xml-parameters">General</a>, <a href="#3d-xml-parameters">3D</a>, <a href="#6d-xml-parameters">6D</a>, <a href="#analog-xml-parameters">Analog</a>, <a href="#force-xml-parameters">Force</a> and <a href="#image-xml-parameters">Image</a>.</td>
+<td>XML string data, NULL terminated.<br>The XML data can consist of one or several of following parameters:<br><a href="#general-xml-parameters">General</a>, <a href="#3d-xml-parameters">3D</a>, <a href="#6d-xml-parameters">6D</a>, <a href="#GazeVector-xml-parameters">GazeVector</a>, <a href="#analog-xml-parameters">Analog</a>, <a href="#force-xml-parameters">Force</a> <a href="#image-xml-parameters">Image</a> and <a href="#Skeleton-xml-parameters">Skeleton</a>. </td>
 </tr>
 </tbody>
 </table>
-<h3 id="xml-parameters">XML Parameters</h3><h4 id="general-xml-parameters">General XML parameters</h4><p>In response to the command GetParameters General the QTM RT server will reply
-with an XML data packet, containing a block called General. See below for the
-format of this block.</p>
+<h4 id="general-xml-parameters">General XML parameters</h4><p>In response to the command GetParameters General the QTM RT server will reply
+with an XML data packet, containing an element called General. See below for the
+format of this element.</p>
 <p><strong>Frequency</strong><br>The QTM capture frequency.</p>
 <p><strong>Capture_Time</strong><br>The length of the QTM capture, started with the start command. The time is expressed in seconds.</p>
 <p><strong>Start_On_External_Trigger</strong><br>Measurement starts on external trigger. The value can be true or false.</p>
@@ -1596,7 +1560,7 @@ be true or false.</p>
 </li>
 <li><p><strong>Signal_Source</strong><br>Signal source used for external time base. Possible values:</p>
 <ul>
-<li>Control port</li>
+<li>Control port<ul>
 <li>IR receiver</li>
 <li>SMPTE</li>
 <li>IRIG</li>
@@ -1604,8 +1568,11 @@ be true or false.</p>
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <ul>
-<li><strong>Signal_Mode</strong><br>Possible values:<ul>
+<li><p><strong>Signal_Mode</strong><br>Possible values:</p>
+<ul>
 <li>Periodic</li>
 <li>Non-periodic</li>
 </ul>
@@ -1639,102 +1606,53 @@ is a float.</p>
 </ul>
 <p><strong>Processing_Actions</strong></p>
 <ul>
-<li><p><strong>PreProcessing2D</strong><br>Enable or disable 2D pre-processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>Tracking</strong><br>2D or 3D tracking processing action. Value can be 2D, 3D or False.</p>
-</li>
-<li><p><strong>AIM</strong><br>AIM processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>Track6DOF</strong><br>6 DOF tracking processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ForceData</strong><br>Force data processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>GazeVector</strong><br>Enable or disable gaze vector data processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>SkeletonData</strong><br>Enable or disable skeleton data processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportTSV</strong><br>Export to TSV processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportC3D</strong><br>Export to C3D processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportMatlabFile</strong><br>Export to MATLAB file processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportAviFile</strong><br>Enable or disable export to AVI video file processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>TwinSystemMerge</strong><br>Twin system merge processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>SplineFill</strong><br>Spline fill processing action. Value can be True or False.</p>
-</li>
+<li><strong>PreProcessing2D</strong><br>Enable or disable 2D pre-processing action. Value can be True or False.</li>
+<li><strong>Tracking</strong><br>2D or 3D tracking processing action. Value can be 2D, 3D or False.</li>
+<li><strong>TwinSystemMerge</strong><br>Twin system merge processing action. Value can be True or False.</li>
+<li><strong>SplineFill</strong><br>Spline fill processing action. Value can be True or False.</li>
+<li><strong>AIM</strong><br>AIM processing action. Value can be True or False.</li>
+<li><strong>Track6DOF</strong><br>6 DOF tracking processing action. Value can be True or False.</li>
+<li><strong>ForceData</strong><br>Force data processing action. Value can be True or False.</li>
+<li><strong>GazeVector</strong><br>Enable or disable gaze vector data processing action. Value can be True or False.</li>
+<li><strong>SkeletonSolve</strong><br>Enable or disable skeleton data processing action. Value can be True or False.</li>
+<li><strong>ExportTSV</strong><br>Export to TSV processing action. Value can be True or False.</li>
+<li><strong>ExportC3D</strong><br>Export to C3D processing action. Value can be True or False.</li>
+<li><strong>ExportMatlabFile</strong><br>Export to MATLAB file processing action. Value can be True or False.</li>
+<li><strong>ExportAviFile</strong><br>Enable or disable export to AVI video file processing action. Value can be True or False.</li>
 </ul>
 <p><strong>RealTime_Processing_Actions</strong></p>
 <ul>
-<li><p><strong>PreProcessing2D</strong><br>Enable or disable 2D pre-processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>Tracking</strong><br>2D or 3D tracking processing action. Value can be 2D, 3D or False.</p>
-</li>
-<li><p><strong>AIM</strong><br>AIM processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>Track6DOF</strong><br>6 DOF tracking processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ForceData</strong><br>Force data processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>GazeVector</strong><br>Enable or disable gaze vector data processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>SkeletonData</strong><br>Enable or disable skeleton data processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportTSV</strong><br>Export to TSV processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportC3D</strong><br>Export to C3D processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportMatlabFile</strong><br>Export to MATLAB file processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportAviFile</strong><br>Enable or disable export to AVI video file processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportFBX</strong><br>Enable or disable export to FBX processing action. Value can be True or False.</p>
-</li>
+<li><strong>PreProcessing2D</strong><br>Enable or disable 2D pre-processing action. Value can be True or False.</li>
+<li><strong>Tracking</strong><br>2D or 3D tracking processing action. Value can be 2D, 3D or False.</li>
+<li><strong>AIM</strong><br>AIM processing action. Value can be True or False.</li>
+<li><strong>Track6DOF</strong><br>6 DOF tracking processing action. Value can be True or False.</li>
+<li><strong>ForceData</strong><br>Force data processing action. Value can be True or False.</li>
+<li><strong>GazeVector</strong><br>Enable or disable gaze vector data processing action. Value can be True or False.</li>
+<li><strong>SkeletonSolve</strong><br>Enable or disable skeleton data processing action. Value can be True or False.</li>
+<li><strong>ExportTSV</strong><br>Export to TSV processing action. Value can be True or False.</li>
+<li><strong>ExportC3D</strong><br>Export to C3D processing action. Value can be True or False.</li>
+<li><strong>ExportMatlabFile</strong><br>Export to MATLAB file processing action. Value can be True or False.</li>
+<li><strong>ExportAviFile</strong><br>Enable or disable export to AVI video file processing action. Value can be True or False.</li>
+<li><strong>ExportFBX</strong><br>Enable or disable export to FBX processing action. Value can be True or False.</li>
 </ul>
 <p><strong>Reprocessing_Actions</strong></p>
 <ul>
-<li><p><strong>PreProcessing2D</strong><br>Enable or disable 2D pre-processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>Tracking</strong><br>2D or 3D tracking processing action. Value can be 2D, 3D or False.</p>
-</li>
-<li><p><strong>AIM</strong><br>AIM processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>Track6DOF</strong><br>6 DOF tracking processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ForceData</strong><br>Force data processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>GazeVector</strong><br>Enable or disable gaze vector data processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>SkeletonData</strong><br>Enable or disable skeleton data processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportTSV</strong><br>Export to TSV processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportC3D</strong><br>Export to C3D processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportMatlabFile</strong><br>Export to MATLAB file processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportAviFile</strong><br>Enable or disable export to AVI video file processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>TwinSystemMerge</strong><br>Twin system merge processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>SplineFill</strong><br>Spline fill processing action. Value can be True or False.</p>
-</li>
-<li><p><strong>ExportFBX</strong><br>Enable or disable export to FBX processing action. Value can be True or False.</p>
-</li>
+<li><strong>PreProcessing2D</strong><br>Enable or disable 2D pre-processing action. Value can be True or False.</li>
+<li><strong>Tracking</strong><br>2D or 3D tracking processing action. Value can be 2D, 3D or False.</li>
+<li><strong>TwinSystemMerge</strong><br>Twin system merge processing action. Value can be True or False.</li>
+<li><strong>SplineFill</strong><br>Spline fill processing action. Value can be True or False.</li>
+<li><strong>AIM</strong><br>AIM processing action. Value can be True or False.</li>
+<li><strong>Track6DOF</strong><br>6 DOF tracking processing action. Value can be True or False.</li>
+<li><strong>ForceData</strong><br>Force data processing action. Value can be True or False.</li>
+<li><strong>GazeVector</strong><br>Enable or disable gaze vector data processing action. Value can be True or False.</li>
+<li><strong>SkeletonSolve</strong><br>Enable or disable skeleton data processing action. Value can be True or False.</li>
+<li><strong>ExportTSV</strong><br>Export to TSV processing action. Value can be True or False.</li>
+<li><strong>ExportC3D</strong><br>Export to C3D processing action. Value can be True or False.</li>
+<li><strong>ExportMatlabFile</strong><br>Export to MATLAB file processing action. Value can be True or False.</li>
+<li><strong>ExportAviFile</strong><br>Enable or disable export to AVI video file processing action. Value can be True or False.</li>
+<li><strong>ExportFBX</strong><br>Enable or disable export to FBX processing action. Value can be True or False.</li>
 </ul>
-<p><strong>Camera_System</strong>  </p>
-<ul>
-<li><p><strong>Type</strong><br>Type of camera system. Available types are:</p>
-<ul>
-<li>Unknown</li>
-<li>Oqus</li>
-<li>Miqus</li>
-</ul>
-</li>
-</ul>
-<p><strong>Camera</strong><br>General settings consist of none or several Camera blocks, with following
+<p><strong>Camera</strong><br>General settings consist of none or several Camera elements, with following
 content:</p>
 <ul>
 <li><p><strong>ID</strong><br>Identity of the camera to which the settings apply.</p>
@@ -1925,7 +1843,7 @@ content:</p>
 </ul>
 </li>
 </ul>
-<h6 id="example--24">Example:</h6><pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.17&gt;
+<h5 id="example--24">Example:</h5><pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.17&gt;
     &lt;General&gt;
         &lt;Frequency&gt;240&lt;/Frequency&gt;
         &lt;Capture_Time&gt;2.5&lt;/Capture_Time&gt;
@@ -2015,16 +1933,16 @@ content:</p>
                 &lt;Height&gt;1024&lt;/Height&gt;
             &lt;/Video_Res&gt;
             &lt;Marker_FOV&gt;
-                         &lt;Left&gt;0&lt;/Left&gt;
-                         &lt;Top&gt;0&lt;/Top&gt;
-                         &lt;Right&gt;1279&lt;/Right&gt;
-                         &lt;Bottom&gt;1023&lt;/Bottom&gt;
+                &lt;Left&gt;0&lt;/Left&gt;
+                &lt;Top&gt;0&lt;/Top&gt;
+                &lt;Right&gt;1279&lt;/Right&gt;
+                &lt;Bottom&gt;1023&lt;/Bottom&gt;
             &lt;/Marker_FOV&gt;
             &lt;Video_FOV&gt;
-                         &lt;Left&gt;0&lt;/Left&gt;
-                         &lt;Top&gt;0&lt;/Top&gt;
-                         &lt;Right&gt;1279&lt;/Right&gt;
-                         &lt;Bottom&gt;1023&lt;/Bottom&gt;
+                &lt;Left&gt;0&lt;/Left&gt;
+                &lt;Top&gt;0&lt;/Top&gt;
+                &lt;Right&gt;1279&lt;/Right&gt;
+                &lt;Bottom&gt;1023&lt;/Bottom&gt;
             &lt;/Video_FOV&gt;
             &lt;Sync_Out&gt;
                 &lt;Mode&gt;Camera independent&lt;/Mode&gt;
@@ -2037,8 +1955,8 @@ content:</p>
 &lt;/QTM_Parameters_Ver_1.17&gt;
 </code></pre>
 <h4 id="3d-xml-parameters">3D XML parameters</h4><p>In response to the command GetParameters 3D the QTM RT server will reply with
-an XML data packet, containing a block called <code>The_3D</code>. See below for the format
-of this block.</p>
+an XML data packet, containing an element called <code>The_3D</code>. See below for the format
+of this element.</p>
 <p><em>Note</em>: XML element names can&rsquo;t begin with a number, that&rsquo;s why the element for
 3D parameters is called <code>The_3D</code>.</p>
 <ul>
@@ -2052,7 +1970,7 @@ Example, &quot;2011.09.23 11:23:11&quot;</p>
 </li>
 <li><p><strong>Labels</strong><br>Number of labelled trajectories (markers).</p>
 </li>
-<li><p><strong>Label</strong><br>Block containing label information.</p>
+<li><p><strong>Label</strong><br>Element containing label information.</p>
 <ul>
 <li><p>Name<br>The name of the label (trajectory).</p>
 </li>
@@ -2062,7 +1980,7 @@ represents blue.</p>
 </li>
 </ul>
 </li>
-<li><p><strong>Bones</strong><br>Block containing bone information.</p>
+<li><p><strong>Bones</strong><br>Element containing bone information.</p>
 <ul>
 <li><p>Bone From<br>The name of the label (trajectory) where the bone starts.</p>
 </li>
@@ -2074,7 +1992,7 @@ The color of the bone.</p>
 </ul>
 </li>
 </ul>
-<h6 id="example--25">Example:</h6><pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.13&gt;
+<h5 id="example--25">Example:</h5><pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.17&gt;
     &lt;The_3D&gt;
         &lt;AxisUpwards&gt;+Z&lt;/AxisUpwards&gt;
         &lt;CalibrationTime&gt;2011.09.23 11:23:11&lt;/CalibrationTime&gt;
@@ -2091,17 +2009,17 @@ The color of the bone.</p>
              &lt;Bone From=&quot;fromName&quot; To=&quot;toName&quot; Color=&quot;ffff00&quot; /&gt;
         &lt;/Bones&gt;
     &lt;/The_3D&gt;
-&lt;/QTM_Parameters_Ver_1.13&gt;
+&lt;/QTM_Parameters_Ver_1.17&gt;
 </code></pre>
 <h4 id="6d-xml-parameters">6D XML parameters</h4><p>In response to the command GetParameters 3D the QTM RT server will reply with
-an XML data packet, containing a block called <code>The_3D</code>. See below for the format
-of this block.</p>
+an XML data packet, containing an element called <code>The_3D</code>. See below for the format
+of this element.</p>
 <p><em>Note</em>: XML element names can&rsquo;t begin with a number, that&rsquo;s why the element for
 3D parameters is called The_6D.</p>
 <ul>
 <li><p><strong>Bodies</strong><br>Number of 6DOF bodies.</p>
 </li>
-<li><p><strong>Body</strong><br>Block containing 6DOF body information.</p>
+<li><p><strong>Body</strong><br>Element containing 6DOF body information.</p>
 <ul>
 <li><p>Name<br>The name of the 6DOF body.</p>
 </li>
@@ -2113,7 +2031,7 @@ The body is defined by 3 or more points.</p>
 </li>
 </ul>
 </li>
-<li><p><strong>Euler</strong><br>Block containing 6DOF Euler rotation names.</p>
+<li><p><strong>Euler</strong><br>Element containing 6DOF Euler rotation names.</p>
 <ul>
 <li><p>First
 The name of the first Euler angle.</p>
@@ -2127,7 +2045,7 @@ The name of the third Euler angle.</p>
 </ul>
 </li>
 </ul>
-<h6 id="example--26">Example:</h6><pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.13&gt;
+<h5 id="example--26">Example:</h5><pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.17&gt;
     &lt;The_6D&gt;
         &lt;Bodies&gt;1&lt;/Bodies&gt;
         &lt;Body&gt;
@@ -2155,13 +2073,13 @@ The name of the third Euler angle.</p>
             &lt;Third&gt;Yaw&lt;/Third&gt;
         &lt;/Euler&gt;
     &lt;/The_3D&gt;
-&lt;/QTM_Parameters_Ver_1.13&gt;
+&lt;/QTM_Parameters_Ver_1.17&gt;
 </code></pre>
 <h4 id="gaze-vector-xml-parameters">Gaze vector XML parameters</h4><p>In response to the command GetParameters GazeVector the QTM RT server will
-reply with an XML data packet, containing a block called Gaze_Vector. See below
-for the format of this block.</p>
+reply with an XML data packet, containing an element called Gaze_Vector. See below
+for the format of this element.</p>
 <ul>
-<li><p><strong>Vector</strong><br>Block containing gaze vector information.</p>
+<li><p><strong>Vector</strong><br>Element containing gaze vector information.</p>
 <ul>
 <li><p>Name<br>The name of the gaze vector body.</p>
 </li>
@@ -2170,7 +2088,7 @@ for the format of this block.</p>
 </ul>
 </li>
 </ul>
-<h6 id="example--27">Example:</h6><pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.17&gt;
+<h5 id="example--27">Example:</h5><pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.17&gt;
     &lt;Gaze_Vector&gt;
         &lt;Vector&gt;
             &lt;Name&gt;Gaze 1 (L)&lt;/Name&gt;
@@ -2188,11 +2106,11 @@ for the format of this block.</p>
 &lt;/QTM_Parameters_Ver_1.17&gt;
 </code></pre>
 <h4 id="analog-xml-parameters">Analog XML parameters</h4><p>In response to the command GetParameters Analog the QTM RT server will reply
-with XML data packet, containing a block called Analog. See below for the
-format of this block.</p>
+with XML data packet, containing an element called Analog. See below for the
+format of this element.</p>
 <ul>
-<li><p><strong>Device</strong><br>Block containing analog device information.</p>
-</li>
+<li><p><strong>Device</strong><br>Element containing analog device information.</p>
+<ul>
 <li><p><strong>Device_ID</strong><br>Unique ID of the analog device. An integer value starting with 1.</p>
 </li>
 <li><p><strong>Device_Name</strong><br>Analog device name.</p>
@@ -2208,7 +2126,9 @@ format of this block.</p>
 <li><p><strong>Label</strong><br>Channel name. There shall be as many labels as there are channels.</p>
 </li>
 </ul>
-<h6 id="example--28">Example:</h6><pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.13&gt;
+</li>
+</ul>
+<h5 id="example--28">Example:</h5><pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.17&gt;
     &lt;Analog&gt;
         &lt;Device&gt;
             &lt;Device_ID&gt;1&lt;/Device_ID&gt;
@@ -2237,24 +2157,24 @@ format of this block.</p>
             &lt;/Channel&gt;
         &lt;/Device&gt;
     &lt;/Analog&gt;
-&lt;/QTM_Parameters_Ver_1.13&gt;   
+&lt;/QTM_Parameters_Ver_1.17&gt;   
 </code></pre>
 <h4 id="force-xml-parameters">Force XML parameters</h4><p>In response to the command <code>GetParameters Force</code> the QTM RT server will reply
-with XML data packet, containing a block called Force. See below for the format
-of this block.</p>
+with XML data packet, containing an element called Force. See below for the format
+of this element.</p>
 <ul>
-<li><p><strong>Unit_Length</strong><br>Length unit used in the Force XML block.</p>
+<li><p><strong>Unit_Length</strong><br>Length unit used in the Force XML element.</p>
 </li>
-<li><p><strong>Unit_Force</strong><br>Force unit used in the Force XML block.</p>
+<li><p><strong>Unit_Force</strong><br>Force unit used in the Force XML element.</p>
 </li>
-<li><p><strong>Plate</strong><br>Block containing force plate information.</p>
-</li>
+<li><p><strong>Plate</strong><br>Element containing force plate information.</p>
+<ul>
 <li><p><strong>Plate_ID</strong><br>Unique ID of the force plate. An integer value starting with 1.</p>
 </li>
 <li><p><strong>Analog_Device_ID</strong><br>ID of the analog device connected to the force plate. If the ID is 0, there
 is no analog device associated with this force plate.</p>
 </li>
-<li><p><strong>Frequency</strong><br>Measurement frequence of the analog device connected to the force plate.</p>
+<li><p><strong>Frequency</strong><br>Measurement frequency of the analog device connected to the force plate.</p>
 </li>
 <li><p><strong>Type</strong><br>Force plate type. Supported force plates:
 AMTI, AMTI 8 Channels, Bertec, Kistler and QMH.</p>
@@ -2265,18 +2185,20 @@ AMTI, AMTI 8 Channels, Bertec, Kistler and QMH.</p>
 </li>
 <li><p><strong>Width</strong><br>Force plate width.</p>
 </li>
-<li><p><strong>Location</strong><br>Block containing four blocks with the corners of the force plate. Corner1,
+<li><p><strong>Location</strong><br>Element containing four elements with the corners of the force plate. Corner1,
 Corner2, Corner3 and Corner4. Each corner has an X, Y and Z coordinate value.</p>
 </li>
-<li><p><strong>Origin</strong><br>Block containing X, Y and Z coordinates for the force plate origin.</p>
+<li><p><strong>Origin</strong><br>Element containing X, Y and Z coordinates for the force plate origin.</p>
 </li>
-<li><p><strong>Channels</strong><br>Block containing blocks called Channel. One for each analog channel connected
+<li><p><strong>Channels</strong><br>Element containing elements called Channel. One for each analog channel connected
 to the force plate. Each Channel contains Channel_No and ConversionFactor.</p>
 </li>
-<li><p><strong>Calibration_Matrix</strong><br>Block containing a 6x6, 6x8 or 12x12 calibration matrix for the force plate.</p>
+<li><p><strong>Calibration_Matrix</strong><br>Element containing a 6x6, 6x8 or 12x12 calibration matrix for the force plate.</p>
 </li>
 </ul>
-<h6 id="example--29">Example:</h6><pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.13&gt;    
+<h5 id="example--29">Example:</h5></li>
+</ul>
+<pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.17&gt;    
     &lt;Force&gt;
         &lt;Unit_Length&gt;mm&lt;/Unit_Length&gt;
         &lt;Unit_Force &gt;N&lt;/Unit_Force&gt;
@@ -2415,16 +2337,16 @@ to the force plate. Each Channel contains Channel_No and ConversionFactor.</p>
             &lt;/Calibration_Matrix&gt;
         &lt;/Plate&gt;
     &lt;/Force&gt;
-&lt;/QTM_Parameters_Ver_1.13&gt;   
+&lt;/QTM_Parameters_Ver_1.17&gt;   
 </code></pre>
 <p>The parameters for force plates follow roughly the standard of the <a href="http://www.c3d.org">C3D file
 format</a>. </p>
 <h4 id="image-xml-parameters">Image XML parameters</h4><p>In response to the command GetParameters Image the QTM RT server will reply
-with XML data packet, containing a block called Image. See below for the format
-of this block.</p>
+with XML data packet, containing an element called Image. See below for the format
+of this element.</p>
 <ul>
-<li><p><strong>Camera</strong><br>The Image block contains one or several Camera blocks. </p>
-</li>
+<li><p><strong>Camera</strong><br>The Image element contains one or several Camera elements. </p>
+<ul>
 <li><p><strong>ID</strong><br>Camera ID for the camera to which the settings apply.</p>
 </li>
 <li><p><strong>Enabled</strong><br>Turn on or of Image streaming from the selected camera.</p>
@@ -2458,7 +2380,9 @@ float.  </p>
 <p>0.0 = Original image top edge.<br>1.0 = Original image bottom edge <strong>(Default)</strong>.</p>
 </li>
 </ul>
-<h6 id="example--30">Example:</h6><pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.13&gt;
+</li>
+</ul>
+<h5 id="example--30">Example:</h5><pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.17&gt;
     &lt;Image&gt;
         &lt;Camera&gt;
             &lt;ID&gt;1&lt;/ID&gt;
@@ -2472,9 +2396,133 @@ float.  </p>
             &lt;Bottom_Crop&gt;1.0&lt;/Bottom_Crop&gt;
         &lt;/Camera&gt;
     &lt;/Image&gt;
-&lt;/QTM_Parameters_Ver_1.13&gt;   
+&lt;/QTM_Parameters_Ver_1.17&gt;   
 </code></pre>
-<h3 id="data-packet">Data packet</h3><p>Each data frame is made up of one or more components, as specified in the
+<h4 id="skeleton-xml-parameters">Skeleton XML parameters</h4><p>In response to the command GetParameters Skeleton the QTM RT server will reply
+with XML data packet, containing an element called Skeletons. See below for the format
+of this element.</p>
+<ul>
+<li><p><strong>Skeleton</strong>
+  Element containing skeleton information.</p>
+<ul>
+<li><strong>Name</strong>
+Attribute with the name of the skeleton.</li>
+</ul>
+</li>
+<li><p><strong>Segment</strong>
+Element containing skeleton Segment information.</p>
+<ul>
+<li><strong>Name</strong>
+Attribute with the name of the skeleton segment.</li>
+</ul>
+<ul>
+<li><p><strong>ID</strong></p>
+<p>   Attribute with the id of the skeleton segment.</p>
+</li>
+<li><p><strong>Parent_ID</strong></p>
+<p>Attribute with the id of the parent skeleton segment. Parent_ID is omitted if this is the skeleton root segment.</p>
+</li>
+<li><p><strong>Position</strong></p>
+<p>Element containing attributes (x, y, z) with skeleton T-pose segment position.</p>
+</li>
+<li><p><strong>Rotation</strong></p>
+<p>Element containing attributes (x, y, z, w) with skeleton T-pose segment rotation. The segment rotation quaternion is in global coordinates.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="example--31">Example:</h5><pre><code class="lang-xml">&lt;QTM_Parameters_Ver_1.17&gt;
+  &lt;Skeletons&gt;
+    &lt;Skeleton Name=&quot;VF&quot;&gt;
+      &lt;Segment Name=&quot;Hips&quot; ID=&quot;752&quot;&gt;
+        &lt;Position Z=&quot;995.815237&quot; Y=&quot;329.611699&quot; X=&quot;320.217367&quot;/&gt;
+        &lt;Rotation Z=&quot;0.999621&quot; Y=&quot;0.009377&quot; X=&quot;-0.025896&quot; W=&quot;-0.000416&quot;/&gt;
+      &lt;/Segment&gt;
+      &lt;Segment Name=&quot;Waist&quot; ID=&quot;753&quot; Parent_ID=&quot;752&quot;&gt;
+        &lt;Position Z=&quot;1120.711096&quot; Y=&quot;329.884179&quot; X=&quot;314.389653&quot;/&gt;
+        &lt;Rotation Z=&quot;0.999505&quot; Y=&quot;0.009760&quot; X=&quot;-0.025754&quot; W=&quot;-0.015228&quot;/&gt;
+      &lt;/Segment&gt;
+      &lt;Segment Name=&quot;Chest&quot; ID=&quot;754&quot; Parent_ID=&quot;753&quot;&gt;
+        &lt;Position Z=&quot;1236.244655&quot; Y=&quot;321.162011&quot; X=&quot;308.735878&quot;/&gt;
+        &lt;Rotation Z=&quot;0.999505&quot; Y=&quot;0.009760&quot; X=&quot;-0.025754&quot; W=&quot;-0.015228&quot;/&gt;
+      &lt;/Segment&gt;
+      &lt;Segment Name=&quot;LeftCollar&quot; ID=&quot;755&quot; Parent_ID=&quot;754&quot;&gt;
+        &lt;Position Z=&quot;1493.044664&quot; Y=&quot;327.801479&quot; X=&quot;356.280229&quot;/&gt;
+        &lt;Rotation Z=&quot;0.999928&quot; Y=&quot;0.000000&quot; X=&quot;0.000000&quot; W=&quot;0.012015&quot;/&gt;
+      &lt;/Segment&gt;
+      &lt;Segment Name=&quot;LeftShoulder&quot; ID=&quot;756&quot; Parent_ID=&quot;755&quot;&gt;
+        &lt;Position Z=&quot;1514.307091&quot; Y=&quot;284.780264&quot; X=&quot;489.585565&quot;/&gt;
+        &lt;Rotation Z=&quot;0.995984&quot; Y=&quot;-0.029643&quot; X=&quot;-0.014262&quot; W=&quot;-0.083273&quot;/&gt;
+      &lt;/Segment&gt;
+      &lt;Segment Name=&quot;LeftElbow&quot; ID=&quot;757&quot; Parent_ID=&quot;756&quot;&gt;
+        &lt;Position Z=&quot;1523.052170&quot; Y=&quot;328.060796&quot; X=&quot;748.096725&quot;/&gt;
+        &lt;Rotation Z=&quot;0.994562&quot; Y=&quot;-0.031872&quot; X=&quot;-0.002571&quot; W=&quot;0.099121&quot;/&gt;
+      &lt;/Segment&gt;
+      &lt;Segment Name=&quot;LeftWrist&quot; ID=&quot;758&quot; Parent_ID=&quot;757&quot;&gt;
+        &lt;Position Z=&quot;1522.740195&quot; Y=&quot;276.974975&quot; X=&quot;1001.894338&quot;/&gt;
+        &lt;Rotation Z=&quot;0.997924&quot; Y=&quot;-0.034750&quot; X=&quot;0.035296&quot; W=&quot;0.041160&quot;/&gt;
+      &lt;/Segment&gt;
+      &lt;Segment Name=&quot;RightCollar&quot; ID=&quot;759&quot; Parent_ID=&quot;754&quot;&gt;
+        &lt;Position Z=&quot;1486.819687&quot; Y=&quot;324.038102&quot; X=&quot;234.880113&quot;/&gt;
+        &lt;Rotation Z=&quot;0.999928&quot; Y=&quot;0.000000&quot; X=&quot;0.000000&quot; W=&quot;0.012015&quot;/&gt;
+      &lt;/Segment&gt;
+      &lt;Segment Name=&quot;RightShoulder&quot; ID=&quot;760&quot; Parent_ID=&quot;759&quot;&gt;
+        &lt;Position Z=&quot;1497.181507&quot; Y=&quot;293.535590&quot; X=&quot;125.319907&quot;/&gt;
+        &lt;Rotation Z=&quot;0.995513&quot; Y=&quot;-0.055653&quot; X=&quot;0.008038&quot; W=&quot;0.076104&quot;/&gt;
+      &lt;/Segment&gt;
+      &lt;Segment Name=&quot;RightElbow&quot; ID=&quot;761&quot; Parent_ID=&quot;760&quot;&gt;
+        &lt;Position Z=&quot;1503.754535&quot; Y=&quot;333.988627&quot; X=&quot;-140.093273&quot;/&gt;
+        &lt;Rotation Z=&quot;0.992461&quot; Y=&quot;-0.058930&quot; X=&quot;0.024634&quot; W=&quot;-0.104606&quot;/&gt;
+      &lt;/Segment&gt;
+      &lt;Segment Name=&quot;RightWrist&quot; ID=&quot;762&quot; Parent_ID=&quot;761&quot;&gt;
+        &lt;Position Z=&quot;1513.410129&quot; Y=&quot;278.395829&quot; X=&quot;-398.045301&quot;/&gt;
+        &lt;Rotation Z=&quot;0.995755&quot; Y=&quot;-0.058416&quot; X=&quot;0.053445&quot; W=&quot;-0.046939&quot;/&gt;
+      &lt;/Segment&gt;
+      &lt;Segment Name=&quot;Neck&quot; ID=&quot;763&quot; Parent_ID=&quot;754&quot;&gt;
+        &lt;Position Z=&quot;1536.720327&quot; Y=&quot;294.130455&quot; X=&quot;294.166499&quot;/&gt;
+        &lt;Rotation Z=&quot;0.999505&quot; Y=&quot;0.009760&quot; X=&quot;-0.025754&quot; W=&quot;-0.015228&quot;/&gt;
+      &lt;/Segment&gt;
+      &lt;Segment Name=&quot;Head&quot; ID=&quot;764&quot; Parent_ID=&quot;763&quot;&gt;
+        &lt;Position Z=&quot;1628.128917&quot; Y=&quot;221.865256&quot; X=&quot;291.636576&quot;/&gt;
+        &lt;Rotation Z=&quot;0.996633&quot; Y=&quot;-0.003364&quot; X=&quot;-0.056558&quot; W=&quot;-0.059272&quot;/&gt;
+      &lt;/Segment&gt;
+      &lt;Segment Name=&quot;LeftHip&quot; ID=&quot;765&quot; Parent_ID=&quot;752&quot;&gt;
+        &lt;Position Z=&quot;977.864429&quot; Y=&quot;280.716111&quot; X=&quot;412.383152&quot;/&gt;
+        &lt;Rotation Z=&quot;0.999829&quot; Y=&quot;-0.002126&quot; X=&quot;-0.015484&quot; W=&quot;-0.009857&quot;/&gt;
+      &lt;/Segment&gt;
+      &lt;Segment Name=&quot;LeftKnee&quot; ID=&quot;766&quot; Parent_ID=&quot;765&quot;&gt;
+        &lt;Position Z=&quot;546.583393&quot; Y=&quot;286.447338&quot; X=&quot;425.650852&quot;/&gt;
+        &lt;Rotation Z=&quot;0.998823&quot; Y=&quot;-0.044461&quot; X=&quot;0.002065&quot; W=&quot;-0.019262&quot;/&gt;
+      &lt;/Segment&gt;
+      &lt;Segment Name=&quot;LeftAnkle&quot; ID=&quot;767&quot; Parent_ID=&quot;766&quot;&gt;
+        &lt;Position Z=&quot;81.207482&quot; Y=&quot;352.588341&quot; X=&quot;421.968425&quot;/&gt;
+        &lt;Rotation Z=&quot;0.999826&quot; Y=&quot;0.000000&quot; X=&quot;0.000000&quot; W=&quot;-0.018649&quot;/&gt;
+      &lt;/Segment&gt;
+      &lt;Segment Name=&quot;LeftFoot&quot; ID=&quot;768&quot; Parent_ID=&quot;767&quot;&gt;
+        &lt;Position Z=&quot;13.976753&quot; Y=&quot;234.477841&quot; X=&quot;426.376048&quot;/&gt;
+        &lt;Rotation Z=&quot;0.999826&quot; Y=&quot;0.000000&quot; X=&quot;0.000000&quot; W=&quot;-0.018649&quot;/&gt;
+      &lt;/Segment&gt;
+      &lt;Segment Name=&quot;RightHip&quot; ID=&quot;769&quot; Parent_ID=&quot;752&quot;&gt;
+        &lt;Position Z=&quot;968.438415&quot; Y=&quot;280.476344&quot; X=&quot;230.530308&quot;/&gt;
+        &lt;Rotation Z=&quot;0.998228&quot; Y=&quot;-0.006385&quot; X=&quot;0.036157&quot; W=&quot;0.046821&quot;/&gt;
+      &lt;/Segment&gt;
+      &lt;Segment Name=&quot;RightKnee&quot; ID=&quot;770&quot; Parent_ID=&quot;769&quot;&gt;
+        &lt;Position Z=&quot;540.298440&quot; Y=&quot;291.132626&quot; X=&quot;200.147449&quot;/&gt;
+        &lt;Rotation Z=&quot;0.996414&quot; Y=&quot;-0.047890&quot; X=&quot;-0.007239&quot; W=&quot;0.069380&quot;/&gt;
+      &lt;/Segment&gt;
+      &lt;Segment Name=&quot;RightAnkle&quot; ID=&quot;771&quot; Parent_ID=&quot;770&quot;&gt;
+        &lt;Position Z=&quot;83.193746&quot; Y=&quot;358.570246&quot; X=&quot;213.201972&quot;/&gt;
+        &lt;Rotation Z=&quot;0.997723&quot; Y=&quot;0.000000&quot; X=&quot;0.000000&quot; W=&quot;0.067438&quot;/&gt;
+      &lt;/Segment&gt;
+      &lt;Segment Name=&quot;RightFoot&quot; ID=&quot;772&quot; Parent_ID=&quot;771&quot;&gt;
+        &lt;Position Z=&quot;17.059501&quot; Y=&quot;243.522260&quot; X=&quot;197.578022&quot;/&gt;
+        &lt;Rotation Z=&quot;0.997723&quot; Y=&quot;0.000000&quot; X=&quot;0.000000&quot; W=&quot;0.067438&quot;/&gt;
+      &lt;/Segment&gt;
+    &lt;/Skeleton&gt;
+  &lt;/Skeletons&gt;
+&lt;/QTM_Parameters_Ver_1.17&gt;   
+</code></pre>
+<h4 id="data-packet">Data packet</h4><p>Each data frame is made up of one or more components, as specified in the
 commands GetCurrentFrame or StreamFrames. The data frame contains a Count field
 that specifies the number of components in the frame. Every component starts
 with a component header – identical (in layout) to the packet header. </p>
@@ -2552,7 +2600,7 @@ with a component header – identical (in layout) to the packet header. </p>
 </tr>
 </tbody>
 </table>
-<h4 id="data-component-types">Data component types</h4><p>The <code>Component Type</code> field of the data component header is a number that should
+<h5 id="data-component-types">Data component types</h5><p>The <code>Component Type</code> field of the data component header is a number that should
 be interpreted according to the table below. These are the data frame component
 types that are defined in the protocol so far.</p>
 <table>
@@ -2649,9 +2697,14 @@ types that are defined in the protocol so far.</p>
 <td>Timecode</td>
 <td>IRIG or SMPTE timecode</td>
 </tr>
+<tr>
+<td>18</td>
+<td>Skeleton</td>
+<td>Skeleton segment information</td>
+</tr>
 </tbody>
 </table>
-<h4 id="2d-and-2d-linearized-component">2D and 2D linearized component</h4><p>The 2D and 2D linearized data frame format are the same. The only difference is
+<h5 id="2d-and-2d-linearized-component">2D and 2D linearized component</h5><p>The 2D and 2D linearized data frame format are the same. The only difference is
 that the coordinates are linearized in 2D linearized.</p>
 <table>
 <thead>
@@ -2763,7 +2816,7 @@ that the coordinates are linearized in 2D linearized.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="3d-component">3D component</h4><p>The markers of the 3D data always follow the labels of the 3D parameters. The
+<h5 id="3d-component">3D component</h5><p>The markers of the 3D data always follow the labels of the 3D parameters. The
 same number of markers are sent each frame, and in the same order as the labels
 of the 3D parameters. If a marker is missing from the frame, its X, Y and Z
 coordinates will have all their 32 bits set - this signifies a negative quiet
@@ -2841,7 +2894,7 @@ Not-A-Number according to the IEEE 754 floating point standard. </p>
 </tr>
 </tbody>
 </table>
-<h4 id="3d-with-residuals-component">3D with residuals component</h4><p>The markers of the 3D data always follow the labels of the 3D parameters. The
+<h5 id="3d-with-residuals-component">3D with residuals component</h5><p>The markers of the 3D data always follow the labels of the 3D parameters. The
 same number of markers are sent each frame, and in the same order as the labels
 of the 3D parameters.  </p>
 <p>If a marker is missing from the frame, its X, Y and Z
@@ -2928,7 +2981,7 @@ point.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="3d-no-labels-component">3D no labels component</h4><table>
+<h5 id="3d-no-labels-component">3D no labels component</h5><table>
 <thead>
 <tr>
 <th>Bytes</th>
@@ -3007,7 +3060,7 @@ point.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="3d-no-labels-with-residuals-component">3D no labels with residuals component</h4><table>
+<h5 id="3d-no-labels-with-residuals-component">3D no labels with residuals component</h5><table>
 <thead>
 <tr>
 <th>Bytes</th>
@@ -3092,7 +3145,7 @@ point.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="6dof-component">6DOF component</h4><table>
+<h5 id="6dof-component">6DOF component</h5><table>
 <thead>
 <tr>
 <th>Bytes</th>
@@ -3171,7 +3224,7 @@ point.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="6dof-with-residuals-component">6DOF with residuals component</h4><table>
+<h5 id="6dof-with-residuals-component">6DOF with residuals component</h5><table>
 <thead>
 <tr>
 <th>Bytes</th>
@@ -3256,7 +3309,7 @@ point.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="6dof-euler-component">6DOF Euler component</h4><table>
+<h5 id="6dof-euler-component">6DOF Euler component</h5><table>
 <thead>
 <tr>
 <th>Bytes</th>
@@ -3288,13 +3341,13 @@ point.</p>
 <td>2</td>
 <td>2D Drop Rate</td>
 <td>16-bit integer</td>
-<td>Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.</td>
+<td>Number of individual 2D frames that have been lost in the communication between QTM and the cameras. The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.</td>
 </tr>
 <tr>
 <td>2</td>
 <td>2D Out Of Sync Rate</td>
 <td>16-bit integer</td>
-<td>Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.</td>
+<td>Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames. The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.</td>
 </tr>
 </tbody>
 </table>
@@ -3331,23 +3384,23 @@ point.</p>
 <td>4</td>
 <td>Angle 1</td>
 <td>32-bit float</td>
-<td>First Euler angle, in degrees, as defined on the Euler tab in QTM&#39;s workspace options.</td>
+<td>First Euler angle, in degrees, as defined on the Euler tab<br />in QTM&#39;s workspace options.</td>
 </tr>
 <tr>
 <td>4</td>
 <td>Angle 2</td>
 <td>32-bit float</td>
-<td>Second Euler angle.</td>
+<td>Second Euler angle, in degrees, as defined on the Euler tab<br />in QTM&#39;s workspace options.</td>
 </tr>
 <tr>
 <td>4</td>
 <td>Angle 3</td>
 <td>32-bit float</td>
-<td>Third Euler angle.</td>
+<td>Third Euler angle, in degrees, as defined on the Euler tab<br />in QTM&#39;s workspace options.</td>
 </tr>
 </tbody>
 </table>
-<h4 id="6dof-euler-with-residuals-component">6DOF Euler with residuals component</h4><table>
+<h5 id="6dof-euler-with-residuals-component">6DOF Euler with residuals component</h5><table>
 <thead>
 <tr>
 <th>Bytes</th>
@@ -3444,7 +3497,7 @@ point.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="analog-component">Analog component</h4><table>
+<h5 id="analog-component">Analog component</h5><table>
 <thead>
 <tr>
 <th>Bytes</th>
@@ -3517,7 +3570,7 @@ point.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="analog-single-component">Analog single component</h4><table>
+<h5 id="analog-single-component">Analog single component</h5><table>
 <thead>
 <tr>
 <th>Bytes</th>
@@ -3579,7 +3632,7 @@ point.</p>
 </tbody>
 </table>
 <p>If no analog data is available, Analog Data will contain IEEE NaN (Not a number) float values.</p>
-<h4 id="force-component">Force component</h4><table>
+<h5 id="force-component">Force component</h5><table>
 <thead>
 <tr>
 <th>Bytes</th>
@@ -3641,12 +3694,12 @@ point.</p>
 <tr>
 <td>36 * Force Count</td>
 <td>Force Data</td>
-<td>32-bit float&#91;&#93;</td>
+<td>32-bit float</td>
 <td>Each force sample consists of 9 float values: <br><br>X coordinate of the force <br>Y coordinate of the force <br>Z coordinate of the force <br>X coordinate of the moment <br>Y coordinate of the moment <br>Z coordinate of the moment <br>X coordinate of the force application point <br>Y coordinate of the force application point <br>Z coordinate of the force application point</td>
 </tr>
 </tbody>
 </table>
-<h4 id="force-single-component">Force single component</h4><table>
+<h5 id="force-single-component">Force single component</h5><table>
 <thead>
 <tr>
 <th>Bytes</th>
@@ -3702,7 +3755,7 @@ point.</p>
 </tbody>
 </table>
 <p>If no force data is available, Force Data will contain IEEE NaN (Not a number) float values.</p>
-<h4 id="image-component">Image component</h4><table>
+<h5 id="image-component">Image component</h5><table>
 <thead>
 <tr>
 <th>Bytes</th>
@@ -3805,7 +3858,7 @@ point.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="gaze-vector">Gaze vector</h4><table>
+<h5 id="gaze-vector">Gaze vector</h5><table>
 <thead>
 <tr>
 <th>Bytes</th>
@@ -3819,7 +3872,7 @@ point.</p>
 <td>4</td>
 <td>Component Size</td>
 <td>32-bit integer</td>
-<td>The size of the component including the header (Component Size, Component Type and Camera Count).</td>
+<td>The size of the component including the header (Component Size, Component Type and Gaze Vector Count).</td>
 </tr>
 <tr>
 <td>4</td>
@@ -3842,31 +3895,31 @@ point.</p>
 <th>Bytes</th>
 <th>Name</th>
 <th>Type</th>
-<th>Description</th>
+<th>Description                                                  </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>4</td>
+<td> 4</td>
 <td>Sample Count</td>
 <td>32-bit integer</td>
-<td>The size of the component including the header (Component Size,<br>Component Type and Camera Count).</td>
+<td>The size of the component including the header (Component Size,<br>Component Type and Camera Count). </td>
 </tr>
 <tr>
-<td>0 (Sample Count=0)<br>4 (Sample Count&gt;0)</td>
+<td> 0 (Sample Count=0)<br>4 (Sample Count&gt;0)</td>
 <td>Sample Number</td>
 <td>32-bit float</td>
-<td>Value = 16. See <a href="#data-component-types">Data component types</a>.</td>
+<td>Value = 16. See <a href="#data-component-types">Data component types</a>. </td>
 </tr>
 <tr>
-<td>24 * Sample Count</td>
+<td> 24 * Sample Count</td>
 <td>Gaze Vector data</td>
-<td>32-bit float[]</td>
-<td>X component of the vector.<br>Y component of the vector.<br>Z component of the vector.<br>X coordinate of the vector.<br>Y coordinate of the vector.<br>Z coordinate of the vector.</td>
+<td>32-bit float</td>
+<td>X component of the vector.<br>Y component of the vector.<br>Z component of the vector.<br>X coordinate of the vector.<br>Y coordinate of the vector.<br>Z coordinate of the vector. </td>
 </tr>
 </tbody>
 </table>
-<h4 id="timecode">Timecode</h4><table>
+<h5 id="timecode">Timecode</h5><table>
 <thead>
 <tr>
 <th>Bytes</th>
@@ -3880,7 +3933,7 @@ point.</p>
 <td>4</td>
 <td>Component Size</td>
 <td>32-bit integer</td>
-<td>The size of the component including the header (Component Size, Component Type and Camera Count).</td>
+<td>The size of the component including the header (Component Size, Component Type and Timecode Count).</td>
 </tr>
 <tr>
 <td>4</td>
@@ -3927,6 +3980,118 @@ point.</p>
 </tr>
 </tbody>
 </table>
+<h5 id="skeleton">Skeleton</h5><table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Component Size</td>
+<td>32-bit integer</td>
+<td>The size of the component including the header (Component Size, Component Type and Skeleton Count).</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Component Type</td>
+<td>32-bit integer</td>
+<td>Value = 18. See <a href="#data-component-types">Data component types</a>.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Skeleton Count</td>
+<td>32-bit integer</td>
+<td>Number of skeletonss.</td>
+</tr>
+</tbody>
+</table>
+<p>Repeated <em>Skeleton Count</em> times:</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Segment Count</td>
+<td>32-bit integer</td>
+<td>Number of segments in skeleton. </td>
+</tr>
+</tbody>
+</table>
+<p>Repeated <em>Segment Count</em> times (32 * Segment Count Bytes):</p>
+<table>
+<thead>
+<tr>
+<th>Bytes</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Segment ID</td>
+<td>32-bit integer</td>
+<td>ID of the segments in skeleton.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Position X</td>
+<td>32-bit float</td>
+<td>Segment position x coordinate.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Position Y</td>
+<td>32-bit float</td>
+<td>Segment position y coordinate.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Position Z</td>
+<td>32-bit float</td>
+<td>Segment position z coordinate.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Rotation X</td>
+<td>32-bit float</td>
+<td>Segment rotation quaternion x.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Rotation Y</td>
+<td>32-bit float</td>
+<td>Segment rotation quaternion y.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Rotation Z</td>
+<td>32-bit float</td>
+<td>Segment rotation quaternion z.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Rotation W</td>
+<td>32-bit float</td>
+<td>Segment rotation quaternion w.</td>
+</tr>
+</tbody>
+</table>
+<p>If a skeleton is not visible in a frame, the segment count will be set to 0.</p>
+<p>The rotation quaternion is sent in local coordinates. It can be changed to global coordinates by selecting skeleton:global as data type.</p>
 <h3 id="no-more-data-packet">No More Data packet</h3><p>This type of packet is sent when QTM is out of data to send because a measurement has stopped or has not even started.</p>
 <table>
 <thead>
@@ -4175,7 +4340,7 @@ QTM responds with a discover response packet, see <a href="#discover-response-pa
 <p>Size and type is always sent as little endian 32 bit integers.</p>
 <p>The Response Port is the UDP port number to which QTM sends a discover response
 message. The response port is big endian.</p>
-<h3 id="discover-response-packet">Discover response packet</h3><p>The discover response packet is a special command message of type 1. The
+<h4 id="discover-response-packet">Discover response packet</h4><p>The discover response packet is a special command message of type 1. The
 message contains a null terminated string, followed by the server&#39;s base port
 number. </p>
 <table>
@@ -4251,11 +4416,11 @@ Port argument is the UDP port on which the client listens for server responses. 
 protocol currently used.</p>
 <p>It is not possible to set the version when connected via the OSC protocol. You
 can only retrieve current version.</p>
-<h6 id="example--31">Example:</h6><pre><code class="lang-coffeescript">Command:    Version
-Response:   Version is 1.12
+<h6 id="example--32">Example:</h6><pre><code class="lang-coffeescript">Command:    Version
+Response:   Version is 1.17
 </code></pre>
 <h4 id="qtmversion-osc-">QTMVersion (OSC)</h4><p>Returns the QTM version on which the RT server is running.</p>
-<h6 id="example--32">Example:</h6><pre><code class="lang-coffeescript">Command:    QTMVersion
+<h6 id="example--33">Example:</h6><pre><code class="lang-coffeescript">Command:    QTMVersion
 Response:   QTM Version is 2.3 (build 464)
 </code></pre>
 <h4 id="getstate-osc-">GetState (OSC)</h4><p>This command makes the RT server send current QTM state as an event data
@@ -4263,18 +4428,21 @@ packet. The event packet will only be sent to the client that sent the GetState
 command. If the client is connected via Telnet, then the response will be sent
 as an ASCII string. GetState will not show the Camera Settings Changed, QTM
 Shutting Down and Capture Saved events.</p>
-<h6 id="example--33">Example:</h6><pre><code class="lang-coffeescript">Command:    GetState
+<h6 id="example--34">Example:</h6><pre><code class="lang-coffeescript">Command:    GetState
 Response:   Event data packet with last QTM event.
-Response    (Telnet): Connected                      or
-            Connection Closed                        or
-            Capture Started                          or
-            Capture Stopped                          or
-            Capture Fetching Finished                or
-            Calibration Started                      or
-            Calibration Stopped                      or
-            RT From File Started                     or
-            RT From File Stopped                     or
-            Waiting For Trigger
+
+(Telnet)
+Response:   Connected                 or
+            Connection Closed         or
+            Capture Started           or
+            Capture Stopped           or
+            Capture Fetching Finished or
+            Calibration Started       or
+            Calibration Stopped       or
+            RT From File Started      or
+            RT From File Stopped      or
+            Waiting For Trigger       or
+            Capture Saved
 </code></pre>
 <h4 id="checklicense-osc-">CheckLicense (OSC)</h4><p>CheckLicense LicenseCode</p>
 <p>LicenseCode: A string containing the license code string that corresponds to
@@ -4287,7 +4455,7 @@ LicenseCode code string sent by the RT client with this command to verify that
 the license key for the RT client is valid. </p>
 <p>The QTM RT server will respond with License pass or License fail, depending on
 whether a valid license key has been entered into QTM. </p>
-<h6 id="example--34">Example:</h6><pre><code class="lang-coffeescript">Command:    CheckLicense dh4xx56krnj8KR3o8yk1nfr
+<h6 id="example--35">Example:</h6><pre><code class="lang-coffeescript">Command:    CheckLicense dh4xx56krnj8KR3o8yk1nfr
 Response:   License pass                         or
             License fail
 </code></pre>
@@ -4296,17 +4464,19 @@ Response:   License pass                         or
 </blockquote>
 <p>This command retrieves the settings for the requested component(s) of QTM in
 XML format. The XML parameters are described <a href="#xml-paramters">here</a>.</p>
-<h6 id="example--35">Example:</h6><pre><code class="lang-coffeescript">Command:    GetParameters 3D Force
+<h6 id="example--36">Example:</h6><pre><code class="lang-coffeescript">Command:    GetParameters 3D Force
 Response:   XML string containing requested parameters
 </code></pre>
 <h4 id="getcurrentframe-osc-">GetCurrentFrame (OSC)</h4><blockquote>
-<p><strong><code>GetCurrentFrame</code></strong> <code>All |
-  ([2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes]
-  [Analog] [AnalogSingle] [Force] [ForceSingle] [6D]
-  [6DRes] [6DEuler] [6DEulerRes])</code></p>
+<p><strong><code>GetCurrentFrame</code></strong> <code>[2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes]
+  [Analog[:channels]] [AnalogSingle[:channels]] [Force] [ForceSingle] [6D]
+  [6DRes] [6DEuler] [6DEulerRes] [GazeVector] [Timecode] [Skeleton[:global]]</code></p>
 </blockquote>
-<p>This command returns the current frame of real-time data from the server. 
-Points worth noting are:</p>
+<p>This command returns the current frame of real-time data from the server. </p>
+<p>The optional channels for Analog and AnalogSingle, is a string containing a list of channels to read from the
+server. The channels are separated by a ‘,’ and can also contain ranges defined by a ‘-’. Example: 1,2,3-6,16.</p>
+<p>By default, skeleton data is in local coordinates. Skeleton:global will change the skeleton data to global coordinates.</p>
+<p>Points worth noting are:</p>
 <ul>
 <li><p>The frame is composed of the parts specified in the parameters to the
 command. The exact layout of the data frame in different situations is
@@ -4330,18 +4500,21 @@ server waits until the next frame of data is available before sending it to
 the client.</p>
 </li>
 </ul>
-<h6 id="example--36">Example:</h6><pre><code class="lang-coffeescript">Command:    GetCurrentFrame 3D Analog
+<h6 id="example--37">Example:</h6><pre><code class="lang-coffeescript">Command:    GetCurrentFrame 3D Analog
 Response:   One data frame is sent to the client according to the 
             data frame protocol described in section the Data packet section.
 </code></pre>
 <h4 id="streamframes-osc-">StreamFrames (OSC)</h4><blockquote>
 <p><strong><code>StreamFrame</code></strong> <code>Stop |
-  ((FrequencyDivisor:n | Frequency:n | AllFrames) All |    
-  ([2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes]
+  ((FrequencyDivisor:n | Frequency:n | AllFrames) 
+  [2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes]
   [Analog] [AnalogSingle] [Force] [ForceSingle] [6D]
-  [6DRes] [6DEuler] [6DEulerRes]))</code></p>
+  [6DRes] [6DEuler] [6DEulerRes] [GazeVector] [Timecode] [Skeleton[:global]])</code></p>
 </blockquote>
-<p>This command makes the QTM RT server start streaming data frames in real-time. </p>
+<p>This command makes the QTM RT server start streaming data frames in real-time.</p>
+<p>The optional channels for Analog and AnalogSingle, is a string containing a list of channels to read from the
+server. The channels are separated by a ‘,’ and can also contain ranges defined by a ‘-’. Example: 1,2,3-6,16.</p>
+<p>By default, skeleton data is in local coordinates. Skeleton:global will change the skeleton data to global coordinates.</p>
 <p>Points worth noting are:</p>
 <ul>
 <li><p>Each frame is composed of the parts specified in the parameters to the
@@ -4411,7 +4584,7 @@ first was finished: send the StreamFrames Stop command.</p>
 </ul>
 </li>
 </ul>
-<h6 id="example--37">Example:</h6><pre><code class="lang-coffeescript">Command:    StreamFrames Frequency:30 UDP:2234 3D Analog
+<h6 id="example--38">Example:</h6><pre><code class="lang-coffeescript">Command:    StreamFrames Frequency:30 UDP:2234 3D Analog
 Response:   30 frames per second containing 3D data and Analog data 
             are streamed over UDP/IP to the client computer’s port 
             2234. The data frame protocol is described in the Data packet section.
@@ -4682,6 +4855,16 @@ OSC address for all data components.</p>
 <td>6D Euler Residuals</td>
 <td>/qtm/6d_euler_res</td>
 <td>6D data - position and Euler angles with residuals. Each body has its own OSC address. See <a href="#6dof-euler-with-residuals-component-osc-">6DOF Euler with residuals component</a>.</td>
+</tr>
+<tr>
+<td>Gaze Vector</td>
+<td>/qtm/gaze_vector</td>
+<td>Gaze vector data – Unit vector and position. Each gaze vector has its own OSC address. </td>
+</tr>
+<tr>
+<td>Skeleton</td>
+<td>/qtm/skeleton</td>
+<td>Skeleton data – Position and rotation of all segments in the skeleton. Each skeleton has its own OSC address. </td>
 </tr>
 </tbody>
 </table>
@@ -5272,6 +5455,124 @@ Example: <code>/qtm/3d/body1</code>.</p>
 </tr>
 </tbody>
 </table>
+<h5 id="gaze-vector-component-osc-">Gaze vector component (OSC)</h5><p>Each gaze vector is sent in a separate OSC message. The OSC address of this message is /qtm/gaze_vector/
+with the name of the gaze vector in the end of the address string. Example: /qtm/gaze_vector/Eye.</p>
+<table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Int32</td>
+<td>Sample Count</td>
+<td>Number of vector samples in this frame.</td>
+</tr>
+<tr>
+<td>Int32</td>
+<td>Sample Number</td>
+<td>Order number of first gaze vector sample in this frame. <em>Sample Number</em> is increased with the gaze vector frequency.</td>
+</tr>
+</tbody>
+</table>
+<p>Repeated <em>Sample Count</em> times:</p>
+<table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Float32</td>
+<td>Vector X</td>
+<td>X component of the gaze unit vector.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Vector Y</td>
+<td>Y component of the gaze unit vector.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Vector Z</td>
+<td>Z component of the gaze unit vector.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Position Z</td>
+<td>X coordinate of the gaze vector.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Rotation X</td>
+<td>Y coordinate of the gaze vector.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Rotation Y</td>
+<td>Z coordinate of the gaze vector.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="skeleton-component-osc-">Skeleton component (OSC)</h5><p>Each skeleton consists of several segments. All segments are sent in a separate OSC message. The OSC address of this message is /qtm/skeleton/<em>skeleton_name</em>/<em>segment_name</em>.</p>
+<p>Example: /qtm/skeleton/JohonDoe/Waist.</p>
+<table>
+<thead>
+<tr>
+<th>OSC type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Int32</td>
+<td>ID</td>
+<td>Segment id.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Position X</td>
+<td>Segment position x coordinate.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Position Y</td>
+<td>Segment position y coordinate.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Position Z</td>
+<td>Segment position z coordinate.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Rotation X</td>
+<td>Segment rotation quaternion x.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Rotation Y</td>
+<td>Segment rotation quaternion y.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Rotation Z</td>
+<td>Segment rotation quaternion z.</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Rotation W</td>
+<td>Segment rotation quaternion w.</td>
+</tr>
+</tbody>
+</table>
 <h3 id="no-more-data-packet-osc-">No More Data packet (OSC)</h3><p>This type of packet is sent when QTM is out of data to send because a
 measurement has stopped or has not even started.</p>
 <p>OSC no data packets are sent in a OSC message with address pattern <code>/qtm/no_data</code>.</p>
@@ -5386,7 +5687,14 @@ changes state.</p>
 </tr>
 </tbody>
 </table>
-<h2 id="changelog">Changelog</h2><h3 id="changes-in-1-18">Changes in 1.18</h3><ul>
+<h2 id="changelog">Changelog</h2><h3 id="changes-in-1-20">Changes in 1.20</h3><ul>
+<li>Removed Camera_System from settings.</li>
+</ul>
+<h3 id="changes-in-1-19">Changes in 1.19</h3><ul>
+<li>Added new data component, skeleton.</li>
+<li>Removed data component All from GetCurrentFrame and StreamFrames.</li>
+</ul>
+<h3 id="changes-in-1-18">Changes in 1.18</h3><ul>
 <li>Added Miqus Video Color camera type.</li>
 <li>Added Auto white balance camera settings</li>
 </ul>

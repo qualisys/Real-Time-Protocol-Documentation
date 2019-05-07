@@ -1,5 +1,5 @@
 ```xml
-<QTM_Parameters_Ver_1.13>
+<QTM_Parameters_Ver_{{ version }}>
     <The_3D>
         <AxisUpwards>+Z</AxisUpwards>
         <CalibrationTime>2011.09.23 11:23:11</CalibrationTime>
@@ -16,5 +16,6 @@
              <Bone From="fromName" To="toName" Color="ffff00" />
         </Bones>
     </The_3D>
-</QTM_Parameters_Ver_1.13>
+</QTM_Parameters_Ver_{{ version }}>
 ```
+

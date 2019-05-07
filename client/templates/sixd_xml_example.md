@@ -1,5 +1,5 @@
 ```xml
-<QTM_Parameters_Ver_1.13>
+<QTM_Parameters_Ver_{{ version }}>
     <The_6D>
         <Bodies>1</Bodies>
         <Body>
@@ -27,5 +27,5 @@
 			<Third>Yaw</Third>
 		</Euler>
     </The_3D>
-</QTM_Parameters_Ver_1.13>
+</QTM_Parameters_Ver_{{ version }}>
 ```

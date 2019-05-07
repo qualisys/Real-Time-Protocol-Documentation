@@ -1,5 +1,5 @@
 ```xml
-<QTM_Parameters_Ver_1.13>
+<QTM_Parameters_Ver_{{ version }}>
     <Image>
         <Camera>
             <ID>1</ID>
@@ -13,5 +13,5 @@
             <Bottom_Crop>1.0</Bottom_Crop>
         </Camera>
     </Image>
-</QTM_Parameters_Ver_1.13>   
+</QTM_Parameters_Ver_{{ version }}>   
 ```
