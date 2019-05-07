@@ -66,9 +66,9 @@ module.exports = function(grunt) {
 		concat: {
 			dist: {
 				src: [
-					'client/bower_components/jquery/dist/jquery.min.js',
-					'client/bower_components/bootstrap/dist/js/bootstrap.min.js',
-					'client/bower_components/highlightjs/highlight.pack.js',
+					'node_modules/jquery/dist/jquery.min.js',
+					'node_modules/bootstrap/dist/js/bootstrap.min.js',
+					'node_modules/highlightjs/highlight.pack.js',
 					'client/js/debounce.js',
 					'client/js/toc.js',
 					'client/js/main.js'

@@ -27,10 +27,13 @@
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-contrib-less": "~1.0.0",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-fontello-update": "^0.2.2",
+    "grunt-fontello-update": "^1.1.1",
     "matchdep": "^0.3.0"
   },
   "dependencies": {
+    "bootstrap": "^3.3.7",
+    "highlightjs": "^9.12.0",
+    "jquery": "^3.3.1",
     "moment": "^2.6.0"
   }
 }
