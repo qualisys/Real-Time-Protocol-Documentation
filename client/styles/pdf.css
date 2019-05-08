@@ -20,4 +20,9 @@ header { display: none; }
 	top: -30px;
 	width: 120px !important;
 }
+
+@page {
+    margin-top: 1cm;
+    margin-bottom: 1cm;
+ }
 /* .print-header .logo { margin-top: -50px; } */
