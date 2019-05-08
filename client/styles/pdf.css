@@ -1,0 +1,23 @@
+body {
+	margin-left: 75px;
+	margin-right: 75px;
+}
+
+/* .affix, header a.logo {
+	position: static !important;
+}  */
+
+header { display: none; }
+
+.print-header {
+	margin-top: 60px;
+	display: block;
+
+}
+
+.print-header .logo img {
+	position: relative !important;
+	top: -30px;
+	width: 120px !important;
+}
+/* .print-header .logo { margin-top: -50px; } */
