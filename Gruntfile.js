@@ -45,11 +45,13 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 
 		fontelloUpdate: {
-			options: {
-				config: 'fontello.json',
-				fonts: 'client/font',
-				css: 'client/font',
-			},
+			mytask: {
+				options: {
+					config: 'fontello.json',
+					fonts: 'client/font',
+					css: 'client/font',
+				},
+			}
 		},
 
 		less: {
