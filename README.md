@@ -1,3 +1,3 @@
 # QTM real-time protocol documentation.
 
-[Click here](https://qualisys.github.io/Real-Time-Protocol-Documentation/) to read it.
+[Click here](https://docs.qualisys.com/qtm-rt-protocol/) to read it.
