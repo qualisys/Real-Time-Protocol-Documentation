@@ -1978,8 +1978,8 @@ Bytes | Name            | Type           | Value/Description
 ----- | --------------- | -------------- | -----------------
 4     | Size            | 32-bit integer | 8 bytes packet header + 12 bytes data frame header + the size of all the components and their headers.
 4     | Type            | 32-bit integer | Value = 3.
-8     | Timestamp       | 64-bit integer | Number of microseconds from start. The timestamp value is not valid for the Analog and Force data frame components, they have their own timestamps in their component data.
-4     | Frame Number    | 32-bit integer | The number of this frame. The frame number is not valid for the Analog and Force data frame components. They have their own frame numbers within the component.
+8     | Marker Timestamp | 64-bit integer | Number of microseconds from start. The timestamp is only valid if at least one camera is in marker mode.<br />The timestamp value is not valid for the Analog and Force data frame components, they have their own timestamps in their component data. 
+4     | Marker Frame Number | 32-bit integer | The number of this frame. The frame number is only valid if at least one camera is in marker mode.<br />The frame number is not valid for the Analog and Force data frame components. They have their own frame numbers within the component. 
 4     | Component Count | 32-bit integer | The number of data components in the data packet.
 
 
@@ -2242,13 +2242,13 @@ Bytes | Name                  | Type           | Description
 
 Repeated *Analog Device Count* times:
 
-Bytes                              | Name             | Type                   | Description
----------------------------------- | ---------------- | ---------------------- | -----------
-4                                  | Analog Device ID | 32-bit integer         | Id of this analog device. Id starts at 1.
-4                                  | Channel Count    | 32-bit integer         | The number of channels of this analog device in this frame.
-4                                  | Sample Count     | 32-bit integer         | The number of analog samples per channel in this frame.
-4                                  | Sample Number    | 32-bit integer         | Order number of first sample in this frame. Sample Number is increased with the analog frequency. There are Channel Count values per sample number.<br><br>Sample Number is omitted if Sample Count is 0.
-4 \* Channel Count \* Sample Count | Analog Data      | 32-bit float&#91;&#93; | Voltage values for all samples of all channels. The samples are ordered like this:<br><br>Channel 1, Sample *Sample Number*<br>Channel 1, Sample *Sample Number* + 1<br>Channel 1, Sample *Sample Number* + 2<br>&hellip;<br>Channel 1, Sample *Sample Number* + Sample Count - 1<br>Channel 2, Sample *Sample Number* Channel 2, Sample *Sample Number + 1*<br>&hellip;<br><br>Analog Data is omitted if Sample Count is 0.
+ Bytes                              | Name             | Type                   | Description                                                  
+ ---------------------------------- | ---------------- | ---------------------- | ------------------------------------------------------------ 
+ 4                                  | Analog Device ID | 32-bit integer         | Id of this analog device. Id starts at 1.<br />If streaming selected analog channels, Id is set to 0. See [GetCurrentFrame](#getcurrentframe) and [StreamFrames](#streamframes). 
+ 4                                  | Channel Count    | 32-bit integer         | The number of channels of this analog device in this frame.  
+ 4                                  | Sample Count     | 32-bit integer         | The number of analog samples per channel in this frame.      
+ 4                                  | Sample Number    | 32-bit integer         | Order number of first sample in this frame. Sample Number is increased with the analog frequency. There are Channel Count values per sample number.<br><br>Sample Number is omitted if Sample Count is 0. 
+ 4 \* Channel Count \* Sample Count | Analog Data      | 32-bit float&#91;&#93; | Voltage values for all samples of all channels. The samples are ordered like this:<br><br>Channel 1, Sample *Sample Number*<br>Channel 1, Sample *Sample Number* + 1<br>Channel 1, Sample *Sample Number* + 2<br>&hellip;<br>Channel 1, Sample *Sample Number* + Sample Count - 1<br>Channel 2, Sample *Sample Number* Channel 2, Sample *Sample Number + 1*<br>&hellip;<br><br>Analog Data is omitted if Sample Count is 0. 
 
 ##### Analog single component
 
@@ -2262,7 +2262,7 @@ Repeated *Analog Device Count* times:
 
 Bytes             | Name                  | Type                   | Description
 ----------------- | --------------------- | ---------------------- | -----------
-4                 | Analog Device ID      | 32-bit integer         | Id of this analog device. Id starts at 1.
+4                 | Analog Device ID      | 32-bit integer         | Id of this analog device. Id starts at 1.<br />If streaming selected analog channels, Id is set to 0. See [GetCurrentFrame](#getcurrentframe) and [StreamFrames](#streamframes). 
 4                 | Channel Count         | 32-bit integer         | The number of channels of this analog device in this frame.
 4 * Channel Count | Analog Data           | 32-bit float&#91;&#93; | Voltage values starting with channel 1.
 
