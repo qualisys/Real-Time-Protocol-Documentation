@@ -22,7 +22,7 @@ var doqRunner = function()
 					livereload: livereload,
 					version: rtVersion,
 					title: 'QTM Real-time Server Protocol documentation',
-					date: moment().format("MMM Do YYYY"),
+					date: moment().format("YYYY-MM-DD"),
 				}
 			},
 			{ name: 'client/index.md', data: { version: rtVersion } },
