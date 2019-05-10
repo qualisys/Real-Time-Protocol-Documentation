@@ -614,34 +614,6 @@ of TCP/IP, to minimize the protocol latency (at the cost of possibly
 losing some data frames). When using the OSC protocol, all data is sent
 via UDP. 
 
-### Command summary
-
-Command              | Parameters
--------------------- | ------------
-Version              | [n.n]
-QTMVersion           | -
-ByteOrder            | -
-GetState             | -
-GetParameters        | `All` &#124; `([General] [3D] [6D] [Analog] [Force] [Image] [GazeVector] [Skeleton])` 
-GetCurrentFrame      | `All` &#124; `([2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes] [Analog[:channels]] [AnalogSingle[:channels]] [Force] [ForceSingle] [6D] [6DRes] [6DEuler] [6DEulerRes] [Image] [GazeVector] [Timecode] [Skeleton[:global]])` 
-StreamFrames         | `Stop` &#124; `((FrequencyDivisor:n` &#124; `Frequency:n` &#124; `AllFrames) [UDP[:address]:port] ([2D] [2DLin] [3D] [3DRes][3DNoLabels] [3DNoLabelsRes] [Analog[:channels]] [AnalogSingle[:channels]] [Force] [ForceSingle] [6D] [6DRes] [6DEuler] [6DEulerRes] [Image] [GazeVector] [Timecode] [Skeleton[:global]]))` 
-TakeControl          | `[Password]`
-ReleaseControl       | -
-New                  | -
-Close                | -
-Start                | `[RTFromFile]` 
-Stop                 | -
-Load                 | `Filename`
-Save                 | `Filename [Overwrite]`
-LoadProject          | `ProjectPath`
-GetCaptureC3D        | -
-GetCaptureQTM        | -
-Trig                 | -
-SetQTMEvent          | `Label`
-Reprocess            | -
-Led                  | `Camera (On` &#124; `Off` &#124; `Pulsing) (Green`&#124;`Amber`&#124;`All)`
-Quit                 | -
-
 
 ## Commands
 
@@ -663,18 +635,40 @@ examples list all available responses for each command. Command strings and
 error strings are shown in italic. If the command is not recognized by the
 server, it will send an error response with the string **Parse Error**.
 
+| Command         | Parameters                                                   |
+| --------------- | ------------------------------------------------------------ |
+| Version         | [n.n]                                                        |
+| QTMVersion      |                                                              |
+| ByteOrder       |                                                              |
+| GetState        |                                                              |
+| GetParameters   | `All` &#124; `([General] [3D] [6D] [Analog] [Force] [Image] [GazeVector] [Skeleton])` |
+| GetCurrentFrame | `[2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes] [Analog[:channels]] [AnalogSingle[:channels]] [Force] [ForceSingle] [6D] [6DRes] [6DEuler] [6DEulerRes] [Image] [GazeVector] [Timecode] [Skeleton[:global]]` |
+| StreamFrames    | `Stop` &#124; `((FrequencyDivisor:n` &#124; `Frequency:n` &#124; `AllFrames) [UDP[:address]:port] ([2D] [2DLin] [3D] [3DRes][3DNoLabels] [3DNoLabelsRes] [Analog[:channels]] [AnalogSingle[:channels]] [Force] [ForceSingle] [6D] [6DRes] [6DEuler] [6DEulerRes] [Image] [GazeVector] [Timecode] [Skeleton[:global]]))` |
+| TakeControl     | `[Password]`                                                 |
+| ReleaseControl  |                                                              |
+| New             |                                                              |
+| Close           |                                                              |
+| Start           | `[RTFromFile]`                                               |
+| Stop            |                                                              |
+| Load            | `Filename`                                                   |
+| Save            | `Filename [Overwrite]`                                       |
+| LoadProject     | `ProjectPath`                                                |
+| GetCaptureC3D   |                                                              |
+| GetCaptureQTM   |                                                              |
+| Trig            |                                                              |
+| SetQTMEvent     | `Label`                                                      |
+| Reprocess       |                                                              |
+| Led             | `Camera (On` &#124; `Off` &#124; `Pulsing) (Green`&#124;`Amber`&#124;`All)` |
+| Quit            |                                                              |
+
 ### Version
+
 > **`Version`** `[n.n]`
 
-The first thing that a client should do after connecting to the QTM RT server
-is to send the Version command to the server with the desired protocol version.
-This will ensure that the protocol described in this document is followed by
-the server. The server will respond with Version set to n.n, where n.n is the
-version selected. If no argument is used, the server will respond with the
-current version.
+The first thing that a client should do after connecting to the QTM RT server is to send the Version command to the server with the desired protocol version. This will ensure that the protocol described in this document is followed by the server. The server will respond with Version set to n.n, where n.n is the
+version selected. If no argument is used, the server will respond with the current version.
 
-If you don't set the protocol version yourself, QTM will set it to **version
-1.1** by default.
+If you don't set the protocol version yourself, QTM will set it to **version 1.1** by default.
 
 ###### Example:
 ```coffeescript
@@ -722,19 +716,6 @@ as an ASCII string. `GetState` will not show the **Camera Settings Changed**,
 ```coffeescript
 Command:    GetState
 Response:   Event data packet with last QTM event.
-
-(Telnet)
-Response:   Connected                 or
-            Connection Closed         or
-            Capture Started           or
-            Capture Stopped           or
-            Capture Fetching Finished or
-            Calibration Started       or
-            Calibration Stopped       or
-            RT From File Started      or
-            RT From File Stopped      or
-            Waiting For Trigger       or
-            Capture Saved
 ```
 
 ### GetParameters
@@ -1259,11 +1240,9 @@ Bytes | Name     | Value
 
 The error string is laid out like this (always with a `NULL` char to terminate it):
 
-<div class="table-noheader"></div>
-
-Byte  | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8   | 9 | 10 | 11 | 12  | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23
-------|-----------------------------------------------------------------------------------------------------------
-Value | C | o | m | m | a | n | d | \32 | n | o  | t  | \32 | s  | u  | p  | p  | o  | r  | t  | e  | d  | .  | \0
+| Byte | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15  | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 |
+| ----- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| Value | C  | o | m | m | a | n | d | \32 | n | o | t | \32 | s | u | p  | p | o | r | t | e | d | . | \0 |
 
 
 ### Command / Command Response packet
@@ -1282,8 +1261,6 @@ Bytes | Name   | Value
 
 The resulting string is laid out like this (with a `NULL` char to terminate it,
 which is not required of clients).
-
-<div class="table-noheader"></div>
 
 Byte  | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8   | 9 | 10 | 11 | 12
 ----- | --------------------------------------------------
@@ -1966,7 +1943,7 @@ Attribute with the name of the skeleton.
 
 {{> skeleton_xml_example }}
 
-#### Data packet
+### Data packet
 Each data frame is made up of one or more components, as specified in the
 commands GetCurrentFrame or StreamFrames. The data frame contains a Count field
 that specifies the number of components in the frame. Every component starts
@@ -1978,10 +1955,9 @@ Bytes | Name            | Type           | Value/Description
 ----- | --------------- | -------------- | -----------------
 4     | Size            | 32-bit integer | 8 bytes packet header + 12 bytes data frame header + the size of all the components and their headers.
 4     | Type            | 32-bit integer | Value = 3.
-8     | Marker Timestamp | 64-bit integer | Number of microseconds from start. The timestamp is only valid if at least one camera is in marker mode.<br />The timestamp value is not valid for the Analog and Force data frame components, they have their own timestamps in their component data. 
-4     | Marker Frame Number | 32-bit integer | The number of this frame. The frame number is only valid if at least one camera is in marker mode.<br />The frame number is not valid for the Analog and Force data frame components. They have their own frame numbers within the component. 
+8     | Marker Timestamp | 64-bit integer | Number of microseconds from start. The timestamp is only valid if at least one camera is in marker mode.<br />The timestamp value is not valid for the Analog, Force and Gaze Vector data frame components, they have their own timestamps in their component data. 
+4     | Marker Frame Number | 32-bit integer | The number of this frame. The frame number is only valid if at least one camera is in marker mode.<br />The frame number is not valid for the Analog, Force and Gaze Vector data frame components. They have their own frame numbers within the component. 
 4     | Component Count | 32-bit integer | The number of data components in the data packet.
-
 
 **Component data** (Repeated *Component Count* times)
 
@@ -1992,7 +1968,7 @@ Bytes    |  Name           | Type           | Value/Description
 Size - 8 |  Component Data | Mixed          | Component-specific data. Defined in [Data component types](#data-component-types) and [2D and 2D linearized component](#2d-and-2d-linearized-component) sections.
 
 
-##### Data component types
+#### Data component types
 
 The `Component Type` field of the data component header is a number that should
 be interpreted according to the table below. These are the data frame component
@@ -2020,7 +1996,12 @@ Type     | Name                   | Description
 18       | Skeleton               | Skeleton segment information
 
 
-##### 2D and 2D linearized component
+#### 2D components
+
+There are two different 2D components that shares the same marker header.
+
+- 2D
+- 2D lineraized
 
 The 2D and 2D linearized data frame format are the same. The only difference is
 that the coordinates are linearized in 2D linearized.
@@ -2051,22 +2032,26 @@ Bytes | Name       | Type           | Description
 2     | Diameter X | 16-bit integer | Marker X size.
 2     | Diameter Y | 16-bit integer | Marker Y size.
 
-##### 3D component
+#### 3D components
 
-The markers of the 3D data always follow the labels of the 3D parameters. The
-same number of markers are sent each frame, and in the same order as the labels
-of the 3D parameters. If a marker is missing from the frame, its X, Y and Z
-coordinates will have all their 32 bits set - this signifies a negative quiet
-Not-A-Number according to the IEEE 754 floating point standard. 
+There are four different 3D components that shares the same marker header.
+
+- 3D
+- 3D with residuals
+- 3D no labels
+- 3D no labels with residuals 
 
 
 Bytes | Name                  | Type           | Description
 ----- | --------------------- | -------------- | -----------
 4     | Component Size        | 32-bit integer | The size of the component including the header (Component Size, Component Type and Marker Count).
-4     | Component Type        | 32-bit integer | Value = 1. See [Data component types](#data-component-types).
+4     | Component Type        | 32-bit integer | Value = 1, 2, 9 or 10. See [Data component types](#data-component-types). 
 4     | Marker Count          | 32-bit integer | The number of markers in this frame.
 2     | 2D Drop Rate          | 16-bit integer | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.
 2     | 2D Out Of Sync Rate   | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
+
+For the *3D* and the *3D with residuals* components, The markers of the 3D data always follow the labels of the 3D parameters. The same number of markers are sent each frame, and in the same order as the labels
+of the 3D parameters. If a marker is missing from the frame, its X, Y and Z coordinates will have all their 32 bits set - this signifies a negative quiet Not-A-Number according to the IEEE 754 floating point standard.
 
 Repeated *Marker Count* times:
 
@@ -2075,149 +2060,25 @@ Bytes | Name | Type         | Description
 4     | X    | 32-bit float | X coordinate of the marker.
 4     | Y    | 32-bit float | Y coordinate of the marker.
 4     | Z    | 32-bit float | Z coordinate of the marker.
+4 | ID | 32-bit float | Id that identifies markers between frames.<br />**Only present for 3D no labels and 3D no labels with residuals**. 
+4 | Residual | 32-bit float | Residual for the 3D point.<br />**Only present for 3D with residual and 3D no labels with residuals**. 
 
-##### 3D with residuals component
+#### 6DOF components
 
-The markers of the 3D data always follow the labels of the 3D parameters. The
-same number of markers are sent each frame, and in the same order as the labels
-of the 3D parameters.  
+There are four different 6DOF components that shares the same 6dof header.
 
-If a marker is missing from the frame, its X, Y and Z
-coordinates will have all their 64 bits set - this signifies a negative quiet
-Not-A-Number according to the IEEE 754 floating point standard. This frame
-component is the same as the 3D data frame, except for the residual for each 3D
-point.
+- 6DOF
+- 6DOF with residuals
+- 6DOF Euler
+- 6DOF Euler with residuals
 
-Bytes | Name                  | Type           | Description
------ | --------------------- | -------------- | -----------
-4     | Component Size        | 32-bit integer | The size of the component including the header (Component Size, Component Type and Marker Count).
-4     | Component Type        | 32-bit integer | Value = 9. See [Data component types](#data-component-types).
-4     | Marker Count          | 32-bit integer | The number of markers in this frame.
-2     | 2D Drop Rate          | 16-bit integer | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.
-2     | 2D Out Of Sync Rate   | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
-
-Repeated *Marker Count* times:
-
-Bytes | Name     | Type         | Description
------ | -------- | ------------ | -----------
-4     | X        | 32-bit float | X coordinate of the marker.
-4     | Y        | 32-bit float | Y coordinate of the marker.
-4     | Z        | 32-bit float | Z coordinate of the marker.
-4     | Residual | 32-bit float | Residual for the 3D point.
-
-##### 3D no labels component
-
-Bytes | Name                  | Type           | Description
------ | --------------------- | -------------- | -----------
-4     | Component Size        | 32-bit integer | The size of the component including the header (Component Size, Component Type and Marker Count).
-4     | Component Type        | 32-bit integer | Value = 2. See [Data component types](#data-component-types).
-4     | Marker Count          | 32-bit integer | The number of markers in this frame.
-2     | 2D Drop Rate          | 16-bit integer | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.
-2     | 2D Out Of Sync Rate   | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
-
-
-Repeated *Marker Count* times:
-
-Bytes | Name | Type           | Description
------ | ---- | -------------- | -----------
-4     | X    | 32-bit float   | X coordinate of the marker.
-4     | Y    | 32-bit float   | Y coordinate of the marker.
-4     | Z    | 32-bit float   | Z coordinate of the marker.
-4     | ID   | 32-bit integer | An unsigned integer ID that serves to identify markers between frames.
-
-##### 3D no labels with residuals component
-
-Bytes | Name                  | Type           | Description
------ | --------------------- | -------------- | -----------
-4     | Component Size        | 32-bit integer | The size of the component including the header (Component Size, Component Type and Marker Count).
-4     | Component Type        | 32-bit integer | Value = 10. See [Data component types](#data-component-types).
-4     | Marker Count          | 32-bit integer | The number of markers in this frame.
-2     | 2D Drop Rate          | 16-bit integer | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.
-2     | 2D Out Of Sync Rate   | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
-
-
-Repeated *Marker Count* times:
-
-Bytes | Name     | Type           | Description
------ | -------- | -------------- | -----------
-4     | X        | 32-bit float   | X coordinate of the marker.
-4     | Y        | 32-bit float   | Y coordinate of the marker.
-4     | Z        | 32-bit float   | Z coordinate of the marker.
-4     | ID       | 32-bit integer | An unsigned integer ID that serves to identify markers between frames.
-4     | Residual | 32-bit float   | Residual for the 3D point.
-
-##### 6DOF component
-
-Bytes | Name                | Type           | Description
------ | ------------------- | -------------- | -----------
-4     | Component Size      | 32-bit integer | The size of the component including the header (Component Size, Component Type and Body Count).
-4     | Component Type      | 32-bit integer | Value = 5. See [Data component types](#data-component-types).
-4     | Body Count          | 32-bit integer | The number of 6DOF bodies in this frame.
-2     | 2D Drop Rate        | 16-bit integer | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.
-2     | 2D Out Of Sync Rate | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
-
-
-Repeated *Body Count* times:
-
-Bytes | Name     | Type                  | Description
------ | -------- | --------------------- | -----------
-4     | X        | 32-bit float          | X coordinate of the body.
-4     | Y        | 32-bit float          | Y coordinate of the body.
-4     | Z        | 32-bit float          | Z coordinate of the body.
-9 * 4 | Rotation | 32-bt float&#91;&#93; | Rotation matrix of the body, 9 floats.
-
-##### 6DOF with residuals component
-
-Bytes | Name                | Type           | Description
------ | ------------------- | -------------- | -----------
-4     | Component Size      | 32-bit integer | The size of the component including the header (Component Size, Component Type and Body Count).
-4     | Component Type      | 32-bit integer | Value = 11. See [Data component types](#data-component-types).
-4     | Body Count          | 32-bit integer | The number of 6DOF bodies in this frame.
-2     | 2D Drop Rate        | 16-bit integer | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.
-2     | 2D Out Of Sync Rate | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
-
-
-Repeated *Body Count* times:
-
-Bytes | Name     | Type                   | Description
------ | -------- | ---------------------- | -----------
-4     | X        | 32-bit float           | X coordinate of the body.
-4     | Y        | 32-bit float           | Y coordinate of the body.
-4     | Z        | 32-bit float           | Z coordinate of the body.
-9 * 4 | Rotation | 32-bit float&#91;&#93; | Rotation matrix of the body, 9 floats.
-4     | Residual | 32-bit float           | Residual for the 6D body.
-
-##### 6DOF Euler component
-
-| Bytes | Name                | Type           | Description                                                  |
-| ----- | ------------------- | -------------- | ------------------------------------------------------------ |
-| 4     | Component Size      | 32-bit integer | The size of the component including the header (Component Size, Component Type and Body Count). |
-| 4     | Component Type      | 32-bit integer | Value = 6. See [Data component types](#data-component-types). |
-| 4     | Body Count          | 32-bit integer | The number of 6DOF bodies in this frame.                     |
-| 2     | 2D Drop Rate        | 16-bit integer | Number of individual 2D frames that have been lost in the communication between QTM and the cameras. The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably. |
-| 2     | 2D Out Of Sync Rate | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames. The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time. |
-
-Repeated *Body Count* times:
-
-| Bytes | Name    | Type         | Description                                                  |
-| ----- | ------- | ------------ | ------------------------------------------------------------ |
-| 4     | X       | 32-bit float | X coordinate of the body.                                    |
-| 4     | Y       | 32-bit float | Y coordinate of the body.                                    |
-| 4     | Z       | 32-bit float | Z coordinate of the body.                                    |
-| 4     | Angle 1 | 32-bit float | First Euler angle, in degrees, as defined on the Euler tab<br />in QTM's workspace options. |
-| 4     | Angle 2 | 32-bit float | Second Euler angle, in degrees, as defined on the Euler tab<br />in QTM's workspace options. |
-| 4     | Angle 3 | 32-bit float | Third Euler angle, in degrees, as defined on the Euler tab<br />in QTM's workspace options. |
-
-
-##### 6DOF Euler with residuals component
-
-Bytes | Name                                  | Type           | Description
------ | ------------------------------------- | -------------- | -----------
-4     | Component Size                        | 32-bit integer | The size of the component including the header (Component Size, Component Type and Body Count).
-4     | Component Type                        | 32-bit integer | Value = 12. See [Data component types](#data-component-types).
-4     | Body Count                            | 32-bit integer | The number of 6DOF bodies in this frame.
-2     | 2D Drop Rate                          | 16-bit integer | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.
-2     | 2D Out Of Sync Rate                   | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
+ Bytes | Name                | Type           | Description                                                  
+ ----- | ------------------- | -------------- | ------------------------------------------------------------ 
+ 4     | Component Size      | 32-bit integer | The size of the component including the header (Component Size, Component Type and Body Count). 
+ 4     | Component Type      | 32-bit integer | Value = 5, 6, 11 or 12. See [Data component types](#data-component-types). 
+ 4     | Body Count          | 32-bit integer | The number of 6DOF bodies in this frame.                     
+ 2     | 2D Drop Rate        | 16-bit integer | Number of individual 2D frames that have been lost in the communication between QTM and the cameras.<br><br>The value is in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably. 
+ 2     | 2D Out Of Sync Rate | 16-bit integer | Number of individual 2D frames in the communication between QTM and the cameras, which have not had the same frame number as the other frames.<br><br>The value is in frames per thousand over the last 0.5 to 1.0 seconds, Range 0-1000. A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time. 
 
 
 Repeated *Body Count* times:
@@ -2227,12 +2088,18 @@ Bytes | Name     | Type           | Description
 4     | X        | 32-bit float   | X coordinate of the body.
 4     | Y        | 32-bit float   | Y coordinate of the body.
 4     | Z        | 32-bit float   | Z coordinate of the body.
-4     | Angle 1  | 32-bit float   | First Euler angle, in degrees, as defined on the Euler tab in QTM's workspace options.
-4     | Angle 2  | 32-bit float   | Second Euler angle.
-4     | Angle 3  | 32-bit float   | Third Euler angle.
-4     | Residual | 32-bit float   | Residual for the 6D body.
+9 * 4 | Rotation | 32-bit float | 3x3 rotation matrix of the body.<br />**Only present for 6DOF and 6DOF with residuals** 
+4     | Angle 1  | 32-bit float   | First Euler angle, in degrees, as defined on the Euler tab in QTM's workspace options.<br />**Only present for 6DOF Euler and 6DOF Euler with residuals** 
+4     | Angle 2  | 32-bit float   | Second Euler angle, in degrees, as defined on the Euler tab in QTM's workspace options.<br />**Only present for 6DOF Euler and 6DOF Euler with residuals** 
+4     | Angle 3  | 32-bit float   | Third Euler angle, in degrees, as defined on the Euler tab in QTM's workspace options.<br />**Only present for 6DOF Euler and 6DOF Euler with residuals** 
+4     | Residual | 32-bit float   | Residual for the 6D body.<br />**Only present for 6DOF with residuals and 6DOF Euler with residuals** 
 
-##### Analog component
+#### Analog components
+
+There are two different analog components that shares the same analog header.
+
+- Analog
+- Analog Single
 
 Bytes | Name                  | Type           | Description
 ----- | --------------------- | -------------- | -----------
@@ -2240,23 +2107,25 @@ Bytes | Name                  | Type           | Description
 4     | Component Type        | 32-bit integer | Value = 3. See [Data component types](#data-component-types).
 4     | Analog Device Count   | 32-bit integer | Number of analog devices in this component.
 
+If only streaming a selection of the analog channels, see [GetCurrentFrame](#getcurrentframe) and [StreamFrames](#streamframes), the order of the channels will be the same as in [Analog XML parameters](#analog-xml-parameters). Id is set to 0. See [GetCurrentFrame](#getcurrentframe) and [StreamFrames](#streamframes).
+
+##### Analog data
+
+The Analog component sends a packet containing all analog samples that the server has buffered since the last analog frame. It contains it's own sample numbers (one per device), since the analog often runs at different frequency than the camera system.
+
 Repeated *Analog Device Count* times:
 
  Bytes                              | Name             | Type                   | Description                                                  
  ---------------------------------- | ---------------- | ---------------------- | ------------------------------------------------------------ 
- 4                                  | Analog Device ID | 32-bit integer         | Id of this analog device. Id starts at 1.<br />If streaming selected analog channels, Id is set to 0. See [GetCurrentFrame](#getcurrentframe) and [StreamFrames](#streamframes). 
+ 4                                  | Analog Device ID | 32-bit integer         | Id of this analog device. Id starts at 1.                    
  4                                  | Channel Count    | 32-bit integer         | The number of channels of this analog device in this frame.  
  4                                  | Sample Count     | 32-bit integer         | The number of analog samples per channel in this frame.      
- 4                                  | Sample Number    | 32-bit integer         | Order number of first sample in this frame. Sample Number is increased with the analog frequency. There are Channel Count values per sample number.<br><br>Sample Number is omitted if Sample Count is 0. 
+ 4                                  | Sample Number    | 32-bit integer         | Order number of first sample in this frame. Sample Number is increased with the analog frequency. There are Channel Count values per sample number. 
  4 \* Channel Count \* Sample Count | Analog Data      | 32-bit float&#91;&#93; | Voltage values for all samples of all channels. The samples are ordered like this:<br><br>Channel 1, Sample *Sample Number*<br>Channel 1, Sample *Sample Number* + 1<br>Channel 1, Sample *Sample Number* + 2<br>&hellip;<br>Channel 1, Sample *Sample Number* + Sample Count - 1<br>Channel 2, Sample *Sample Number* Channel 2, Sample *Sample Number + 1*<br>&hellip;<br><br>Analog Data is omitted if Sample Count is 0. 
 
-##### Analog single component
+##### Analog single data
 
-Bytes | Name                  | Type           | Description
------ | --------------------- | -------------- | -----------
-4     | Component Size        | 32-bit integer | The size of the component including the header (Component Size, Component Type and Analog Device Count).
-4     | Component Type        | 32-bit integer | Value = 13. See [Data component types](#data-component-types).
-4     | Analog Device Count   | 32-bit integer | Number of analog devices in this component.
+The Analog single component sends a packet containing only one sample per analog channel.
 
 Repeated *Analog Device Count* times:
 
@@ -2268,31 +2137,18 @@ Bytes             | Name                  | Type                   | Description
 
 If no analog data is available, Analog Data will contain IEEE NaN (Not a number) float values.
 
-##### Force component
+#### Force components
 
-Bytes | Name             | Type           | Description
------ | ---------------- | -------------- | -----------
-4     | Component Size   | 32-bit integer | The size of the component including the header (Component Size, Component Type and Plate Count).
-4     | Component Type   | 32-bit integer | Value = 4. See [Data component types](#data-component-types).
-4     | Plate Count      | 32-bit integer | The number of force plates in this frame.
+There are two different force components that shares the same force header.
 
+- Force
+- Force single
 
-Repeated *Plate Count* times:
-
-Bytes            | Name             | Type                   | Description
----------------- | ---------------- | ---------------------- | -----------
-4                | Force Plate ID   | 32-bit integer         | Id of the analog device in this frame. Id starts at 1.
-4                | Force Count      | 32-bit integer         | The number of forces in this frame.
-4                | Force Number     | 32-bit integer         | Order number of first force in this frame. Force Number is increased with the force frequency.
-36 * Force Count | Force Data       | 32-bit float | Each force sample consists of 9 float values: <br><br>X coordinate of the force <br>Y coordinate of the force <br>Z coordinate of the force <br>X coordinate of the moment <br>Y coordinate of the moment <br>Z coordinate of the moment <br>X coordinate of the force application point <br>Y coordinate of the force application point <br>Z coordinate of the force application point
-
-##### Force single component
-
-| Bytes | Name           | Type           | Description                                                  |
-| ----- | -------------- | -------------- | ------------------------------------------------------------ |
-| 4     | Component Size | 32-bit integer | The size of the component including the header (Component Size, Component Type and Plate Count). |
-| 4     | Component Type | 32-bit integer | Value = 15. See [Data component types](#data-component-types). |
-| 4     | Plate Count    | 32-bit integer | The number of force plates in this frame.                    |
+ Bytes | Name           | Type           | Description                                                  
+ ----- | -------------- | -------------- | ------------------------------------------------------------ 
+ 4     | Component Size | 32-bit integer | The size of the component including the header (Component Size, Component Type and Plate Count). 
+ 4     | Component Type | 32-bit integer | Value = 4 or 15. See [Data component types](#data-component-types). 
+ 4     | Plate Count    | 32-bit integer | The number of force plates in this frame.                    
 
 
 Repeated *Plate Count* times:
@@ -2300,11 +2156,11 @@ Repeated *Plate Count* times:
 Bytes            | Name             | Type                   | Description
 ---------------- | ---------------- | ---------------------- | -----------
 4                | Force Plate ID   | 32-bit integer         | Id of the analog device in this frame. Id starts at 1.
-36 * Force Count | Force Data       | 32-bit float&#91;&#93; | Each force sample consists of 9 float values: <br><br>X coordinate of the force <br>Y coordinate of the force <br>Z coordinate of the force <br>X coordinate of the moment <br>Y coordinate of the moment <br>Z coordinate of the moment <br>X coordinate of the force application point <br>Y coordinate of the force application point <br>Z coordinate of the force application point
+4                | Force Count      | 32-bit integer         | The number of forces in this frame.<br />**Only present for Analog component.<br />Force Count is always 1 for Analog single component.** 
+4                | Force Number     | 32-bit integer         | Order number of first force in this frame. Force Number is increased with the force frequency.<br />**Only present for Analog component.** 
+36 * Force Count | Force Data       | 32-bit float | X coordinate of the force <br>Y coordinate of the force <br>Z coordinate of the force <br>X coordinate of the moment <br>Y coordinate of the moment <br>Z coordinate of the moment <br>X coordinate of the force application point <br>Y coordinate of the force application point <br>Z coordinate of the force application point<br /><br />**If no force data is available for an Analog single component, Force Data will contain IEEE NaN (Not a number).** 
 
-If no force data is available, Force Data will contain IEEE NaN (Not a number) float values.
-
-##### Image component
+#### Image component
 
 Bytes | Name             | Type           | Description
 ----- | ---------------- | -------------- | -----------
@@ -2327,7 +2183,7 @@ Bytes      | Name           | Type           | Description
 4          | Image Size     | 32-bit integer | Size of Image Data in number of bytes.
 Image Size | Image Data     | Binary data    | Image data formatted according to the Image Format parameter.
 
-##### Gaze vector
+#### Gaze vector
 
 Bytes | Name              | Type           | Description
 ----- | ----------------- | ---------------|------------
@@ -2344,7 +2200,7 @@ Repeated *Gaze Vector Count* times:
  24 * Sample Count                        | Gaze Vector data | 32-bit float   | X component of the vector.<br>Y component of the vector.<br>Z component of the vector.<br>X coordinate of the vector.<br>Y coordinate of the vector.<br>Z coordinate of the vector. 
 
 
-##### Timecode
+#### Timecode
 
 Bytes | Name              | Type           | Description
 ----- | ----------------- | ---------------|------------
@@ -2361,7 +2217,7 @@ Bytes                    | Name           | Type           | Description
 4     | Timecode Lo      | 32-bit integer | IRIG time code little endian format:<br>Bit 0 – 4: Hours<br>Bit 5 – 10: Minutes<br>Bit 11 - 16: Seconds<br>bit 17 - 20: Tenth of a seconds<br><br>SMPTE time code little endian format:<br>Bit 0 – 4: Hours<br>Bit 5 – 10: Minutes<br>Bit 11 - 16: Seconds<br>bit 17 - 21: Frame<br>Bit 22 - 31 Not used<br><br>Camera time<br>Lo 32 bits of 64-bit integer timecode.
 
 
-##### Skeleton
+#### Skeleton
 
 Bytes | Name              | Type           | Description
 ----- | ----------------- | ---------------|------------
@@ -2522,6 +2378,17 @@ Command strings and their parameters never contain spaces, so a space character
 (ASCII 32) is used as separator between command names and parameters.
 
 Command strings and parameter strings are case insensitive.
+
+| Command         | Parameters                                                   |
+| --------------- | ------------------------------------------------------------ |
+| Connect         | Port                                                         |
+| Disconnect      |                                                              |
+| Version         | [n.n]                                                        |
+| QTMVersion      |                                                              |
+| GetState        |                                                              |
+| GetParameters   | `All` &#124; `([General] [3D] [6D] [Analog] [Force] [Image] [GazeVector] [Skeleton])` |
+| GetCurrentFrame | `[2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes] [Analog[:channels]] [AnalogSingle[:channels]] [Force] [ForceSingle] [6D] [6DRes] [6DEuler] [6DEulerRes] [Image] [GazeVector] [Timecode] [Skeleton[:global]]` |
+| StreamFrames    | `Stop` &#124; `((FrequencyDivisor:n` &#124; `Frequency:n` &#124; `AllFrames) [UDP[:address]:port] ([2D] [2DLin] [3D] [3DRes][3DNoLabels] [3DNoLabelsRes] [Analog[:channels]] [AnalogSingle[:channels]] [Force] [ForceSingle] [6D] [6DRes] [6DEuler] [6DEulerRes] [Image] [GazeVector] [Timecode] [Skeleton[:global]]))` |
 
 #### Connect (OSC)
 OSC Format:
@@ -2830,15 +2697,15 @@ component. See [OSC Data frame component types](#data-frame-component-types-osc-
 The frame header and the data components are sent in an OSC bundle as separate
 OSC messages.
 
-OSC type | Name            | Value
----------|-----------------|------
-Int32    | TimeStamp Hi    | Hi 32 bits of 64 bit timestamp value.<br><br>Number of microseconds from start. The timestamp value is not valid for the Analog and Force data frame components, they have their own timestamps in their component data.
-Int32    | TimeStamp Lo    | Lo 32 bits of 64 bit timestamp value. See above.
-Int32    | SMPTETimeCode   | SMPTE time code little endian format:<br> <br>Bit 0-4: Hours <br>Bit 5-10: Minutes <br>Bit 11-16: Seconds <br>Bit 17-21: Frame <br>Bit 22-30: Sub frame <br>Bit 31: Valid bit
-Int32    | FrameNumber     | The number of this frame. The frame number is not valid for the Analog and Force data frame components. They have their own sample numbers in their component data.
-Int32    | 2DDropRate      | How many individual camera 2D frames that have been lost, in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000.<br><br>A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably.
-Int32    | 2DOutOfSyncRate | How many individual camera 2D frames, in frames per thousand over the last 0.5 to 1.0 seconds, that have not had the same frame number as the other frames. Range 0-1000.<br><br>A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time.
-Int32    | ComponentCount  | The number of data components in the data message. Each component is sent as a separate OSC message.
+ OSC type | Name                | Value                                                        
+ -------- | ------------------- | ------------------------------------------------------------ 
+ Int32    | Marker Timestamp Hi | Hi 32 bits of 64 bit timestamp value.<br><br>Number of microseconds from start. The timestamp value is not valid for the Analog, Force and Gaze Vector data frame components, they have their own timestamps in their component data. 
+ Int32    | Marker Timestamp Lo | Lo 32 bits of 64 bit timestamp value. See above.             
+ Int32    | SMPTE TimeCode      | SMPTE time code little endian format:<br> <br>Bit 0-4: Hours <br>Bit 5-10: Minutes <br>Bit 11-16: Seconds <br>Bit 17-21: Frame <br>Bit 22-30: Sub frame <br>Bit 31: Valid bit 
+ Int32    | Marker Frame Number | The number of this frame. The frame number is not valid for the Analog, Force and Gaze Vector data frame components. They have their own sample numbers in their component data. 
+ Int32    | 2DDropRate          | How many individual camera 2D frames that have been lost, in frames per thousand, over the last 0.5 to 1.0 seconds. Range 0-1000.<br><br>A high value is a sign that the cameras are set at a frequency that is too high for the current network topology to transmit reliably. 
+ Int32    | 2DOutOfSyncRate     | How many individual camera 2D frames, in frames per thousand over the last 0.5 to 1.0 seconds, that have not had the same frame number as the other frames. Range 0-1000.<br><br>A high value is a sign that the cameras are set at a frequency that is too high for the cameras to process in real time. 
+ Int32    | ComponentCount      | The number of data components in the data message. Each component is sent as a separate OSC message. 
 
 ##### Data frame component types (OSC)
 Each data frame component has a unique OSC address. The table below shows the
@@ -2865,9 +2732,16 @@ Skeleton | /qtm/skeleton | Skeleton data – Position and rotation of all segmen
 
 
 
-##### 2D and 2D linearized component (OSC)
+##### 2D components (OSC)
+There are two different 2D components.
+
+- 2D
+- 2D linearized
+
 The 2D and 2D linearized data frame format are the same. The only difference is
 that the coordinates are linearized in 2D linearized.
+
+OSC address: `/qtm/2d` or `/qtm/2d_lin`.
 
 OSC type | Name         | Description
 ---------|--------------|------------
@@ -2892,8 +2766,9 @@ Int32    | Diameter X | Marker X size.
 Int32    | Diameter Y | Marker Y size.
 
 ##### 3D component (OSC)
-Each marker is sent in a separate OSC message. The OSC address of this message
-is `/qtm/3d/` with the name of the marker in the end of the address string.
+Each marker is sent in a separate OSC message.
+
+OSC address:  `/qtm/3d/`	The marker name is appended to the end of the address string.
 Example: `/qtm/3d/marker1`.
 
 OSC type | Name | Description
@@ -2903,9 +2778,10 @@ Float32  | Y    | Y coordinate of the marker.
 Float32  | Z    | Z coordinate of the marker.
 
 ##### 3D with residuals component (OSC)
-Each marker is sent in a separate OSC message. The OSC address of this message
-is `/qtm/3d/` with the name of the marker in the end of the address string.
-Example: `/qtm/3d/marker1`.
+Each marker is sent in a separate OSC message.
+
+OSC address: `/qtm/3d_res/`	The marker name is appended to the end of the address string.
+Example: `/qtm/3d_res/marker1`.
 
 OSC type | Name     | Description
 ---------|----------|------------
@@ -2915,6 +2791,8 @@ Float32  | Z        | Z coordinate of the marker.
 Float32  | Residual | Residual for the 3D point.
 
 ##### 3D no labels component (OSC)
+
+OSC address: `/qtm/3d_no_labels/`
 
 OSC type | Name         | Description
 ---------|--------------|------------
@@ -2930,6 +2808,8 @@ Float32  | Z    | Z coordinate of the marker.
 Int32    | ID   | An unsigned integer ID that serves to identify markers between frames.
 
 ##### 3D no labels with residuals component (OSC)
+
+OSC address: `/qtm/3d_no_labels_res/`
 
 OSC type | Name         | Description
 ---------|--------------|------------
@@ -2947,6 +2827,8 @@ Float32  | Residual | Residual for the 3D point.
 
 ##### Analog component (OSC)
 
+OSC address: `/qtm/analog/`
+
 OSC type | Name                | Description
 ---------|---------------------|------------
 Int32    | Analog Device Count | Number of analog devices in this component.
@@ -2962,6 +2844,8 @@ Int32    | Sample Number    | Order number of first sample in this frame. Sample
 Float32  | Analog Data      | There are (Channel Count * Sample Count) voltage values. The samples are ordered like this:<br><br>Channel 1, Sample *Sample Number* <br>Channel 1, Sample *Sample Number + 1* <br>Channel 1, *Sample Sample Number + 2* <br>&hellip;.  <br>Channel 1, Sample *Sample Number + Sample Count – 1* <br>Channel 2, Sample *Sample Number* <br>Channel 2, Sample *Sample Number + 1* <br>&hellip;
 
 ##### Analog single component (OSC)
+
+OSC address: `/qtm/analog_single/
 
 OSC type | Name                | Description
 ---------|---------------------|------------
@@ -2979,6 +2863,8 @@ If there is no analog data available, Channel Count is set to 0 and Analog Data 
 
 ##### Force component (OSC)
 
+OSC address: `/qtm/force/
+
 OSC type  | Name        | Description
 ----------|-------------|------------
 Int32     | Plate Count | The number of force plates in this frame.
@@ -2991,11 +2877,13 @@ OSC type | Name           | Description
 Int32    | Force Plate ID | Id of the analog device in this frame. Starts at 1.
 Int32    | Force Count    | The number of forces in this frame.
 Int32    | Force Number   | Order number of first force in this frame. Force Number is increased with the force frequency.
-Float32  | Force Data     | There are (Force Count * 9) float values. Each force sample consists of 9 Float32 values in following order:<br><br>X coordinate of the force <br>Y coordinate of the force <br>Z coordinate of the force <br>X coordinate of the moment <br>Y coordinate of the moment <br>Z coordinate of the moment <br>X coordinate of the force application point <br>Y coordinate of the force application point <br>Z coordinate of the force application point
+Float32  | Force Data     | There are *Force Count* force samples. Total size of the Force Data is 9 * *Force Count* Float32 values in following order:<br><br>X coordinate of the force <br>Y coordinate of the force <br>Z coordinate of the force <br>X coordinate of the moment <br>Y coordinate of the moment <br>Z coordinate of the moment <br>X coordinate of the force application point <br>Y coordinate of the force application point <br>Z coordinate of the force application point 
 
 If Force Count = 0 (force not visible in QTM), Force Number and Force Data is omitted.
 
 ##### Force single component (OSC)
+
+OSC address: `/qtm/force_single/
 
 OSC type | Name        | Description
 ---------|-------------|------------
@@ -3004,17 +2892,18 @@ Int32    | Plate Count | The number of force plates in this frame.
 
 Repeated *Plate Count* times:
 
-OSC type | Name           | Description
----------|----------------|------------
-Int32    | Force Plate ID | Id of the analog device in this frame. Starts at 1.
-Float32  | Force Data     | There are (Force Count * 9) float values. Each force sample consists of 9 Float32 values in following order:<br><br>X coordinate of the force <br>Y coordinate of the force <br>Z coordinate of the force <br>X coordinate of the moment <br>Y coordinate of the moment <br>Z coordinate of the moment <br>X coordinate of the force application point <br>Y coordinate of the force application point <br>Z coordinate of the force application point
+ OSC type | Name           | Description                                                  
+ -------- | -------------- | ------------------------------------------------------------ 
+ Int32    | Force Plate ID | Id of the analog device in this frame. Starts at 1.          
+ Float32  | Force Data     | Each force sample consists of 9 Float32 values in following order:<br><br>X coordinate of the force <br>Y coordinate of the force <br>Z coordinate of the force <br>X coordinate of the moment <br>Y coordinate of the moment <br>Z coordinate of the moment <br>X coordinate of the force application point <br>Y coordinate of the force application point <br>Z coordinate of the force application point 
 
 If force not visible in QTM, Force Data is omitted.
 
 ##### 6DOF component (OSC)
-Each body is sent in a separate OSC message. The OSC address of this message is
-`/qtm/6d/` with the name of the body in the end of the address string. Example:
-`/qtm/3d/body1`.
+Each body is sent in a separate OSC message.
+
+OSC address: `/qtm/6d/`	The body name is appended to the end of the address string.
+Example:`/qtm/6d/body1`.
 
 
 OSC type | Name     | Description
@@ -3025,9 +2914,10 @@ Float32  | Z        | Z coordinate of the body.
 Float32  | Rotation | 3x3 Rotation matrix of the body. Consists of 9 Float32 values.
 
 ##### 6DOF with residuals component (OSC)
-Each body is sent in a separate OSC message. The OSC address of this message is
-`/qtm/6d/` with the name of the body in the end of the address string. Example:
-`/qtm/3d/body1`.
+Each body is sent in a separate OSC message.
+
+OSC address: `/qtm/6d_res/`	The body name is appended to the end of the address string.
+Example:`/qtm/6d_res/body1`.
 
 OSC type | Name     | Description
 ---------|----------|------------
@@ -3038,9 +2928,10 @@ Float32  | Rotation | 3x3 Rotation matrix of the body. Consists of 9 Float32 val
 Float32  | Residual | Residual for the 6D body.
 
 ##### 6DOF Euler component (OSC)
-Each body is sent in a separate OSC message. The OSC address of this message is
-`/qtm/6d/` with the name of the body in the end of the address string.
-Example: `/qtm/3d/body1`.
+Each body is sent in a separate OSC message.
+
+OSC address: `/qtm/6d_euler/`	The body name is appended to the end of the address string.
+Example:`/qtm/6d_euler/body1`.
 
 OSC type | Name    | Description
 ---------|---------|------------
@@ -3052,9 +2943,8 @@ Float32  | Angle 2 | Second Euler angle.
 Float32  | Angle 3 | Third Euler angle.
 
 ##### 6DOF Euler with residuals component (OSC)
-Each body is sent in a separate OSC message. The OSC address of this message is
-`/qtm/6d/` with the name of the body in the end of the address string. Example:
-`/qtm/3d/body1`.
+OSC address: `/qtm/6d_euler_res/`	The body name is appended to the end of the address string.
+Example:`/qtm/6d_euler_res/body1`.
 
 
 OSC type | Name     | Description
@@ -3069,8 +2959,10 @@ Float32  | Residual | Residual for the 6D body.
 
 ##### Gaze vector component (OSC)
 
-Each gaze vector is sent in a separate OSC message. The OSC address of this message is /qtm/gaze_vector/
-with the name of the gaze vector in the end of the address string. Example: /qtm/gaze_vector/Eye.
+Each gaze vector is sent in a separate OSC message.
+
+OSC address: `/qtm/gaze_vector/`	The body name is appended to the end of the address string.
+Example:`/qtm/gaze_vector/Eye`.
 
 | OSC type | Name          | Description                                                  |
 | -------- | ------------- | ------------------------------------------------------------ |
@@ -3090,9 +2982,10 @@ Repeated *Sample Count* times:
 
 ##### Skeleton component (OSC)
 
-Each skeleton consists of several segments. All segments are sent in a separate OSC message. The OSC address of this message is /qtm/skeleton/*skeleton_name*/*segment_name*.
+Each skeleton consists of several segments. All segments are sent in a separate OSC message.
 
-Example: /qtm/skeleton/JohonDoe/Waist.
+OSC address: `/qtm/skeleton/`	The skeleton and segment name is appended to the end of the address string.
+Example:`/qtm/skeleton/JohnDoe/Waist`.
 
 | OSC type | Name       | Description                    |
 | -------- | ---------- | ------------------------------ |
@@ -3143,6 +3036,177 @@ changes state.
 | 12       | QTM Shutting Down       | Sent when QTM is shutting down. Not included in the GetState command response. |
 | 13       | Capture Saved           | Sent when QTM has saved current measurement. Not included in the GetState command response. |
 
+## Telnet
+
+The OSC version of the QTM RT server uses the [Open Sound Control 1.0 specification](http://opensoundcontrol.org).
+
+### Connecting (Telnet)
+
+Connect using the Telnet
+protocol on port 22221 of the QTM computer. Port 22221 (*base port – 1)* is the default Telnet port in QTM, see [IP port numbers](#ip-port-numbers) .
+
+### Commands (Telnet)
+
+In the description of the commands, number parameters are designated by an *n*, optional parameters are designated by enclosing brackets [] and choices between possible values are designated by a ‘|’. Parentheses are used to group parameters together. None of these characters (brackets, ‘|’ or parentheses) should be included in the command sent to the server. 
+
+Command strings and their parameters never contain spaces, so a space character (ASCII 32) is used as separator between command names and parameters.
+
+Command strings and parameter strings are case insensitive.
+
+| Command        | Parameters                                                   |
+| -------------- | ------------------------------------------------------------ |
+| Version        | [n.n]                                                        |
+| QTMVersion     |                                                              |
+| ByteOrder      |                                                              |
+| GetState       |                                                              |
+| GetParameters  | `All` &#124; `([General] [3D] [6D] [Analog] [Force] [Image] [GazeVector] [Skeleton])` |
+| StreamFrames   | `Stop` &#124; `((FrequencyDivisor:n` &#124; `Frequency:n` &#124; `AllFrames) [UDP[:address]:port] ([2D] [2DLin] [3D] [3DRes][3DNoLabels] [3DNoLabelsRes] [Analog[:channels]] [AnalogSingle[:channels]] [Force] [ForceSingle] [6D] [6DRes] [6DEuler] [6DEulerRes] [Image] [GazeVector] [Timecode] [Skeleton[:global]]))` |
+| TakeControl    | `[Password]`                                                 |
+| ReleaseControl |                                                              |
+| New            |                                                              |
+| Close          | -                                                            |
+| Start          | `[RTFromFile]`                                               |
+| Stop           | -                                                            |
+| Load           | `Filename`                                                   |
+| Save           | `Filename [Overwrite]`                                       |
+| LoadProject    | `ProjectPath`                                                |
+| Trig           |                                                              |
+| SetQTMEvent    | `Label`                                                      |
+| Reprocess      |                                                              |
+| Led            | `Camera (On` &#124; `Off` &#124; `Pulsing) (Green`&#124;`Amber`&#124;`All)` |
+| Quit           | -                                                            |
+
+### Version (Telnet)
+
+> **`Version`**
+
+The server responds with *Version is n.n*, where *n.n* is the version of the RT protocol currently used.
+
+It is not possible to set the version when connected via the Telnet protocol. You can only retrieve current version.
+
+###### Example:
+
+```coffeescript
+Command:    Version
+Response:   Version is {{ version }}
+```
+
+### QTMVersion (Telnet)
+
+The telnet version of this command is te same as the standard version of the command.
+See, [QTMVersion](#qtmversion).
+
+### ByteOrder (Telnet)
+
+The telnet version of this command is te same as the standard version of the command.
+See, [ByteOrder](#byteorder).
+
+### GetState (Telnet)
+
+> **`GetState`**
+
+This command makes the RT server send current QTM state as an event data
+packet. The event packet will only be sent to the client that sent the GetState
+command. `GetState` will not show the **Camera Settings Changed**,
+**QTM Shutting Down** and **Capture Saved events**.
+
+###### Example:
+
+```coffeescript
+Command:    GetState
+
+Response:   Connected                 or
+            Connection Closed         or
+            Capture Started           or
+            Capture Stopped           or
+            Capture Fetching Finished or
+            Calibration Started       or
+            Calibration Stopped       or
+            RT From File Started      or
+            RT From File Stopped      or
+            Waiting For Trigger       or
+            Capture Saved
+```
+
+### GetParameters (Telnet)
+
+The telnet version of this command is te same as the standard version of the command.
+See, [GetParameters](#getparameters).
+
+### StreamFrames (Telnet)
+
+The telnet version of this command is te same as the standard version of the command.
+See, [StreamFrames](#streamframes).
+
+### TakeControl (Telnet)
+
+The telnet version of this command is te same as the standard version of the command.
+See, [TakeControl](#takecontrol).
+
+### ReleaseControl (Telnet)
+
+The telnet version of this command is te same as the standard version of the command.
+See, [ReleaseControl](#releasecontrol).
+
+### New (Telnet)
+
+The telnet version of this command is te same as the standard version of the command.
+See, [New](#new).
+
+### Close (Telnet)
+
+The telnet version of this command is te same as the standard version of the command.
+See, [Close](#close).
+
+### Start (Telnet)
+
+The telnet version of this command is te same as the standard version of the command.
+See, [Start](#start).
+
+### Stop (Telnet)
+
+The telnet version of this command is te same as the standard version of the command.
+See, [Stop](#stop).
+
+### Load (Telnet)
+
+The telnet version of this command is te same as the standard version of the command.
+See, [Load](#load).
+
+### Save (Telnet)
+
+The telnet version of this command is te same as the standard version of the command.
+See, [Save](#save).
+
+### LoadProject (Telnet)
+
+The telnet version of this command is te same as the standard version of the command.
+See, [LoadProject](#loadproject).
+
+### Trig (Telnet)
+
+The telnet version of this command is te same as the standard version of the command.
+See, [Trig](#trig).
+
+### SetQTMEvent (Telnet)
+
+The telnet version of this command is te same as the standard version of the command.
+See, [SetQTMEvent](#setqtmevent).
+
+### Reprocess (Telnet)
+
+The telnet version of this command is te same as the standard version of the command.
+See, [Reprocess](#reprocess).
+
+### Led (Telnet)
+
+The telnet version of this command is te same as the standard version of the command.
+See, [Led](#led).
+
+### Quit (Telnet)
+
+The telnet version of this command is te same as the standard version of the command.
+See, [Quit](#quit).
 
 ## Changelog
 
