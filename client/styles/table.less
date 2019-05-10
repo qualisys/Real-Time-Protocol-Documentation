@@ -41,5 +41,27 @@ div.table-noheader + table {
 	}
 
 	td:first-child { font-weight: normal; }
-td, th { background-color: transparent !important; }
+	td, th { background-color: transparent !important; }
+}
+
+div.table-noheader + table {
+	th {
+		font-weight: normal;
+		border-bottom-width: 1px;
+		text-transform: none;
+
+	}
+
+	td, th { background-color: transparent !important; }
+
+	th, td {
+		&:first-child {
+			white-space: nowrap;
+			text-transform: uppercase;
+			font-weight: 700;
+			font-size: 0.9em;
+
+			background-color: lighten(@gray-lighter, 3%) !important;
+		}
+	}
 }

@@ -118,7 +118,7 @@ server port, for version 1.0 of the protocol. All other ports except for the
 auto discover port are set from the base port. See table below.
 
 | Port           | Default | Description                                                                                                             |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------- | ------- | ------------------------------------------------------------------------------------------------------------------------|
 | Base port - 1  | 22221   | Telnet port. Used mainly for testing. Connects to the latest version of the RT protocol.                                |
 | Base port      | 22222   | Supports only the 1.0 version of the protocol. **Don&rsquo;t use this port for any new clients.**                       |
 | Base port + 1  | 22223   | Little-endian version of the protocol. Used from protocol version 1.1 and onwards.                                      |
@@ -1240,9 +1240,11 @@ Bytes | Name     | Value
 
 The error string is laid out like this (always with a `NULL` char to terminate it):
 
-| Byte | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15  | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 |
-| ----- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
-| Value | C  | o | m | m | a | n | d | \32 | n | o | t | \32 | s | u | p  | p | o | r | t | e | d | . | \0 |
+<div class="table-noheader table-first-column-header"></div>
+
+Byte  | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8   | 9 | 10 | 11 | 12  | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23
+----- | - | - | - | - | - | - | - | --- | - | -- | -- | --- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | --
+Value | C | o | m | m | a | n | d | \32 | n | o  | t  | \32 | s  | u  | p  | p  | o  | r  | t  | e  | d  | .  | \0
 
 
 ### Command / Command Response packet
@@ -1260,10 +1262,12 @@ Bytes | Name   | Value
 12    | Data   | "Version 1.2"
 
 The resulting string is laid out like this (with a `NULL` char to terminate it,
-which is not required of clients).
+which is n t required of clients).
+
+<div class="table-noheader table-first-column-header"></div>
 
 Byte  | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8   | 9 | 10 | 11 | 12
------ | --------------------------------------------------
+----- | - | - | - | - | - | - | - | --- | - | -- | -- | --
 Value | V | e | r | s | i | o | n | \32 | 1 | .  | 2  | \0
 
 ### XML packet
