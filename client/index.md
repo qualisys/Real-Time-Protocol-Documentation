@@ -117,14 +117,14 @@ You can only edit the base port (**22222** by default). This is is the legacy
 server port, for version 1.0 of the protocol. All other ports except for the
 auto discover port are set from the base port. See table below.
 
-| Port           | Default | Description                                                                                                             |
-| -------------- | ------- | ------------------------------------------------------------------------------------------------------------------------|
-| Base port - 1  | 22221   | Telnet port. Used mainly for testing. Connects to the latest version of the RT protocol.                                |
-| Base port      | 22222   | Supports only the 1.0 version of the protocol. **Don&rsquo;t use this port for any new clients.**                       |
-| Base port + 1  | 22223   | Little-endian version of the protocol. Used from protocol version 1.1 and onwards.                                      |
-| Base port + 2  | 22224   | Big-endian version of the protocol.  Used from protocol version 1.1 and onwards.                                        |
-| Base port + 3  | 22225   | QTM RT-protocol over OSC (Open Sound Control) protocol. OSC protocol is sent over UDP.                                  |
-| 22226          | 22226   | QTM auto discover. QTM listens for UDP discover broadcasts on this port and responds with an UDP message to the sender. |
+| Port           | Default | Description                              |
+| -------------- | ------- | -----------------------------------------|
+| Base port - 1  | 22221   | Telnet port. Used mainly for testing. Connects to the latest version of the RT protocol.                    |
+| Base port      | 22222   | Supports only the 1.0 version of the protocol. **Don&rsquo;t use this port for any new clients.**         |
+| Base port + 1  | 22223   | Little-endian version of the protocol. Used from protocol version 1.1 and onwards.                                |
+| Base port + 2  | 22224   | Big-endian version of the protocol. Used from protocol version 1.1 and onwards.                                |
+| Base port + 3  | 22225   | QTM RT-protocol over OSC (Open Sound Control) protocol. OSC protocol is sent over UDP.                     |
+| 22226          | 22226   | QTM auto discover. QTM listens for UDP discover broadcasts on this port and responds with an UDP message to the sender.                                                               |
 
 
 ### Protocol structure
@@ -715,7 +715,7 @@ as an ASCII string. `GetState` will not show the **Camera Settings Changed**,
 ###### Example:
 ```coffeescript
 Command:    GetState
-Response:   Event data packet with last QTM event.
+Response:   'Event packet with last QTM event.'
 ```
 
 ### GetParameters
@@ -729,8 +729,8 @@ By default, skeleton data is in local coordinates. Skeleton:global will change t
 ###### Example:
 ```coffeescript
 Command:    GetParameters 3D Force
-Response:   Parameters not available                    or
-            XML string containing requested parameters
+Response:   Parameters not available                     or
+            'XML packet containing requested parameters'
 ```
 
 ### GetCurrentFrame
@@ -770,8 +770,8 @@ Points worth noting are:
 ###### Example:
 ```coffeescript
 Command:    GetCurrentFrame 3D Analog
-Response:   One data frame is sent to the client according to the 
-            data frame protocol described in the Data packet section.
+Response:   'A data frame is sent to the client, containing all requested data
+             components.'
 ```
 
 ### StreamFrames
@@ -885,9 +885,8 @@ Points worth noting are:
 ###### Example:
 ```coffeescript
 Command:    StreamFrames Frequency:30 UDP:2234 3D Analog
-Response:   30 frames per second containing 3D data and Analog data 
-            are streamed over UDP/IP to port 2234 of the client computer. The
-            data frame protocol is described in the Data packet section.
+Response:   '30 data packets per second containing 3D data and Analog data are streamed
+             over UDP to port 2234 of the client computer.'
 ```
 
 ### TakeControl
@@ -917,7 +916,7 @@ over the control.
 ###### Example:
 ```coffeescript
 Command:    ReleaseControl
-Response:   You are now a regular client      or
+Response:   You are now a regular client       or
             You are already a regular client
 ```
 
@@ -1077,23 +1076,25 @@ Response:   Project loaded                             or
 
 ### GetCaptureC3D
 This command will download the latest capture as a C3D file.
+If the command is successful, a `Sending capture` response is sent, followed by a C3D file packet containing current capture.
 
 ###### Example:
 ```coffeescript
 Command:    GetCapture
-Response:   Sending capture followed by a C3D data packet containing current capture.    or
-            No capture to get                                                            or
+Response:   Sending capture   'A C3D packet is sent containing current capture'    or 
+            No capture to get                                                      or
             Error sending C3D file
 ```
 
 ### GetCaptureQTM
 This command will download the latest capture as a QTM file.
+If the command is successful, a `Sending capture` response is sent, followed by a QTM file packet containing current capture.
 
 ###### Example:
 ```coffeescript
 Command:    GetCapture
-Response:   Sending capture followed by a QTM data packet containing current capture.    or
-            No capture to get                                                            or
+Response:   Sending capture   'A QTM packet is sent containing current capture'    or
+            No capture to get                                                      or
             Error sending QTM file
 ```
 
@@ -1138,8 +1139,8 @@ this command if you have the control over the QTM RT interface. See [TakeControl
 ###### Example:
 ```coffeescript
 Command:    Reprocess
-Response:   Reprocessing file                            or
-            No file open                                 or
+Response:   Reprocessing file       or
+            No file open            or
             RT from file running
 ```
 
@@ -1159,7 +1160,7 @@ the Miqus leds should be on, off or pulsing in all or individual colors
 ###### Example:
 ```coffeescript
 Command:    Led
-Response:   Parse error                                         or
+Response:   Parse error                                 or
             You must be master to issue this command
 ```
 
@@ -1226,9 +1227,7 @@ Type no  | Name                       | Description
 8        | QTM file                   | Data sent from the server in form of a QTM file.
 
 ### Error packet
-Error messages from the server are sent in an error packet. Whenever you read a
-response from the server, it may be an error packet instead of the packet type
-you expect. 
+Error messages from the server are sent in an error packet. Whenever you read a response from the server, it may be an error packet instead of the packet type you expect. Command response strings sent from the server are always NULL-terminated.
 
 Example of an error packet:  
 
@@ -1238,20 +1237,10 @@ Bytes | Name     | Value
 4     | Type     | 0
 23    | Data     | "Command not supported."
 
-The error string is laid out like this (always with a `NULL` char to terminate it):
-
-<div class="table-noheader table-first-column-header"></div>
-
-Byte  | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8   | 9 | 10 | 11 | 12  | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23
------ | - | - | - | - | - | - | - | --- | - | -- | -- | --- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | --
-Value | C | o | m | m | a | n | d | \32 | n | o  | t  | \32 | s  | u  | p  | p  | o  | r  | t  | e  | d  | .  | \0
-
 
 ### Command / Command Response packet
 Commands and responses to commands are sent in packets of type 1 (see table
-above). Command response strings sent from the server are always
-NULL-terminated but
-NULL-termination is optional for command strings sent from the clients. 
+above). Command response strings sent from the server are always NULL-terminated, but NULL-termination is optional for command strings sent from the clients. 
 
 Here is an example of a command sent to the server:
 
@@ -1260,15 +1249,6 @@ Bytes | Name   | Value
 4     | Size   | 20 (8 bytes header + 12 bytes data)
 4     | Type   | 1
 12    | Data   | "Version 1.2"
-
-The resulting string is laid out like this (with a `NULL` char to terminate it,
-which is n t required of clients).
-
-<div class="table-noheader table-first-column-header"></div>
-
-Byte  | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8   | 9 | 10 | 11 | 12
------ | - | - | - | - | - | - | - | --- | - | -- | -- | --
-Value | V | e | r | s | i | o | n | \32 | 1 | .  | 2  | \0
 
 ### XML packet
 XML is used to exchange parameters between the server and the client. This has
@@ -2387,7 +2367,7 @@ Command strings and parameter strings are case insensitive.
 | --------------- | ------------------------------------------------------------ |
 | Connect         | Port                                                         |
 | Disconnect      |                                                              |
-| Version         | [n.n]                                                        |
+| Version         |                                                              |
 | QTMVersion      |                                                              |
 | GetState        |                                                              |
 | GetParameters   | `All` &#124; `([General] [3D] [6D] [Analog] [Force] [Image] [GazeVector] [Skeleton])` |
@@ -2418,207 +2398,24 @@ Response:   Version is {{ version }}
 ```
 
 #### QTMVersion (OSC)
-Returns the QTM version on which the RT server is running.
 
-###### Example:
-```coffeescript
-Command:    QTMVersion
-Response:   QTM Version is 2.3 (build 464)
-```
+See standard version of the command, [QTMVersion](#qtmversion)
 
 #### GetState (OSC)
-This command makes the RT server send current QTM state as an event data
-packet. The event packet will only be sent to the client that sent the GetState
-command. If the client is connected via Telnet, then the response will be sent
-as an ASCII string. GetState will not show the Camera Settings Changed, QTM
-Shutting Down and Capture Saved events.
 
-###### Example:
-```coffeescript
-Command:    GetState
-Response:   Event data packet with last QTM event.
-
-(Telnet)
-Response:   Connected                 or
-            Connection Closed         or
-            Capture Started           or
-            Capture Stopped           or
-            Capture Fetching Finished or
-            Calibration Started       or
-            Calibration Stopped       or
-            RT From File Started      or
-            RT From File Stopped      or
-            Waiting For Trigger       or
-            Capture Saved
-```
-
-#### CheckLicense (OSC)
-CheckLicense LicenseCode
-
-LicenseCode: A string containing the license code string that corresponds to
-the license name.
-
-QTM can take care of license checking for an RT client. To produce valid
-license keys, the LicenseCode code string must be sent to Qualisys together
-with the QTM user name for the user that will be granted a license. Qualisys
-will generate a key that the user can enter into QTM. QTM then uses the
-LicenseCode code string sent by the RT client with this command to verify that
-the license key for the RT client is valid. 
-
-The QTM RT server will respond with License pass or License fail, depending on
-whether a valid license key has been entered into QTM. 
-
-###### Example:
-```coffeescript
-Command:    CheckLicense dh4xx56krnj8KR3o8yk1nfr
-Response:   License pass                         or
-            License fail
-```
+See standard version of the command,[GetState](#getstate) 
 
 #### GetParameters (OSC)
-> **`GetParameters`** `All | ([General] [3D] [Analog] [Force])`
 
-This command retrieves the settings for the requested component(s) of QTM in
-XML format. The XML parameters are described [here](#xml-paramters).
-
-###### Example:
-```coffeescript
-Command:    GetParameters 3D Force
-Response:   XML string containing requested parameters
-```
+See standard version of the command,[GetParameters](#getparameters) 
 
 #### GetCurrentFrame (OSC)
 
-> **`GetCurrentFrame`** `[2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes]
-  [Analog[:channels]] [AnalogSingle[:channels]] [Force] [ForceSingle] [6D]
-  [6DRes] [6DEuler] [6DEulerRes] [GazeVector] [Timecode] [Skeleton[:global]]`
-
-This command returns the current frame of real-time data from the server. 
-
-The optional channels for Analog and AnalogSingle, is a string containing a list of channels to read from the
-server. The channels are separated by a ‘,’ and can also contain ranges defined by a ‘-’. Example: 1,2,3-6,16.
-
-By default, skeleton data is in local coordinates. Skeleton:global will change the skeleton data to global coordinates.
-
-Points worth noting are:
-
-* The frame is composed of the parts specified in the parameters to the
-  command. The exact layout of the data frame in different situations is
-  described in [Data packet](#data-packet). 
-
-* The composition of the data frame may vary between frames. This is due to the
-  fact that some data (Analog and Force data) is not collected or buffered at
-  the same rate as the camera data (2D, 3D, 6D).
-  
-  If you specify Analog or Force data to be streamed together with some form(s)
-  of camera data, some data frames may include analog while others don't
-  include it. This is because QTM sends the Analog and Force data as soon as it
-  is available, and it is usually available in fairly large chunks and not as
-  often as camera data is available
-
-* If there is no ongoing measurement (either it has not started or it has
-  already finished), an [empty data frame](#no-more-data-packet) is sent to the
-  client.
-
-* If a measurement is ongoing but there is no new frame of data available, the
-  server waits until the next frame of data is available before sending it to
-  the client.
-
-###### Example:
-```coffeescript
-Command:    GetCurrentFrame 3D Analog
-Response:   One data frame is sent to the client according to the 
-			data frame protocol described in section the Data packet section.
-```
+See standard version of the command, [GetCurrentFrame](#getcurrentframe)
 
 #### StreamFrames (OSC)
-> **`StreamFrame`** `Stop |
-  ((FrequencyDivisor:n | Frequency:n | AllFrames) 
-  [2D] [2DLin] [3D] [3DRes] [3DNoLabels] [3DNoLabelsRes]
-  [Analog] [AnalogSingle] [Force] [ForceSingle] [6D]
-  [6DRes] [6DEuler] [6DEulerRes] [GazeVector] [Timecode] [Skeleton[:global]])`
 
-This command makes the QTM RT server start streaming data frames in real-time.
-
-The optional channels for Analog and AnalogSingle, is a string containing a list of channels to read from the
-server. The channels are separated by a ‘,’ and can also contain ranges defined by a ‘-’. Example: 1,2,3-6,16.
-
-By default, skeleton data is in local coordinates. Skeleton:global will change the skeleton data to global coordinates.
-
-Points worth noting are:
-
-* Each frame is composed of the parts specified in the parameters to the
-  command. The exact layout of the data frame in different situations is
-  described in section [Data packet](#data-packet).
-
-* The composition of the data frame may vary between frames. This is due to the
-  fact that some data (Analog and Force data) is not collected or buffered at
-  the same rate as the camera data (2D, 3D, 6D). If you specify Analog or Force
-  data to be streamed together with some form(s) of camera data, some data
-  frames may include analog while others don’t include it. This is because QTM
-  sends the Analog and Force data as soon as it is available, and it is usually
-  available in fairly large chunks and not as often as camera data is available
-
-* If there is no ongoing measurement (either it has not started or it has
-  already finished), an [empty data frame](#no-more-data-packet) is sent to the
-  client.
-
-* The actual rate at which the frames are sent depends on several factors – not
-  just the frequency specified in the command parameters:
-
-  * **The measurement frequency** used when acquiring the camera data (2D, 3D, 6D).
-    The transmission rate cannot be greater than this frequency.
-
-  * **The real-time processing frequency** set in QTM. This may differ greatly from
-    the measurement frequency. For example QTM may be measuring at 1000 Hz but
-    trying to calculate real-time frames only at 50Hz. The transmission rate
-    cannot be greater than this frequency either.
-
-  * **The processing time** needed for each frame of data in QTM. 
-	This may also be a limiting factor – QTM may not have time to process and
-	transmit frames at the rate specified as the real-time processing
-	frequency.
-
-  * **The frequency specified by the client in the command parameters**.  
-	The client has three ways of specifying the preferred data rate of the
-	server. If the client specifies a higher rate than it can receive and
-	handle in real-time, buffering will occur in the TCP/IP or UDP/IP stack at
-	the client side and the client will experience lagging. 
-    * **FrequencyDivisor:n**
-	  With this setting, QTM transmits every n:th processed real-time frame to
-	  the client. Please note that this may not be the same as every n:th frame
-	  of the measurement (see real-time processing frequency above).  
-	  Example: QTM is measuring in 200 Hz and real-time tracking in 100 Hz. If
-	  a client specifies FrequencyDivisor:4 QTM will send data at a rate of
-	  25Hz. 
-    * **Frequency:n**
-	  With a specific frequency setting, the QTM RT server will transmit frames
-	  at a rate of approximately n Hz. 
-	  Example: QTM is measuring in 200 Hz and real-time tracking in 100 Hz. If
-	  a client specifies Frequency:60 QTM will send data at an approximate rate
-	  of 60Hz. This means that usually every other processed frame is
-	  transmitted, but once in a while two frames in a row are transmitted (to
-	  reach 60Hz instead of 50). 
-    * **AllFrames**
-	  When a client specifies AllFrames in the StreamFrames command, every
-	  real-time frame processed by QTM is transmitted to the client.
-
- * When the measurement is finished, or has not yet started, a special
-    [empty data frame](#no-more-data-packet) packet signaling that no data is
-    available is sent to the client.
-
- * To stop the data stream before it has reached the end of the measurement or
-   to prevent data from being sent if a new measurement is started after the
-   first was finished: send the StreamFrames Stop command.
-
-
-###### Example:
-```coffeescript
-Command:    StreamFrames Frequency:30 UDP:2234 3D Analog
-Response:   30 frames per second containing 3D data and Analog data 
-            are streamed over UDP/IP to the client computer’s port 
-            2234. The data frame protocol is described in the Data packet section.
-```
+See standard version of the command, [StreamFrames](#streamframes)
 
 ### QTM RT Packets (OSC)
 
@@ -3080,7 +2877,7 @@ Command strings and parameter strings are case insensitive.
 | Led            | `Camera (On` &#124; `Off` &#124; `Pulsing) (Green`&#124;`Amber`&#124;`All)` |
 | Quit           | -                                                            |
 
-### Version (Telnet)
+#### Version (Telnet)
 
 > **`Version`**
 
@@ -3095,17 +2892,15 @@ Command:    Version
 Response:   Version is {{ version }}
 ```
 
-### QTMVersion (Telnet)
+#### QTMVersion (Telnet)
 
-The telnet version of this command is te same as the standard version of the command.
-See, [QTMVersion](#qtmversion).
+See standard version of the command, [QTMVersion](#qtmversion).
 
-### ByteOrder (Telnet)
+#### ByteOrder (Telnet)
 
-The telnet version of this command is te same as the standard version of the command.
-See, [ByteOrder](#byteorder).
+See standard version of the command, [ByteOrder](#byteorder).
 
-### GetState (Telnet)
+#### GetState (Telnet)
 
 > **`GetState`**
 
@@ -3132,85 +2927,69 @@ Response:   Connected                 or
             Capture Saved
 ```
 
-### GetParameters (Telnet)
+#### GetParameters (Telnet)
 
-The telnet version of this command is te same as the standard version of the command.
-See, [GetParameters](#getparameters).
+See standard version of the command, [GetParameters](#getparameters).
 
-### StreamFrames (Telnet)
+#### StreamFrames (Telnet)
 
-The telnet version of this command is te same as the standard version of the command.
-See, [StreamFrames](#streamframes).
+See standard version of the command, [StreamFrames](#streamframes).
 
-### TakeControl (Telnet)
+#### TakeControl (Telnet)
 
-The telnet version of this command is te same as the standard version of the command.
-See, [TakeControl](#takecontrol).
+See standard version of the command, [TakeControl](#takecontrol).
 
-### ReleaseControl (Telnet)
+#### ReleaseControl (Telnet)
 
-The telnet version of this command is te same as the standard version of the command.
-See, [ReleaseControl](#releasecontrol).
+See standard version of the command, [ReleaseControl](#releasecontrol).
 
-### New (Telnet)
+#### New (Telnet)
 
-The telnet version of this command is te same as the standard version of the command.
-See, [New](#new).
+See standard version of the command, [New](#new).
 
-### Close (Telnet)
+#### Close (Telnet)
 
-The telnet version of this command is te same as the standard version of the command.
-See, [Close](#close).
+See standard version of the command, [Close](#close).
 
-### Start (Telnet)
+#### Start (Telnet)
 
-The telnet version of this command is te same as the standard version of the command.
-See, [Start](#start).
+See standard version of the command, [Start](#start).
 
-### Stop (Telnet)
+#### Stop (Telnet)
 
-The telnet version of this command is te same as the standard version of the command.
-See, [Stop](#stop).
+See standard version of the command, [Stop](#stop).
 
-### Load (Telnet)
+#### Load (Telnet)
 
-The telnet version of this command is te same as the standard version of the command.
-See, [Load](#load).
+See standard version of the command, [Load](#load).
 
-### Save (Telnet)
+#### Save (Telnet)
 
-The telnet version of this command is te same as the standard version of the command.
-See, [Save](#save).
+See standard version of the command, [Save](#save).
 
-### LoadProject (Telnet)
+#### LoadProject (Telnet)
 
-The telnet version of this command is te same as the standard version of the command.
-See, [LoadProject](#loadproject).
+See standard version of the command, [LoadProject](#loadproject).
 
-### Trig (Telnet)
+#### Trig (Telnet)
 
-The telnet version of this command is te same as the standard version of the command.
-See, [Trig](#trig).
+See standard version of the command, [Trig](#trig).
 
-### SetQTMEvent (Telnet)
+#### SetQTMEvent (Telnet)
 
-The telnet version of this command is te same as the standard version of the command.
-See, [SetQTMEvent](#setqtmevent).
+See standard version of the command, [SetQTMEvent](#setqtmevent).
 
-### Reprocess (Telnet)
+#### Reprocess (Telnet)
 
-The telnet version of this command is te same as the standard version of the command.
-See, [Reprocess](#reprocess).
+See standard version of the command, [Reprocess](#reprocess).
 
-### Led (Telnet)
+#### Led (Telnet)
 
-The telnet version of this command is te same as the standard version of the command.
-See, [Led](#led).
+See standard version of the command, [Led](#led).
 
-### Quit (Telnet)
+#### Quit (Telnet)
 
-The telnet version of this command is te same as the standard version of the command.
-See, [Quit](#quit).
+See standard version of the command, [Quit](#quit).
 
 ## Changelog
 
