@@ -1,9 +1,9 @@
 var scrollSpyOffset = 90;
 
-var stripOSC = function()
+var stripToc = function(str)
 {
-	$('nav a, h1, h2, h3, h4, h5').each(function() {
-		$(this).text($(this).text().replace(' (OSC)', ''));
+	$('nav a').each(function() {
+		$(this).text($(this).text().replace(str, ''));
 	});
 };
 
@@ -17,7 +17,8 @@ jQuery(document).ready(function($)
 		}
 	});
 
-	stripOSC();
+	stripToc(' (OSC)');
+	stripToc(' (Telnet)');
 
 	// Apply syntax highlighting.
 	$('pre code').each(function(i, e) {
