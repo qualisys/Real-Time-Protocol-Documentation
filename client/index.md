@@ -1958,26 +1958,26 @@ The `Component Type` field of the data component header is a number that should
 be interpreted according to the table below. These are the data frame component
 types that are defined in the protocol so far.
 
-Type     | Name                   | Description
--------- | ---------------------- | ------------
-1        | 3D                     | 3D marker data
-2        | 3D No Labels           | Unidentified 3D marker data
-3        | Analog                 | Analog data from available analog devices
-4        | Force                  | Force data from available force plates.
-5        | 6D                     | 6D data - position and rotation matrix
-6        | 6D Euler               | 6D data - position and Euler angles
-7        | 2D                     | 2D marker data
-8        | 2D Linearized          | Linearized 2D marker data
-9        | 3D Residuals           | 3D marker data with residuals
-10       | 3D No Labels Residuals | Unidentified 3D marker data with residuals
-11       | 6D Residuals           | 6D data - position and rotation matrix with residuals
-12       | 6D Euler Residuals     | 6D data - position and Euler angles with residuals
-13       | Analog Single          | Analog data from available analog devices. Only one sample per channel and camera frame. The latest sample is used if more than one sample is available.
-14       | Image                  | Image frame from a specific camera. Image size and format is set with the XML settings, see [Image settings](#image-settings).
-15       | Force Single           | Force data from available force plates. Only one sample per plate and camera frame. The latest sample is used if more than one sample is available.
-16       | Gaze Vector            | Gaze vector data defined by a unit vector and position.
-17       | Timecode               | IRIG or SMPTE timecode
-18       | Skeleton               | Skeleton segment information
+Name                                     | Type     | Description
+---------------------------------------- | -------- | ------------
+[2D](#2d-components)                     | 7        | 2D marker data
+[2D_Linearized](#2d-components)          | 8        | Linearized 2D marker data
+[3D](#3d-components)                     | 1        | 3D marker data
+[3D_Residuals](#3d-components)           | 9        | 3D marker data with residuals
+[3D_No_Labels](#3d-components)           | 2        | Unidentified 3D marker data
+[3D_No_Labels_Residuals](#3d-components) | 10       | Unidentified 3D marker data with residuals
+[6D](#6dof-components)                   | 5        | 6D data - position and rotation matrix
+[6D_Residuals](#6dof-components)         | 11       | 6D data - position and rotation matrix with residuals
+[6D_Euler](#6dof-components)             | 6        | 6D data - position and Euler angles
+[6D_Euler_Residuals](#6dof-components)   | 12       | 6D data - position and Euler angles with residuals
+[Analog](#analog-data)                   | 3        | Analog data from available analog devices
+[Analog_Single](#analog-single-data)     | 13       | Analog data from available analog devices. Only one sample per channel and camera frame. The latest sample is used if more than one sample is available.
+[Force](#force-components)               | 4        | Force data from available force plates.
+[Force_Single](#force-components)        | 15       | Force data from available force plates. Only one sample per plate and camera frame. The latest sample is used if more than one sample is available.
+[Image](#image-component)                | 14       | Image frame from a specific camera. Image size and format is set with the XML settings, see [Image settings](#image-settings).
+[Gaze_Vector](#gaze-vector-component)    | 16       | Gaze vector data defined by a unit vector and position.
+[Timecode](#timecode-component)          | 17       | IRIG or SMPTE timecode
+[Skeleton](#skeleton-component)          | 18       | Skeleton segment information
 
 
 #### 2D components
@@ -2085,13 +2085,13 @@ There are two different analog components that shares the same analog header.
 - Analog
 - Analog Single
 
-Bytes | Name                  | Type           | Description
------ | --------------------- | -------------- | -----------
-4     | Component Size        | 32-bit integer | The size of the component including the header (Component Size, Component Type and Analog Device Count).
-4     | Component Type        | 32-bit integer | Value = 3. See [Data component types](#data-component-types).
-4     | Analog Device Count   | 32-bit integer | Number of analog devices in this component.
+ Bytes | Name                | Type           | Description                                                  
+ ----- | ------------------- | -------------- | ------------------------------------------------------------ 
+ 4     | Component Size      | 32-bit integer | The size of the component including the header (Component Size, Component Type and Analog Device Count). 
+ 4     | Component Type      | 32-bit integer | Value = 3 or 13. See [Data component types](#data-component-types). 
+ 4     | Analog Device Count | 32-bit integer | Number of analog devices in this component.                  
 
-> If only streaming a selection of the analog channels, see [GetCurrentFrame](#getcurrentframe) and [StreamFrames](#streamframes), the order of the channels will be the same as in [Analog XML parameters](#analog-xml-parameters). 
+If only streaming a selection of the analog channels, see [GetCurrentFrame](#getcurrentframe) and [StreamFrames](#streamframes), the order of the channels will be the same as in [Analog XML parameters](#analog-xml-parameters). 
 
 ##### Analog data
 
