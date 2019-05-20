@@ -1716,16 +1716,16 @@ of this element.
       Element containing true if marker is virtual, else false.
 
     * X  
-      X-coordinate for point.      
+      X-coordinate for point.
 
     * Y  
-      Y-coordinate for point.      
+      Y-coordinate for point.
 
     * Z  
       Z-coordinate for point.
   
 * **Euler**  
- Element containing 6DOF Euler rotation names.
+  Element containing 6DOF Euler rotation names.
 
   * First  
     Element containing the name of the first Euler angle.
