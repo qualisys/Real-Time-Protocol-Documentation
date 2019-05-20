@@ -1693,31 +1693,48 @@ of this element.
 3D parameters is called The_6D.
 
 * **Bodies**  
-  Number of 6DOF bodies.
+  Element containing number of 6DOF bodies.
 
 * **Body**  
   Element containing 6DOF body information.
+  
   * Name  
-    The name of the 6DOF body.
+    Element containing the name of the 6DOF body.
     
   * RGBColor  
-    The color of the 6DOF body, represented by a three byte integer value. Bit
+    Element containing the color of the 6DOF body, represented by a three byte integer value. Bit
     0-7 represents red, bit 8-15 represents green and bit 16-23 represents blue.
     
-  * Point  
-    The X, Y and Z coordinate of one of the points that defines the 6DOF body.
-    The body is defined by 3 or more points.
+  * Point
+    
+    Element containing information for one of the points that defines the 6DOF body.
+    
+    * ID  
+      Element containing physical ID of the marker.
+
+    * Virtual  
+      Element containing true if marker is virtual, else false.
+
+    * X  
+      X-coordinate for point.      
+
+    * Y  
+      Y-coordinate for point.      
+
+    * Z  
+      Z-coordinate for point.
   
 * **Euler**  
  Element containing 6DOF Euler rotation names.
- * First
-   The name of the first Euler angle.
-   
- * Second
-   The name of the second Euler angle.
-   
- * Third
-   The name of the third Euler angle.
+
+  * First  
+    Element containing the name of the first Euler angle.
+    
+  * Second  
+    Element containing the name of the second Euler angle.
+    
+  * Third  
+    Element containing the name of the third Euler angle.
 
 
 ##### Example:
@@ -1838,7 +1855,7 @@ of this element.
   The Image element contains one or several Camera elements. 
 
   * **ID**  
-  Camera ID for the camera to which the settings apply.
+    Camera ID for the camera to which the settings apply.
 
   * **Enabled**  
     Turn on or of Image streaming from the selected camera.
@@ -1896,31 +1913,27 @@ with XML data packet, containing an element called Skeletons. See below for the 
 of this element.
 
 * **Skeleton**
-    Element containing skeleton information.
-    
-    * **Name**
-Attribute with the name of the skeleton.
-    
+  Element containing skeleton information.
+  
+  * **Name**
+    Attribute with the name of the skeleton.
+  
 * **Segment**
   Element containing skeleton Segment information.
 
-    * **Name**
-      Attribute with the name of the skeleton segment.
-      
+  * **Name**
+    Attribute with the name of the skeleton segment.
+    
   * **ID**
-
-       Attribute with the id of the skeleton segment.
+    Attribute with the id of the skeleton segment.
 
   * **Parent_ID**
-
     Attribute with the id of the parent skeleton segment. Parent_ID is omitted if this is the skeleton root segment.
 
   * **Position**
-
     Element containing attributes (x, y, z) with skeleton T-pose segment position.
 
   * **Rotation**
-
     Element containing attributes (x, y, z, w) with skeleton T-pose segment rotation. The segment rotation quaternion is in global coordinates.
 
 ##### Example:
@@ -2995,6 +3008,7 @@ See standard version of the command, [Quit](#quit).
 
 ### Changes in 1.20
 
+- Added new settings for rigid body points. Id and virtual.
 - Removed Camera_System from settings.
 
 ### Changes in 1.19
