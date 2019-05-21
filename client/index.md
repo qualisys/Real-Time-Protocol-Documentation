@@ -1678,7 +1678,7 @@ Element containing bone information.
   * Bone To  
   The name of the label (trajectory) where the bone ends.
 
-  * Color
+  * Color  
   The color of the bone.
 
 ##### Example:
@@ -1706,7 +1706,6 @@ of this element.
     0-7 represents red, bit 8-15 represents green and bit 16-23 represents blue.
     
   * Point
-    
     Element containing information for one of the points that defines the 6DOF body.
     
     * ID  
@@ -1715,13 +1714,13 @@ of this element.
     * Virtual  
       Element containing true if marker is virtual, else false.
 
-    * X  
+    * X
       X-coordinate for point.
 
-    * Y  
+    * Y
       Y-coordinate for point.
 
-    * Z  
+    * Z
       Z-coordinate for point.
   
 * **Euler**  
