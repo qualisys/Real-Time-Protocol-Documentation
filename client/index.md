@@ -1708,25 +1708,24 @@ of this element.
   * Point
     Element containing information for one of the points that defines the 6DOF body.
     
-    * ID  
-      Element containing physical ID of the marker.
+    * X  
+      X-coordinate for point.
+
+    * Y  
+      Y-coordinate for point.
+
+    * Z  
+      Z-coordinate for point.
 
     * Virtual  
       Element containing true if marker is virtual, else false.
 
-    * X
-      X-coordinate for point.
-
-    * Y
-      Y-coordinate for point.
-
-    * Z
-      Z-coordinate for point.
+    * PhysicalId  
+      Element containing physical ID of the marker.
   
 * **Euler**  
   Element containing 6DOF Euler rotation names.
-
-  * First  
+* First  
     Element containing the name of the first Euler angle.
     
   * Second  
@@ -2298,12 +2297,12 @@ Event ID     | Name                    | Comment
 8            | RT From File Started    | Sent when QTM has started real time transmissions from a file.
 9            | RT From File Stopped    | Sent when QTM has stopped real time transmissions from a file.
 10           | Waiting For Trigger     | Sent when QTM is waiting for the user to press the trigger button.
-11           | Camera Settings Changed | Sent when the settings have changed for one or more cameras. Not included in the GetState response.
-12           | QTM Shutting Down       | Sent when QTM is shutting down. Not included in the GetState response.
-13           | Capture Saved           | Sent when QTM has saved the current measurement. Not included in the GetState response.
+11           | Camera Settings Changed | Sent when the settings have changed for one or more cameras. **Not included in the GetState response**. 
+12           | QTM Shutting Down       | Sent when QTM is shutting down. **Not included in the GetState response**. 
+13           | Capture Saved           | Sent when QTM has saved the current measurement. **Not included in the GetState response**. 
 14           | Reserved                | Reserved.
 15           | Reserved                | Reserved.
-16           | Trigger                 | This event is sent by the server when QTM has received a trigger. This event will not show in the GetState command response.
+16           | Trigger                 | This event is sent by the server when QTM has received a trigger. **Not included in the GetState response**. 
 
 
 ### Discover packet

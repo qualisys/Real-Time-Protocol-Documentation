@@ -6,25 +6,25 @@
             <Name>Body1</Name>
             <RGBColor>ffffff</RGBColor>
             <Point>
-                <ID>1</ID>
-                <Virtual>False</Virtual>
                 <X>10.5</X>
                 <Y>9.5</Y>
                 <Z>10.5</Z>
+                <Virtual>False</Virtual>
+                <PhysicalId>1</PhysicalId>
             </Point>
             <Point>
-                <ID>2</ID>
-                <Virtual>False</Virtual>
                 <X>10.5</X>
                 <Y>9.5</Y>
                 <Z>10.5</Z>
+                <Virtual>False</Virtual>
+                <PhysicalId>2</PhysicalId>
             </Point>
             <Point>
-                <ID>3</ID>
-                <Virtual>False</Virtual>
                 <X>10.5</X>
                 <Y>9.5</Y>
                 <Z>10.5</Z>
+                <Virtual>False</Virtual>
+                <PhysicalId>3</PhysicalId>
             </Point>
         </Body>
 		<Euler>
