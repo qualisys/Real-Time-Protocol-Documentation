@@ -349,38 +349,33 @@ Enable or disable export to FBX processing action. Value can be True or False.
 General settings consist of none or several *Camera* elements, with
 following content.
 
-* **ID** - Select camera to which the settings shall apply. If the camera id is
-  set to a negative value, settings will apply to all cameras. This value must
-  always be present.  
+* **ID**  
+Select camera to which the settings shall apply. If the camera id is set to a negative value, settings will apply to all cameras. This value must always be present.  
 
-* **Mode** - Changes camera mode for selected camera. Available camera modes
-  are:
+* **Mode**  
+Changes camera mode for selected camera. Available camera modes are:
 
   * Marker 
   * Marker Intensity
   * Video
 
-* **Video_Resolution** - Change video resolution for non-marker cameras (Oqus
- 2c and Miqus Video). Available resolutions are:
+* **Video_Resolution**  
+Change video resolution for non-marker cameras (Oqus 2c and Miqus Video). Available resolutions are:
 
- * 1080p
- * 720p 
- * 540p 
- * 480p
+  * 1080p
+  * 720p 
+  * 540p 
+  * 480p
 
-* **Video_Aspect_Ratio** - Change video aspect ratio for non-marker cameras
-  (Oqus 2c and Miqus Video). Available aspect ratios are:
-  
+* **Video_Aspect_Ratio**  
+Change video aspect ratio for non-marker cameras (Oqus 2c and Miqus Video). Available aspect ratios are:
   * 16x9
   * 4x3
   * 1x1
-
-
+  
 * **Video\_Frequency**  
-Set video capture frequency for the camera selected by Camera ID, see above.
-The value is either in Hz ( >1 Hz) or in percent of max frequency (0.0 to
-1.0), 32-bit float. Note: It is only possible to set minimum video capture
-frequency, which is 1 Hz, by setting the Video_Frequency setting to 0 (0%).
+Set video capture frequency for the camera selected by Camera ID, see above. The value is either in Hz ( >1 Hz) or in percent of max frequency (0.0 to 1.0), 32-bit float.
+Note: It is only possible to set minimum video capture frequency, which is 1 Hz, by setting the Video_Frequency setting to 0 (0%).
 
 * **Video\_Exposure**  
 Set video exposure time for the camera selected by Camera ID, see above. The
