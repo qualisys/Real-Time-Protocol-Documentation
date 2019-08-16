@@ -2050,7 +2050,7 @@ Bytes | Name | Type         | Description
 4     | X    | 32-bit float | X coordinate of the marker.
 4     | Y    | 32-bit float | Y coordinate of the marker.
 4     | Z    | 32-bit float | Z coordinate of the marker.
-4 | ID | 32-bit float | Id that identifies markers between frames.<br />**Only present for 3D no labels and 3D no labels with residuals**. 
+4 | ID | 32-bit integer | Id that identifies markers between frames.<br />**Only present for 3D no labels and 3D no labels with residuals**. 
 4 | Residual | 32-bit float | Residual for the 3D point.<br />**Only present for 3D with residual and 3D no labels with residuals**. 
 
 #### 6DOF components
