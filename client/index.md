@@ -2099,6 +2099,8 @@ There are two different analog components that shares the same analog header.
 
 If only streaming a selection of the analog channels, see [GetCurrentFrame](#getcurrentframe) and [StreamFrames](#streamframes), the order of the channels will be the same as in [Analog XML parameters](#analog-xml-parameters). 
 
+> The update frequency of the analog data is dependent on the analog data source and its drivers. The QTM real-time server server can only deliver the data at the rate the data source is updated in QTM. For example. If the analog device is running at 1000 Hz and the cameras at 100 Hz, the analog single data component (that gives you only the latest sample) could be empty now and then. This will happen if the analog device driver is updating QTM at a lower rate than 100 Hz (the camera frequency).
+
 ##### Analog data
 
 The Analog component sends a packet containing all analog samples that the server has buffered since the last analog frame. It contains it's own sample numbers (one per device), since the analog often runs at different frequency than the camera system.
@@ -2115,7 +2117,7 @@ Repeated *Analog Device Count* times:
 
 ##### Analog single data
 
-The Analog single component sends a packet containing only one sample per analog channel.
+The Analog single component sends a packet containing only one sample (the latest) per analog channel.
 
 Repeated *Analog Device Count* times:
 
@@ -2125,7 +2127,7 @@ Bytes             | Name                  | Type                   | Description
 4                 | Channel Count         | 32-bit integer         | The number of channels of this analog device in this frame.
 4 * Channel Count | Analog Data           | 32-bit float | Voltage samples with increasing channel order. 
 
-If no analog data is available, Analog Data will contain IEEE NaN (Not a number) float values.
+If the analog data has not been updated in QTM since last rt-packet, Analog Data will contain IEEE NaN (Not a number) float values.
 
 #### Force components
 
