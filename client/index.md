@@ -2099,7 +2099,7 @@ There are two different analog components that shares the same analog header.
 
 If only streaming a selection of the analog channels, see [GetCurrentFrame](#getcurrentframe) and [StreamFrames](#streamframes), the order of the channels will be the same as in [Analog XML parameters](#analog-xml-parameters). 
 
-> The update frequency of the analog data is dependent on the analog data source and its drivers. The QTM real-time server server can only deliver the data at the rate the data source is updated in QTM. For example. If the analog device is running at 1000 Hz and the cameras at 100 Hz, the analog single data component (that gives you only the latest sample) could be empty now and then. This will happen if the analog device driver is updating QTM at a lower rate than 100 Hz (the camera frequency).
+> The update frequency of the analog data is dependent on the analog data source and its drivers. The QTM real-time server server can only deliver the data at the rate the data source is updated in QTM. Due to this, the analog single data can sometimes return a NaN. This indicates that the server has no updated analog value to transmit. Lower camera frequencies will make it less likely to miss any data.
 
 ##### Analog data
 
