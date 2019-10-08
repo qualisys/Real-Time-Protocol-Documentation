@@ -632,7 +632,7 @@ server, it will send an error response with the string **Parse Error**.
 
 | Command         | Parameters                                                   |
 | --------------- | ------------------------------------------------------------ |
-| Version         | [n.n]                                                        |
+| Version         | `[n.n]`                                                      |
 | QTMVersion      |                                                              |
 | ByteOrder       |                                                              |
 | GetState        |                                                              |
@@ -1028,7 +1028,8 @@ given in the argument. The file name can be relative or absolute. If the file
 name is relative, QTM will save the file in the data folder located in the
 project folder. If the file already exists, it will be overwritten if the
 Overwrite parameter is present. Otherwise a counter will be added to the end of
-the file name (_##).
+the file name (_##). If the filename includes spaces, the whole filename should be
+enclosed by quotation marks.
 
 It is only possible to issue this command if you have the control over the QTM
 RT interface. See [TakeControl](#takecontrol).
